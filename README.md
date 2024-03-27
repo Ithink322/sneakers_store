@@ -10,7 +10,7 @@ Frontend:
 - SCSS
 - TS
 - Vue 3
-- Nuxt
+- Nuxt 3
 - Pinia
 
 backend:
