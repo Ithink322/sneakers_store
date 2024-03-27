@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "Golos Regular";
+  src: url("@/assets/fonts/golos-text_regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pragmatica Bold";
+  src: url("@/assets/fonts/Pragmatica-Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Pragmatica Book";
+  src: url("@/assets/fonts/Pragmatica-Book.woff") format("woff");
+}
+@font-face {
+  font-family: "Pragmatica ExtraBoldOblique";
+  src: url("@/assets/fonts/Pragmatica-ExtraBoldOblique.woff") format("woff");
+}
+@font-face {
+  font-family: "Pragmatica Medium";
+  src: url("@/assets/fonts/Pragmatica-Medium.woff") format("woff");
+}
+@mixin btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  width: fit-content;
+  border: none;
+  padding: 0rem;
+  cursor: pointer;
+}
+@mixin input {
+  background: none;
+  border: none;
+}
