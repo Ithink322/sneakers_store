@@ -1,7 +1,8 @@
 # Sneakers store - online sneakers store.
 
 Project in development...
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>
+<br/>
 Stack:
 
 Frontend:
