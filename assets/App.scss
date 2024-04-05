@@ -18,6 +18,11 @@
   font-family: "Pragmatica Medium";
   src: url("@/assets/fonts/Pragmatica-Medium.woff") format("woff");
 }
+$Light-Black: #1e1e1e;
+$Dark-Black: #000000;
+$Light-Orange: #ff6915;
+$Dark-Orange: #fb5a00;
+$Blue: #3f71bc;
 @mixin btn {
   display: flex;
   justify-content: center;

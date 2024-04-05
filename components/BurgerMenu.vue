@@ -1,9 +1,9 @@
 <template>
   <div class="burger-menu-shadow">
+    <button @click="closeBurgerMenu" class="burger-menu-shadow__close-btn">
+      <img src="@/public/imgs/cross.svg" alt="cross" />
+    </button>
     <nav class="burger-menu">
-      <button @click="closeBurgerMenu" class="burger-menu-shadow__close-btn">
-        <img src="@/public/imgs/cross.svg" alt="cross" />
-      </button>
       <form class="burger-menu__search-form">
         <input
           placeholder="Поиск по каталогу товаров..."
@@ -176,11 +176,9 @@
 </template>
 
 <script setup lang="ts">
-const isBurgerMenuVisible = ref(false);
 const closeBurgerMenu = () => {
-  /* document.querySelector<HTMLElement>(".burger-menu-shadow")!.style.display =
-    "none"; */
-  isBurgerMenuVisible.value = false;
+  document.querySelector<HTMLElement>(".burger-menu-shadow")!.style.display =
+    "none";
 };
 
 const catalogButtonClicked = ref(false);
@@ -293,12 +291,6 @@ const openModelsDropDownMenu = () => {
   height: 100vh;
   top: 0rem;
 }
-.burger-menu-shadow__close-btn {
-  @include btn;
-  position: absolute;
-  top: 0.75rem;
-  left: 103%;
-}
 .burger-menu {
   position: relative;
   background: #fff;
@@ -307,6 +299,12 @@ const openModelsDropDownMenu = () => {
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+.burger-menu-shadow__close-btn {
+  @include btn;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
 }
 .burger-menu__search-form {
   display: flex;

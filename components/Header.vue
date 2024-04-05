@@ -13,7 +13,10 @@
       </div>
       <div class="header-mid">
         <div class="header__titles-flex">
-          <div class="header__burger-btn-and-burger-text-from768px-flex">
+          <div
+            @click="toggleCatalogMenu"
+            class="header__burger-btn-and-burger-text-from768px-flex"
+          >
             <button class="header__burger-btn">
               <img src="@/public/imgs/burger-btn.svg" alt="" />
             </button>
@@ -105,6 +108,7 @@
       </div>
     </header>
     <BurgerMenu></BurgerMenu>
+    <CatalogMenu></CatalogMenu>
   </nav>
 </template>
 
@@ -142,6 +146,11 @@ onMounted(() => {
     });
   }
 });
+const toggleCatalogMenu = () => {
+  document
+    .querySelector<HTMLElement>(".catalog-menu")!
+    .classList.toggle("catalog-menu-opened");
+};
 </script>
 
 <style lang="scss" scoped>
@@ -247,7 +256,6 @@ onMounted(() => {
 /* 1024px = 64em */
 @media (min-width: 64em) {
   .header {
-    padding: 0rem 9.625rem;
     padding: 0rem calc((100vw - 44.75rem) / 2);
   }
 }
@@ -315,8 +323,5 @@ onMounted(() => {
   .header__titles-flex {
     margin-left: 11.755rem;
   }
-}
-/* 1920px = 120em */
-@media (min-width: 120em) {
 }
 </style>
