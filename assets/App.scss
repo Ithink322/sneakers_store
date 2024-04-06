@@ -37,3 +37,14 @@ $Blue: #3f71bc;
   background: none;
   border: none;
 }
+@mixin ul {
+  list-style-type: none;
+  padding: 0rem;
+
+  li {
+    a {
+      text-decoration: none;
+      color: #000000;
+    }
+  }
+}

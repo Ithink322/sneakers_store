@@ -179,105 +179,84 @@
 const closeBurgerMenu = () => {
   document.querySelector<HTMLElement>(".burger-menu-shadow")!.style.display =
     "none";
+
+  /* styles from 768px to 1200px for .header__burger-btn svg and .header__burger-text-hiden-at1440px starts */
+  const svgElement = document.querySelector(".header__burger-btn svg")!;
+  const lines = Array.from(svgElement.querySelectorAll("line"));
+  lines.forEach((line) => {
+    line.setAttribute("stroke", "black");
+  });
+
+  document.querySelector<HTMLElement>(
+    ".header__burger-text-hiden-at1440px"
+  )!.style.color = "#000000";
+  /* styles from 768px to 1200px for .header__burger-btn svg and .header__burger-text-hiden-at1440px ends */
+};
+
+const toggleMenu = (
+  btnSelector: string,
+  menuSelector: string,
+  bgColor: string,
+  textColor: string
+) => {
+  const btn = document.querySelector<HTMLElement>(btnSelector)!;
+  const menu = document.querySelector<HTMLElement>(menuSelector)!;
+
+  btn.style.backgroundColor = bgColor;
+  btn.style.color = textColor;
+  menu.classList.toggle("burger-menu__dropdown-menu-opened");
 };
 
 const catalogButtonClicked = ref(false);
+const summerBtnClicked = ref(false);
+const demiSeasonBtnClicked = ref(false);
+const winterBtnClicked = ref(false);
+const modelsBtnClicked = ref(false);
+
 const openCatalogDropDownMenu = () => {
-  const catalogBtn = document.querySelector<HTMLElement>(
-    ".burger-menu__catalog-btn-catalog"
-  )!;
-  if (catalogButtonClicked.value) {
-    catalogBtn.style.backgroundColor = "#ffffff";
-    catalogBtn.style.color = "#000";
-    document
-      .querySelector<HTMLElement>(".burger-menu__dropdown-menu")!
-      .classList.remove("burger-menu__dropdown-menu-opened");
-  } else {
-    catalogBtn.style.backgroundColor = "#000";
-    catalogBtn.style.color = "#ffffff";
-    document
-      .querySelector<HTMLElement>(".burger-menu__dropdown-menu")!
-      .classList.add("burger-menu__dropdown-menu-opened");
-  }
   catalogButtonClicked.value = !catalogButtonClicked.value;
+  toggleMenu(
+    ".burger-menu__catalog-btn-catalog",
+    ".burger-menu__dropdown-menu",
+    catalogButtonClicked.value ? "#000" : "#fff",
+    catalogButtonClicked.value ? "#fff" : "#000"
+  );
 };
 
-const summerBtnClicked = ref(false),
-  demiSeasonBtnClicked = ref(false),
-  winterBtnClicked = ref(false),
-  modelsBtnClicked = ref(false);
+const openSubMenu = (btnClicked: Ref<boolean>, flexSelector: string) => {
+  btnClicked.value = !btnClicked.value;
+  const flexMenu = document.querySelector(flexSelector)!;
+  flexMenu.classList.toggle(
+    "burger-menu__dropdown-menu-subtitles-btns-flex-opened"
+  );
+};
 
 const openSummerDropDownMenu = () => {
-  summerBtnClicked.value = !summerBtnClicked.value;
-  if (summerBtnClicked.value) {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-summer-flex"
-      )!
-      .classList.add("burger-menu__dropdown-menu-subtitles-btns-flex-opened");
-  } else {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-summer-flex"
-      )!
-      .classList.remove(
-        "burger-menu__dropdown-menu-subtitles-btns-flex-opened"
-      );
-  }
+  openSubMenu(
+    summerBtnClicked,
+    ".burger-menu__dropdown-menu-subtitles-btns-summer-flex"
+  );
 };
+
 const openDemiSeasonDropDownMenu = () => {
-  demiSeasonBtnClicked.value = !demiSeasonBtnClicked.value;
-  if (demiSeasonBtnClicked.value) {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-demi-season-flex"
-      )!
-      .classList.add("burger-menu__dropdown-menu-subtitles-btns-flex-opened");
-  } else {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-demi-season-flex"
-      )!
-      .classList.remove(
-        "burger-menu__dropdown-menu-subtitles-btns-flex-opened"
-      );
-  }
+  openSubMenu(
+    demiSeasonBtnClicked,
+    ".burger-menu__dropdown-menu-subtitles-btns-demi-season-flex"
+  );
 };
+
 const openWinterDropDownMenu = () => {
-  winterBtnClicked.value = !winterBtnClicked.value;
-  if (winterBtnClicked.value) {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-winter-flex"
-      )!
-      .classList.add("burger-menu__dropdown-menu-subtitles-btns-flex-opened");
-  } else {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-winter-flex"
-      )!
-      .classList.remove(
-        "burger-menu__dropdown-menu-subtitles-btns-flex-opened"
-      );
-  }
+  openSubMenu(
+    winterBtnClicked,
+    ".burger-menu__dropdown-menu-subtitles-btns-winter-flex"
+  );
 };
+
 const openModelsDropDownMenu = () => {
-  modelsBtnClicked.value = !modelsBtnClicked.value;
-  if (modelsBtnClicked.value) {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-models-flex"
-      )!
-      .classList.add("burger-menu__dropdown-menu-subtitles-btns-flex-opened");
-  } else {
-    document
-      .querySelector<HTMLElement>(
-        ".burger-menu__dropdown-menu-subtitles-btns-models-flex"
-      )!
-      .classList.remove(
-        "burger-menu__dropdown-menu-subtitles-btns-flex-opened"
-      );
-  }
+  openSubMenu(
+    modelsBtnClicked,
+    ".burger-menu__dropdown-menu-subtitles-btns-models-flex"
+  );
 };
 </script>
 

@@ -2,13 +2,15 @@
   <nav class="headers_nav">
     <header class="header">
       <div class="header-top">
-        <div class="header-top__titles-flex">
-          <span class="header-top__title">О магазине</span>
-          <span class="header-top__title">Наш блог</span>
-          <span class="header-top__title">Доставка и оплата</span>
-          <span class="header-top__title">Контакты</span>
-          <span class="header-top__title">Индивидуальный заказ</span>
-        </div>
+        <ul class="header-top__titles-list-flex">
+          <li><NuxtLink to="">О магазине</NuxtLink></li>
+          <li><NuxtLink to="">Наш блог</NuxtLink></li>
+          <li><NuxtLink to="">Доставка и оплата</NuxtLink></li>
+          <li><NuxtLink to="">Контакты</NuxtLink></li>
+          <li>
+            <NuxtLink to="">Индивидуальный заказ</NuxtLink>
+          </li>
+        </ul>
         <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>
       </div>
       <div class="header-mid">
@@ -18,7 +20,29 @@
             class="header__burger-btn-and-burger-text-from768px-flex"
           >
             <button class="header__burger-btn">
-              <img src="@/public/imgs/burger-btn.svg" alt="" />
+              <svg
+                width="36"
+                height="12"
+                viewBox="0 0 36 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="36"
+                  y1="1.98633"
+                  x2="13.0168"
+                  y2="1.98633"
+                  stroke="black"
+                  stroke-width="2"
+                />
+                <line
+                  x1="36"
+                  y1="10.0137"
+                  y2="10.0137"
+                  stroke="black"
+                  stroke-width="2"
+                />
+              </svg>
             </button>
             <span class="header__burger-text-from768px"
               ><span class="header__burger-text-hiden-at1440px">Меню</span
@@ -27,10 +51,12 @@
               ></span
             >
           </div>
-          <span class="header__title">Мужские</span>
-          <span class="header__title">Женские</span>
-          <span class="header__title">Детские</span>
-          <span class="header__title">Распродажа</span>
+          <ul class="header__titles-list">
+            <li><NuxtLink to="">Мужские</NuxtLink></li>
+            <li><NuxtLink to="">Женские</NuxtLink></li>
+            <li><NuxtLink to="">Детские</NuxtLink></li>
+            <li><NuxtLink to="">Распродажа</NuxtLink></li>
+          </ul>
         </div>
         <img src="@/public/imgs/logo.svg" alt="" class="header__logo" />
         <div class="header__btns-flex">
@@ -122,7 +148,29 @@ onMounted(() => {
       )!;
       burgerMenu.style.display = "block";
     });
+
+    /* styles from 768px to 1200px for .burger-menu-shadow and .header__burger-text-hiden-at1440px starts */
+    const burgerMenuBtn = document.querySelector<HTMLElement>(
+      ".header__burger-btn-and-burger-text-from768px-flex"
+    )!;
+    const burgerMenu = document.querySelector<HTMLElement>(
+      ".burger-menu-shadow"
+    )!;
+    burgerMenuBtn.addEventListener("click", () => {
+      const svgElement = document.querySelector(".header__burger-btn svg")!;
+      const lines = Array.from(svgElement.querySelectorAll("line"));
+      lines.forEach((line) => {
+        line.setAttribute("stroke", "#fb5a00");
+      });
+
+      burgerMenu.style.display = "block";
+      document.querySelector<HTMLElement>(
+        ".header__burger-text-hiden-at1440px"
+      )!.style.color = "#fb5a00";
+    });
+    /* styles from 768px to 1200px for .burger-menu-shadow and .header__burger-text-hiden-at1440px  ends */
   }
+
   if (window.innerWidth >= 768) {
     const buttons = Array.from(
       document.querySelectorAll<HTMLButtonElement>(".header__btns-flex button")
@@ -146,10 +194,49 @@ onMounted(() => {
     });
   }
 });
+
+let isActive = false;
 const toggleCatalogMenu = () => {
+  const catalogMenu = document.querySelector(".catalog-menu")!;
+  catalogMenu.classList.toggle("catalog-menu-opened");
   document
-    .querySelector<HTMLElement>(".catalog-menu")!
-    .classList.toggle("catalog-menu-opened");
+    .querySelector(".header__burger-text-from768px")!
+    .classList.toggle("burger-btn-opened");
+
+  const svgElement = document.querySelector(".header__burger-btn svg")!;
+  const lines = Array.from(svgElement.querySelectorAll("line"));
+  if (isActive) {
+    lines.forEach((line) => {
+      line.setAttribute("stroke", "black");
+    });
+    isActive = false;
+  } else {
+    lines.forEach((line) => {
+      line.setAttribute("stroke", "#fb5a00");
+    });
+    isActive = true;
+  }
+  const burgerFlex = document.querySelector(
+    ".header__burger-btn-and-burger-text-from768px-flex"
+  )!;
+
+  document.addEventListener("click", (event) => {
+    const targetElement = event.target as HTMLElement;
+
+    if (
+      !catalogMenu.contains(targetElement) &&
+      !burgerFlex.contains(targetElement)
+    ) {
+      catalogMenu.classList.remove("catalog-menu-opened");
+      lines.forEach((line) => {
+        line.setAttribute("stroke", "black");
+      });
+      document
+        .querySelector<HTMLElement>(".header__burger-text-from768px")!
+        .classList.remove("burger-btn-opened");
+      isActive = false;
+    }
+  });
 };
 </script>
 
@@ -178,7 +265,7 @@ const toggleCatalogMenu = () => {
 .header__burger-text-hiden-at320px {
   display: none;
 }
-.header__title {
+.header__titles-list {
   display: none;
 }
 .header__btns-flex {
@@ -252,6 +339,9 @@ const toggleCatalogMenu = () => {
     height: 70px;
     border-right: 1px solid #eaeaea;
   }
+  .header__burger-text-hiden-at1440px-opened {
+    color: $Dark-Orange;
+  }
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
@@ -266,15 +356,19 @@ const toggleCatalogMenu = () => {
     justify-content: space-between;
     height: 45px;
   }
-  .header-top__titles-flex {
+  .header-top__titles-list-flex {
+    @include ul;
     display: flex;
     align-items: center;
     gap: 2.5rem;
   }
-  .header-top__title {
+  .header-top__titles-list-flex li {
     font-family: "Pragmatica Book";
     font-size: 0.875rem;
     cursor: pointer;
+  }
+  .header-top__titles-list-flex li a {
+    color: #585858;
   }
   .header {
     padding: 0rem calc((100vw - 71.875rem) / 2);
@@ -298,14 +392,27 @@ const toggleCatalogMenu = () => {
     gap: 3.563rem;
     margin-left: 2rem;
   }
-  .header__burger-text-hiden-at320px {
-    display: block;
+  .header__titles-list {
+    @include ul;
+    display: flex;
+    align-items: stretch;
+    gap: 3.563rem;
+    margin: 0rem;
+    height: 100%;
   }
-  .header__title {
-    display: block;
+  .header__titles-list li {
     font-family: "Pragmatica Medium", sans-serif;
     font-size: 0.938rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .header__titles-list li:hover a {
+    transition: all 100ms ease;
+    color: #fb5a00;
+  }
+  .header__burger-text-hiden-at320px {
+    display: block;
   }
   .header__wishlist-counter-circle,
   .header__cart-counter-circle {
@@ -313,6 +420,15 @@ const toggleCatalogMenu = () => {
     height: 16px;
     margin-left: 3.8rem;
     margin-top: -3.9rem;
+  }
+  .burger-btn-opened {
+    color: $Dark-Orange;
+  }
+  .header__burger-btn-and-burger-text-from768px-flex:hover {
+    color: $Dark-Orange;
+  }
+  .header__burger-btn-and-burger-text-from768px-flex:hover svg line {
+    stroke: $Dark-Orange;
   }
 }
 /* 1440px = 90em */
