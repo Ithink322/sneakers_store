@@ -14,12 +14,12 @@
         <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>
       </div>
       <div class="header-mid">
-        <div class="header__titles-flex">
+        <div class="header-mid__titles-flex">
           <div
             @click="toggleCatalogMenu"
-            class="header__burger-btn-and-burger-text-from768px-flex"
+            class="header-mid__burger-btn-and-burger-text-flex--from768px"
           >
-            <button class="header__burger-btn">
+            <button class="header-mid__burger-btn">
               <svg
                 width="36"
                 height="12"
@@ -44,23 +44,23 @@
                 />
               </svg>
             </button>
-            <span class="header__burger-text-from768px"
-              ><span class="header__burger-text-hiden-at1440px">Меню</span
-              ><span class="header__burger-text-hiden-at320px"
+            <span class="header-mid__burger-text--from768px"
+              ><span class="header-mid__burger-text--hidden-at1200px">Меню</span
+              ><span class="header-mid__burger-text--hidden-at320px"
                 >Каталог</span
               ></span
             >
           </div>
-          <ul class="header__titles-list">
+          <ul class="header-mid__titles-list">
             <li><NuxtLink to="">Мужские</NuxtLink></li>
             <li><NuxtLink to="">Женские</NuxtLink></li>
             <li><NuxtLink to="">Детские</NuxtLink></li>
             <li><NuxtLink to="">Распродажа</NuxtLink></li>
           </ul>
         </div>
-        <img src="@/public/imgs/logo.svg" alt="" class="header__logo" />
-        <div class="header__btns-flex">
-          <button class="header__my-account-btn-from768px">
+        <img src="@/public/imgs/logo.svg" alt="" class="header-mid__logo" />
+        <div class="header-mid__btns-flex">
+          <button class="header-mid__my-account-btn--from768px">
             <svg
               width="15"
               height="20"
@@ -77,7 +77,7 @@
               />
             </svg>
           </button>
-          <button class="header__search-btn-from768px">
+          <button class="header-mid__search-btn--from768px">
             <svg
               width="16"
               height="16"
@@ -94,7 +94,7 @@
               />
             </svg>
           </button>
-          <button class="header__wishlist-btn">
+          <button class="header-mid__wishlist-btn">
             <svg
               width="21"
               height="18"
@@ -112,7 +112,7 @@
             </svg>
             <UIWishlistCounterCircle></UIWishlistCounterCircle>
           </button>
-          <button class="header__cart-btn">
+          <button class="header-mid__cart-btn">
             <svg
               width="17"
               height="18"
@@ -141,7 +141,7 @@
 <script setup lang="ts">
 onMounted(() => {
   if (window.innerWidth < 1200) {
-    const burgerBtn = document.querySelector(".header__burger-btn")!;
+    const burgerBtn = document.querySelector(".header-mid__burger-btn")!;
     burgerBtn.addEventListener("click", () => {
       const burgerMenu = document.querySelector<HTMLElement>(
         ".burger-menu-shadow"
@@ -149,31 +149,30 @@ onMounted(() => {
       burgerMenu.style.display = "block";
     });
 
-    /* styles from 768px to 1200px for .burger-menu-shadow and .header__burger-text-hiden-at1440px starts */
+    /* styles from 768px to 1200px starts */
     const burgerMenuBtn = document.querySelector<HTMLElement>(
-      ".header__burger-btn-and-burger-text-from768px-flex"
+      ".header-mid__burger-btn-and-burger-text-flex--from768px"
     )!;
     const burgerMenu = document.querySelector<HTMLElement>(
       ".burger-menu-shadow"
     )!;
     burgerMenuBtn.addEventListener("click", () => {
-      const svgElement = document.querySelector(".header__burger-btn svg")!;
+      const svgElement = document.querySelector(".header-mid__burger-btn svg")!;
       const lines = Array.from(svgElement.querySelectorAll("line"));
       lines.forEach((line) => {
         line.setAttribute("stroke", "#fb5a00");
       });
 
       burgerMenu.style.display = "block";
-      document.querySelector<HTMLElement>(
-        ".header__burger-text-hiden-at1440px"
-      )!.style.color = "#fb5a00";
     });
-    /* styles from 768px to 1200px for .burger-menu-shadow and .header__burger-text-hiden-at1440px  ends */
+    /* styles from 768px to 1200px ends */
   }
 
   if (window.innerWidth >= 768) {
     const buttons = Array.from(
-      document.querySelectorAll<HTMLButtonElement>(".header__btns-flex button")
+      document.querySelectorAll<HTMLButtonElement>(
+        ".header-mid__btns-flex button"
+      )
     );
 
     buttons.forEach((button) => {
@@ -197,13 +196,10 @@ onMounted(() => {
 
 let isActive = false;
 const toggleCatalogMenu = () => {
-  const catalogMenu = document.querySelector(".catalog-menu")!;
-  catalogMenu.classList.toggle("catalog-menu-opened");
-  document
-    .querySelector(".header__burger-text-from768px")!
-    .classList.toggle("burger-btn-opened");
+  const catalogMenu = document.querySelector(".catalog")!;
+  catalogMenu.classList.toggle("catalog__menu--opened");
 
-  const svgElement = document.querySelector(".header__burger-btn svg")!;
+  const svgElement = document.querySelector(".header-mid__burger-btn svg")!;
   const lines = Array.from(svgElement.querySelectorAll("line"));
   if (isActive) {
     lines.forEach((line) => {
@@ -217,7 +213,7 @@ const toggleCatalogMenu = () => {
     isActive = true;
   }
   const burgerFlex = document.querySelector(
-    ".header__burger-btn-and-burger-text-from768px-flex"
+    ".header-mid__burger-btn-and-burger-text-flex--from768px"
   )!;
 
   document.addEventListener("click", (event) => {
@@ -227,13 +223,10 @@ const toggleCatalogMenu = () => {
       !catalogMenu.contains(targetElement) &&
       !burgerFlex.contains(targetElement)
     ) {
-      catalogMenu.classList.remove("catalog-menu-opened");
+      catalogMenu.classList.remove("catalog__menu--opened");
       lines.forEach((line) => {
         line.setAttribute("stroke", "black");
       });
-      document
-        .querySelector<HTMLElement>(".header__burger-text-from768px")!
-        .classList.remove("burger-btn-opened");
       isActive = false;
     }
   });
@@ -253,36 +246,37 @@ const toggleCatalogMenu = () => {
   display: flex;
   justify-content: space-between;
   width: 100%;
-}
-.header__burger-btn {
-  @include btn;
-  width: 59px;
-  height: 70px;
-  padding-right: 1.438rem;
-  border-right: 1px solid #eaeaea;
-}
-.header__burger-text-from768px,
-.header__burger-text-hiden-at320px {
-  display: none;
-}
-.header__titles-list {
-  display: none;
-}
-.header__btns-flex {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  border-left: 1px solid #eaeaea;
-  padding-left: 0.938rem;
-  padding-right: 0.5rem;
-}
-.header__my-account-btn-from768px,
-.header__search-btn-from768px {
-  display: none;
-}
-.header__wishlist-btn,
-.header__cart-btn {
-  @include btn;
+
+  &__burger-btn {
+    @include btn;
+    width: 59px;
+    height: 70px;
+    padding-right: 1.438rem;
+    border-right: 1px solid #eaeaea;
+  }
+  &__burger-text--from768px,
+  &__burger-text--hidden-at320px {
+    display: none;
+  }
+  &__titles-list {
+    display: none;
+  }
+  &__btns-flex {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-left: 1px solid #eaeaea;
+    padding-left: 0.938rem;
+    padding-right: 0.5rem;
+  }
+  &__my-account-btn--from768px,
+  &__search-btn--from768px {
+    display: none;
+  }
+  &__wishlist-btn,
+  &__cart-btn {
+    @include btn;
+  }
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
@@ -290,57 +284,56 @@ const toggleCatalogMenu = () => {
     padding: 0rem calc((100vw - 44.874rem) / 2);
     margin: 0 auto;
   }
-  .header__burger-btn-and-burger-text-from768px-flex {
-    display: flex;
-    align-items: center;
-    margin-right: auto;
-    margin-left: 1.614rem;
-    cursor: pointer;
-  }
-  .header__burger-btn {
-    border-right: none;
-    padding-right: 0rem;
-  }
-  .header__burger-text-from768px {
-    display: block;
-    margin-top: -0.1rem;
-    font-family: "Pragmatica Medium", sans-serif;
-    font-size: 0.938rem;
-  }
-  .header__titles-flex {
-    display: flex;
-    order: 2;
-    margin-right: auto;
-  }
-  .header__logo {
-    padding-right: 1.875rem;
-    border-right: 1px solid #eaeaea;
-    order: 1;
-  }
-  .header__btns-flex {
-    order: 3;
-    padding-left: 0rem;
-    padding-right: 0rem;
-    border-right: 1px solid #eaeaea;
-    gap: 0rem;
-  }
-  .header__wishlist-btn,
-  .header__cart-btn {
-    @include btn;
-    width: 71px;
-    height: 70px;
-  }
-  .header__my-account-btn-from768px,
-  .header__search-btn-from768px,
-  .header__wishlist-btn {
-    display: block;
-    @include btn;
-    width: 71px;
-    height: 70px;
-    border-right: 1px solid #eaeaea;
-  }
-  .header__burger-text-hiden-at1440px-opened {
-    color: $Dark-Orange;
+  .header-mid {
+    &__burger-btn-and-burger-text-flex--from768px {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+      margin-left: 1.614rem;
+      cursor: pointer;
+    }
+    &__burger-btn {
+      border-right: none;
+      padding-right: 0rem;
+    }
+    &__burger-text--from768px {
+      display: block;
+      margin-top: -0.1rem;
+      font-family: "Pragmatica Medium", sans-serif;
+      font-size: 0.938rem;
+    }
+    &__titles-flex {
+      display: flex;
+      order: 2;
+      margin-right: auto;
+    }
+    &__logo {
+      padding-right: 1.875rem;
+      border-right: 1px solid #eaeaea;
+      order: 1;
+    }
+    &__btns-flex {
+      order: 3;
+      padding-left: 0rem;
+      padding-right: 0rem;
+      border-right: 1px solid #eaeaea;
+      gap: 0rem;
+    }
+    &__wishlist-btn,
+    &__cart-btn {
+      @include btn;
+      width: 71px;
+      height: 70px;
+    }
+    &__my-account-btn--from768px,
+    &__search-btn--from768px,
+    &__wishlist-btn {
+      display: block;
+      @include btn;
+      width: 71px;
+      height: 70px;
+      border-right: 1px solid #eaeaea;
+    }
   }
 }
 /* 1024px = 64em */
@@ -355,20 +348,21 @@ const toggleCatalogMenu = () => {
     display: flex;
     justify-content: space-between;
     height: 45px;
-  }
-  .header-top__titles-list-flex {
-    @include ul;
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-  }
-  .header-top__titles-list-flex li {
-    font-family: "Pragmatica Book";
-    font-size: 0.875rem;
-    cursor: pointer;
-  }
-  .header-top__titles-list-flex li a {
-    color: #585858;
+
+    &__titles-list-flex {
+      @include ul;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    &__titles-list-flex li {
+      font-family: "Pragmatica Book";
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    &__titles-list-flex li a {
+      color: #585858;
+    }
   }
   .header {
     padding: 0rem calc((100vw - 71.875rem) / 2);
@@ -382,53 +376,55 @@ const toggleCatalogMenu = () => {
     height: 1px;
     margin-top: 2.72rem;
   }
-  .header__burger-text-hiden-at1440px,
-  .header__my-account-btn-from768px {
-    display: none;
-  }
-  .header__titles-flex {
-    display: flex;
-    align-items: center;
-    gap: 3.563rem;
-    margin-left: 2rem;
-  }
-  .header__titles-list {
-    @include ul;
-    display: flex;
-    align-items: stretch;
-    gap: 3.563rem;
-    margin: 0rem;
-    height: 100%;
-  }
-  .header__titles-list li {
-    font-family: "Pragmatica Medium", sans-serif;
-    font-size: 0.938rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  .header__titles-list li:hover a {
-    transition: all 100ms ease;
-    color: #fb5a00;
-  }
-  .header__burger-text-hiden-at320px {
-    display: block;
-  }
-  .header__wishlist-counter-circle,
-  .header__cart-counter-circle {
-    width: 16px;
-    height: 16px;
-    margin-left: 3.8rem;
-    margin-top: -3.9rem;
-  }
-  .burger-btn-opened {
-    color: $Dark-Orange;
-  }
-  .header__burger-btn-and-burger-text-from768px-flex:hover {
-    color: $Dark-Orange;
-  }
-  .header__burger-btn-and-burger-text-from768px-flex:hover svg line {
-    stroke: $Dark-Orange;
+  .header-mid {
+    &__burger-text--hidden-at1200px,
+    &__my-account-btn--from768px {
+      display: none;
+    }
+    &__titles-flex {
+      display: flex;
+      align-items: center;
+      gap: 3.563rem;
+      margin-left: 2rem;
+    }
+    &__titles-list {
+      @include ul;
+      display: flex;
+      align-items: stretch;
+      gap: 3.563rem;
+      margin: 0rem;
+      height: 100%;
+    }
+    &__titles-list li {
+      font-family: "Pragmatica Medium", sans-serif;
+      font-size: 0.938rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    &__titles-list li:hover a {
+      transition: all 100ms ease;
+      color: #fb5a00;
+    }
+    &__burger-text--hidden-at320px {
+      display: block;
+    }
+    &__wishlist-counter-circle,
+    &__cart-counter-circle {
+      width: 16px;
+      height: 16px;
+      margin-left: 3.8rem;
+      margin-top: -3.9rem;
+    }
+    &__burger-btn-opened {
+      color: $Dark-Orange;
+    }
+    &__burger-btn-and-burger-text-flex--from768px:hover {
+      color: $Dark-Orange;
+    }
+    &__burger-btn-and-burger-text-flex--from768px:hover svg line {
+      stroke: $Dark-Orange;
+    }
   }
 }
 /* 1440px = 90em */
@@ -436,7 +432,7 @@ const toggleCatalogMenu = () => {
   .header {
     padding: 0rem calc((100vw - 85rem) / 2);
   }
-  .header__titles-flex {
+  .header-mid__titles-flex {
     margin-left: 11.755rem;
   }
 }

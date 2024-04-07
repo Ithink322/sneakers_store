@@ -180,17 +180,13 @@ const closeBurgerMenu = () => {
   document.querySelector<HTMLElement>(".burger-menu-shadow")!.style.display =
     "none";
 
-  /* styles from 768px to 1200px for .header__burger-btn svg and .header__burger-text-hiden-at1440px starts */
-  const svgElement = document.querySelector(".header__burger-btn svg")!;
+  /* styles from 768px to 1200px starts */
+  const svgElement = document.querySelector(".header-mid__burger-btn svg")!;
   const lines = Array.from(svgElement.querySelectorAll("line"));
   lines.forEach((line) => {
     line.setAttribute("stroke", "black");
   });
-
-  document.querySelector<HTMLElement>(
-    ".header__burger-text-hiden-at1440px"
-  )!.style.color = "#000000";
-  /* styles from 768px to 1200px for .header__burger-btn svg and .header__burger-text-hiden-at1440px ends */
+  /* styles from 768px to 1200px ends */
 };
 
 const toggleMenu = (
@@ -204,7 +200,7 @@ const toggleMenu = (
 
   btn.style.backgroundColor = bgColor;
   btn.style.color = textColor;
-  menu.classList.toggle("burger-menu__dropdown-menu-opened");
+  menu.classList.toggle("burger-menu__dropdown-menu--opened");
 };
 
 const catalogButtonClicked = ref(false);
@@ -227,7 +223,7 @@ const openSubMenu = (btnClicked: Ref<boolean>, flexSelector: string) => {
   btnClicked.value = !btnClicked.value;
   const flexMenu = document.querySelector(flexSelector)!;
   flexMenu.classList.toggle(
-    "burger-menu__dropdown-menu-subtitles-btns-flex-opened"
+    "burger-menu__dropdown-menu-subtitles-btns-flex--opened"
   );
 };
 
@@ -270,6 +266,12 @@ const openModelsDropDownMenu = () => {
   height: 100vh;
   top: 0rem;
 }
+.burger-menu-shadow__close-btn {
+  @include btn;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
 .burger-menu {
   position: relative;
   background: #fff;
@@ -278,115 +280,124 @@ const openModelsDropDownMenu = () => {
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-.burger-menu-shadow__close-btn {
-  @include btn;
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-}
-.burger-menu__search-form {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f9f9f9;
-  height: 70px;
-  border-bottom: 1px solid #eaeaea;
-}
-.burger-menu__input {
-  @include input;
-  margin-left: 0.938rem;
-  width: 192px;
-  font-family: "Pragmatica Book";
-  color: #000;
-}
-.burger-menu__input::placeholder {
-  color: #969696;
-}
-.burger-menu__input:focus {
-  outline: none;
-}
-.burger-menu__search-btn {
-  @include btn;
-  width: 70px;
-  height: 70px;
-  border-left: 1px solid #eaeaea;
-}
-.burger-menu__btns-flex {
-  display: flex;
-  justify-content: space-between;
-}
-.burger-menu__wishlist-and-cart-btns-flex {
-  display: flex;
-}
-.burger-menu__wishlist-btn,
-.burger-menu__cart-btn {
-  @include btn;
-  width: 58px;
-  height: 58px;
-}
-.burger-menu__catalogs-and-sections-btns-flex {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid #eaeaea;
-}
-.burger-menu__catalog-btn {
-  @include btn;
-  justify-content: left;
-  height: 51px;
-  width: 100%;
-  padding-left: 0.938rem;
-  border-bottom: 1px solid #eaeaea;
-  font-family: "Pragmatica Medium";
-  font-size: 0.875rem;
-}
-.burger-menu__section-btn {
-  @include btn;
-  justify-content: left;
-  height: 45px;
-  width: 100%;
-  padding-left: 0.938rem;
-  font-family: "Pragmatica Book";
-  font-size: 0.938rem;
-}
-.burger-menu__dropdown-menu {
-  flex-direction: column;
-  padding: 0 1.563rem;
-  min-width: max-content;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease-in-out;
-}
-.burger-menu__dropdown-menu-opened {
-  max-height: 100vh;
-  transition: max-height 0.3s ease-in-out;
-}
-.burger-menu__dropdown-menu-title-btn {
-  @include btn;
-  height: 43px;
-  width: 100%;
-  justify-content: space-between;
-  font-family: "Pragmatica Medium";
-  font-size: 0.938rem;
-}
-.burger-menu__dropdown-menu-subtitles-btns-flex {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease-in-out;
-}
-.burger-menu__dropdown-menu-subtitles-btns-flex-opened {
-  display: flex;
-  flex-direction: column;
-  max-height: 100vh;
-  transition: max-height 0.3s ease-in-out;
-}
-.burger-menu__dropdown-menu-subtitle-btn {
-  @include btn;
-  width: 100%;
-  height: 27px;
-  justify-content: left;
-  font-family: "Pragmatica Book";
-  font-size: 0.875rem;
-  padding-left: 1rem;
+
+  &__search-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9f9f9;
+    height: 70px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  &__input {
+    @include input;
+    margin-left: 0.938rem;
+    width: 192px;
+    font-family: "Pragmatica Book";
+    color: #000;
+
+    &::placeholder {
+      color: #969696;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__search-btn {
+    @include btn;
+    width: 70px;
+    height: 70px;
+    border-left: 1px solid #eaeaea;
+  }
+
+  &__btns-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__wishlist-and-cart-btns-flex {
+    display: flex;
+  }
+  &__wishlist-btn,
+  &__cart-btn {
+    @include btn;
+    width: 58px;
+    height: 58px;
+  }
+
+  &__catalogs-and-sections-btns-flex {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #eaeaea;
+  }
+
+  &__catalog-btn {
+    @include btn;
+    justify-content: left;
+    height: 51px;
+    width: 100%;
+    padding-left: 0.938rem;
+    border-bottom: 1px solid #eaeaea;
+    font-family: "Pragmatica Medium";
+    font-size: 0.875rem;
+  }
+
+  &__section-btn {
+    @include btn;
+    justify-content: left;
+    height: 45px;
+    width: 100%;
+    padding-left: 0.938rem;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+  }
+
+  &__dropdown-menu {
+    flex-direction: column;
+    padding: 0 1.563rem;
+    min-width: max-content;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+
+    &--opened {
+      max-height: 100vh;
+      transition: max-height 0.3s ease-in-out;
+    }
+  }
+
+  &__dropdown-menu-title-btn {
+    @include btn;
+    height: 43px;
+    width: 100%;
+    justify-content: space-between;
+    font-family: "Pragmatica Medium";
+    font-size: 0.938rem;
+  }
+
+  &__dropdown-menu-subtitles-btns-flex {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-in-out;
+
+    &--opened {
+      display: flex;
+      flex-direction: column;
+      max-height: 100vh;
+      transition: max-height 0.3s ease-in-out;
+    }
+  }
+
+  &__dropdown-menu-subtitle-btn {
+    @include btn;
+    width: 100%;
+    height: 27px;
+    justify-content: left;
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    padding-left: 1rem;
+  }
 }
 </style>
