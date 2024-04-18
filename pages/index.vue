@@ -57,7 +57,7 @@
             />
             <div class="slide__text-price-and-more-btn-flex">
               <span class="slide__text-price"
-                >от <span class="slide__price">9900 ₽</span></span
+                >от <span class="slide__price">8800 ₽</span></span
               >
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
@@ -90,7 +90,7 @@
             />
             <div class="slide__text-price-and-more-btn-flex">
               <span class="slide__text-price"
-                >от <span class="slide__price">9900 ₽</span></span
+                >от <span class="slide__price">7700 ₽</span></span
               >
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
@@ -123,7 +123,7 @@
             />
             <div class="slide__text-price-and-more-btn-flex">
               <span class="slide__text-price"
-                >от <span class="slide__price">9900 ₽</span></span
+                >от <span class="slide__price">6600 ₽</span></span
               >
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
@@ -154,6 +154,50 @@
         </div>
       </div>
     </div>
+    <div class="benefits-main-flex">
+      <div class="benefits-main-flex__benefit-flex benefit-flex">
+        <img
+          src="@/public/imgs/benefit-icon-original-products.svg"
+          alt=""
+          class="benefit-flex__icon"
+        />
+        <div class="benefit-flex__title-and-text-flex">
+          <span class="benefit-flex__title">Только оригинальные товары</span>
+          <span class="benefit-flex__text"
+            >Гарантированная подлинность Nike и высокое качество
+            кроссовок.</span
+          >
+        </div>
+      </div>
+      <div class="benefits-main-flex__benefit-flex benefit-flex">
+        <img
+          src="@/public/imgs/benefit-professional-service.svg"
+          alt=""
+          class="benefit-flex__icon"
+        />
+        <div class="benefit-flex__title-and-text-flex">
+          <span class="benefit-flex__title">Профессиональный сервис</span>
+          <span class="benefit-flex__text"
+            >Команда экспертов, готовых помочь с выбором размера ответить на все
+            вопросы.</span
+          >
+        </div>
+      </div>
+      <div class="benefits-main-flex__benefit-flex benefit-flex">
+        <img
+          src="@/public/imgs/benefit-exclusive-choice.svg"
+          alt=""
+          class="benefit-flex__icon"
+        />
+        <div class="benefit-flex__title-and-text-flex">
+          <span class="benefit-flex__title">Эксклюзивный выбор</span>
+          <span class="benefit-flex__text"
+            >Богатый ассортимент оригинальных моделей Nike, включая редкие
+            выпуски.</span
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -165,9 +209,19 @@ onMounted(() => {
     nextBtn = document.querySelector<HTMLElement>(".overflow__next-btn")!,
     carouselContainer = document.querySelector<HTMLElement>(".overflow__flex")!;
   let currentPosition = 0,
-    currentIndex = 0;
+    currentIndex = 0,
+    interval: any = null;
 
-  prevBtn.addEventListener("click", () => {
+  function stopTimer() {
+    clearInterval(interval);
+  }
+
+  function startTimer() {
+    interval = setInterval(() => nextSlide(), 5000);
+  }
+
+  function prevSlide() {
+    stopTimer();
     currentIndex--;
     currentPosition += 100;
     if (currentIndex < 0) {
@@ -176,9 +230,11 @@ onMounted(() => {
     }
     carouselContainer.style.transform = `translateX(${currentPosition}%)`;
     updateIndicators();
-  });
+    startTimer();
+  }
 
   function nextSlide() {
+    stopTimer();
     currentIndex++;
     currentPosition -= 100;
     if (currentIndex === slides.length) {
@@ -187,13 +243,17 @@ onMounted(() => {
     }
     carouselContainer.style.transform = `translateX(${currentPosition}%)`;
     updateIndicators();
+    startTimer();
   }
 
   nextBtn.addEventListener("click", () => {
     nextSlide();
   });
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+  });
 
-  setInterval(() => nextSlide(), 5000);
+  startTimer();
 
   function updateIndicators() {
     const indicators = document.querySelectorAll(".indicators-flex__indicator");
@@ -311,7 +371,7 @@ onMounted(() => {
 }
 .overflow__indicators-flex {
   width: fit-content;
-  margin: 2.5rem auto;
+  margin: 2.5rem auto 3.125rem auto;
 }
 .indicators-flex {
   display: flex;
@@ -355,6 +415,56 @@ onMounted(() => {
     border: 2px solid #1f1f1f;
   }
 }
+.benefits-main-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1.563rem;
+  margin-top: 1.875rem;
+  height: auto;
+
+  &__benefit-flex {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.688rem;
+  }
+}
+.benefits-main-flex::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  border: 1px solid #eaeaea;
+  left: 0rem;
+  margin-top: -1.875rem;
+}
+.benefits-main-flex::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  border: 1px solid #eaeaea;
+  left: 0rem;
+  margin-top: 18.75rem;
+}
+.benefit-flex {
+  &__icon {
+    width: 40px;
+    flex-shrink: 0;
+  }
+  &__title-and-text-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  &__title {
+    font-family: "Pragmatica Medium";
+    font-size: 0.938rem;
+  }
+  &__text {
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    color: #4b4b4b;
+  }
+}
+
 /* 768px = 48em */
 @media (min-width: 48em) {
   .container {
@@ -393,6 +503,22 @@ onMounted(() => {
 
     &__indicator::before {
       top: -0.4rem;
+    }
+  }
+  .benefits-main-flex {
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__benefit-flex {
+      gap: 0.625rem;
+    }
+  }
+  .benefits-main-flex::after {
+    margin-top: 8.125rem;
+  }
+  .benefit-flex {
+    &__title {
+      font-size: 0.813rem;
     }
   }
 }
@@ -452,6 +578,27 @@ onMounted(() => {
       top: -0.4rem;
     }
   }
+  .benefits-main-flex {
+    margin-top: 3.125rem;
+
+    &__benefit-flex {
+      gap: 1.25rem;
+    }
+  }
+  .benefits-main-flex::before {
+    margin-top: -3.125rem;
+  }
+  .benefits-main-flex::after {
+    margin-top: 9.375rem;
+  }
+  .benefit-flex {
+    &__title {
+      font-size: 1.125rem;
+    }
+    &__text {
+      font-size: 1.125rem;
+    }
+  }
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
@@ -484,6 +631,9 @@ onMounted(() => {
     &__indicator::before {
       top: -0.4rem;
     }
+  }
+  .benefits-main-flex::after {
+    margin-top: 7.3rem;
   }
 }
 /* 1920px = 120em */
