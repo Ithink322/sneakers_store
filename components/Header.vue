@@ -58,7 +58,7 @@
             <li><NuxtLink to="">Распродажа</NuxtLink></li>
           </ul>
         </div>
-        <img src="@/public/imgs/logo.svg" alt="" class="header-mid__logo" />
+        <img src="/imgs/logo.svg" alt="" class="header-mid__logo" />
         <div class="header-mid__btns-flex">
           <button class="header-mid__my-account-btn--from768px">
             <svg

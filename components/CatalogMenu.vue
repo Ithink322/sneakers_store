@@ -52,11 +52,7 @@
             <span class="hero-card__title"
               >Новая коллекция в каталоге Nike Air Max Solo</span
             >
-            <img
-              src="@/public/imgs/catalog-hero.svg"
-              alt=""
-              class="hero-card__hero"
-            />
+            <img src="/imgs/catalog-hero.svg" alt="" class="hero-card__hero" />
             <button class="hero-card__go-to-catalog-btn">
               Перейти в каталог
             </button>
@@ -76,10 +72,13 @@
 @media (min-width: 75em) {
   .catalog {
     display: block;
+    position: absolute;
     overflow: hidden;
+    width: 100%;
     box-shadow: 0px 10px 55px 0px rgba(0, 0, 0, 0.08);
     max-height: 0;
     transition: max-height 0.15s ease-in-out;
+    z-index: 2;
   }
   .catalog__menu--opened {
     max-height: 100vh;

@@ -1,7 +1,7 @@
 <template>
   <div class="burger-menu-shadow">
     <button @click="closeBurgerMenu" class="burger-menu-shadow__close-btn">
-      <img src="@/public/imgs/cross.svg" alt="cross" />
+      <img src="/imgs/cross.svg" alt="cross" />
     </button>
     <nav class="burger-menu">
       <form class="burger-menu__search-form">
@@ -11,7 +11,7 @@
           class="burger-menu__input"
         />
         <button class="burger-menu__search-btn">
-          <img src="@/public/imgs/search-icon.svg" alt="" />
+          <img src="/imgs/search-icon.svg" alt="" />
         </button>
       </form>
       <div class="burger-menu__btns-flex">
@@ -20,11 +20,11 @@
         ></UISignUpOrSignInOrMyAccountBtn>
         <div class="burger-menu__wishlist-and-cart-btns-flex">
           <button class="burger-menu__wishlist-btn">
-            <img src="@/public/imgs/wishlist-icon.svg" alt="" />
+            <img src="/imgs/wishlist-icon.svg" alt="" />
             <UIWishlistCounterCircle></UIWishlistCounterCircle>
           </button>
           <button class="burger-menu__cart-btn">
-            <img src="@/public/imgs/cart-icon.svg" alt="" />
+            <img src="/imgs/cart-icon.svg" alt="" />
             <UICartCounterCircle></UICartCounterCircle>
           </button>
         </div>
@@ -43,7 +43,7 @@
           >
             Лето
             <img
-              src="@/public/imgs/arrow-icon.svg"
+              src="/imgs/arrow-icon.svg"
               alt=""
               class="burger-menu__dropdown-menu-title-arrow-summer-btn"
             />
@@ -82,7 +82,7 @@
           >
             Демисезон
             <img
-              src="@/public/imgs/arrow-icon.svg"
+              src="/imgs/arrow-icon.svg"
               alt=""
               class="burger-menu__dropdown-menu-title-arrow-demi-season-btn"
             />
@@ -109,7 +109,7 @@
           >
             Зима
             <img
-              src="@/public/imgs/arrow-icon.svg"
+              src="/imgs/arrow-icon.svg"
               alt=""
               class="burger-menu__dropdown-menu-title-arrow-winter-btn"
             />
@@ -133,7 +133,7 @@
           >
             Модели
             <img
-              src="@/public/imgs/arrow-icon.svg"
+              src="/imgs/arrow-icon.svg"
               alt=""
               class="burger-menu__dropdown-menu-title-arrow-models-btn"
             />
@@ -265,6 +265,7 @@ const openModelsDropDownMenu = () => {
   width: 100%;
   height: 100vh;
   top: 0rem;
+  z-index: 2;
 }
 .burger-menu-shadow__close-btn {
   @include btn;

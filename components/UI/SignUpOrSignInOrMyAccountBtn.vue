@@ -1,6 +1,6 @@
 <template>
   <button class="signUp-or-signIn-or-my-account-btn">
-    <img src="@/public/imgs/my-account-icon.svg" alt="" />
+    <img src="/imgs/my-account-icon.svg" alt="" />
     Вход \ Регистрация
   </button>
 </template>
