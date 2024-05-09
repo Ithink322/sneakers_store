@@ -141,20 +141,17 @@
 <script setup lang="ts">
 onMounted(() => {
   if (window.innerWidth < 1200) {
+    const burgerMenu = document.querySelector<HTMLElement>(
+      ".burger-menu-shadow"
+    )!;
     const burgerBtn = document.querySelector(".header-mid__burger-btn")!;
     burgerBtn.addEventListener("click", () => {
-      const burgerMenu = document.querySelector<HTMLElement>(
-        ".burger-menu-shadow"
-      )!;
       burgerMenu.style.display = "block";
     });
 
     /* styles from 768px to 1200px starts */
     const burgerMenuBtn = document.querySelector<HTMLElement>(
       ".header-mid__burger-btn-and-burger-text-flex--from768px"
-    )!;
-    const burgerMenu = document.querySelector<HTMLElement>(
-      ".burger-menu-shadow"
     )!;
     burgerMenuBtn.addEventListener("click", () => {
       const svgElement = document.querySelector(".header-mid__burger-btn svg")!;

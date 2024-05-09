@@ -188,6 +188,7 @@
         </div>
       </div>
     </div>
+    <div class="border-bottom-for-benefits-main-flex"></div>
     <div class="latest-arrivals products-catalog">
       <h2 class="latest-arrivals__title products-catalog__title">
         ПОСЛЕДНИЕ<br />
@@ -1827,8 +1828,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     gap: 1.688rem;
   }
 }
-.benefits-main-flex::before,
-.benefits-main-flex::after {
+.benefits-main-flex::before {
   position: absolute;
   content: "";
   width: calc(100% + 1.876rem);
@@ -1836,8 +1836,12 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   left: -0.938rem;
   margin-top: -1.875rem;
 }
-.benefits-main-flex::after {
-  bottom: -1.875rem;
+.border-bottom-for-benefits-main-flex {
+  position: absolute;
+  width: 100%;
+  border: 1px solid #eaeaea;
+  left: 0rem;
+  margin-top: 1.875rem;
 }
 .benefit-flex {
   &__icon {
@@ -2046,8 +2050,8 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   .benefits-main-flex::before {
     margin-top: -3.125rem;
   }
-  .benefits-main-flex::after {
-    bottom: -19.75rem;
+  .border-bottom-for-benefits-main-flex {
+    margin-top: 2.9rem;
   }
   .benefit-flex {
     &__title {
@@ -2062,6 +2066,9 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       font-size: 2.438rem;
       margin-bottom: 3.2rem;
     }
+  }
+  .latest-arrivals__title {
+    margin-top: 5.7rem;
   }
   .best-selling {
     margin-top: 7rem;
@@ -2101,9 +2108,6 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       top: -0.4rem;
     }
   }
-  .benefits-main-flex::after {
-    bottom: -21.75rem;
-  }
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
@@ -2112,9 +2116,6 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   }
   .benefit-flex__text-br--from1920px {
     display: block;
-  }
-  .benefits-main-flex::after {
-    bottom: -5.4rem;
   }
 }
 </style>
