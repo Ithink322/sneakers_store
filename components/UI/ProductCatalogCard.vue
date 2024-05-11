@@ -133,9 +133,11 @@ onMounted(() => {
       slider.addEventListener("touchmove", handleTouchMove, false);
 
       let startX: number | null = null;
+      let startY: number | null = null;
 
       function handleTouchStart(event: TouchEvent) {
         startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
       }
 
       function handleTouchMove(event: TouchEvent) {
@@ -145,15 +147,20 @@ onMounted(() => {
 
         let currentX = event.touches[0].clientX;
         let diffX = startX - currentX;
+        let diffY = Math.abs(event.touches[0].clientY - startY!);
 
-        if (diffX > 0 && currentIndex < slides.length) {
-          currentIndex++;
-          startX = null;
-          moveSlider();
-        } else if (diffX < 0) {
-          currentIndex--;
-          startX = null;
-          moveSlider();
+        if (diffY < 20) {
+          // проверка на вертикальное движение
+          event.preventDefault(); // отмена стандартного поведения браузера
+          if (diffX > 0 && currentIndex < slides.length) {
+            currentIndex++;
+            startX = null;
+            moveSlider();
+          } else if (diffX < 0) {
+            currentIndex--;
+            startX = null;
+            moveSlider();
+          }
         }
       }
 

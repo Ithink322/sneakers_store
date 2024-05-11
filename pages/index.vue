@@ -279,6 +279,7 @@
       </div>
       <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
     </div>
+    <div class="season-hit"></div>
   </div>
 </template>
 
