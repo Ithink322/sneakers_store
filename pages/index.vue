@@ -279,7 +279,51 @@
       </div>
       <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
     </div>
-    <div class="season-hit"></div>
+    <div class="season-hit">
+      <div class="season-hit__content-flex">
+        <span class="season-hit__title">ХИТ СЕЗОНА</span>
+        <div class="season-hit__title-and-line-flex">
+          <span class="season-hit__title">ОТ NIKE</span>
+          <span class="season-hit__line"></span>
+        </div>
+        <span class="season-hit__subtitle"
+          >Nike Air Max Alpha<br />
+          Trainer 5</span
+        >
+        <span class="season-hit__price-text"
+          >от <span class="season-hit__price">7 899 ₽</span></span
+        >
+      </div>
+      <button class="season-hit__more-btn more-btn">
+        <div class="more-btn__flex">
+          <span class="more-btn__text">Подробнее</span>
+        </div>
+        <div class="season-hit__more-btn-arrow more-btn__arrow">
+          <img src="/imgs/white-right-arrow.svg" alt="" />
+        </div>
+      </button>
+      <img
+        class="season-hit__hero--from320px"
+        src="/imgs/season-hit-hero--from320px.svg"
+        alt=""
+      />
+      <img
+        class="season-hit__hero--from1440px"
+        src="/imgs/season-hit-hero--from1440px.svg"
+        alt=""
+      />
+      <div class="season-hit__description-flex">
+        <img
+          src="/imgs/plus-gray.svg"
+          alt=""
+          class="season-hit__description-icon"
+        />
+        <span class="season-hit__description"
+          >Уникальная технология структуры стельки позволяет забыть про обувь на
+          ноге.</span
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -1764,6 +1808,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   &__arrow {
     @include btn;
     background-color: $Dark-Black;
+    flex-shrink: 0;
     width: 65px;
     height: 65px;
     margin-left: auto;
@@ -1913,11 +1958,87 @@ const hitProductsNextSlide = (e: MouseEvent) => {
 .indicators span.active {
   background-color: #333;
 }
+.season-hit {
+  background-color: $Light-Black;
+  padding: 2.188rem;
+  overflow: hidden;
+  margin-top: 4.375rem;
+
+  &__title-and-line-flex {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+  }
+  &__title {
+    font-family: "Pragmatica Medium";
+    font-size: 2rem;
+    color: #fff;
+  }
+  &__line {
+    display: inline-block;
+    width: 76px;
+    border: 1px solid #fff;
+  }
+  &__subtitle {
+    display: block;
+    font-family: "Pragmatica Book";
+    font-size: 1.375rem;
+    color: #fff;
+    margin-top: 1.063rem;
+  }
+  &__price-text {
+    display: block;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #fff;
+    margin-top: 1.25rem;
+    margin-bottom: 0.938rem;
+  }
+  &__price {
+    font-family: "Pragmatica Medium";
+    font-size: 1.375rem;
+  }
+  &__more-btn {
+    width: 100%;
+    max-width: 260px;
+    background-color: $Light-Orange;
+  }
+  &__more-btn-arrow {
+    background-color: $Dark-Orange;
+  }
+  &__hero--from320px {
+    width: calc(120% + 3.876rem);
+    margin-top: 1.438rem;
+    margin-left: -3rem;
+  }
+  &__hero--from1440px {
+    display: none;
+  }
+  &__description-flex {
+    display: flex;
+    gap: 0.875rem;
+    align-items: start;
+    margin-top: -3rem;
+  }
+  &__description {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 165%;
+    color: #fff;
+  }
+}
 
 /* 360px = 22.5em */
 @media (min-width: 22.5em) {
   .products-catalog__btns-flex {
     top: 2.438rem;
+  }
+  .season-hit {
+    &__hero--from320px {
+      width: calc(114% + 3.876rem);
+      margin-top: 1.438rem;
+      margin-left: -3rem;
+    }
   }
 }
 /* 768px = 48em */
@@ -1981,6 +2102,22 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   .benefit-flex {
     &__title {
       font-size: 0.688rem;
+    }
+  }
+  .season-hit {
+    height: 341px;
+
+    &__title {
+      font-size: 2.125rem;
+    }
+    &__hero--from320px {
+      width: 560px;
+      height: 392px;
+      margin-top: -19rem;
+      margin-left: 13rem;
+    }
+    &__description-flex {
+      display: none;
     }
   }
 }
@@ -2074,6 +2211,16 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   .best-selling {
     margin-top: 7rem;
   }
+  .season-hit {
+    &__hero--from320px {
+      margin-left: 20rem;
+    }
+    &__description-flex {
+      display: flex;
+      margin-top: -9rem;
+      margin-left: 50rem;
+    }
+  }
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
@@ -2109,6 +2256,40 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       top: -0.4rem;
     }
   }
+  .season-hit {
+    height: 618px;
+    padding: 4.375rem;
+    margin-top: 7.188rem;
+
+    &__content-flex {
+      margin-top: 1.7rem;
+    }
+    &__title-and-line-flex {
+      gap: 1rem;
+    }
+    &__title {
+      font-size: 3.875rem;
+    }
+    &__line {
+      width: 123px;
+    }
+    &__subtitle {
+      font-size: 2.25rem;
+    }
+    &__hero--from320px {
+      display: none;
+    }
+    &__hero--from1440px {
+      display: block;
+      margin-top: -30rem;
+      margin-left: -7rem;
+    }
+    &__description-flex {
+      display: flex;
+      margin-top: -9rem;
+      margin-left: 58rem;
+    }
+  }
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
@@ -2117,6 +2298,15 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   }
   .benefit-flex__text-br--from1920px {
     display: block;
+  }
+  .season-hit {
+    width: 1500px;
+    margin-left: -4.375rem;
+
+    &__description-flex {
+      margin-top: -13.3rem;
+      margin-left: 67rem;
+    }
   }
 }
 </style>

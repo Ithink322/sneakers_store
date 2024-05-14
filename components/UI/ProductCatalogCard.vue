@@ -141,26 +141,28 @@ onMounted(() => {
       }
 
       function handleTouchMove(event: TouchEvent) {
-        if (!startX) {
+        if (!startX || !startY) {
           return;
         }
 
         let currentX = event.touches[0].clientX;
         let diffX = startX - currentX;
-        let diffY = Math.abs(event.touches[0].clientY - startY!);
+        let currentY = event.touches[0].clientY;
+        let diffY = Math.abs(startY - currentY);
 
-        if (diffY < 20) {
-          // проверка на вертикальное движение
-          event.preventDefault(); // отмена стандартного поведения браузера
-          if (diffX > 0 && currentIndex < slides.length) {
-            currentIndex++;
-            startX = null;
-            moveSlider();
-          } else if (diffX < 0) {
-            currentIndex--;
-            startX = null;
-            moveSlider();
-          }
+        if (diffX > 0 && currentIndex < slides.length) {
+          currentIndex++;
+          startX = null;
+          moveSlider();
+        } else if (diffX < 0) {
+          currentIndex--;
+          startX = null;
+          moveSlider();
+        }
+
+        if (diffY > diffX) {
+          /* event.preventDefault();
+          event.stopPropagation(); */
         }
       }
 
@@ -252,6 +254,9 @@ const showFirstImage = () => {
     right: 0.625rem;
   }
 }
+/* .slider {
+  touch-action: none;
+} */
 .slide--from1440px,
 .slide--from1440px.active {
   display: none;
