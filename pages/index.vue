@@ -324,13 +324,79 @@
         >
       </div>
     </div>
+    <UIRecentPublicationsList></UIRecentPublicationsList>
+    <UIProductsWithDiscountList></UIProductsWithDiscountList>
+    <div class="new-collection-banners-flex banners-flex">
+      <div class="banners-flex__collection-banner collection-banner">
+        <img
+          src="/imgs/collection-hero-1.svg"
+          alt=""
+          class="collection-banner__hero"
+        />
+        <span class="collection-banner__title"
+          >Новая коллекция в<br />
+          каталоге Nike Air<br />
+          Max Solo</span
+        >
+        <button class="collection-banner__btn">Перейти в каталог</button>
+      </div>
+      <div class="banners-flex__collection-banner collection-banner">
+        <img
+          src="/imgs/collection-hero-2.svg"
+          alt=""
+          class="collection-banner__hero"
+        />
+        <span class="collection-banner__title"
+          >Новая коллекция в<br />
+          каталоге Nike Air<br />
+          Max Solo</span
+        >
+        <button class="collection-banner__btn">Перейти в каталог</button>
+      </div>
+    </div>
+    <div class="about-us-flex">
+      <h1 class="about-us-flex__title">
+        ИНТЕРНЕТ-МАГАЗИН<br />
+        <div class="about-us-flex__title-and-line-flex">
+          SWOOSH STORE
+          <div class="about-us-flex__line"></div>
+        </div>
+      </h1>
+      <span class="about-us-flex__text"
+        >Добро пожаловать в
+        <strong class="about-us-flex__text--bold">Swoosh Store</strong> – ваш
+        источник подлинных кроссовок Nike и непревзойденного стиля! Мы рады
+        представить вам уникальную онлайн-платформу, где вы сможете окунуться в
+        мир инноваций и моды от легендарного бренда спортивной обуви.</span
+      >
+      <span class="about-us-flex__text"
+        ><strong class="about-us-flex__text--bold"
+          >Легендарное наследие Nike:</strong
+        ><br /><br />
+        Swoosh Store - это место, где история и стиль сливаются воедино. Мы
+        гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
+        продукцию, которая воплощает более чем полувековое наследие инноваций,
+        комфорта и качества. Каждая пара кроссовок – это не просто спортивная
+        обувь, это произведение искусства, воплощающее дух победы и страстную
+        преданность активному образу жизни.</span
+      >
+      <img src="/imgs/about-us-hero.svg" alt="" class="about-us-flex__hero" />
+      <button class="about-us-flex__more-btn more-btn">
+        <div class="more-btn__flex">
+          <span class="more-btn__text">Подробнее</span>
+        </div>
+        <div class="more-btn__arrow">
+          <img src="/imgs/white-right-arrow.svg" alt="" />
+        </div>
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 onMounted(() => {
   /* carousel for .overflow__flex from 1440px starts */
-  let slides = document.querySelectorAll(".slide");
+  let slides = document.querySelectorAll(".overflow__slide");
   const prevBtn = document.querySelector<HTMLElement>(".overflow__prev-btn")!,
     nextBtn = document.querySelector<HTMLElement>(".overflow__next-btn")!,
     carouselContainer = document.querySelector<HTMLElement>(".overflow__flex")!;
@@ -1962,7 +2028,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   background-color: $Light-Black;
   padding: 2.188rem;
   overflow: hidden;
-  margin-top: 4.375rem;
+  margin: 4.375rem 0rem 3.75rem 0rem;
 
   &__title-and-line-flex {
     display: flex;
@@ -2017,7 +2083,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   &__description-flex {
     display: flex;
     gap: 0.875rem;
-    align-items: start;
+    align-items: flex-start;
     margin-top: -3rem;
   }
   &__description {
@@ -2026,6 +2092,77 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     line-height: 165%;
     color: #fff;
   }
+}
+.banners-flex {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  margin-top: 1.34rem;
+}
+.collection-banner {
+  position: relative;
+  display: flex;
+  padding: 1.875rem;
+  left: 0rem;
+  right: 0rem;
+
+  &__hero {
+    width: calc(100% + 3.75rem);
+    margin: -1.875rem;
+  }
+  &__title {
+    position: absolute;
+    font-family: "Pragmatica Medium";
+    font-size: 1.5rem;
+    color: #fff;
+    z-index: 2;
+  }
+  &__btn {
+    position: absolute;
+    @include btn;
+    font-family: "Pragmatica Medium";
+    font-size: 0.938rem;
+    color: #fff;
+    line-height: 230%;
+    border-bottom: 2px solid #fff;
+    bottom: 2rem;
+    z-index: 2;
+  }
+}
+.about-us-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+  margin-top: 3.75rem;
+
+  &__title-and-line-flex {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  &__title {
+    font-family: "Pragmatica Medium";
+    font-size: 1.5rem;
+    margin: 0rem;
+  }
+  &__line {
+    width: 90px;
+    height: 2px;
+    background-color: $Dark-Black;
+  }
+  &__text {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 23px;
+  }
+  &__hero {
+    margin-right: -0.938rem;
+  }
+}
+.about-us-flex__more-btn {
+  margin: 0 auto;
 }
 
 /* 360px = 22.5em */
@@ -2041,6 +2178,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     }
   }
 }
+
 /* 768px = 48em */
 @media (min-width: 48em) {
   .container {
@@ -2120,6 +2258,44 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       display: none;
     }
   }
+  .banners-flex {
+    flex-direction: row;
+  }
+  .collection-banner {
+    flex-grow: 1;
+  }
+  /* .about-us-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    margin-top: 3.75rem;
+
+    &__title-and-line-flex {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+    &__title {
+      font-family: "Pragmatica Medium";
+      font-size: 1.5rem;
+      margin: 0rem;
+    }
+    &__line {
+      width: 90px;
+      height: 2px;
+      background-color: $Dark-Black;
+    }
+    &__text {
+      font-family: "Pragmatica Book";
+      font-size: 0.938rem;
+    }
+    &__hero {
+      margin-right: -0.938rem;
+    }
+  }
+  .about-us-flex__more-btn {
+    margin: 0 auto;
+  } */
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
@@ -2219,6 +2395,21 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       display: flex;
       margin-top: -9rem;
       margin-left: 50rem;
+    }
+  }
+  .collection-banner {
+    padding: 3.75rem;
+
+    &__hero {
+      width: calc(100% + 7.5rem);
+      margin: -3.75rem;
+    }
+    &__title {
+      font-size: 2rem;
+    }
+    &__btn {
+      font-size: 1.125rem;
+      bottom: 3.75rem;
     }
   }
 }

@@ -1,0 +1,305 @@
+<template>
+  <div class="with-discount">
+    <h2 class="with-discount__title">
+      ТОВАРЫ СО<br />
+      СКИДКОЙ
+    </h2>
+    <div class="with-discount__btns-flex btns-flex">
+      <button @click="PrevSlide" class="btns-flex__prev-btn btns-flex__btn">
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.4"
+            d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+      <button @click="NextSlide" class="btns-flex__next-btn btns-flex__btn">
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="with-discount__overflow">
+      <div class="with-discount__list">
+        <UIProductsWithDiscountCard
+          v-for="hero in heroes"
+          :hero="hero"
+          :key="hero.id"
+        ></UIProductsWithDiscountCard>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+interface Hero {
+  id: number;
+  hero: string;
+  discount: string;
+  category: string;
+  title: string;
+  colors: string[];
+  currentPrice: string;
+  previousPrice: string;
+}
+
+const heroes = ref<Hero[]>([
+  {
+    id: 1,
+    hero: "/imgs/with-discount-hero-1.svg",
+    discount: "-20%",
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air 2023 Dragon",
+    colors: ["#2A2C2D", "#F81D2A", "#A8B7BF"],
+    currentPrice: "7 899 ₽",
+    previousPrice: "11 699 ₽",
+  },
+  {
+    id: 2,
+    hero: "/imgs/with-discount-hero-2.svg",
+    discount: "-30%",
+    category: "МУЖСКИЕ",
+    title: "Nike Air VaporMax 2023 Flyknit",
+    colors: ["#6F97CC", "#2A2C2D", "#A8B7BF"],
+    currentPrice: "7 899 ₽",
+    previousPrice: "11 699 ₽",
+  },
+  {
+    id: 3,
+    hero: "/imgs/with-discount-hero-2.svg",
+    discount: "-27%",
+    category: "МУЖСКИЕ",
+    title: "Nike Air 2025 Dragon",
+    colors: ["#64E1CB", "#4296C3", "#D81F64"],
+    currentPrice: "9 940 ₽",
+    previousPrice: "13 860 ₽",
+  },
+  {
+    id: 4,
+    hero: "/imgs/with-discount-hero-1.svg",
+    discount: "-25%",
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air VaporMax 2026 Flyknit",
+    colors: ["#D81F64", "#2A2C2D", "#6F97CC"],
+    currentPrice: "7 900 ₽",
+    previousPrice: "11 400 ₽",
+  },
+  {
+    id: 5,
+    hero: "/imgs/with-discount-hero-1.svg",
+    discount: "-20%",
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air 2023 Dragon",
+    colors: ["#2A2C2D", "#F81D2A", "#A8B7BF"],
+    currentPrice: "7 899 ₽",
+    previousPrice: "11 699 ₽",
+  },
+  {
+    id: 6,
+    hero: "/imgs/with-discount-hero-2.svg",
+    discount: "-30%",
+    category: "МУЖСКИЕ",
+    title: "Nike Air VaporMax 2023 Flyknit",
+    colors: ["#6F97CC", "#2A2C2D", "#A8B7BF"],
+    currentPrice: "7 899 ₽",
+    previousPrice: "11 699 ₽",
+  },
+  {
+    id: 7,
+    hero: "/imgs/with-discount-hero-2.svg",
+    discount: "-27%",
+    category: "МУЖСКИЕ",
+    title: "Nike Air 2025 Dragon",
+    colors: ["#64E1CB", "#4296C3", "#D81F64"],
+    currentPrice: "9 940 ₽",
+    previousPrice: "13 860 ₽",
+  },
+  {
+    id: 8,
+    hero: "/imgs/with-discount-hero-1.svg",
+    discount: "-25%",
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air VaporMax 2026 Flyknit",
+    colors: ["#D81F64", "#2A2C2D", "#6F97CC"],
+    currentPrice: "7 900 ₽",
+    previousPrice: "11 400 ₽",
+  },
+  {
+    id: 9,
+    hero: "/imgs/with-discount-hero-2.svg",
+    discount: "-27%",
+    category: "МУЖСКИЕ",
+    title: "Nike Air 2025 Dragon",
+    colors: ["#64E1CB", "#4296C3", "#D81F64"],
+    currentPrice: "9 940 ₽",
+    previousPrice: "13 860 ₽",
+  },
+  {
+    id: 10,
+    hero: "/imgs/with-discount-hero-1.svg",
+    discount: "-25%",
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air VaporMax 2026 Flyknit",
+    colors: ["#D81F64", "#2A2C2D", "#6F97CC"],
+    currentPrice: "7 900 ₽",
+    previousPrice: "11 400 ₽",
+  },
+]);
+
+let SliderWrapper: HTMLElement | null = null;
+let SlideWidth: number = 0;
+let SlidesLength: number = 0;
+let gap: number = 0;
+
+onMounted(() => {
+  SliderWrapper = document.querySelector<HTMLElement>(".with-discount__list")!;
+  SlideWidth = document.querySelector<HTMLElement>(
+    ".with-discount__card"
+  )!.offsetWidth;
+  SlidesLength = document.querySelectorAll(".with-discount__card").length;
+  gap = parseFloat(
+    window.getComputedStyle(SliderWrapper).getPropertyValue("gap")
+  );
+});
+
+let CurrentPosition = 0,
+  CurrentIndex = 0;
+
+const PrevSlide = (e: MouseEvent) => {
+  const svgPathPrev = (e.target as HTMLElement).querySelector(
+    ".btns-flex__prev-btn svg path"
+  );
+  const svgPathNext = (e.target as HTMLElement)
+    .closest(".btns-flex")!
+    .querySelector(".btns-flex__next-btn svg path");
+
+  if (svgPathPrev && svgPathNext) {
+    (svgPathPrev as HTMLElement).style.opacity = "1";
+    (svgPathNext as HTMLElement).style.opacity = "0.4";
+  }
+
+  CurrentIndex--;
+  CurrentPosition += SlideWidth + gap;
+  if (CurrentIndex < 0) {
+    CurrentIndex = SlidesLength - 1;
+    CurrentPosition = -SlideWidth * CurrentIndex - gap * CurrentIndex;
+  }
+  SliderWrapper!.style.transform = `translateX(${CurrentPosition}px)`;
+};
+const NextSlide = (e: MouseEvent) => {
+  const svgPathNext = (e.target as HTMLElement).querySelector(
+    ".btns-flex__next-btn svg path"
+  );
+  const svgPathPrev = (e.target as HTMLElement)
+    .closest(".btns-flex")!
+    .querySelector(".btns-flex__prev-btn svg path");
+
+  if (svgPathPrev && svgPathNext) {
+    (svgPathPrev as HTMLElement).style.opacity = "0.4";
+    (svgPathNext as HTMLElement).style.opacity = "1";
+  }
+
+  CurrentIndex++;
+  CurrentPosition -= SlideWidth + gap;
+  if (CurrentIndex === SlidesLength) {
+    CurrentIndex = 0;
+    CurrentPosition = 0;
+  }
+  SliderWrapper!.style.transform = `translateX(${CurrentPosition}px)`;
+};
+</script>
+
+<style lang="scss" scoped>
+@import "assets/App.scss";
+.with-discount {
+  position: relative;
+  top: 1.3rem;
+
+  &__title {
+    font-family: "Pragmatica Medium";
+    font-size: 1.5rem;
+    color: $Dark-Black;
+    margin: 0rem;
+  }
+  &__btns-flex {
+    position: absolute;
+    top: 0.4rem;
+    right: 0rem;
+    z-index: 2;
+  }
+  &__overflow {
+    overflow: hidden;
+    margin-right: -0.938rem;
+  }
+  &__list {
+    display: flex;
+    gap: 1.25rem;
+    margin: 2.125rem 0rem 3.75rem 0rem;
+    transition: transform 0.5s ease-in-out;
+  }
+}
+.btns-flex {
+  display: flex;
+  gap: 0.938rem;
+
+  &__btn {
+    @include btn;
+  }
+}
+
+/* 360px = 22.5em */
+@media (min-width: 22.5em) {
+  .with-discount__btns-flex {
+    top: 2.438rem;
+  }
+}
+
+/* 768px = 48em */
+@media (min-width: 48em) {
+  .with-discount__overflow {
+    margin-right: calc((100vw - 44.874rem) / (-2));
+  }
+}
+
+/* 1024px = 64em */
+@media (min-width: 64em) {
+  .with-discount__overflow {
+    margin-right: calc((100vw - 44.75rem) / (-2));
+  }
+}
+
+/* 1200px = 75em */
+@media (min-width: 75em) {
+  .with-discount {
+    &__title {
+      font-size: 2.438rem;
+    }
+    &__overflow {
+      margin-right: calc((100vw - 71.875rem) / (-2));
+    }
+  }
+}
+
+/* 1440px = 90em */
+@media (min-width: 90em) {
+  .with-discount__overflow {
+    margin-right: calc((100vw - 85rem) / (-2));
+  }
+}
+</style>
