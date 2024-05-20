@@ -362,14 +362,14 @@
           <div class="about-us-flex__line"></div>
         </div>
       </h1>
-      <span class="about-us-flex__text"
+      <span class="about-us-flex__text about-us-flex__text-1"
         >Добро пожаловать в
         <strong class="about-us-flex__text--bold">Swoosh Store</strong> – ваш
         источник подлинных кроссовок Nike и непревзойденного стиля! Мы рады
         представить вам уникальную онлайн-платформу, где вы сможете окунуться в
         мир инноваций и моды от легендарного бренда спортивной обуви.</span
       >
-      <span class="about-us-flex__text"
+      <span class="about-us-flex__text about-us-flex__text-2"
         ><strong class="about-us-flex__text--bold"
           >Легендарное наследие Nike:</strong
         ><br /><br />
@@ -380,7 +380,7 @@
         обувь, это произведение искусства, воплощающее дух победы и страстную
         преданность активному образу жизни.</span
       >
-      <img src="/imgs/about-us-hero.svg" alt="" class="about-us-flex__hero" />
+      <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
       <button class="about-us-flex__more-btn more-btn">
         <div class="more-btn__flex">
           <span class="more-btn__text">Подробнее</span>
@@ -2160,9 +2160,9 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   &__hero {
     margin-right: -0.938rem;
   }
-}
-.about-us-flex__more-btn {
-  margin: 0 auto;
+  &__more-btn {
+    margin: 0 auto;
+  }
 }
 
 /* 360px = 22.5em */
@@ -2264,38 +2264,32 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   .collection-banner {
     flex-grow: 1;
   }
-  /* .about-us-flex {
-    display: flex;
-    flex-direction: column;
-    gap: 1.125rem;
-    margin-top: 3.75rem;
-
-    &__title-and-line-flex {
-      display: flex;
-      align-items: center;
-      gap: 0.875rem;
+  .about-us-flex {
+    &__text-1 {
+      order: 0;
+      padding-right: 24rem;
     }
-    &__title {
-      font-family: "Pragmatica Medium";
-      font-size: 1.5rem;
-      margin: 0rem;
-    }
-    &__line {
-      width: 90px;
-      height: 2px;
-      background-color: $Dark-Black;
+    &__text-2 {
+      order: 1;
     }
     &__text {
       font-family: "Pragmatica Book";
       font-size: 0.938rem;
     }
     &__hero {
-      margin-right: -0.938rem;
+      position: relative;
+      width: 50vw;
+      height: calc(50vw * 0.72);
+      /* max-width: 853px;
+      max-height: 600px; */
+      margin-top: -15.75rem;
+      right: -22.45rem;
+    }
+    &__more-btn {
+      order: 2;
+      margin-left: 0;
     }
   }
-  .about-us-flex__more-btn {
-    margin: 0 auto;
-  } */
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
@@ -2393,7 +2387,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     }
     &__description-flex {
       display: flex;
-      margin-top: -9rem;
+      margin-top: -11rem;
       margin-left: 50rem;
     }
   }
@@ -2410,6 +2404,18 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     &__btn {
       font-size: 1.125rem;
       bottom: 3.75rem;
+    }
+  }
+  .about-us-flex {
+    margin-top: 12.063rem;
+
+    &__text {
+      padding-right: 44rem;
+    }
+    &__hero {
+      order: 3;
+      margin-top: -37rem;
+      right: -35.95rem;
     }
   }
 }
@@ -2481,6 +2487,18 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       margin-left: 58rem;
     }
   }
+  .about-us-flex {
+    &__title {
+      font-size: 2.438rem;
+    }
+    &__text {
+      font-size: 1rem;
+    }
+    &__hero {
+      margin-top: -30rem;
+      right: -42.5rem;
+    }
+  }
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
@@ -2497,6 +2515,13 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     &__description-flex {
       margin-top: -13.3rem;
       margin-left: 67rem;
+    }
+  }
+  .about-us-flex {
+    &__hero {
+      max-width: 853px;
+      max-height: 600px;
+      right: -48.1rem;
     }
   }
 }
