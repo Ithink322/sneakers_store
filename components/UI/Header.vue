@@ -133,8 +133,8 @@
         </div>
       </div>
     </header>
-    <BurgerMenu></BurgerMenu>
-    <CatalogMenu></CatalogMenu>
+    <UIBurgerMenu></UIBurgerMenu>
+    <UICatalogMenu></UICatalogMenu>
   </nav>
 </template>
 

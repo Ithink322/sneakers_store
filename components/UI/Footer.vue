@@ -1,0 +1,370 @@
+<template>
+  <footer class="footer">
+    <div class="footer__logo-and-social-media-flex logo-and-social-media-flex">
+      <img
+        src="/imgs/logo-footer.svg"
+        alt=""
+        class="logo-and-social-media-flex__logo"
+      />
+      <div
+        class="logo-and-social-media-flex__social-media-flex social-media-flex"
+      >
+        <button class="social-media-flex__btn">
+          <NuxtLink to="">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g opacity="0.8">
+                <path
+                  d="M16.9265 4.97643C16.8853 4.07395 16.7419 3.45764 16.5324 2.91843C16.3196 2.3527 15.9858 1.84027 15.5545 1.41671C15.1311 0.985395 14.6185 0.651494 14.0528 0.438552C13.5134 0.229104 12.8973 0.0858924 11.9948 0.0448825C11.0906 0.00348439 10.8018 -0.00634766 8.49926 -0.00634766C6.19677 -0.00634766 5.90789 0.00348439 5.00374 0.0446237C4.10126 0.0858924 3.48508 0.229233 2.94575 0.438811C2.38002 0.651623 1.8676 0.985395 1.44404 1.41671C1.01273 1.84014 0.678833 2.35257 0.465893 2.9183C0.256446 3.45764 0.113235 4.07395 0.0722258 4.9763C0.0308281 5.88059 0.0209961 6.16934 0.0209961 8.47185C0.0209961 10.7745 0.0308281 11.0634 0.0722258 11.9675C0.113365 12.8699 0.256705 13.4862 0.466281 14.0255C0.679091 14.5911 1.01286 15.1037 1.44417 15.5271C1.8676 15.9584 2.38015 16.2922 2.94588 16.505C3.48508 16.7147 4.10139 16.8579 5.00386 16.8992C5.90815 16.9405 6.1969 16.9502 8.49939 16.9502C10.8019 16.9502 11.0908 16.9405 11.9949 16.8992C12.8974 16.8579 13.5136 16.7147 14.0529 16.505C15.1917 16.0646 16.092 15.1644 16.5324 14.0255C16.7421 13.4862 16.8853 12.8699 16.9265 11.9675C16.9677 11.0632 16.9775 10.7745 16.9775 8.47198C16.9775 6.16934 16.9677 5.88059 16.9265 4.97643ZM15.4004 11.8981C15.3628 12.7247 15.2246 13.1736 15.1085 13.4724C14.8233 14.2118 14.2389 14.7962 13.4995 15.0814C13.2008 15.1975 12.7518 15.3357 11.9252 15.3733C11.0314 15.4142 10.7632 15.4227 8.49926 15.4227C6.23519 15.4227 5.96714 15.4142 5.07321 15.3733C4.24667 15.3357 3.79777 15.1975 3.49893 15.0814C3.13074 14.9455 2.79762 14.7288 2.52414 14.4471C2.2425 14.1737 2.02581 13.8407 1.88985 13.4724C1.7738 13.1736 1.63564 12.7247 1.59799 11.8981C1.55724 11.0041 1.54857 10.7359 1.54857 8.47211C1.54857 6.20815 1.55724 5.9401 1.59799 5.04603C1.63577 4.21936 1.7738 3.77045 1.88985 3.47174C2.02581 3.10342 2.24263 2.7703 2.52414 2.49681C2.79762 2.21518 3.13074 1.99848 3.49906 1.86265C3.79777 1.74647 4.24667 1.60844 5.07334 1.57066C5.96727 1.52991 6.23545 1.52124 8.49926 1.52124C10.7631 1.52124 11.0311 1.52991 11.9252 1.57079C12.7518 1.60844 13.2006 1.7466 13.4995 1.86265C13.8676 1.99861 14.2008 2.21531 14.4743 2.49681C14.7559 2.7703 14.9726 3.10342 15.1084 3.47174C15.2246 3.77045 15.3628 4.21936 15.4004 5.04603C15.4411 5.93997 15.4498 6.20815 15.4498 8.47198C15.4498 10.7359 15.4413 11.004 15.4004 11.8981Z"
+                  fill="white"
+                />
+                <path
+                  d="M8.49913 4.11819C6.0947 4.11819 4.14551 6.06753 4.14551 8.47198C4.14551 10.8764 6.0947 12.8256 8.49913 12.8256C10.9037 12.8256 12.8529 10.8764 12.8529 8.47198C12.8529 6.06753 10.9037 4.11819 8.49913 4.11819ZM8.49913 11.298C6.93844 11.2979 5.67309 10.0327 5.67322 8.47185C5.67322 6.91114 6.93843 5.64578 8.49926 5.64578C10.0601 5.64591 11.3253 6.91114 11.3253 8.47185C11.3253 10.0327 10.06 11.298 8.49913 11.298Z"
+                  fill="white"
+                />
+                <path
+                  d="M14.0423 3.94626C14.0423 4.50811 13.5868 4.96362 13.0249 4.96362C12.463 4.96362 12.0075 4.50811 12.0075 3.94626C12.0075 3.38428 12.463 2.92878 13.0249 2.92878C13.5868 2.92878 14.0423 3.38428 14.0423 3.94626Z"
+                  fill="white"
+                />
+              </g>
+            </svg>
+          </NuxtLink>
+        </button>
+        <button class="social-media-flex__btn">
+          <NuxtLink to="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 48 48"
+              width="17px"
+              height="17px"
+            >
+              <path
+                d="M39.175,10.016c1.687,0,2.131,1.276,1.632,4.272c-0.571,3.426-2.216,14.769-3.528,21.83 c-0.502,2.702-1.407,3.867-2.724,3.867c-0.724,0-1.572-0.352-2.546-0.995c-1.32-0.872-7.984-5.279-9.431-6.314 c-1.32-0.943-3.141-2.078-0.857-4.312c0.813-0.796,6.14-5.883,10.29-9.842c0.443-0.423,0.072-1.068-0.42-1.068 c-0.112,0-0.231,0.034-0.347,0.111c-5.594,3.71-13.351,8.859-14.338,9.53c-0.987,0.67-1.949,1.1-3.231,1.1 c-0.655,0-1.394-0.112-2.263-0.362c-1.943-0.558-3.84-1.223-4.579-1.477c-2.845-0.976-2.17-2.241,0.593-3.457 c11.078-4.873,25.413-10.815,27.392-11.637C36.746,10.461,38.178,10.016,39.175,10.016 M39.175,7.016L39.175,7.016 c-1.368,0-3.015,0.441-5.506,1.474L33.37,8.614C22.735,13.03,13.092,17.128,6.218,20.152c-1.074,0.473-4.341,1.91-4.214,4.916 c0.054,1.297,0.768,3.065,3.856,4.124l0.228,0.078c0.862,0.297,2.657,0.916,4.497,1.445c1.12,0.322,2.132,0.478,3.091,0.478 c1.664,0,2.953-0.475,3.961-1.028c-0.005,0.168-0.001,0.337,0.012,0.507c0.182,2.312,1.97,3.58,3.038,4.338l0.149,0.106 c1.577,1.128,8.714,5.843,9.522,6.376c1.521,1.004,2.894,1.491,4.199,1.491c2.052,0,4.703-1.096,5.673-6.318 c0.921-4.953,1.985-11.872,2.762-16.924c0.331-2.156,0.603-3.924,0.776-4.961c0.349-2.094,0.509-4.466-0.948-6.185 C42.208,7.875,41.08,7.016,39.175,7.016L39.175,7.016z"
+                fill="white"
+                opacity="0.8"
+              />
+            </svg>
+          </NuxtLink>
+        </button>
+        <button class="social-media-flex__btn">
+          <NuxtLink to="">
+            <svg
+              width="17"
+              height="14"
+              viewBox="0 0 17 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.8"
+                d="M16.2653 2.04034C15.688 2.2943 15.0915 2.47011 14.4565 2.54825C15.1107 2.15755 15.6111 1.53243 15.842 0.770555C15.2262 1.14172 14.5527 1.39568 13.8407 1.55196C13.2634 0.926836 12.4359 0.536133 11.5315 0.536133C9.78031 0.536133 8.37554 1.98174 8.37554 3.7399C8.37554 3.99386 8.39478 4.22828 8.45251 4.4627C5.83541 4.34549 3.5262 3.05617 1.96748 1.12219C0.851362 3.15384 2.10218 4.83387 2.92965 5.40039C2.42932 5.40039 1.92899 5.24411 1.50564 5.00969C1.50564 6.59203 2.60251 7.90089 4.02653 8.19392C3.71863 8.29159 3.02587 8.3502 2.60251 8.25252C3.00663 9.52231 4.18047 10.46 5.54676 10.4795C4.46913 11.3391 2.89116 12.0228 0.870605 11.8079C2.27538 12.7261 3.93031 13.2535 5.71995 13.2535C11.5315 13.2535 14.6874 8.36973 14.6874 4.15014C14.6874 4.01339 14.6874 3.87665 14.6681 3.7399C15.3224 3.25152 15.8612 2.685 16.2653 2.04034Z"
+                fill="white"
+              />
+            </svg>
+          </NuxtLink>
+        </button>
+      </div>
+    </div>
+    <span class="footer__note"
+      >Instagram и twitter являются запрещенными соц.сетями в РФ</span
+    >
+    <nav class="footer__sections-flex sections-flex">
+      <button @click="openInfoDropdown" class="sections-flex__btn">
+        <div class="sections-flex__btn-flex">
+          ИНФОРМАЦИЯ
+          <img
+            class="sections-flex__info-arrow-icon-btn"
+            src="/imgs/dropdown-arrow.svg"
+            alt=""
+          />
+        </div>
+        <ul
+          class="footer__dropdown-list dropdown-list footer__dropdown-info-list"
+        >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">О магазине</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Наш блог</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Доставка и оплата</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Контакты</li></NuxtLink
+          >
+        </ul>
+      </button>
+      <button @click="openProductsDropdown" class="sections-flex__btn">
+        <div class="sections-flex__btn-flex">
+          ТОВАРЫ
+          <img
+            class="sections-flex__products-arrow-icon-btn"
+            src="/imgs/dropdown-arrow.svg"
+            alt=""
+          />
+        </div>
+        <ul
+          class="footer__dropdown-list dropdown-list footer__dropdown-products-list"
+        >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Каталог</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Детские кроссовки</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Женские кроссовки</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Мужские кроссовки</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Распродажа</li></NuxtLink
+          >
+        </ul>
+      </button>
+      <button @click="openShopDropdown" class="sections-flex__btn">
+        <div class="sections-flex__btn-flex">
+          МАГАЗИН
+          <img
+            class="sections-flex__shop-arrow-icon-btn"
+            src="/imgs/dropdown-arrow.svg"
+            alt=""
+          />
+        </div>
+        <ul
+          class="footer__dropdown-list dropdown-list footer__dropdown-shop-list"
+        >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Личный кабинет</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Избранное</li></NuxtLink
+          >
+          <NuxtLink to=""
+            ><li class="dropdown-list__link">Корзина товаров</li></NuxtLink
+          >
+        </ul>
+      </button>
+    </nav>
+    <div class="footer__subscribe-on-news subscribe-on-news">
+      <span class="subscribe-on-news__title">ПОДПИСКА НА НОВОСТИ</span>
+      <span class="subscribe-on-news__subtitle"
+        >Подпишитесь на новости и скидки</span
+      >
+      <form class="subscribe-on-news__send-email-form send-email-form">
+        <input placeholder="Email" type="text" class="send-email-form__input" />
+        <div class="send-email-form__border--vertical"></div>
+        <button class="send-email-form__btn">Подписаться</button>
+      </form>
+      <span class="subscribe-on-news__privacy-policy-text"
+        >Согласен с
+        <span class="subscribe-on-news__privacy-policy-text--emphasized"
+          >политикой конфиденциальности</span
+        ></span
+      >
+    </div>
+    <span class="footer__copyright-text"
+      >© 2023 - Swoosh Store - Интернет-магазин ориганальных кроссовок</span
+    >
+    <span class="footer__privacy-policy-text">Политика конфиденциальности</span>
+  </footer>
+</template>
+
+<script setup lang="ts">
+const toggleMenu = (dropdownSelector: string) => {
+  const dropdown = document.querySelector<HTMLElement>(dropdownSelector)!;
+  dropdown.classList.toggle("dropdown-list__dropdown-list--opened");
+};
+const openInfoDropdown = () => {
+  toggleMenu(".footer__dropdown-info-list");
+};
+const openProductsDropdown = () => {
+  toggleMenu(".footer__dropdown-products-list");
+};
+const openShopDropdown = () => {
+  toggleMenu(".footer__dropdown-shop-list");
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/App.scss";
+.footer {
+  position: relative;
+  background-color: $Light-Black;
+  padding: 1.25rem 0.938rem 2.813rem 0.938rem;
+  margin-top: 5rem;
+
+  &__note {
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.75rem;
+    margin-top: 0.625rem;
+    color: #6b6b6b;
+  }
+  &__subscribe-on-news {
+    margin: 1.875rem 0rem 1.25rem 0rem;
+  }
+  &__copyright-text {
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.813rem;
+    color: #d6d6d6;
+    margin-top: 3.625rem;
+  }
+  &__privacy-policy-text {
+    position: relative;
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.813rem;
+    color: #d6d6d6;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-top: 1rem;
+  }
+}
+.logo-and-social-media-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.social-media-flex {
+  display: flex;
+  gap: 0.688rem;
+
+  &__btn {
+    @include btn;
+    background-color: #272727;
+    width: 39px;
+    height: 39px;
+  }
+}
+.sections-flex {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.875rem;
+
+  &__btn {
+    position: relative;
+    @include btn;
+    flex-direction: column;
+    gap: 0.625rem;
+    font-family: "Pragmatica Bold";
+    font-size: 0.875rem;
+    color: #707070;
+    width: 100%;
+    padding: 0.625rem 0rem;
+  }
+  &__btn-flex {
+    display: flex;
+    gap: 0.625rem;
+
+    img {
+      margin-top: -0.25rem;
+    }
+  }
+  &__btn-flex::after {
+    content: "";
+    position: absolute;
+    left: 0rem;
+    height: 1px;
+    width: 100%;
+    background-color: #dad9d9;
+    opacity: 10%;
+    margin-top: 1.5rem;
+  }
+}
+.dropdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.438rem;
+  overflow: hidden;
+  list-style-type: none;
+  text-align: center;
+  padding: 0rem 0rem 0rem 0rem;
+  margin: 0rem;
+  max-height: 0;
+  transition: max-height 0.1s ease-in-out, padding 0.2s ease-in-out;
+
+  &__link {
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    color: #fff;
+  }
+  &__dropdown-list--opened {
+    max-height: 100vh;
+    padding: 1.438rem 0rem 0rem 0rem;
+    transition: max-height 0.1s ease-in-out, padding 0.2s ease-in-out;
+  }
+}
+.subscribe-on-news {
+  &__title {
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Bold";
+    font-size: 0.875rem;
+    color: #707070;
+  }
+  &__subtitle {
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    color: #fff;
+    margin-top: 0.938rem;
+  }
+  &__send-email-form {
+    margin: 0.938rem 0.719rem 0.563rem 0.719rem;
+  }
+  &__privacy-policy-text {
+    display: block;
+    font-family: "Pragmatica Book";
+    font-size: 0.813rem;
+    color: #6b6e72;
+    margin: 0rem 0rem 1.25rem 0.719rem;
+  }
+  &__privacy-policy-text--emphasized {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-bottom: 1.25rem;
+  }
+}
+.subscribe-on-news::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 5%);
+  width: 100%;
+  left: 0rem;
+}
+.send-email-form {
+  display: flex;
+  padding: 0.75rem 1.063rem 0.75rem 1.063rem;
+  border: 1px solid rgba(216, 221, 228, 0.09);
+
+  &__input {
+    @include input;
+    width: 50%;
+  }
+  &__border--vertical {
+    width: 1px;
+    height: 28px;
+    background-color: #34373b;
+    margin-left: auto;
+  }
+  &__btn {
+    @include btn;
+    font-family: "Pragmatica Medium";
+    font-size: 0.813rem;
+    color: $Light-Orange;
+    padding-left: 1.125rem;
+  }
+}
+</style>

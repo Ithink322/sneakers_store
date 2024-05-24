@@ -120,7 +120,7 @@ const props = defineProps<{ hero: Hero }>();
   .description-flex {
     position: absolute;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     gap: 0.875rem;
     padding-right: 20rem;
     line-height: 180%;

@@ -6,8 +6,8 @@
     </div>
     <button class="card__add-to-wishlist-btn">
       <svg
-        width="23"
-        height="20"
+        width="23px"
+        height="20px"
         viewBox="0 0 23 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -18,15 +18,13 @@
           stroke-width="1.4"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="23px"
-          height="20px"
         />
       </svg>
     </button>
     <button class="card__add-to-cart-btn">
       <svg
-        width="22"
-        height="24"
+        width="22px"
+        height="24px"
         viewBox="0 0 22 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -37,8 +35,6 @@
           stroke-width="1.4"
           stroke-linecap="round"
           stroke-linejoin="round"
-          width="22px"
-          height="24px"
         />
       </svg>
     </button>

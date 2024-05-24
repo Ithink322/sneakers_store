@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <main class="container">
     <div class="slider-advertises">
       <div class="slider-advertises__overflow overflow">
         <div class="overflow__flex">
@@ -372,13 +372,15 @@
       <span class="about-us-flex__text about-us-flex__text-2"
         ><strong class="about-us-flex__text--bold"
           >Легендарное наследие Nike:</strong
-        ><br /><br />
-        Swoosh Store - это место, где история и стиль сливаются воедино. Мы
-        гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
-        продукцию, которая воплощает более чем полувековое наследие инноваций,
-        комфорта и качества. Каждая пара кроссовок – это не просто спортивная
-        обувь, это произведение искусства, воплощающее дух победы и страстную
-        преданность активному образу жизни.</span
+        ><br />
+        <div class="about-us-flex__text-2--margin-top">
+          Swoosh Store - это место, где история и стиль сливаются воедино. Мы
+          гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
+          продукцию, которая воплощает более чем полувековое наследие инноваций,
+          комфорта и качества. Каждая пара кроссовок – это не просто спортивная
+          обувь, это произведение искусства, воплощающее дух победы и страстную
+          преданность активному образу жизни.
+        </div></span
       >
       <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
       <button class="about-us-flex__more-btn more-btn">
@@ -390,7 +392,8 @@
         </div>
       </button>
     </div>
-  </div>
+  </main>
+  <UIFooter></UIFooter>
 </template>
 
 <script setup lang="ts">
@@ -2132,6 +2135,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   }
 }
 .about-us-flex {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1.125rem;
@@ -2146,6 +2150,9 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     font-family: "Pragmatica Medium";
     font-size: 1.5rem;
     margin: 0rem;
+  }
+  &__text-2--margin-top {
+    margin-top: 0.4rem;
   }
   &__line {
     width: 90px;
@@ -2265,25 +2272,27 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     flex-grow: 1;
   }
   .about-us-flex {
+    margin-right: calc((100vw - 44.874rem) / (-2));
+
     &__text-1 {
       order: 0;
       padding-right: 24rem;
+      margin-right: calc((100vw - 44.874rem) / 2);
     }
     &__text-2 {
       order: 1;
+      margin-right: calc((100vw - 44.874rem) / 2);
     }
     &__text {
       font-family: "Pragmatica Book";
       font-size: 0.938rem;
     }
     &__hero {
-      position: relative;
       width: 50vw;
       height: calc(50vw * 0.72);
-      /* max-width: 853px;
-      max-height: 600px; */
+      margin-left: auto;
+      margin-right: 0;
       margin-top: -15.75rem;
-      right: -22.45rem;
     }
     &__more-btn {
       order: 2;
@@ -2295,6 +2304,9 @@ const hitProductsNextSlide = (e: MouseEvent) => {
 @media (min-width: 64em) {
   .container {
     padding: 0rem calc((100vw - 44.75rem) / 2);
+  }
+  .about-us-flex {
+    margin-right: calc((100vw - 44.75rem) / (-2));
   }
 }
 /* 1200px = 75em */
@@ -2408,14 +2420,16 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   }
   .about-us-flex {
     margin-top: 12.063rem;
+    margin-right: calc((100vw - 71.875rem) / (-2));
 
-    &__text {
-      padding-right: 44rem;
+    &__text-2 {
+      padding-right: 24rem;
     }
     &__hero {
+      position: absolute;
       order: 3;
-      margin-top: -37rem;
-      right: -35.95rem;
+      margin-top: -3rem;
+      right: 0;
     }
   }
 }
@@ -2488,6 +2502,8 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     }
   }
   .about-us-flex {
+    margin-right: calc((100vw - 85rem) / (-2));
+
     &__title {
       font-size: 2.438rem;
     }
@@ -2495,8 +2511,10 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       font-size: 1rem;
     }
     &__hero {
-      margin-top: -30rem;
-      right: -42.5rem;
+      position: static;
+      max-width: 853px;
+      max-height: 600px;
+      margin-top: -34rem;
     }
   }
 }
@@ -2518,10 +2536,14 @@ const hitProductsNextSlide = (e: MouseEvent) => {
     }
   }
   .about-us-flex {
+    &__text-1,
+    &__text-2 {
+      padding-right: 14rem;
+    }
     &__hero {
       max-width: 853px;
       max-height: 600px;
-      right: -48.1rem;
+      margin-top: -32rem;
     }
   }
 }
