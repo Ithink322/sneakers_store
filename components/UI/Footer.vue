@@ -352,6 +352,14 @@ const openShopDropdown = () => {
   &__input {
     @include input;
     width: 50%;
+    outline: none;
+    font-family: "Pragmatica Book";
+    color: #fff;
+    font-size: 0.875rem;
+  }
+  &__input::placeholder {
+    font-family: "Pragmatica Book";
+    color: #fff;
   }
   &__border--vertical {
     width: 1px;
