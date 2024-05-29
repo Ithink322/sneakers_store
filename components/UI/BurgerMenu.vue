@@ -52,28 +52,28 @@
             class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-summer-flex"
           >
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Для бега
+              <NuxtLink target="_blank" to=""> Для бега</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Повседневные
+              <NuxtLink target="_blank" to=""> Повседневные</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Треккинг
+              <NuxtLink target="_blank" to=""> Треккинг</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Для футбола
+              <NuxtLink target="_blank" to=""> Для футбола</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Для волейбола
+              <NuxtLink target="_blank" to=""> Для волейбола</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Для баскетбола
+              <NuxtLink target="_blank" to=""> Для баскетбола</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Для тенниса
+              <NuxtLink target="_blank" to=""> Для тенниса</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Спортивные
+              <NuxtLink target="_blank" to=""> Спортивные</NuxtLink>
             </button>
           </div>
           <button
@@ -91,16 +91,16 @@
             class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-demi-season-flex"
           >
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Для бега
+              <NuxtLink target="_blank" to=""> Для бега</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Повседневные
+              <NuxtLink target="_blank" to=""> Повседневные</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Треккинг
+              <NuxtLink target="_blank" to=""> Треккинг</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Кожаные
+              <NuxtLink target="_blank" to=""> Кожаные</NuxtLink>
             </button>
           </div>
           <button
@@ -118,13 +118,13 @@
             class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-winter-flex"
           >
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Утепленные
+              <NuxtLink target="_blank" to=""> Утепленные</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Повседневные
+              <NuxtLink target="_blank" to=""> Повседневные</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Кожаные
+              <NuxtLink target="_blank" to=""> Кожаные</NuxtLink>
             </button>
           </div>
           <button
@@ -142,34 +142,52 @@
             class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-models-flex"
           >
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Nike Air Force 1
+              <NuxtLink target="_blank" to=""> Nike Air Force 1</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Nike SB Dunk Low
+              <NuxtLink target="_blank" to=""> Nike SB Dunk Low</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Nike Air Max 90
+              <NuxtLink target="_blank" to=""> Nike Air Max 90</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Nike Shox
+              <NuxtLink target="_blank" to=""> Nike Shox</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Nike Blazer
+              <NuxtLink target="_blank" to=""> Nike Blazer</NuxtLink>
             </button>
             <button class="burger-menu__dropdown-menu-subtitle-btn">
-              Nike Air Max Plus
+              <NuxtLink target="_blank" to=""> Nike Air Max Plus</NuxtLink>
             </button>
           </div>
         </div>
-        <button class="burger-menu__catalog-btn">МУЖСКИЕ</button>
-        <button class="burger-menu__catalog-btn">ЖЕНСКИЕ</button>
-        <button class="burger-menu__catalog-btn">ДЕТСКИЕ</button>
-        <button class="burger-menu__catalog-btn">РАСПРОДАЖА</button>
-        <button class="burger-menu__section-btn">О магазине</button>
-        <button class="burger-menu__section-btn">Наш блог</button>
-        <button class="burger-menu__section-btn">Доставка и оплата</button>
-        <button class="burger-menu__section-btn">Контакты</button>
-        <button class="burger-menu__section-btn">Индивидуальный заказ</button>
+        <button class="burger-menu__catalog-btn">
+          <NuxtLink target="_blank" to="">МУЖСКИЕ</NuxtLink>
+        </button>
+        <button class="burger-menu__catalog-btn">
+          <NuxtLink target="_blank" to="">ЖЕНСКИЕ</NuxtLink>
+        </button>
+        <button class="burger-menu__catalog-btn">
+          <NuxtLink target="_blank" to="">ДЕТСКИЕ</NuxtLink>
+        </button>
+        <button class="burger-menu__catalog-btn">
+          <NuxtLink target="_blank" to="">РАСПРОДАЖА</NuxtLink>
+        </button>
+        <button class="burger-menu__section-btn">
+          <NuxtLink target="_blank" to="">О магазине</NuxtLink>
+        </button>
+        <button class="burger-menu__section-btn">
+          <NuxtLink target="_blank" to="">Наш блог</NuxtLink>
+        </button>
+        <button class="burger-menu__section-btn">
+          <NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink>
+        </button>
+        <button class="burger-menu__section-btn">
+          <NuxtLink target="_blank" to="">Контакты</NuxtLink>
+        </button>
+        <button class="burger-menu__section-btn">
+          <NuxtLink target="_blank" to="">Индивидуальный заказ</NuxtLink>
+        </button>
       </div>
     </nav>
   </div>

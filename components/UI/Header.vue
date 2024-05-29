@@ -3,12 +3,12 @@
     <header class="header">
       <div class="header-top">
         <ul class="header-top__titles-list-flex">
-          <li><NuxtLink to="">О магазине</NuxtLink></li>
-          <li><NuxtLink to="">Наш блог</NuxtLink></li>
-          <li><NuxtLink to="">Доставка и оплата</NuxtLink></li>
-          <li><NuxtLink to="">Контакты</NuxtLink></li>
+          <li><NuxtLink target="_blank" to="">О магазине</NuxtLink></li>
+          <li><NuxtLink target="_blank" to="">Наш блог</NuxtLink></li>
+          <li><NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink></li>
+          <li><NuxtLink target="_blank" to="">Контакты</NuxtLink></li>
           <li>
-            <NuxtLink to="">Индивидуальный заказ</NuxtLink>
+            <NuxtLink target="_blank" to="">Индивидуальный заказ</NuxtLink>
           </li>
         </ul>
         <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>
@@ -52,10 +52,10 @@
             >
           </div>
           <ul class="header-mid__titles-list">
-            <li><NuxtLink to="">Мужские</NuxtLink></li>
-            <li><NuxtLink to="">Женские</NuxtLink></li>
-            <li><NuxtLink to="">Детские</NuxtLink></li>
-            <li><NuxtLink to="">Распродажа</NuxtLink></li>
+            <li><NuxtLink target="_blank" to="">Мужские</NuxtLink></li>
+            <li><NuxtLink target="_blank" to="">Женские</NuxtLink></li>
+            <li><NuxtLink target="_blank" to="">Детские</NuxtLink></li>
+            <li><NuxtLink target="_blank" to="">Распродажа</NuxtLink></li>
           </ul>
         </div>
         <img src="/imgs/logo.svg" alt="" class="header-mid__logo" />
@@ -398,10 +398,10 @@ const toggleCatalogMenu = () => {
       cursor: pointer;
       display: flex;
       align-items: center;
+      transition: color 100ms ease;
     }
     &__titles-list li:hover a {
-      transition: all 100ms ease;
-      color: #fb5a00;
+      color: $Light-Orange;
     }
     &__burger-text--hidden-at320px {
       display: block;

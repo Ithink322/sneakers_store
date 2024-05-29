@@ -22,14 +22,16 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">9900 ₽</span></span
               >
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
+              <NuxtLink target="_blank" to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__flex">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
             </div>
           </div>
           <div class="overflow__slide overflow__slide-flex slide">
@@ -51,14 +53,16 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">8800 ₽</span></span
               >
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
+              <NuxtLink target="_blank" to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__flex">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
             </div>
           </div>
           <div class="overflow__slide overflow__slide-flex slide">
@@ -80,14 +84,16 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">7700 ₽</span></span
               >
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
+              <NuxtLink target="_blank" to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__flex">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
             </div>
           </div>
           <div class="overflow__slide overflow__slide-flex slide">
@@ -109,14 +115,16 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">6600 ₽</span></span
               >
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
+              <NuxtLink target="_blank" to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__flex">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -294,14 +302,16 @@
           >от <span class="season-hit__price">7 899 ₽</span></span
         >
       </div>
-      <button class="season-hit__more-btn more-btn">
-        <div class="more-btn__flex">
-          <span class="more-btn__text">Подробнее</span>
-        </div>
-        <div class="season-hit__more-btn-arrow more-btn__arrow">
-          <img src="/imgs/white-right-arrow.svg" alt="" />
-        </div>
-      </button>
+      <NuxtLink target="_blank" to="">
+        <button class="season-hit__more-btn more-btn">
+          <div class="more-btn__flex">
+            <span class="more-btn__text">Подробнее</span>
+          </div>
+          <div class="season-hit__more-btn-arrow more-btn__arrow">
+            <img src="/imgs/white-right-arrow.svg" alt="" />
+          </div>
+        </button>
+      </NuxtLink>
       <img
         class="season-hit__hero--from320px"
         src="/imgs/season-hit-hero--from320px.svg"
@@ -383,14 +393,16 @@
         </div></span
       >
       <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
-      <button class="about-us-flex__more-btn more-btn">
-        <div class="more-btn__flex">
-          <span class="more-btn__text">Подробнее</span>
-        </div>
-        <div class="more-btn__arrow">
-          <img src="/imgs/white-right-arrow.svg" alt="" />
-        </div>
-      </button>
+      <NuxtLink target="_blank" to="">
+        <button class="about-us-flex__more-btn more-btn">
+          <div class="more-btn__flex">
+            <span class="more-btn__text">Подробнее</span>
+          </div>
+          <div class="more-btn__arrow">
+            <img src="/imgs/white-right-arrow.svg" alt="" />
+          </div>
+        </button>
+      </NuxtLink>
     </div>
   </main>
   <UIFooter></UIFooter>
