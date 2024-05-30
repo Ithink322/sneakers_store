@@ -1,411 +1,408 @@
 <template>
-  <main class="container">
-    <div class="slider-advertises">
-      <div class="slider-advertises__overflow overflow">
-        <div class="overflow__flex">
-          <div class="overflow__slide overflow__slide-flex slide">
-            <div class="slide__title-and-text-flex">
-              <div>
-                <div class="slide__title-and-line-flex">
-                  <span class="slide__title">AIR MAX</span>
-                  <span class="slide__line"></span>
-                </div>
-                <span class="slide__title">FLYKNIT RACER</span>
+  <div class="slider-advertises">
+    <div class="slider-advertises__overflow overflow">
+      <div class="overflow__flex">
+        <div class="overflow__slide overflow__slide-flex slide">
+          <div class="slide__title-and-text-flex">
+            <div>
+              <div class="slide__title-and-line-flex">
+                <span class="slide__title">AIR MAX</span>
+                <span class="slide__line"></span>
               </div>
-              <span class="slide__text"
-                >Усиленный носок и прочный пластиковый каркас. Инновационная
-                технология раскрывается через перфорированную стельку</span
-              >
+              <span class="slide__title">FLYKNIT RACER</span>
             </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-            <div class="slide__text-price-and-more-btn-flex">
-              <span class="slide__text-price"
-                >от <span class="slide__price">9900 ₽</span></span
-              >
-              <NuxtLink target="_blank" to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__flex">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
-            </div>
+            <span class="slide__text"
+              >Усиленный носок и прочный пластиковый каркас. Инновационная
+              технология раскрывается через перфорированную стельку</span
+            >
           </div>
-          <div class="overflow__slide overflow__slide-flex slide">
-            <div class="slide__title-and-text-flex">
-              <div>
-                <div class="slide__title-and-line-flex">
-                  <span class="slide__title">AIR MAX</span>
-                  <span class="slide__line"></span>
+          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+          <div class="slide__text-price-and-more-btn-flex">
+            <span class="slide__text-price"
+              >от <span class="slide__price">9900 ₽</span></span
+            >
+            <NuxtLink target="_blank" to="">
+              <button class="slide__more-btn more-btn">
+                <div class="more-btn__flex">
+                  <span class="more-btn__text">Подробнее</span>
                 </div>
-                <span class="slide__title">FLYKNIT RACER</span>
-              </div>
-              <span class="slide__text"
-                >Усиленный носок и прочный пластиковый каркас. Инновационная
-                технология раскрывается через перфорированную стельку</span
-              >
-            </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-            <div class="slide__text-price-and-more-btn-flex">
-              <span class="slide__text-price"
-                >от <span class="slide__price">8800 ₽</span></span
-              >
-              <NuxtLink target="_blank" to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__flex">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
-            </div>
-          </div>
-          <div class="overflow__slide overflow__slide-flex slide">
-            <div class="slide__title-and-text-flex">
-              <div>
-                <div class="slide__title-and-line-flex">
-                  <span class="slide__title">AIR MAX</span>
-                  <span class="slide__line"></span>
+                <div class="more-btn__arrow">
+                  <img src="/imgs/white-right-arrow.svg" alt="" />
                 </div>
-                <span class="slide__title">FLYKNIT RACER</span>
-              </div>
-              <span class="slide__text"
-                >Усиленный носок и прочный пластиковый каркас. Инновационная
-                технология раскрывается через перфорированную стельку</span
-              >
-            </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-            <div class="slide__text-price-and-more-btn-flex">
-              <span class="slide__text-price"
-                >от <span class="slide__price">7700 ₽</span></span
-              >
-              <NuxtLink target="_blank" to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__flex">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
-            </div>
-          </div>
-          <div class="overflow__slide overflow__slide-flex slide">
-            <div class="slide__title-and-text-flex">
-              <div>
-                <div class="slide__title-and-line-flex">
-                  <span class="slide__title">AIR MAX</span>
-                  <span class="slide__line"></span>
-                </div>
-                <span class="slide__title">FLYKNIT RACER</span>
-              </div>
-              <span class="slide__text"
-                >Усиленный носок и прочный пластиковый каркас. Инновационная
-                технология раскрывается через перфорированную стельку</span
-              >
-            </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-            <div class="slide__text-price-and-more-btn-flex">
-              <span class="slide__text-price"
-                >от <span class="slide__price">6600 ₽</span></span
-              >
-              <NuxtLink target="_blank" to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__flex">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
-            </div>
+              </button>
+            </NuxtLink>
           </div>
         </div>
-        <div class="overflow__prev-and-next-btns-flex">
-          <button class="overflow__prev-btn">
-            <img src="/imgs/prev-btn-arrow.svg" alt="" />
-          </button>
-          <button class="overflow__next-btn">
-            <img src="/imgs/next-btn-arrow.svg" alt="" />
-          </button>
+        <div class="overflow__slide overflow__slide-flex slide">
+          <div class="slide__title-and-text-flex">
+            <div>
+              <div class="slide__title-and-line-flex">
+                <span class="slide__title">AIR MAX</span>
+                <span class="slide__line"></span>
+              </div>
+              <span class="slide__title">FLYKNIT RACER</span>
+            </div>
+            <span class="slide__text"
+              >Усиленный носок и прочный пластиковый каркас. Инновационная
+              технология раскрывается через перфорированную стельку</span
+            >
+          </div>
+          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+          <div class="slide__text-price-and-more-btn-flex">
+            <span class="slide__text-price"
+              >от <span class="slide__price">8800 ₽</span></span
+            >
+            <NuxtLink target="_blank" to="">
+              <button class="slide__more-btn more-btn">
+                <div class="more-btn__flex">
+                  <span class="more-btn__text">Подробнее</span>
+                </div>
+                <div class="more-btn__arrow">
+                  <img src="/imgs/white-right-arrow.svg" alt="" />
+                </div>
+              </button>
+            </NuxtLink>
+          </div>
         </div>
-        <div class="overflow__indicators-flex indicators-flex">
-          <div
-            class="indicators-flex__indicator indicators-flex__indicator--active"
-          ></div>
-          <div class="indicators-flex__indicator"></div>
-          <div class="indicators-flex__indicator"></div>
-          <div class="indicators-flex__indicator"></div>
+        <div class="overflow__slide overflow__slide-flex slide">
+          <div class="slide__title-and-text-flex">
+            <div>
+              <div class="slide__title-and-line-flex">
+                <span class="slide__title">AIR MAX</span>
+                <span class="slide__line"></span>
+              </div>
+              <span class="slide__title">FLYKNIT RACER</span>
+            </div>
+            <span class="slide__text"
+              >Усиленный носок и прочный пластиковый каркас. Инновационная
+              технология раскрывается через перфорированную стельку</span
+            >
+          </div>
+          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+          <div class="slide__text-price-and-more-btn-flex">
+            <span class="slide__text-price"
+              >от <span class="slide__price">7700 ₽</span></span
+            >
+            <NuxtLink target="_blank" to="">
+              <button class="slide__more-btn more-btn">
+                <div class="more-btn__flex">
+                  <span class="more-btn__text">Подробнее</span>
+                </div>
+                <div class="more-btn__arrow">
+                  <img src="/imgs/white-right-arrow.svg" alt="" />
+                </div>
+              </button>
+            </NuxtLink>
+          </div>
         </div>
+        <div class="overflow__slide overflow__slide-flex slide">
+          <div class="slide__title-and-text-flex">
+            <div>
+              <div class="slide__title-and-line-flex">
+                <span class="slide__title">AIR MAX</span>
+                <span class="slide__line"></span>
+              </div>
+              <span class="slide__title">FLYKNIT RACER</span>
+            </div>
+            <span class="slide__text"
+              >Усиленный носок и прочный пластиковый каркас. Инновационная
+              технология раскрывается через перфорированную стельку</span
+            >
+          </div>
+          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+          <div class="slide__text-price-and-more-btn-flex">
+            <span class="slide__text-price"
+              >от <span class="slide__price">6600 ₽</span></span
+            >
+            <NuxtLink target="_blank" to="">
+              <button class="slide__more-btn more-btn">
+                <div class="more-btn__flex">
+                  <span class="more-btn__text">Подробнее</span>
+                </div>
+                <div class="more-btn__arrow">
+                  <img src="/imgs/white-right-arrow.svg" alt="" />
+                </div>
+              </button>
+            </NuxtLink>
+          </div>
+        </div>
+      </div>
+      <div class="overflow__prev-and-next-btns-flex">
+        <button class="overflow__prev-btn">
+          <img src="/imgs/prev-btn-arrow.svg" alt="" />
+        </button>
+        <button class="overflow__next-btn">
+          <img src="/imgs/next-btn-arrow.svg" alt="" />
+        </button>
+      </div>
+      <div class="overflow__indicators-flex indicators-flex">
+        <div
+          class="indicators-flex__indicator indicators-flex__indicator--active"
+        ></div>
+        <div class="indicators-flex__indicator"></div>
+        <div class="indicators-flex__indicator"></div>
+        <div class="indicators-flex__indicator"></div>
       </div>
     </div>
-    <div class="benefits-main-flex">
-      <div class="benefits-main-flex__benefit-flex benefit-flex">
-        <img
-          src="/imgs/benefit-icon-original-products.svg"
-          alt=""
-          class="benefit-flex__icon"
-        />
-        <div class="benefit-flex__title-and-text-flex">
-          <span class="benefit-flex__title">ТОЛЬКО ОРИГИНАЛЬНЫЕ ТОВАРЫ</span>
-          <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
-            >Гарантированная подлинность Nike и<br
-              class="benefit-flex__text-br--from1920px"
-            />
-            высокое качество кроссовок.</span
-          >
-        </div>
-      </div>
-      <div class="benefits-main-flex__benefit-flex benefit-flex">
-        <img
-          src="/imgs/benefit-professional-service.svg"
-          alt=""
-          class="benefit-flex__icon"
-        />
-        <div class="benefit-flex__title-and-text-flex">
-          <span class="benefit-flex__title">ПРОФЕССИОНАЛЬНЫЙ СЕРВИС</span>
-          <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
-            >Команда экспертов, готовых помочь с<br
-              class="benefit-flex__text-br--from1920px"
-            />
-            выбором размера ответить на все вопросы.</span
-          >
-        </div>
-      </div>
-      <div class="benefits-main-flex__benefit-flex benefit-flex">
-        <img
-          src="/imgs/benefit-exclusive-choice.svg"
-          alt=""
-          class="benefit-flex__icon"
-        />
-        <div class="benefit-flex__title-and-text-flex">
-          <span class="benefit-flex__title">ЭКСКЛЮЗИВНЫЙ ВЫБОР</span>
-          <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
-            >Богатый ассортимент оригинальных<br
-              class="benefit-flex__text-br--from1920px"
-            />
-            моделей Nike, включая редкие выпуски.</span
-          >
-        </div>
-      </div>
-    </div>
-    <div class="border-bottom-for-benefits-main-flex"></div>
-    <div class="latest-arrivals products-catalog">
-      <h2 class="latest-arrivals__title products-catalog__title">
-        ПОСЛЕДНИЕ<br />
-        ПОСТУПЛЕНИЯ
-      </h2>
-      <div class="latest-arrivals__btns-flex products-catalog__btns-flex">
-        <button
-          @click="latestArrivalsPrevSlide"
-          class="latest-arrivals__prev-btn latest-arrivals__btn products-catalog__btn"
-        >
-          <svg
-            width="34"
-            height="14"
-            viewBox="0 0 34 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              opacity="0.4"
-              d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
-              fill="black"
-            />
-          </svg>
-        </button>
-        <button
-          @click="latestArrivalsNextSlide"
-          class="latest-arrivals__next-btn latest-arrivals__btn products-catalog__btn"
-        >
-          <svg
-            width="34"
-            height="14"
-            viewBox="0 0 34 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
-              fill="black"
-            />
-          </svg>
-        </button>
-      </div>
-      <UIProductsCatalogList
-        :latestProducts="latestProducts"
-      ></UIProductsCatalogList>
-    </div>
-    <div class="best-selling products-catalog">
-      <h2 class="best-selling__title products-catalog__title">
-        САМЫЕ<br />
-        ПРОДАВАЕМЫЕ
-      </h2>
-      <div class="best-selling__btns-flex products-catalog__btns-flex">
-        <button
-          @click="hitProductsPrevSlide"
-          class="best-selling__prev-btn latest-arrivals__btn products-catalog__btn"
-        >
-          <svg
-            width="34"
-            height="14"
-            viewBox="0 0 34 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              opacity="0.4"
-              d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
-              fill="black"
-            />
-          </svg>
-        </button>
-        <button
-          @click="hitProductsNextSlide"
-          class="best-selling__next-btn latest-arrivals__btn products-catalog__btn"
-        >
-          <svg
-            width="34"
-            height="14"
-            viewBox="0 0 34 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
-              fill="black"
-            />
-          </svg>
-        </button>
-      </div>
-      <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
-    </div>
-    <div class="season-hit">
-      <div class="season-hit__content-flex">
-        <span class="season-hit__title">ХИТ СЕЗОНА</span>
-        <div class="season-hit__title-and-line-flex">
-          <span class="season-hit__title">ОТ NIKE</span>
-          <span class="season-hit__line"></span>
-        </div>
-        <span class="season-hit__subtitle"
-          >Nike Air Max Alpha<br />
-          Trainer 5</span
-        >
-        <span class="season-hit__price-text"
-          >от <span class="season-hit__price">7 899 ₽</span></span
-        >
-      </div>
-      <NuxtLink target="_blank" to="">
-        <button class="season-hit__more-btn more-btn">
-          <div class="more-btn__flex">
-            <span class="more-btn__text">Подробнее</span>
-          </div>
-          <div class="season-hit__more-btn-arrow more-btn__arrow">
-            <img src="/imgs/white-right-arrow.svg" alt="" />
-          </div>
-        </button>
-      </NuxtLink>
+  </div>
+  <div class="benefits-main-flex">
+    <div class="benefits-main-flex__benefit-flex benefit-flex">
       <img
-        class="season-hit__hero--from320px"
-        src="/imgs/season-hit-hero--from320px.svg"
+        src="/imgs/benefit-icon-original-products.svg"
         alt=""
+        class="benefit-flex__icon"
       />
+      <div class="benefit-flex__title-and-text-flex">
+        <span class="benefit-flex__title">ТОЛЬКО ОРИГИНАЛЬНЫЕ ТОВАРЫ</span>
+        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
+          >Гарантированная подлинность Nike и<br
+            class="benefit-flex__text-br--from1920px"
+          />
+          высокое качество кроссовок.</span
+        >
+      </div>
+    </div>
+    <div class="benefits-main-flex__benefit-flex benefit-flex">
       <img
-        class="season-hit__hero--from1440px"
-        src="/imgs/season-hit-hero--from1440px.svg"
+        src="/imgs/benefit-professional-service.svg"
         alt=""
+        class="benefit-flex__icon"
       />
-      <div class="season-hit__description-flex">
-        <img
-          src="/imgs/plus-gray.svg"
-          alt=""
-          class="season-hit__description-icon"
-        />
-        <span class="season-hit__description"
-          >Уникальная технология структуры стельки позволяет забыть про обувь на
-          ноге.</span
+      <div class="benefit-flex__title-and-text-flex">
+        <span class="benefit-flex__title">ПРОФЕССИОНАЛЬНЫЙ СЕРВИС</span>
+        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
+          >Команда экспертов, готовых помочь с<br
+            class="benefit-flex__text-br--from1920px"
+          />
+          выбором размера ответить на все вопросы.</span
         >
       </div>
     </div>
-    <UIRecentPublicationsList></UIRecentPublicationsList>
-    <UIProductsWithDiscountList></UIProductsWithDiscountList>
-    <div class="new-collection-banners-flex banners-flex">
-      <div class="banners-flex__collection-banner collection-banner">
-        <img
-          src="/imgs/collection-hero-1.svg"
-          alt=""
-          class="collection-banner__hero"
-        />
-        <span class="collection-banner__title"
-          >Новая коллекция в<br />
-          каталоге Nike Air<br />
-          Max Solo</span
+    <div class="benefits-main-flex__benefit-flex benefit-flex">
+      <img
+        src="/imgs/benefit-exclusive-choice.svg"
+        alt=""
+        class="benefit-flex__icon"
+      />
+      <div class="benefit-flex__title-and-text-flex">
+        <span class="benefit-flex__title">ЭКСКЛЮЗИВНЫЙ ВЫБОР</span>
+        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
+          >Богатый ассортимент оригинальных<br
+            class="benefit-flex__text-br--from1920px"
+          />
+          моделей Nike, включая редкие выпуски.</span
         >
-        <button class="collection-banner__btn">Перейти в каталог</button>
-      </div>
-      <div class="banners-flex__collection-banner collection-banner">
-        <img
-          src="/imgs/collection-hero-2.svg"
-          alt=""
-          class="collection-banner__hero"
-        />
-        <span class="collection-banner__title"
-          >Новая коллекция в<br />
-          каталоге Nike Air<br />
-          Max Solo</span
-        >
-        <button class="collection-banner__btn">Перейти в каталог</button>
       </div>
     </div>
-    <div class="about-us-flex">
-      <h1 class="about-us-flex__title">
-        ИНТЕРНЕТ-МАГАЗИН<br />
-        <div class="about-us-flex__title-and-line-flex">
-          SWOOSH STORE
-          <div class="about-us-flex__line"></div>
+  </div>
+  <div class="border-bottom-for-benefits-main-flex"></div>
+  <div class="latest-arrivals products-catalog">
+    <h2 class="latest-arrivals__title products-catalog__title">
+      ПОСЛЕДНИЕ<br />
+      ПОСТУПЛЕНИЯ
+    </h2>
+    <div class="latest-arrivals__btns-flex products-catalog__btns-flex">
+      <button
+        @click="latestArrivalsPrevSlide"
+        class="latest-arrivals__prev-btn latest-arrivals__btn products-catalog__btn"
+      >
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.4"
+            d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+      <button
+        @click="latestArrivalsNextSlide"
+        class="latest-arrivals__next-btn latest-arrivals__btn products-catalog__btn"
+      >
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+    </div>
+    <UIProductsCatalogList
+      :latestProducts="latestProducts"
+    ></UIProductsCatalogList>
+  </div>
+  <div class="best-selling products-catalog">
+    <h2 class="best-selling__title products-catalog__title">
+      САМЫЕ<br />
+      ПРОДАВАЕМЫЕ
+    </h2>
+    <div class="best-selling__btns-flex products-catalog__btns-flex">
+      <button
+        @click="hitProductsPrevSlide"
+        class="best-selling__prev-btn latest-arrivals__btn products-catalog__btn"
+      >
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.4"
+            d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+      <button
+        @click="hitProductsNextSlide"
+        class="best-selling__next-btn latest-arrivals__btn products-catalog__btn"
+      >
+        <svg
+          width="34"
+          height="14"
+          viewBox="0 0 34 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+    </div>
+    <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
+  </div>
+  <div class="season-hit">
+    <div class="season-hit__content-flex">
+      <span class="season-hit__title">ХИТ СЕЗОНА</span>
+      <div class="season-hit__title-and-line-flex">
+        <span class="season-hit__title">ОТ NIKE</span>
+        <span class="season-hit__line"></span>
+      </div>
+      <span class="season-hit__subtitle"
+        >Nike Air Max Alpha<br />
+        Trainer 5</span
+      >
+      <span class="season-hit__price-text"
+        >от <span class="season-hit__price">7 899 ₽</span></span
+      >
+    </div>
+    <NuxtLink target="_blank" to="">
+      <button class="season-hit__more-btn more-btn">
+        <div class="more-btn__flex">
+          <span class="more-btn__text">Подробнее</span>
         </div>
-      </h1>
-      <span class="about-us-flex__text about-us-flex__text-1"
-        >Добро пожаловать в
-        <strong class="about-us-flex__text--bold">Swoosh Store</strong> – ваш
-        источник подлинных кроссовок Nike и непревзойденного стиля! Мы рады
-        представить вам уникальную онлайн-платформу, где вы сможете окунуться в
-        мир инноваций и моды от легендарного бренда спортивной обуви.</span
+        <div class="season-hit__more-btn-arrow more-btn__arrow">
+          <img src="/imgs/white-right-arrow.svg" alt="" />
+        </div>
+      </button>
+    </NuxtLink>
+    <img
+      class="season-hit__hero--from320px"
+      src="/imgs/season-hit-hero--from320px.svg"
+      alt=""
+    />
+    <img
+      class="season-hit__hero--from1440px"
+      src="/imgs/season-hit-hero--from1440px.svg"
+      alt=""
+    />
+    <div class="season-hit__description-flex">
+      <img
+        src="/imgs/plus-gray.svg"
+        alt=""
+        class="season-hit__description-icon"
+      />
+      <span class="season-hit__description"
+        >Уникальная технология структуры стельки позволяет забыть про обувь на
+        ноге.</span
       >
-      <span class="about-us-flex__text about-us-flex__text-2"
-        ><strong class="about-us-flex__text--bold"
-          >Легендарное наследие Nike:</strong
-        ><br />
-        <div class="about-us-flex__text-2--margin-top">
-          Swoosh Store - это место, где история и стиль сливаются воедино. Мы
-          гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
-          продукцию, которая воплощает более чем полувековое наследие инноваций,
-          комфорта и качества. Каждая пара кроссовок – это не просто спортивная
-          обувь, это произведение искусства, воплощающее дух победы и страстную
-          преданность активному образу жизни.
-        </div></span
-      >
-      <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
-      <NuxtLink target="_blank" to="">
-        <button class="about-us-flex__more-btn more-btn">
-          <div class="more-btn__flex">
-            <span class="more-btn__text">Подробнее</span>
-          </div>
-          <div class="more-btn__arrow">
-            <img src="/imgs/white-right-arrow.svg" alt="" />
-          </div>
-        </button>
-      </NuxtLink>
     </div>
-  </main>
-  <UIFooter></UIFooter>
+  </div>
+  <UIRecentPublicationsList></UIRecentPublicationsList>
+  <UIProductsWithDiscountList></UIProductsWithDiscountList>
+  <div class="new-collection-banners-flex banners-flex">
+    <div class="banners-flex__collection-banner collection-banner">
+      <img
+        src="/imgs/collection-hero-1.svg"
+        alt=""
+        class="collection-banner__hero"
+      />
+      <span class="collection-banner__title"
+        >Новая коллекция в<br />
+        каталоге Nike Air<br />
+        Max Solo</span
+      >
+      <button class="collection-banner__btn">Перейти в каталог</button>
+    </div>
+    <div class="banners-flex__collection-banner collection-banner">
+      <img
+        src="/imgs/collection-hero-2.svg"
+        alt=""
+        class="collection-banner__hero"
+      />
+      <span class="collection-banner__title"
+        >Новая коллекция в<br />
+        каталоге Nike Air<br />
+        Max Solo</span
+      >
+      <button class="collection-banner__btn">Перейти в каталог</button>
+    </div>
+  </div>
+  <div class="about-us-flex">
+    <h1 class="about-us-flex__title">
+      ИНТЕРНЕТ-МАГАЗИН<br />
+      <div class="about-us-flex__title-and-line-flex">
+        SWOOSH STORE
+        <div class="about-us-flex__line"></div>
+      </div>
+    </h1>
+    <span class="about-us-flex__text about-us-flex__text-1"
+      >Добро пожаловать в
+      <strong class="about-us-flex__text--bold">Swoosh Store</strong> – ваш
+      источник подлинных кроссовок Nike и непревзойденного стиля! Мы рады
+      представить вам уникальную онлайн-платформу, где вы сможете окунуться в
+      мир инноваций и моды от легендарного бренда спортивной обуви.</span
+    >
+    <span class="about-us-flex__text about-us-flex__text-2"
+      ><strong class="about-us-flex__text--bold"
+        >Легендарное наследие Nike:</strong
+      ><br />
+      <div class="about-us-flex__text-2--margin-top">
+        Swoosh Store - это место, где история и стиль сливаются воедино. Мы
+        гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
+        продукцию, которая воплощает более чем полувековое наследие инноваций,
+        комфорта и качества. Каждая пара кроссовок – это не просто спортивная
+        обувь, это произведение искусства, воплощающее дух победы и страстную
+        преданность активному образу жизни.
+      </div></span
+    >
+    <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
+    <NuxtLink target="_blank" to="" class="about-us-flex__more-btn-link">
+      <button class="about-us-flex__more-btn more-btn">
+        <div class="more-btn__flex">
+          <span class="more-btn__text">Подробнее</span>
+        </div>
+        <div class="more-btn__arrow">
+          <img src="/imgs/white-right-arrow.svg" alt="" />
+        </div>
+      </button>
+    </NuxtLink>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -1796,11 +1793,9 @@ const hitProductsNextSlide = (e: MouseEvent) => {
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
-.container {
-  padding: 2.375rem 0.938rem 0rem 0.938rem;
-}
 .overflow {
   overflow: hidden;
+  padding-top: 2.375rem;
 
   &__flex {
     display: flex;
@@ -2200,9 +2195,6 @@ const hitProductsNextSlide = (e: MouseEvent) => {
 
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .container {
-    padding: 0rem calc((100vw - 44.874rem) / 2);
-  }
   .overflow__slide-flex {
     flex-direction: row;
   }
@@ -2306,26 +2298,22 @@ const hitProductsNextSlide = (e: MouseEvent) => {
       margin-right: 0;
       margin-top: -15.75rem;
     }
-    &__more-btn {
+    &__more-btn-link {
       order: 2;
+    }
+    &__more-btn {
       margin-left: 0;
     }
   }
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
-  .container {
-    padding: 0rem calc((100vw - 44.75rem) / 2);
-  }
   .about-us-flex {
     margin-right: calc((100vw - 44.75rem) / (-2));
   }
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .container {
-    padding: 0rem calc((100vw - 71.875rem) / 2);
-  }
   .slide {
     &__title {
       font-size: 4.313rem;
@@ -2447,9 +2435,6 @@ const hitProductsNextSlide = (e: MouseEvent) => {
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
-  .container {
-    padding: 0rem calc((100vw - 85rem) / 2);
-  }
   .slide {
     &__title-and-text-flex {
       margin-top: 7.875rem;
@@ -2516,6 +2501,9 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   .about-us-flex {
     margin-right: calc((100vw - 85rem) / (-2));
 
+    &__line {
+      width: 123px;
+    }
     &__title {
       font-size: 2.438rem;
     }

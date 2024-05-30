@@ -58,7 +58,9 @@
             <li><NuxtLink target="_blank" to="">Распродажа</NuxtLink></li>
           </ul>
         </div>
-        <img src="/imgs/logo.svg" alt="" class="header-mid__logo" />
+        <NuxtLink to="/" class="header-mid__logo">
+          <img src="/imgs/logo.svg" alt=""
+        /></NuxtLink>
         <div class="header-mid__btns-flex">
           <button class="header-mid__my-account-btn--from768px">
             <svg
@@ -241,6 +243,7 @@ const toggleCatalogMenu = () => {
 }
 .header-mid {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
 
@@ -265,6 +268,7 @@ const toggleCatalogMenu = () => {
     border-left: 1px solid #eaeaea;
     padding-left: 0.938rem;
     padding-right: 0.5rem;
+    height: 70px;
   }
   &__my-account-btn--from768px,
   &__search-btn--from768px {
@@ -305,6 +309,9 @@ const toggleCatalogMenu = () => {
       margin-right: auto;
     }
     &__logo {
+      display: flex;
+      align-items: center;
+      height: 70px;
       padding-right: 1.875rem;
       border-right: 1px solid #eaeaea;
       order: 1;

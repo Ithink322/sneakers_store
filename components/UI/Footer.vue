@@ -250,7 +250,7 @@
         <span class="subscribe-on-news__privacy-policy-text"
           >Согласен с
           <span class="subscribe-on-news__privacy-policy-text--emphasized"
-            ><NuxtLink target="_blank" to=""
+            ><NuxtLink target="_blank" to="/PrivacyPolicy"
               >политикой конфиденциальности</NuxtLink
             ></span
           ></span
@@ -262,7 +262,7 @@
         >© 2023 - Swoosh Store - Интернет-магазин ориганальных кроссовок</span
       >
       <span class="footer__privacy-policy-text"
-        ><NuxtLink target="_blank" to=""
+        ><NuxtLink target="_blank" to="/PrivacyPolicy"
           >Политика конфиденциальности</NuxtLink
         ></span
       >
@@ -339,6 +339,9 @@ const isValidEmail = computed(() => {
     color: #d6d6d6;
     text-decoration: underline;
     text-underline-offset: 4px;
+  }
+  &__privacy-policy-text a {
+    color: inherit;
   }
 }
 .logo-and-social-media-flex {
@@ -455,6 +458,9 @@ const isValidEmail = computed(() => {
     text-decoration: underline;
     text-underline-offset: 3px;
     margin-bottom: 1.25rem;
+  }
+  &__privacy-policy-text--emphasized a {
+    color: inherit;
   }
   &__invalid-email-message {
     display: block;
