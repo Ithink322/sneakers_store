@@ -85,13 +85,21 @@ const heroes = ref<Hero[]>([
 ]);
 
 let SliderWrapper: HTMLElement | null = null;
+let SliderOverflow: HTMLElement | null = null;
 let SlideWidth: number = 0;
 let SlidesLength: number = 0;
 let gap: number = 0;
+let startX: number | null = null;
+
+let CurrentPosition = 0,
+  CurrentIndex = 0;
 
 onMounted(() => {
   SliderWrapper = document.querySelector<HTMLElement>(
     ".recent-publications__list"
+  )!;
+  SliderOverflow = document.querySelector<HTMLElement>(
+    ".recent-publications__overflow"
   )!;
   SlideWidth = document.querySelector<HTMLElement>(
     ".recent-publications-card"
@@ -100,18 +108,41 @@ onMounted(() => {
   gap = parseFloat(
     window.getComputedStyle(SliderWrapper).getPropertyValue("gap")
   );
+
+  /* touchscreen sliders for .recent-publications__overflow starts */
+  SliderWrapper!.style.transform = "translateX(0)";
+
+  SliderOverflow!.addEventListener("touchstart", HandleTouchStart, false);
+  SliderOverflow!.addEventListener("touchmove", HandleTouchMove, false);
+
+  function HandleTouchStart(e: TouchEvent) {
+    startX = e.touches[0].clientX;
+  }
+
+  function HandleTouchMove(e: TouchEvent) {
+    if (!startX) {
+      return;
+    }
+
+    let currentX = e.touches[0].clientX;
+    let diffX = startX - currentX;
+
+    if (diffX > 0 && CurrentIndex < SlidesLength + 1) {
+      startX = null;
+      NextSlide();
+    } else if (diffX < 0 && CurrentIndex >= 0) {
+      startX = null;
+      PrevSlide();
+    }
+  }
+
+  SliderWrapper!.style.transform = "translateX(0)";
+  /* touchscreen sliders for .recent-publications__overflow ends */
 });
 
-let CurrentPosition = 0,
-  CurrentIndex = 0;
-
-const PrevSlide = (e: MouseEvent) => {
-  const svgPathPrev = (e.target as HTMLElement).querySelector(
-    ".btns-flex__prev-btn svg path"
-  );
-  const svgPathNext = (e.target as HTMLElement)
-    .closest(".btns-flex")!
-    .querySelector(".btns-flex__next-btn svg path");
+const PrevSlide = () => {
+  const svgPathPrev = document.querySelector(".btns-flex__prev-btn svg path");
+  const svgPathNext = document.querySelector(".btns-flex__next-btn svg path");
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "1";
@@ -126,13 +157,9 @@ const PrevSlide = (e: MouseEvent) => {
   }
   SliderWrapper!.style.transform = `translateX(${CurrentPosition}px)`;
 };
-const NextSlide = (e: MouseEvent) => {
-  const svgPathNext = (e.target as HTMLElement).querySelector(
-    ".btns-flex__next-btn svg path"
-  );
-  const svgPathPrev = (e.target as HTMLElement)
-    .closest(".btns-flex")!
-    .querySelector(".btns-flex__prev-btn svg path");
+const NextSlide = () => {
+  const svgPathPrev = document.querySelector(".btns-flex__prev-btn svg path");
+  const svgPathNext = document.querySelector(".btns-flex__next-btn svg path");
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "0.4";

@@ -1674,37 +1674,143 @@ const hitProducts = ref<Product[]>([
   },
 ]);
 
+/* carousels with arrows for .products-catalog__list-grid starts */
 let SliderWrapper: NodeListOf<HTMLElement> | null = null;
+let SliderOverflow: NodeListOf<HTMLElement> | null = null;
 let latestSliderWrapper: HTMLElement | null = null;
 let hitSliderWrapper: HTMLElement | null = null;
+let latestSliderOverflow: HTMLElement | null = null;
+let hitSliderOverflow: HTMLElement | null = null;
 let flex_gap: number = 0;
 let windowWidth: number = 0;
-
-onMounted(() => {
-  SliderWrapper = document.querySelectorAll<HTMLElement>(
-    ".products-catalog__list-grid"
-  )!;
-  latestSliderWrapper = SliderWrapper[0];
-  hitSliderWrapper = SliderWrapper[1];
-  let gap = window.getComputedStyle(SliderWrapper[0]!);
-  flex_gap =
-    (parseInt(gap.getPropertyValue("gap")) / SliderWrapper[0]!.offsetWidth) *
-    100;
-  windowWidth = window.innerWidth;
-});
+let slides: number = 8;
+let startX: number | null = null;
 
 let latestCurrentPosition = 0,
   latestCurrentIndex = 0,
   hitCurrentPosition = 0,
   hitCurrentIndex = 0;
 
-const latestArrivalsPrevSlide = (e: MouseEvent) => {
-  const svgPathPrev = (e.target as HTMLElement).querySelector(
+onMounted(() => {
+  SliderWrapper = document.querySelectorAll<HTMLElement>(
+    ".products-catalog__list-grid"
+  )!;
+  SliderOverflow = document.querySelectorAll<HTMLElement>(
+    ".products-catalog__overflow"
+  )!;
+  latestSliderWrapper = SliderWrapper[0];
+  hitSliderWrapper = SliderWrapper[1];
+  latestSliderOverflow = SliderOverflow[0];
+  hitSliderOverflow = SliderOverflow[1];
+  let gap = window.getComputedStyle(SliderWrapper[0]!);
+  flex_gap =
+    (parseInt(gap.getPropertyValue("gap")) / SliderWrapper[0]!.offsetWidth) *
+    100;
+  windowWidth = window.innerWidth;
+  slides = windowWidth < 768 ? 8 : 11;
+
+  /* touchscreen sliders for .products-catalog__overflow starts */
+  latestSliderWrapper!.style.transform = "translateX(0)";
+
+  latestSliderOverflow!.addEventListener(
+    "touchstart",
+    latestHandleTouchStart,
+    false
+  );
+  latestSliderOverflow!.addEventListener(
+    "touchmove",
+    latestHandleTouchMove,
+    false
+  );
+
+  function latestHandleTouchStart(e: TouchEvent) {
+    let targetElement = e.target as HTMLElement;
+    let isTargetOrParentHasCardHeroClass = false;
+
+    while (targetElement) {
+      if (
+        targetElement.classList.contains("card__hero") ||
+        targetElement.classList.contains("indicator")
+      ) {
+        isTargetOrParentHasCardHeroClass = true;
+        break;
+      }
+      targetElement = targetElement.parentElement as HTMLElement;
+    }
+
+    if (!isTargetOrParentHasCardHeroClass) {
+      startX = e.touches[0].clientX;
+    }
+  }
+
+  function latestHandleTouchMove(e: TouchEvent) {
+    if (!startX) {
+      return;
+    }
+
+    let currentX = e.touches[0].clientX;
+    let diffX = startX - currentX;
+
+    if (diffX > 0 && latestCurrentIndex < slides + 1) {
+      startX = null;
+      latestArrivalsNextSlide();
+    } else if (diffX < 0 && latestCurrentIndex >= 0) {
+      startX = null;
+      latestArrivalsPrevSlide();
+    }
+  }
+
+  latestSliderWrapper!.style.transform = "translateX(0)";
+
+  hitSliderOverflow!.addEventListener("touchstart", hitHandleTouchStart, false);
+  hitSliderOverflow!.addEventListener("touchmove", hitHandleTouchMove, false);
+
+  function hitHandleTouchStart(e: TouchEvent) {
+    let targetElement = e.target as HTMLElement;
+    let isTargetOrParentHasCardHeroClass = false;
+
+    while (targetElement) {
+      if (
+        targetElement.classList.contains("card__hero") ||
+        targetElement.classList.contains("indicator")
+      ) {
+        isTargetOrParentHasCardHeroClass = true;
+        break;
+      }
+      targetElement = targetElement.parentElement as HTMLElement;
+    }
+
+    if (!isTargetOrParentHasCardHeroClass) {
+      startX = e.touches[0].clientX;
+    }
+  }
+
+  function hitHandleTouchMove(e: TouchEvent) {
+    if (!startX) {
+      return;
+    }
+
+    let currentX = e.touches[0].clientX;
+    let diffX = startX - currentX;
+
+    if (diffX > 0 && hitCurrentIndex < slides + 1) {
+      startX = null;
+      hitProductsNextSlide();
+    } else if (diffX < 0 && hitCurrentIndex >= 0) {
+      startX = null;
+      hitProductsPrevSlide();
+    }
+  }
+  /* touchscreen sliders for .products-catalog__overflow ends */
+});
+
+const latestArrivalsPrevSlide = () => {
+  const svgPathPrev = document.querySelector(
     ".latest-arrivals__prev-btn svg path"
   );
-  const svgPathNext = (e.target as HTMLElement)
-    .closest(".latest-arrivals__btns-flex")!
-    .querySelector(".latest-arrivals__next-btn svg path");
+  const svgPathNext = document.querySelector(
+    ".latest-arrivals__next-btn svg path"
+  );
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "1";
@@ -1720,13 +1826,13 @@ const latestArrivalsPrevSlide = (e: MouseEvent) => {
   }
   latestSliderWrapper!.style.transform = `translateX(${latestCurrentPosition}%)`;
 };
-const latestArrivalsNextSlide = (e: MouseEvent) => {
-  const svgPathNext = (e.target as HTMLElement).querySelector(
+const latestArrivalsNextSlide = () => {
+  const svgPathPrev = document.querySelector(
+    ".latest-arrivals__prev-btn svg path"
+  );
+  const svgPathNext = document.querySelector(
     ".latest-arrivals__next-btn svg path"
   );
-  const svgPathPrev = (e.target as HTMLElement)
-    .closest(".latest-arrivals__btns-flex")!
-    .querySelector(".latest-arrivals__prev-btn svg path");
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "0.4";
@@ -1744,13 +1850,13 @@ const latestArrivalsNextSlide = (e: MouseEvent) => {
   }
   latestSliderWrapper!.style.transform = `translateX(${latestCurrentPosition}%)`;
 };
-const hitProductsPrevSlide = (e: MouseEvent) => {
-  const svgPathPrev = (e.target as HTMLElement).querySelector(
+const hitProductsPrevSlide = () => {
+  const svgPathPrev = document.querySelector(
     ".best-selling__prev-btn svg path"
   );
-  const svgPathNext = (e.target as HTMLElement)
-    .closest(".best-selling__btns-flex")!
-    .querySelector(".best-selling__next-btn svg path");
+  const svgPathNext = document.querySelector(
+    ".best-selling__next-btn svg path"
+  );
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "1";
@@ -1765,13 +1871,13 @@ const hitProductsPrevSlide = (e: MouseEvent) => {
   }
   hitSliderWrapper!.style.transform = `translateX(${hitCurrentPosition}%)`;
 };
-const hitProductsNextSlide = (e: MouseEvent) => {
-  const svgPathNext = (e.target as HTMLElement).querySelector(
+const hitProductsNextSlide = () => {
+  const svgPathPrev = document.querySelector(
+    ".best-selling__prev-btn svg path"
+  );
+  const svgPathNext = document.querySelector(
     ".best-selling__next-btn svg path"
   );
-  const svgPathPrev = (e.target as HTMLElement)
-    .closest(".best-selling__btns-flex")!
-    .querySelector(".best-selling__prev-btn svg path");
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "0.4";
@@ -1789,6 +1895,7 @@ const hitProductsNextSlide = (e: MouseEvent) => {
   }
   hitSliderWrapper!.style.transform = `translateX(${hitCurrentPosition}%)`;
 };
+/* carousels with arrows for .products-catalog__list-grid ends */
 </script>
 
 <style lang="scss" scoped>
