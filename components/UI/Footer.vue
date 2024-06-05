@@ -98,20 +98,18 @@
             <ul
               class="footer__dropdown-list dropdown-list footer__dropdown-info-list"
             >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">О магазине</li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Наш блог</li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">
-                  Доставка и оплата
-                </li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Контакты</li></NuxtLink
-              >
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Наш блог</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Контакты</NuxtLink>
+              </li>
             </ul>
             <button @click="openProductsDropdown" class="sections-flex__btn">
               <div class="sections-flex__btn-flex">
@@ -126,27 +124,21 @@
             <ul
               class="footer__dropdown-list dropdown-list footer__dropdown-products-list"
             >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Каталог</li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">
-                  Детские кроссовки
-                </li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">
-                  Женские кроссовки
-                </li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">
-                  Мужские кроссовки
-                </li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Распродажа</li></NuxtLink
-              >
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Каталог</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Детские кроссовки</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Женские кроссовки</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Мужские кроссовки</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Распродажа</NuxtLink>
+              </li>
             </ul>
             <button @click="openShopDropdown" class="sections-flex__btn">
               <div class="sections-flex__btn-flex">
@@ -161,22 +153,22 @@
             <ul
               class="footer__dropdown-list dropdown-list footer__dropdown-shop-list"
             >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Личный кабинет</li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Избранное</li></NuxtLink
-              >
-              <NuxtLink target="_blank" to=""
-                ><li class="dropdown-list__link">Корзина товаров</li></NuxtLink
-              >
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Личный кабинет</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Избранное</NuxtLink>
+              </li>
+              <li class="dropdown-list__link">
+                <NuxtLink target="_blank" to="">Корзина товаров</NuxtLink>
+              </li>
             </ul>
           </div>
           <div class="list--from768px">
             <ul class="footer__list list">
               <span class="list__title">ИНФОРМАЦИЯ</span>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">О магазине</NuxtLink>
+                <NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="list__link">
                 <NuxtLink target="_blank" to="">Наш блог</NuxtLink>
@@ -229,11 +221,12 @@
           >
         </div>
         <form
-          @click.prevent
+          @submit.prevent="submitForm"
           class="subscribe-on-news__send-email-form send-email-form"
         >
           <input
             v-model="email"
+            @input="handleInput"
             placeholder="Email"
             type="text"
             class="send-email-form__input"
@@ -246,6 +239,16 @@
           class="subscribe-on-news__invalid-email-message"
           v-if="!isValidEmail"
           >Некорректный email адрес</span
+        >
+        <span
+          v-if="succesMessageIsVisible"
+          class="subscribe-on-news__success-message"
+          >Вы успешно подписались</span
+        >
+        <span
+          v-if="emptyMessageIsVisible"
+          class="subscribe-on-news__empty-message"
+          >Введите email адрес</span
         >
         <span class="subscribe-on-news__privacy-policy-text"
           >Согласен с
@@ -286,13 +289,41 @@ const openShopDropdown = () => {
 };
 
 const email = ref("");
-const isValidEmail = computed(() => {
-  if (!email.value) {
-    return true;
+const isValidEmail = ref(true);
+
+const succesMessageIsVisible = ref(false);
+const emptyMessageIsVisible = ref(false);
+
+const handleInput = () => {
+  if (email.value) {
+    emptyMessageIsVisible.value = false;
   }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email.value);
-});
+};
+
+const submitForm = () => {
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/;
+
+  if (email.value) {
+    isValidEmail.value = emailRegex.test(email.value);
+  } else {
+    isValidEmail.value = false;
+  }
+
+  if (isValidEmail.value && email.value) {
+    email.value = "";
+    succesMessageIsVisible.value = true;
+    emptyMessageIsVisible.value = false;
+  } else if (email.value === "") {
+    succesMessageIsVisible.value = false;
+    isValidEmail.value = true;
+    emptyMessageIsVisible.value = true;
+  } else {
+    succesMessageIsVisible.value = false;
+    emptyMessageIsVisible.value = false;
+    isValidEmail.value = false;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -412,8 +443,12 @@ const isValidEmail = computed(() => {
   &__link {
     font-family: "Pragmatica Book";
     font-size: 0.875rem;
-    color: #fff;
     transition: color 100ms ease;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
   }
   &__link:hover {
     color: $Light-Orange;
@@ -462,12 +497,17 @@ const isValidEmail = computed(() => {
   &__privacy-policy-text--emphasized a {
     color: inherit;
   }
-  &__invalid-email-message {
+  &__invalid-email-message,
+  &__empty-message,
+  &__success-message {
     display: block;
     font-family: "Pragmatica Bold";
     font-size: 1rem;
     color: #f81d2a;
     margin: 0rem 0rem 0.5rem 0.719rem;
+  }
+  &__success-message {
+    color: #07961e;
   }
 }
 .subscribe-on-news::after {
@@ -599,6 +639,11 @@ const isValidEmail = computed(() => {
       font-size: 0.938rem;
       color: #fff;
       transition: color 100ms ease;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
     }
     li:hover {
       color: $Light-Orange;
@@ -626,7 +671,9 @@ const isValidEmail = computed(() => {
       margin: 0;
       margin-left: auto;
     }
-    &__invalid-email-message {
+    &__invalid-email-message,
+    &__empty-message,
+    &__success-message {
       position: absolute;
       margin: 6.25rem 0rem 0.5rem 16.35rem;
     }
@@ -681,7 +728,9 @@ const isValidEmail = computed(() => {
       white-space: nowrap;
       margin-left: 0rem;
     }
-    &__invalid-email-message {
+    &__invalid-email-message,
+    &__empty-message,
+    &__success-message {
       position: static;
       margin: 0rem 0rem 0.5rem 0rem;
     }

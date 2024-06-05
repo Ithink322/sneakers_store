@@ -174,7 +174,7 @@
           <NuxtLink target="_blank" to="">РАСПРОДАЖА</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink target="_blank" to="">О магазине</NuxtLink>
+          <NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
           <NuxtLink target="_blank" to="">Наш блог</NuxtLink>
@@ -371,6 +371,11 @@ const openModelsDropDownMenu = () => {
     padding-left: 0.938rem;
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
+
+    a {
+      text-decoration: none;
+      color: $Dark-Black;
+    }
   }
 
   &__dropdown-menu {

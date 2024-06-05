@@ -1,6 +1,8 @@
 <template>
   <div class="breadcrump">
-    <span class="breadcrump__home-title">Swoosh Store</span>
+    <span class="breadcrump__home-title"
+      ><NuxtLink to="/">Swoosh Store</NuxtLink></span
+    >
     <img class="breadcrump__arrow" src="/imgs/gray-arrow.svg" alt="" />
     <span class="breadcrump__main-title">Политика конфиденциальности</span>
   </div>
@@ -390,8 +392,6 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
-
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .breadcrump {
@@ -405,7 +405,10 @@
     white-space: nowrap;
   }
   &__home-title {
-    color: #868686;
+    a {
+      text-decoration: none;
+      color: #868686;
+    }
   }
   &__main-title {
     color: #434343;
@@ -451,6 +454,8 @@
 /* 1200px = 75em */
 @media (min-width: 75em) {
   .breadcrump {
+    gap: 0.938rem;
+
     span {
       font-size: 0.875rem;
     }

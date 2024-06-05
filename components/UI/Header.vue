@@ -3,7 +3,7 @@
     <header class="header">
       <div class="header-top">
         <ul class="header-top__titles-list-flex">
-          <li><NuxtLink target="_blank" to="">О магазине</NuxtLink></li>
+          <li><NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink></li>
           <li><NuxtLink target="_blank" to="">Наш блог</NuxtLink></li>
           <li><NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink></li>
           <li><NuxtLink target="_blank" to="">Контакты</NuxtLink></li>

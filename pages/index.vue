@@ -145,57 +145,7 @@
       </div>
     </div>
   </div>
-  <div class="benefits-main-flex">
-    <div class="benefits-main-flex__benefit-flex benefit-flex">
-      <img
-        src="/imgs/benefit-icon-original-products.svg"
-        alt=""
-        class="benefit-flex__icon"
-      />
-      <div class="benefit-flex__title-and-text-flex">
-        <span class="benefit-flex__title">ТОЛЬКО ОРИГИНАЛЬНЫЕ ТОВАРЫ</span>
-        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
-          >Гарантированная подлинность Nike и<br
-            class="benefit-flex__text-br--from1920px"
-          />
-          высокое качество кроссовок.</span
-        >
-      </div>
-    </div>
-    <div class="benefits-main-flex__benefit-flex benefit-flex">
-      <img
-        src="/imgs/benefit-professional-service.svg"
-        alt=""
-        class="benefit-flex__icon"
-      />
-      <div class="benefit-flex__title-and-text-flex">
-        <span class="benefit-flex__title">ПРОФЕССИОНАЛЬНЫЙ СЕРВИС</span>
-        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
-          >Команда экспертов, готовых помочь с<br
-            class="benefit-flex__text-br--from1920px"
-          />
-          выбором размера ответить на все вопросы.</span
-        >
-      </div>
-    </div>
-    <div class="benefits-main-flex__benefit-flex benefit-flex">
-      <img
-        src="/imgs/benefit-exclusive-choice.svg"
-        alt=""
-        class="benefit-flex__icon"
-      />
-      <div class="benefit-flex__title-and-text-flex">
-        <span class="benefit-flex__title">ЭКСКЛЮЗИВНЫЙ ВЫБОР</span>
-        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
-          >Богатый ассортимент оригинальных<br
-            class="benefit-flex__text-br--from1920px"
-          />
-          моделей Nike, включая редкие выпуски.</span
-        >
-      </div>
-    </div>
-  </div>
-  <div class="border-bottom-for-benefits-main-flex"></div>
+  <UIBenefits></UIBenefits>
   <div class="latest-arrivals products-catalog">
     <h2 class="latest-arrivals__title products-catalog__title">
       ПОСЛЕДНИЕ<br />
@@ -363,46 +313,7 @@
       <button class="collection-banner__btn">Перейти в каталог</button>
     </div>
   </div>
-  <div class="about-us-flex">
-    <h1 class="about-us-flex__title">
-      ИНТЕРНЕТ-МАГАЗИН<br />
-      <div class="about-us-flex__title-and-line-flex">
-        SWOOSH STORE
-        <div class="about-us-flex__line"></div>
-      </div>
-    </h1>
-    <span class="about-us-flex__text about-us-flex__text-1"
-      >Добро пожаловать в
-      <strong class="about-us-flex__text--bold">Swoosh Store</strong> – ваш
-      источник подлинных кроссовок Nike и непревзойденного стиля! Мы рады
-      представить вам уникальную онлайн-платформу, где вы сможете окунуться в
-      мир инноваций и моды от легендарного бренда спортивной обуви.</span
-    >
-    <span class="about-us-flex__text about-us-flex__text-2"
-      ><strong class="about-us-flex__text--bold"
-        >Легендарное наследие Nike:</strong
-      ><br />
-      <div class="about-us-flex__text-2--margin-top">
-        Swoosh Store - это место, где история и стиль сливаются воедино. Мы
-        гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
-        продукцию, которая воплощает более чем полувековое наследие инноваций,
-        комфорта и качества. Каждая пара кроссовок – это не просто спортивная
-        обувь, это произведение искусства, воплощающее дух победы и страстную
-        преданность активному образу жизни.
-      </div></span
-    >
-    <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
-    <NuxtLink target="_blank" to="" class="about-us-flex__more-btn-link">
-      <button class="about-us-flex__more-btn more-btn">
-        <div class="more-btn__flex">
-          <span class="more-btn__text">Подробнее</span>
-        </div>
-        <div class="more-btn__arrow">
-          <img src="/imgs/white-right-arrow.svg" alt="" />
-        </div>
-      </button>
-    </NuxtLink>
-  </div>
+  <UIAboutUs></UIAboutUs>
 </template>
 
 <script setup lang="ts">
@@ -2043,58 +1954,6 @@ const hitProductsNextSlide = () => {
     border: 2px solid #1f1f1f;
   }
 }
-.benefits-main-flex {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.563rem;
-  margin-top: 1.875rem;
-  height: auto;
-
-  &__benefit-flex {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.688rem;
-  }
-}
-.benefits-main-flex::before {
-  position: absolute;
-  content: "";
-  width: calc(100% + 1.876rem);
-  border: 1px solid #eaeaea;
-  left: -0.938rem;
-  margin-top: -1.875rem;
-}
-.border-bottom-for-benefits-main-flex {
-  position: absolute;
-  width: 100%;
-  border: 1px solid #eaeaea;
-  left: 0rem;
-  margin-top: 1.875rem;
-}
-.benefit-flex {
-  &__icon {
-    width: 40px;
-    flex-shrink: 0;
-  }
-  &__title-and-text-flex {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  &__title {
-    font-family: "Pragmatica Medium";
-    font-size: 0.938rem;
-  }
-  &__text {
-    font-family: "Pragmatica Book";
-    font-size: 0.875rem;
-    color: #4b4b4b;
-  }
-  &__text-br--from1920px {
-    display: none;
-  }
-}
 .products-catalog {
   position: relative;
   margin: 4.375rem 0rem 2.063rem 0rem;
@@ -2248,43 +2107,6 @@ const hitProductsNextSlide = () => {
     z-index: 2;
   }
 }
-.about-us-flex {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.125rem;
-  margin-top: 3.75rem;
-
-  &__title-and-line-flex {
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-  }
-  &__title {
-    font-family: "Pragmatica Medium";
-    font-size: 1.5rem;
-    margin: 0rem;
-  }
-  &__text-2--margin-top {
-    margin-top: 0.4rem;
-  }
-  &__line {
-    width: 90px;
-    height: 2px;
-    background-color: $Dark-Black;
-  }
-  &__text {
-    font-family: "Pragmatica Book";
-    font-size: 0.938rem;
-    line-height: 23px;
-  }
-  &__hero {
-    margin-right: -0.938rem;
-  }
-  &__more-btn {
-    margin: 0 auto;
-  }
-}
 
 /* 360px = 22.5em */
 @media (min-width: 22.5em) {
@@ -2337,29 +2159,6 @@ const hitProductsNextSlide = () => {
       top: -0.4rem;
     }
   }
-  .benefits-main-flex {
-    position: static;
-    flex-direction: row;
-    gap: 0.406rem;
-
-    &__benefit-flex {
-      gap: 0.625rem;
-    }
-    &::before {
-      width: 100%;
-      left: 0rem;
-    }
-    &::after {
-      width: 100%;
-      left: 0rem;
-      bottom: 0rem;
-    }
-  }
-  .benefit-flex {
-    &__title {
-      font-size: 0.688rem;
-    }
-  }
   .season-hit {
     height: 341px;
 
@@ -2381,42 +2180,6 @@ const hitProductsNextSlide = () => {
   }
   .collection-banner {
     flex-grow: 1;
-  }
-  .about-us-flex {
-    margin-right: calc((100vw - 44.874rem) / (-2));
-
-    &__text-1 {
-      order: 0;
-      padding-right: 24rem;
-      margin-right: calc((100vw - 44.874rem) / 2);
-    }
-    &__text-2 {
-      order: 1;
-      margin-right: calc((100vw - 44.874rem) / 2);
-    }
-    &__text {
-      font-family: "Pragmatica Book";
-      font-size: 0.938rem;
-    }
-    &__hero {
-      width: 50vw;
-      height: calc(50vw * 0.72);
-      margin-left: auto;
-      margin-right: 0;
-      margin-top: -15.75rem;
-    }
-    &__more-btn-link {
-      order: 2;
-    }
-    &__more-btn {
-      margin-left: 0;
-    }
-  }
-}
-/* 1024px = 64em */
-@media (min-width: 64em) {
-  .about-us-flex {
-    margin-right: calc((100vw - 44.75rem) / (-2));
   }
 }
 /* 1200px = 75em */
@@ -2466,28 +2229,6 @@ const hitProductsNextSlide = () => {
       top: -0.4rem;
     }
   }
-  .benefits-main-flex {
-    margin-top: 3.125rem;
-    gap: 3.875rem;
-
-    &__benefit-flex {
-      gap: 1.25rem;
-    }
-  }
-  .benefits-main-flex::before {
-    margin-top: -3.125rem;
-  }
-  .border-bottom-for-benefits-main-flex {
-    margin-top: 2.9rem;
-  }
-  .benefit-flex {
-    &__title {
-      font-size: 1.125rem;
-    }
-    &__text {
-      font-size: 1.125rem;
-    }
-  }
   .products-catalog {
     &__title {
       font-size: 2.438rem;
@@ -2523,20 +2264,6 @@ const hitProductsNextSlide = () => {
     &__btn {
       font-size: 1.125rem;
       bottom: 3.75rem;
-    }
-  }
-  .about-us-flex {
-    margin-top: 12.063rem;
-    margin-right: calc((100vw - 71.875rem) / (-2));
-
-    &__text-2 {
-      padding-right: 24rem;
-    }
-    &__hero {
-      position: absolute;
-      order: 3;
-      margin-top: -3rem;
-      right: 0;
     }
   }
 }
@@ -2605,34 +2332,9 @@ const hitProductsNextSlide = () => {
       margin-left: 58rem;
     }
   }
-  .about-us-flex {
-    margin-right: calc((100vw - 85rem) / (-2));
-
-    &__line {
-      width: 123px;
-    }
-    &__title {
-      font-size: 2.438rem;
-    }
-    &__text {
-      font-size: 1rem;
-    }
-    &__hero {
-      position: static;
-      max-width: 853px;
-      max-height: 600px;
-      margin-top: -34rem;
-    }
-  }
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
-  .benefit-flex__text--nowrapfrom1920px {
-    white-space: nowrap;
-  }
-  .benefit-flex__text-br--from1920px {
-    display: block;
-  }
   .season-hit {
     width: 1500px;
     margin-left: -4.375rem;
@@ -2640,17 +2342,6 @@ const hitProductsNextSlide = () => {
     &__description-flex {
       margin-top: -13.3rem;
       margin-left: 67rem;
-    }
-  }
-  .about-us-flex {
-    &__text-1,
-    &__text-2 {
-      padding-right: 14rem;
-    }
-    &__hero {
-      max-width: 853px;
-      max-height: 600px;
-      margin-top: -32rem;
     }
   }
 }

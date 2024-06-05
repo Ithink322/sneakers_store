@@ -48,6 +48,7 @@ const props = defineProps<{ hero: Hero }>();
     object-fit: cover;
   }
   &__title {
+    display: block;
     position: relative;
     font-family: "Pragmatica Medium";
     font-size: 1.313rem;
@@ -105,7 +106,7 @@ const props = defineProps<{ hero: Hero }>();
     }
     &__title {
       font-size: 1.688rem;
-      padding-right: 20rem;
+      padding-right: 10rem;
     }
     &__btn-more-and-date-flex {
       bottom: -16.7rem;
