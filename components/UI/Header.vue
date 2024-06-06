@@ -3,12 +3,14 @@
     <header class="header">
       <div class="header-top">
         <ul class="header-top__titles-list-flex">
-          <li><NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink></li>
-          <li><NuxtLink target="_blank" to="">Наш блог</NuxtLink></li>
-          <li><NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink></li>
-          <li><NuxtLink target="_blank" to="">Контакты</NuxtLink></li>
+          <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
+          <li><NuxtLink to="">Наш блог</NuxtLink></li>
           <li>
-            <NuxtLink target="_blank" to="">Индивидуальный заказ</NuxtLink>
+            <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
+          </li>
+          <li><NuxtLink to="">Контакты</NuxtLink></li>
+          <li>
+            <NuxtLink to="">Индивидуальный заказ</NuxtLink>
           </li>
         </ul>
         <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>
@@ -52,10 +54,10 @@
             >
           </div>
           <ul class="header-mid__titles-list">
-            <li><NuxtLink target="_blank" to="">Мужские</NuxtLink></li>
-            <li><NuxtLink target="_blank" to="">Женские</NuxtLink></li>
-            <li><NuxtLink target="_blank" to="">Детские</NuxtLink></li>
-            <li><NuxtLink target="_blank" to="">Распродажа</NuxtLink></li>
+            <li><NuxtLink to="">Мужские</NuxtLink></li>
+            <li><NuxtLink to="">Женские</NuxtLink></li>
+            <li><NuxtLink to="">Детские</NuxtLink></li>
+            <li><NuxtLink to="">Распродажа</NuxtLink></li>
           </ul>
         </div>
         <NuxtLink to="/" class="header-mid__logo">

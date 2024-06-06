@@ -28,11 +28,7 @@
       </div></span
     >
     <img src="/imgs/about-us-hero.webp" alt="" class="about-us-flex__hero" />
-    <NuxtLink
-      target="_blank"
-      to="/AboutUs"
-      class="about-us-flex__more-btn-link"
-    >
+    <NuxtLink to="/AboutUs" class="about-us-flex__more-btn-link">
       <button class="about-us-flex__more-btn more-btn">
         <div class="more-btn__flex">
           <span class="more-btn__text">Подробнее</span>

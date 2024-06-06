@@ -1,11 +1,5 @@
 <template>
-  <div class="breadcrump">
-    <span class="breadcrump__home-title"
-      ><NuxtLink to="/">Swoosh Store</NuxtLink></span
-    >
-    <img class="breadcrump__arrow" src="/imgs/gray-arrow.svg" alt="" />
-    <span class="breadcrump__main-title">О компании</span>
-  </div>
+  <UIBreadcrump :breadcrumpTitle="'О компании'"></UIBreadcrump>
   <div class="about-container">
     <h1 class="about-container__title">
       ИНТЕРНЕТ-МАГАЗИН<br />
@@ -97,7 +91,7 @@
         <span class="mailing__privacy-policy-text"
           >Согласен с
           <span class="mailing__privacy-policy-text--underlined"
-            ><NuxtLink target="_blank" to="/PrivacyPolicy"
+            ><NuxtLink to="/PrivacyPolicy"
               >политикой конфиденциальности</NuxtLink
             ></span
           ></span
@@ -115,16 +109,6 @@
 </template>
 
 <script setup lang="ts">
-if (typeof window !== "undefined") {
-  if (window.location.href.includes("AboutUs")) {
-    document
-      .querySelector(".about-us-flex__more-btn-link")!
-      .addEventListener("click", (e) => {
-        e.preventDefault();
-      });
-  }
-}
-
 const email = ref("");
 const isValidEmail = ref(true);
 const emptyMessageIsVisible = ref(false);
@@ -163,26 +147,6 @@ const submitForm = () => {
 
 <style lang="scss">
 @import "@/assets/App.scss";
-.breadcrump {
-  display: flex;
-  gap: 0.563rem;
-  padding: 1.25rem 0rem;
-
-  span {
-    font-family: "Pragmatica Book";
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-  &__home-title {
-    a {
-      text-decoration: none;
-      color: #868686;
-    }
-  }
-  &__main-title {
-    color: #434343;
-  }
-}
 .about-container {
   &__title {
     font-family: "Pragmatica Medium";
@@ -381,13 +345,6 @@ const submitForm = () => {
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .breadcrump {
-    gap: 0.938rem;
-
-    span {
-      font-size: 0.875rem;
-    }
-  }
   .about-container {
     &__hero {
       margin-left: calc((100vw - 71.875rem) / (-2));

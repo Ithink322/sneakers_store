@@ -15,7 +15,7 @@
           <div
             class="logo-and-social-media-flex__social-media-flex social-media-flex"
           >
-            <NuxtLink target="_blank" to="">
+            <NuxtLink to="">
               <button class="social-media-flex__btn">
                 <svg
                   class="social-media-flex__inst-icon"
@@ -42,7 +42,7 @@
                 </svg>
               </button>
             </NuxtLink>
-            <NuxtLink target="_blank" to="https://t.me/VitaliyNelubov">
+            <NuxtLink to="https://t.me/VitaliyNelubov">
               <button class="social-media-flex__btn">
                 <svg
                   class="social-media-flex__telegram-icon"
@@ -59,7 +59,7 @@
                 </svg>
               </button>
             </NuxtLink>
-            <NuxtLink target="_blank" to="">
+            <NuxtLink to="">
               <button class="social-media-flex__btn">
                 <svg
                   class="social-media-flex__twitter-icon"
@@ -99,16 +99,16 @@
               class="footer__dropdown-list dropdown-list footer__dropdown-info-list"
             >
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink>
+                <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Наш блог</NuxtLink>
+                <NuxtLink to="">Наш блог</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink>
+                <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Контакты</NuxtLink>
+                <NuxtLink to="">Контакты</NuxtLink>
               </li>
             </ul>
             <button @click="openProductsDropdown" class="sections-flex__btn">
@@ -125,19 +125,19 @@
               class="footer__dropdown-list dropdown-list footer__dropdown-products-list"
             >
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Каталог</NuxtLink>
+                <NuxtLink to="">Каталог</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Детские кроссовки</NuxtLink>
+                <NuxtLink to="">Детские кроссовки</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Женские кроссовки</NuxtLink>
+                <NuxtLink to="">Женские кроссовки</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Мужские кроссовки</NuxtLink>
+                <NuxtLink to="">Мужские кроссовки</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Распродажа</NuxtLink>
+                <NuxtLink to="">Распродажа</NuxtLink>
               </li>
             </ul>
             <button @click="openShopDropdown" class="sections-flex__btn">
@@ -154,13 +154,13 @@
               class="footer__dropdown-list dropdown-list footer__dropdown-shop-list"
             >
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Личный кабинет</NuxtLink>
+                <NuxtLink to="">Личный кабинет</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Избранное</NuxtLink>
+                <NuxtLink to="">Избранное</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink target="_blank" to="">Корзина товаров</NuxtLink>
+                <NuxtLink to="">Корзина товаров</NuxtLink>
               </li>
             </ul>
           </div>
@@ -168,46 +168,46 @@
             <ul class="footer__list list">
               <span class="list__title">ИНФОРМАЦИЯ</span>
               <li class="list__link">
-                <NuxtLink target="_blank" to="/AboutUs">О магазине</NuxtLink>
+                <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Наш блог</NuxtLink>
+                <NuxtLink to="">Наш блог</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Доставка и оплата</NuxtLink>
+                <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Контакты</NuxtLink>
+                <NuxtLink to="">Контакты</NuxtLink>
               </li>
             </ul>
             <ul class="footer__list list">
               <span class="list__title">ТОВАРЫ</span>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Каталог</NuxtLink>
+                <NuxtLink to="">Каталог</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Детские кроссовки</NuxtLink>
+                <NuxtLink to="">Детские кроссовки</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Женские кроссовки</NuxtLink>
+                <NuxtLink to="">Женские кроссовки</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Мужские кроссовки</NuxtLink>
+                <NuxtLink to="">Мужские кроссовки</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Распродажа</NuxtLink>
+                <NuxtLink to="">Распродажа</NuxtLink>
               </li>
             </ul>
             <ul class="footer__list list">
               <span class="list__title">МАГАЗИН</span>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Личный кабинет</NuxtLink>
+                <NuxtLink to="">Личный кабинет</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Избранное</NuxtLink>
+                <NuxtLink to="">Избранное</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink target="_blank" to="">Корзина товаров</NuxtLink>
+                <NuxtLink to="">Корзина товаров</NuxtLink>
               </li>
             </ul>
           </div>
@@ -253,7 +253,7 @@
         <span class="subscribe-on-news__privacy-policy-text"
           >Согласен с
           <span class="subscribe-on-news__privacy-policy-text--emphasized"
-            ><NuxtLink target="_blank" to="/PrivacyPolicy"
+            ><NuxtLink to="/PrivacyPolicy"
               >политикой конфиденциальности</NuxtLink
             ></span
           ></span
@@ -265,7 +265,7 @@
         >© 2023 - Swoosh Store - Интернет-магазин ориганальных кроссовок</span
       >
       <span class="footer__privacy-policy-text"
-        ><NuxtLink target="_blank" to="/PrivacyPolicy"
+        ><NuxtLink to="/PrivacyPolicy"
           >Политика конфиденциальности</NuxtLink
         ></span
       >

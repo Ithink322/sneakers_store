@@ -21,7 +21,7 @@
             <span class="slide__text-price"
               >от <span class="slide__price">9900 ₽</span></span
             >
-            <NuxtLink target="_blank" to="">
+            <NuxtLink to="">
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
                   <span class="more-btn__text">Подробнее</span>
@@ -52,7 +52,7 @@
             <span class="slide__text-price"
               >от <span class="slide__price">8800 ₽</span></span
             >
-            <NuxtLink target="_blank" to="">
+            <NuxtLink to="">
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
                   <span class="more-btn__text">Подробнее</span>
@@ -83,7 +83,7 @@
             <span class="slide__text-price"
               >от <span class="slide__price">7700 ₽</span></span
             >
-            <NuxtLink target="_blank" to="">
+            <NuxtLink to="">
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
                   <span class="more-btn__text">Подробнее</span>
@@ -114,7 +114,7 @@
             <span class="slide__text-price"
               >от <span class="slide__price">6600 ₽</span></span
             >
-            <NuxtLink target="_blank" to="">
+            <NuxtLink to="">
               <button class="slide__more-btn more-btn">
                 <div class="more-btn__flex">
                   <span class="more-btn__text">Подробнее</span>
@@ -251,7 +251,7 @@
         >от <span class="season-hit__price">7 899 ₽</span></span
       >
     </div>
-    <NuxtLink target="_blank" to="">
+    <NuxtLink to="">
       <button class="season-hit__more-btn more-btn">
         <div class="more-btn__flex">
           <span class="more-btn__text">Подробнее</span>

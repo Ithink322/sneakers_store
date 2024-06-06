@@ -1,11 +1,5 @@
 <template>
-  <div class="breadcrump">
-    <span class="breadcrump__home-title"
-      ><NuxtLink to="/">Swoosh Store</NuxtLink></span
-    >
-    <img class="breadcrump__arrow" src="/imgs/gray-arrow.svg" alt="" />
-    <span class="breadcrump__main-title">Политика конфиденциальности</span>
-  </div>
+  <UIBreadcrump :breadcrumpTitle="'Политика конфиденциальности'"></UIBreadcrump>
   <h1 class="title">Политика конфиденциальности</h1>
   <div class="note">
     <span class="note__text"
@@ -394,31 +388,12 @@
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
-.breadcrump {
-  display: flex;
-  gap: 0.563rem;
-  padding: 1.25rem 0rem;
-
-  span {
-    font-family: "Pragmatica Book";
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-  &__home-title {
-    a {
-      text-decoration: none;
-      color: #868686;
-    }
-  }
-  &__main-title {
-    color: #434343;
-  }
-}
 .title {
   font-family: "Pragmatica Medium";
   font-size: 1.563rem;
   color: $Dark-Black;
-  margin: 0rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0rem;
 }
 .note {
   padding: 0.938rem;
@@ -453,15 +428,9 @@
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .breadcrump {
-    gap: 0.938rem;
-
-    span {
-      font-size: 0.875rem;
-    }
-  }
   .title {
     font-size: 2.813rem;
+    margin-top: 1.563rem;
   }
   .note {
     span {
