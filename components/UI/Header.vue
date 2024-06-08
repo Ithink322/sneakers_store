@@ -10,7 +10,7 @@
           </li>
           <li><NuxtLink to="">Контакты</NuxtLink></li>
           <li>
-            <NuxtLink to="">Индивидуальный заказ</NuxtLink>
+            <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
           </li>
         </ul>
         <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>

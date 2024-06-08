@@ -198,7 +198,7 @@
           <NuxtLink @click="closeBurgerMenu" to="">Контакты</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to=""
+          <NuxtLink @click="closeBurgerMenu" to="/IndividualOrder"
             >Индивидуальный заказ</NuxtLink
           >
         </button>

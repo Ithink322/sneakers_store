@@ -162,6 +162,9 @@
               <li class="dropdown-list__link">
                 <NuxtLink to="">Корзина товаров</NuxtLink>
               </li>
+              <li class="dropdown-list__link">
+                <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
+              </li>
             </ul>
           </div>
           <div class="list--from768px">
@@ -208,6 +211,9 @@
               </li>
               <li class="list__link">
                 <NuxtLink to="">Корзина товаров</NuxtLink>
+              </li>
+              <li class="list__link">
+                <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
               </li>
             </ul>
           </div>
@@ -552,7 +558,8 @@ const submitForm = () => {
     color: #fff;
   }
 }
-.invalid-email {
+.invalid-email,
+.invalid-email::placeholder {
   color: #f81d2a;
 }
 /* 768px = 48em */

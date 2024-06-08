@@ -82,7 +82,7 @@
           alt=""
         />
         <span v-if="!isValidEmail" class="mailing__invalid-email-message"
-          >Некорректный email адрес</span
+          >Введите корректный email адрес</span
         >
         <span v-if="emptyMessageIsVisible" class="mailing__empty-message"
           >Введите email адрес</span
@@ -119,6 +119,7 @@ const handleInput = () => {
   if (email.value) {
     emptyMessageIsVisible.value = false;
   }
+  console.log("isValidEmail:", isValidEmail.value);
 };
 
 const submitForm = () => {
@@ -286,6 +287,9 @@ const submitForm = () => {
 .invalid-email {
   color: #f81d2a;
   border-bottom: 1px solid #f81d2a;
+}
+.invalid-email::placeholder {
+  color: #f81d2a;
 }
 .success-message {
   color: #07961e;
