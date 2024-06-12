@@ -108,7 +108,7 @@
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Контакты</NuxtLink>
+                <NuxtLink to="/Contacts">Контакты</NuxtLink>
               </li>
             </ul>
             <button @click="openProductsDropdown" class="sections-flex__btn">
@@ -180,7 +180,7 @@
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink to="">Контакты</NuxtLink>
+                <NuxtLink to="/Contacts">Контакты</NuxtLink>
               </li>
             </ul>
             <ul class="footer__list list">
@@ -301,9 +301,9 @@ const succesMessageIsVisible = ref(false);
 const emptyMessageIsVisible = ref(false);
 
 const handleInput = () => {
-  if (email.value) {
-    emptyMessageIsVisible.value = false;
-  }
+  emptyMessageIsVisible.value = email.value === "";
+  isValidEmail.value = true;
+  succesMessageIsVisible.value = false;
 };
 
 const submitForm = () => {

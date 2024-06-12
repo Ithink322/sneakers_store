@@ -72,35 +72,8 @@
         </div>
       </div>
     </section>
-    <section class="contacts">
-      <div
-        v-if="thankNoticeIsVisible"
-        class="contacts__thank-notice thank-notice"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="69"
-          height="68"
-          viewBox="0 0 69 68"
-          fill="none"
-        >
-          <rect x="0.5" width="68" height="68" fill="#FF6915"></rect>
-          <path
-            d="M21.5 34.5L30.1667 43L47.5 26"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="square"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
-        <span class="thank-notice__title"> Спасибо! </span>
-        <p class="thank-notice__paragraph">
-          Мы получили Ваше сообщение. В ближайшее время наши менеджеры свяжутся
-          с вами и ответят на все вопросы.
-        </p>
-      </div>
+    <section v-if="contactsIsVisible" class="contacts">
       <form
-        v-if="contactsIsVisible"
         @submit.prevent="submitForm"
         class="contacts-main-flex contacts__main-flex"
       >
@@ -112,6 +85,7 @@
           >
           <input
             v-model="name"
+            @input="nameOnInput"
             placeholder="Как вас зовут"
             type="text"
             class="input-and-label-flex__input"
@@ -134,6 +108,7 @@
           >
           <input
             v-model="phoneNumber"
+            @input="phoneOnInput"
             placeholder="+7 (___) ___ - ___ - ___"
             type="text"
             class="input-and-label-flex__input"
@@ -156,11 +131,13 @@
           >
           <input
             v-model="email"
+            @input="emailOnInput"
             placeholder="Введите ваш email адрес"
             type="text"
             class="input-and-label-flex__input"
             id="email"
             :class="{
+              'invalid-email--empty': emailIsEmpty,
               'invalid-email': !emailIsValid,
             }"
           />
@@ -207,6 +184,7 @@
         </div>
       </form>
     </section>
+    <UIThankNotice v-if="thankNoticeIsVisible"></UIThankNotice>
   </div>
 </template>
 
@@ -232,6 +210,19 @@ const emailIsValid = ref(true);
 
 const thankNoticeIsVisible = ref(false);
 const contactsIsVisible = ref(true);
+
+const nameOnInput = () => {
+  nameIsEmpty.value = name.value === "";
+};
+
+const emailOnInput = () => {
+  emailIsEmpty.value = email.value === "";
+  emailIsValid.value = true;
+};
+
+const phoneOnInput = () => {
+  phoneIsEmpty.value = phoneNumber.value === "";
+};
 
 const submitForm = () => {
   if (name.value === "") {
@@ -275,7 +266,6 @@ const submitForm = () => {
     thankNoticeIsVisible.value = true;
     contactsIsVisible.value = false;
   }
-  console.log(name.value, phoneIsEmpty.value, emailIsValid.value);
 };
 </script>
 
@@ -355,25 +345,6 @@ const submitForm = () => {
     0px 202px 81px 0px rgba(0, 0, 0, 0.01), 0px 316px 88px 0px rgba(0, 0, 0, 0);
   background-color: #ffffff;
   padding: 1.25rem;
-}
-.thank-notice {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1.875rem 0;
-
-  &__title {
-    font-family: "Pragmatica Medium";
-    font-size: 1.375rem;
-    margin-top: 1.875rem;
-  }
-  &__paragraph {
-    text-align: center;
-    font-family: "Pragmatica Book";
-    font-size: 0.938rem;
-    margin-top: 0.625rem;
-    margin-bottom: 0rem;
-  }
 }
 .contacts-main-flex {
   display: flex;
@@ -475,21 +446,15 @@ const submitForm = () => {
     margin-left: auto;
   }
 }
-.invalid-name,
 .invalid-name::placeholder,
 .invalid-email,
 .invalid-email::placeholder,
-.invalid-phone,
+.invalid-email--empty::placeholder,
 .invalid-phone::placeholder {
   color: #f81d2a;
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .thank-notice {
-    &__paragraph {
-      margin: 0.625rem 3rem 0 3rem;
-    }
-  }
   .main-flex {
     flex-flow: row wrap;
   }
@@ -500,6 +465,11 @@ const submitForm = () => {
   }
   .contacts {
     padding: 2.5rem;
+  }
+  .thank-notice {
+    &__paragraph {
+      margin: 0.625rem 3rem 0 3rem;
+    }
   }
 }
 /* 1200px = 75em */

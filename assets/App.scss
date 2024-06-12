@@ -48,3 +48,8 @@ $Blue: #3f71bc;
     }
   }
 }
+@mixin flex-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

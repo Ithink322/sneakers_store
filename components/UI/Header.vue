@@ -8,7 +8,7 @@
           <li>
             <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
           </li>
-          <li><NuxtLink to="">Контакты</NuxtLink></li>
+          <li><NuxtLink to="/Contacts">Контакты</NuxtLink></li>
           <li>
             <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
           </li>

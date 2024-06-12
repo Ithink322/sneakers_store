@@ -14,5 +14,4 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/App.scss"],
-/*   plugins: [{ src: "~/plugins/inputmask.js", ssr: true }], */
 });

@@ -116,10 +116,8 @@ const followBtn = ref<HTMLButtonElement | null>(null);
 const isEmailLocked = ref(false);
 
 const handleInput = () => {
-  if (email.value) {
-    emptyMessageIsVisible.value = false;
-  }
-  console.log("isValidEmail:", isValidEmail.value);
+  emptyMessageIsVisible.value = email.value ? false : true;
+  isValidEmail.value = true;
 };
 
 const submitForm = () => {
@@ -232,6 +230,7 @@ const submitForm = () => {
     @include input;
     outline: none;
     padding: 0.625rem;
+    font-family: "Pragmatica Book";
     font-size: 1rem;
     color: #2b2b2b;
     border-bottom: 1px solid $Light-Black;
