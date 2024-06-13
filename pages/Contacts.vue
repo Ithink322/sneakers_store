@@ -2,13 +2,17 @@
   <UIBreadcrump :breadcrumpTitle="'Наши контакты'"></UIBreadcrump>
   <h1 class="title">Наши контакты</h1>
   <nav class="nav-btns-flex">
-    <div class="nav-btns-flex__div nav-btns-flex__border-bottom--left"></div>
+    <div
+      class="nav-btns-flex__border-bottom nav-btns-flex__border-bottom--left"
+    ></div>
     <button class="nav-btns-flex__kursk-btn">Курск</button>
     <button class="nav-btns-flex__moscow-btn">Москва</button>
-    <div class="nav-btns-flex__div nav-btns-flex__border-bottom--right"></div>
+    <div
+      class="nav-btns-flex__border-bottom nav-btns-flex__border-bottom--right"
+    ></div>
   </nav>
   <section v-if="infoKurskIsVisible" class="info-kursk">
-    <div class="contacts-and-social-media-and-map-flex">
+    <div class="content-flex">
       <div>
         <section class="contacts-main-flex">
           <div class="contacts-main-flex__contact-flex contact-flex">
@@ -171,6 +175,7 @@
         ></iframe>
       </section>
     </div>
+    <div class="wide-border"></div>
     <section class="send-question">
       <form @submit.prevent="submitForm" class="send-question-form">
         <h2 class="send-question-form__title">
@@ -249,7 +254,7 @@
     <UIThankNotice v-if="thankNoticeIsVisible"></UIThankNotice>
   </section>
   <section v-if="infoMoscowIsVisible" class="info-moscow">
-    <div class="contacts-and-social-media-and-map-flex">
+    <div class="content-flex">
       <div>
         <section class="contacts-main-flex">
           <div class="contacts-main-flex__contact-flex contact-flex">
@@ -553,7 +558,7 @@ const showThankNotice = () => {
 .nav-btns-flex {
   display: flex;
 
-  &__div {
+  &__border-bottom {
     @include btn;
     flex-shrink: 0;
     width: 15.008px;
@@ -567,7 +572,6 @@ const showThankNotice = () => {
   }
   &__kursk-btn {
     @include btn;
-    flex-shrink: 0;
     width: 160px;
     border: 1px solid #e8e8e8;
     border-bottom: none;
@@ -577,8 +581,7 @@ const showThankNotice = () => {
   }
   &__moscow-btn {
     @include btn;
-    width: 100%;
-    justify-content: left;
+    flex-grow: 1;
     border-bottom: 1px solid #e8e8e8;
     padding: 1.563rem;
     font-family: "Pragmatica Medium";
@@ -664,6 +667,14 @@ const showThankNotice = () => {
     background-color: #f5f5f5;
     width: 46px;
     height: 46px;
+  }
+  &__btn:hover svg path {
+    fill: $Light-Orange;
+    transition: fill 200ms ease;
+  }
+  &__btn:not(:hover) svg path {
+    fill: #000;
+    transition: fill 100ms ease;
   }
 }
 .map {
@@ -755,6 +766,18 @@ const showThankNotice = () => {
   color: #f81d2a;
 }
 
+/* 350px = 21.875em */
+@media (min-width: 21.875em) {
+  .nav-btns-flex {
+    &__border-bottom--right {
+      flex-grow: 1;
+    }
+    &__moscow-btn {
+      flex-grow: 0;
+      width: 160px;
+    }
+  }
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .title {
@@ -856,7 +879,7 @@ const showThankNotice = () => {
       padding-right: calc((100vw - 71.875rem) / 2);
     }
   }
-  .contacts-and-social-media-and-map-flex {
+  .content-flex {
     display: flex;
     gap: 6.25rem;
   }
@@ -874,6 +897,9 @@ const showThankNotice = () => {
     &__content {
       text-align: left;
     }
+    &__content--big {
+      width: 182px;
+    }
   }
   .social-media {
     &__notice {
@@ -889,22 +915,15 @@ const showThankNotice = () => {
   }
   .wide-border {
     display: block;
-    width: 100%;
     border: 1px solid #eaeaea;
+    margin: 5.25rem calc((100vw - 71.875rem) / (-2)) 0rem
+      calc((100vw - 71.875rem) / (-2));
   }
   .send-question {
     display: flex;
     justify-content: center;
     margin-top: 6.5rem;
   }
-  /*  .send-question-form::before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    border: 1px solid #eaeaea;
-    margin-top: -4.125rem;
-    margin-left: calc((100vw - 71.875rem) / (-2));
-  } */
   .send-question-form {
     width: 750px;
 
@@ -938,9 +957,9 @@ const showThankNotice = () => {
       padding-right: calc((100vw - 85rem) / 2);
     }
   }
-  /* .send-question::before {
-    margin-left: calc((100vw - 85rem) / (-2));
-    margin-right: calc((100vw - 85rem) / (-2));
-  } */
+  .wide-border {
+    margin: 5.25rem calc((100vw - 85rem) / (-2)) 0rem
+      calc((100vw - 85rem) / (-2));
+  }
 }
 </style>

@@ -397,6 +397,11 @@ const submitForm = () => {
   }
   &__btn:hover svg path {
     fill: $Light-Orange;
+    transition: fill 200ms ease;
+  }
+  &__btn:not(:hover) svg path {
+    fill: white;
+    transition: fill 100ms ease;
   }
 }
 .sections-flex {
