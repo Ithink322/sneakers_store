@@ -15,7 +15,7 @@
           <div
             class="logo-and-social-media-flex__social-media-flex social-media-flex"
           >
-            <NuxtLink to="">
+            <a href="https://www.instagram.com/nike/" target="_blank">
               <button class="social-media-flex__btn">
                 <svg
                   class="social-media-flex__inst-icon"
@@ -41,8 +41,8 @@
                   </g>
                 </svg>
               </button>
-            </NuxtLink>
-            <NuxtLink to="https://t.me/VitaliyNelubov">
+            </a>
+            <a href="https://t.me/nike_sneakers_9" target="_blank">
               <button class="social-media-flex__btn">
                 <svg
                   class="social-media-flex__telegram-icon"
@@ -58,8 +58,8 @@
                   />
                 </svg>
               </button>
-            </NuxtLink>
-            <NuxtLink to="">
+            </a>
+            <a href="https://x.com/Nike" target="_blank">
               <button class="social-media-flex__btn">
                 <svg
                   class="social-media-flex__twitter-icon"
@@ -76,7 +76,7 @@
                   />
                 </svg>
               </button>
-            </NuxtLink>
+            </a>
           </div>
         </div>
         <span class="footer__note"
