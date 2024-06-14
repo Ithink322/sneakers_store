@@ -24,9 +24,7 @@
             </div>
             <span class="contact-flex__info info">
               <h2 class="info__title">Адрес:</h2>
-              <span class="info__content"
-                >Курск, улица Карла Маркса 68, 2 этаж.</span
-              >
+              <span class="info__content">{{ towmInfo[0].address }}</span>
             </span>
           </div>
           <div class="contacts-main-flex__contact-flex contact-flex">
@@ -50,9 +48,9 @@
             </div>
             <span class="contact-flex__info info">
               <h2 class="info__title">Телефон:</h2>
-              <NuxtLink href="tel:+79185472083" class="info__content--big"
-                >+7 (918) 547-20-83</NuxtLink
-              >
+              <NuxtLink href="tel:+79185472083" class="info__content--big">{{
+                towmInfo[0].phone
+              }}</NuxtLink>
             </span>
           </div>
           <div class="contacts-main-flex__contact-flex contact-flex">
@@ -79,7 +77,7 @@
               <a
                 href="mailto:orderskursk@store.ru"
                 class="info__content--underlined"
-                >orderskursk@store.ru</a
+                >{{ towmInfo[0].email }}</a
               >
             </span>
           </div>
@@ -160,7 +158,7 @@
       <section class="map">
         <iframe
           class="map__iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2419295.1426344425!2d34.26138521858544!3d53.68988041953008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x412f03c89ce986d3%3A0xa106adaa8e5d19f4!2sNew%20Balance!5e0!3m2!1sru!2sru!4v1718014806912!5m2!1sru!2sru"
+          :src="towmInfo[0].mapSrc"
           width="600"
           height="450"
           style="border: 0"
@@ -172,6 +170,192 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface Contacts {
+  address: string;
+  phone: string;
+  email: string;
+  mapSrc: string;
+}
+const props = defineProps<{
+  KurskInfo?: Contacts[];
+  MoscowInfo?: Contacts[];
+}>();
+const towmInfo = props.KurskInfo! ? props.KurskInfo! : props.MoscowInfo!;
+console.log("towmInfo:", towmInfo);
+</script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "@/assets/App.scss";
+.contacts-main-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 2.188rem;
+  margin-top: 1.5rem;
+}
+.contact-flex {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  &__div {
+    @include flex-centered;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background-color: $Light-Black;
+  }
+}
+.info {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-family: "Pragmatica Medium";
+    font-size: 1.063rem;
+    line-height: 3rem;
+    margin: 0rem;
+  }
+  &__content {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    line-height: 1.375rem;
+    color: $Light-Black;
+  }
+  &__content--big {
+    font-family: "Pragmatica Medium";
+    font-size: 1.25rem;
+    color: $Light-Black;
+    text-decoration: none;
+  }
+  &__content--underlined {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-decoration: underline;
+    color: $Light-Black;
+  }
+}
+.social-media {
+  margin: 2.188rem 0;
+
+  &__notice {
+    display: block;
+    font-family: "Pragmatica Book";
+    font-size: 0.75rem;
+    margin-top: 0.75rem;
+    color: #a0a0a0;
+  }
+}
+.social-media-flex {
+  display: flex;
+  align-items: center;
+  gap: 1.375rem;
+
+  &__title {
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+  }
+}
+.btns-flex {
+  display: flex;
+  gap: 0.688rem;
+
+  &__btn {
+    @include btn;
+    background-color: #f5f5f5;
+    width: 46px;
+    height: 46px;
+  }
+  &__btn:hover svg path {
+    fill: $Light-Orange;
+    transition: fill 200ms ease;
+  }
+  &__btn:not(:hover) svg path {
+    fill: #000;
+    transition: fill 100ms ease;
+  }
+}
+.map {
+  margin: 0 -0.938rem;
+
+  &__iframe {
+    width: 100%;
+    height: 509px;
+  }
+}
+/* 768px = 48em */
+@media (min-width: 48em) {
+  .contacts-main-flex {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 3.063rem;
+  }
+  .contact-flex {
+    flex-direction: column;
+    gap: 0rem;
+    width: 220px;
+  }
+  .info {
+    align-items: center;
+
+    &__content {
+      text-align: center;
+    }
+  }
+  .social-media {
+    &__notice {
+      text-align: center;
+    }
+  }
+  .social-media-flex {
+    justify-content: center;
+  }
+  .map {
+    margin: 0 calc((100vw - 44.874rem) / (-2));
+  }
+}
+/* 1024px = 64em */
+@media (min-width: 64em) {
+  .map {
+    margin: 0rem calc((100vw - 44.75rem) / (-2));
+  }
+}
+/* 1200px = 75em */
+@media (min-width: 75em) {
+  .content-flex {
+    display: flex;
+    gap: 6.25rem;
+  }
+  .contacts-main-flex {
+    flex-direction: column;
+    margin-top: 5.813rem;
+  }
+  .contact-flex {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  .info {
+    align-items: flex-start;
+
+    &__content {
+      text-align: left;
+    }
+    &__content--big {
+      width: 185px;
+    }
+  }
+  .social-media {
+    &__notice {
+      text-align: left;
+    }
+  }
+  .social-media-flex {
+    justify-content: left;
+  }
+  .map {
+    width: 100%;
+    margin: 3rem auto 0 auto;
+  }
+}
+</style>

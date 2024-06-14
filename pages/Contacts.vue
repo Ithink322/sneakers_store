@@ -24,344 +24,10 @@
     ></div>
   </nav>
   <section v-if="infoKurskIsVisible" class="info-kursk">
-    <div class="content-flex">
-      <div>
-        <section class="contacts-main-flex">
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
-              <svg
-                width="10"
-                height="19"
-                viewBox="0 0 10 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 9.18307C7.20914 9.18307 9 7.35123 9 5.09153C9 2.83184 7.20914 1 5 1C2.79089 1 1 2.83184 1 5.09153C1 7.35123 2.79089 9.18307 5 9.18307ZM5 9.18307L5.00001 18"
-                  stroke="white"
-                  stroke-width="1.3"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <span class="contact-flex__info info">
-              <h2 class="info__title">Адрес:</h2>
-              <span class="info__content"
-                >Курск, улица Карла Маркса 68, 2 этаж.</span
-              >
-            </span>
-          </div>
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.52941 1H5.58824L7.11765 4.82353L5.20588 5.97059C6.02485 7.63117 7.36883 8.97515 9.02941 9.79412L10.1765 7.88235L14 9.41176V12.4706C14 12.8762 13.8389 13.2652 13.552 13.552C13.2652 13.8389 12.8762 14 12.4706 14C9.48767 13.8187 6.67424 12.552 4.5611 10.4389C2.44797 8.32577 1.18127 5.51233 1 2.52941C1 2.12379 1.16113 1.73477 1.44795 1.44795C1.73477 1.16113 2.12379 1 2.52941 1Z"
-                  stroke="white"
-                  stroke-width="1.3"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <span class="contact-flex__info info">
-              <h2 class="info__title">Телефон:</h2>
-              <NuxtLink href="tel:+79185472083" class="info__content--big"
-                >+7 (918) 547-20-83</NuxtLink
-              >
-            </span>
-          </div>
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
-              <svg
-                width="17"
-                height="14"
-                viewBox="0 0 17 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 2.71429C1 2.25963 1.17559 1.82359 1.48816 1.5021C1.80072 1.18061 2.22464 1 2.66667 1H14.3333C14.7754 1 15.1993 1.18061 15.5118 1.5021C15.8244 1.82359 16 2.25963 16 2.71429M1 2.71429V11.2857C1 11.7404 1.17559 12.1764 1.48816 12.4979C1.80072 12.8194 2.22464 13 2.66667 13H14.3333C14.7754 13 15.1993 12.8194 15.5118 12.4979C15.8244 12.1764 16 11.7404 16 11.2857V2.71429M1 2.71429L8.5 7.85714L16 2.71429"
-                  stroke="white"
-                  stroke-width="1.3"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <span class="contact-flex__info info">
-              <h2 class="info__title">Email:</h2>
-              <a
-                href="mailto:orderskursk@store.ru"
-                class="info__content--underlined"
-                >orderskursk@store.ru</a
-              >
-            </span>
-          </div>
-        </section>
-        <section class="social-media">
-          <div class="social-media__social-media-flex social-media-flex">
-            <span class="social-media-flex__title">Мы в соц.сетях:</span>
-            <div class="social-media-flex__btns-flex btns-flex">
-              <a href="https://www.instagram.com/nike/" target="_blank">
-                <button class="btns-flex__btn">
-                  <svg
-                    class="social-media-flex__inst-icon"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g opacity="0.8">
-                      <path
-                        d="M16.9265 4.97643C16.8853 4.07395 16.7419 3.45764 16.5324 2.91843C16.3196 2.3527 15.9858 1.84027 15.5545 1.41671C15.1311 0.985395 14.6185 0.651494 14.0528 0.438552C13.5134 0.229104 12.8973 0.0858924 11.9948 0.0448825C11.0906 0.00348439 10.8018 -0.00634766 8.49926 -0.00634766C6.19677 -0.00634766 5.90789 0.00348439 5.00374 0.0446237C4.10126 0.0858924 3.48508 0.229233 2.94575 0.438811C2.38002 0.651623 1.8676 0.985395 1.44404 1.41671C1.01273 1.84014 0.678833 2.35257 0.465893 2.9183C0.256446 3.45764 0.113235 4.07395 0.0722258 4.9763C0.0308281 5.88059 0.0209961 6.16934 0.0209961 8.47185C0.0209961 10.7745 0.0308281 11.0634 0.0722258 11.9675C0.113365 12.8699 0.256705 13.4862 0.466281 14.0255C0.679091 14.5911 1.01286 15.1037 1.44417 15.5271C1.8676 15.9584 2.38015 16.2922 2.94588 16.505C3.48508 16.7147 4.10139 16.8579 5.00386 16.8992C5.90815 16.9405 6.1969 16.9502 8.49939 16.9502C10.8019 16.9502 11.0908 16.9405 11.9949 16.8992C12.8974 16.8579 13.5136 16.7147 14.0529 16.505C15.1917 16.0646 16.092 15.1644 16.5324 14.0255C16.7421 13.4862 16.8853 12.8699 16.9265 11.9675C16.9677 11.0632 16.9775 10.7745 16.9775 8.47198C16.9775 6.16934 16.9677 5.88059 16.9265 4.97643ZM15.4004 11.8981C15.3628 12.7247 15.2246 13.1736 15.1085 13.4724C14.8233 14.2118 14.2389 14.7962 13.4995 15.0814C13.2008 15.1975 12.7518 15.3357 11.9252 15.3733C11.0314 15.4142 10.7632 15.4227 8.49926 15.4227C6.23519 15.4227 5.96714 15.4142 5.07321 15.3733C4.24667 15.3357 3.79777 15.1975 3.49893 15.0814C3.13074 14.9455 2.79762 14.7288 2.52414 14.4471C2.2425 14.1737 2.02581 13.8407 1.88985 13.4724C1.7738 13.1736 1.63564 12.7247 1.59799 11.8981C1.55724 11.0041 1.54857 10.7359 1.54857 8.47211C1.54857 6.20815 1.55724 5.9401 1.59799 5.04603C1.63577 4.21936 1.7738 3.77045 1.88985 3.47174C2.02581 3.10342 2.24263 2.7703 2.52414 2.49681C2.79762 2.21518 3.13074 1.99848 3.49906 1.86265C3.79777 1.74647 4.24667 1.60844 5.07334 1.57066C5.96727 1.52991 6.23545 1.52124 8.49926 1.52124C10.7631 1.52124 11.0311 1.52991 11.9252 1.57079C12.7518 1.60844 13.2006 1.7466 13.4995 1.86265C13.8676 1.99861 14.2008 2.21531 14.4743 2.49681C14.7559 2.7703 14.9726 3.10342 15.1084 3.47174C15.2246 3.77045 15.3628 4.21936 15.4004 5.04603C15.4411 5.93997 15.4498 6.20815 15.4498 8.47198C15.4498 10.7359 15.4413 11.004 15.4004 11.8981Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M8.49913 4.11819C6.0947 4.11819 4.14551 6.06753 4.14551 8.47198C4.14551 10.8764 6.0947 12.8256 8.49913 12.8256C10.9037 12.8256 12.8529 10.8764 12.8529 8.47198C12.8529 6.06753 10.9037 4.11819 8.49913 4.11819ZM8.49913 11.298C6.93844 11.2979 5.67309 10.0327 5.67322 8.47185C5.67322 6.91114 6.93843 5.64578 8.49926 5.64578C10.0601 5.64591 11.3253 6.91114 11.3253 8.47185C11.3253 10.0327 10.06 11.298 8.49913 11.298Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M14.0423 3.94626C14.0423 4.50811 13.5868 4.96362 13.0249 4.96362C12.463 4.96362 12.0075 4.50811 12.0075 3.94626C12.0075 3.38428 12.463 2.92878 13.0249 2.92878C13.5868 2.92878 14.0423 3.38428 14.0423 3.94626Z"
-                        fill="black"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </a>
-              <a href="https://t.me/nike_sneakers_9" target="_blank">
-                <button class="btns-flex__btn btns-flex">
-                  <svg
-                    class="social-media-flex__telegram-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 48 48"
-                    width="20px"
-                    height="20px"
-                  >
-                    <path
-                      d="M39.175,10.016c1.687,0,2.131,1.276,1.632,4.272c-0.571,3.426-2.216,14.769-3.528,21.83 c-0.502,2.702-1.407,3.867-2.724,3.867c-0.724,0-1.572-0.352-2.546-0.995c-1.32-0.872-7.984-5.279-9.431-6.314 c-1.32-0.943-3.141-2.078-0.857-4.312c0.813-0.796,6.14-5.883,10.29-9.842c0.443-0.423,0.072-1.068-0.42-1.068 c-0.112,0-0.231,0.034-0.347,0.111c-5.594,3.71-13.351,8.859-14.338,9.53c-0.987,0.67-1.949,1.1-3.231,1.1 c-0.655,0-1.394-0.112-2.263-0.362c-1.943-0.558-3.84-1.223-4.579-1.477c-2.845-0.976-2.17-2.241,0.593-3.457 c11.078-4.873,25.413-10.815,27.392-11.637C36.746,10.461,38.178,10.016,39.175,10.016 M39.175,7.016L39.175,7.016 c-1.368,0-3.015,0.441-5.506,1.474L33.37,8.614C22.735,13.03,13.092,17.128,6.218,20.152c-1.074,0.473-4.341,1.91-4.214,4.916 c0.054,1.297,0.768,3.065,3.856,4.124l0.228,0.078c0.862,0.297,2.657,0.916,4.497,1.445c1.12,0.322,2.132,0.478,3.091,0.478 c1.664,0,2.953-0.475,3.961-1.028c-0.005,0.168-0.001,0.337,0.012,0.507c0.182,2.312,1.97,3.58,3.038,4.338l0.149,0.106 c1.577,1.128,8.714,5.843,9.522,6.376c1.521,1.004,2.894,1.491,4.199,1.491c2.052,0,4.703-1.096,5.673-6.318 c0.921-4.953,1.985-11.872,2.762-16.924c0.331-2.156,0.603-3.924,0.776-4.961c0.349-2.094,0.509-4.466-0.948-6.185 C42.208,7.875,41.08,7.016,39.175,7.016L39.175,7.016z"
-                      fill="black"
-                      opacity="0.8"
-                    />
-                  </svg>
-                </button>
-              </a>
-              <a href="https://x.com/Nike" target="_blank">
-                <button class="btns-flex__btn btns-flex">
-                  <svg
-                    class="social-media-flex__twitter-icon"
-                    width="20"
-                    height="18"
-                    viewBox="0 0 17 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      opacity="0.8"
-                      d="M16.2653 2.04034C15.688 2.2943 15.0915 2.47011 14.4565 2.54825C15.1107 2.15755 15.6111 1.53243 15.842 0.770555C15.2262 1.14172 14.5527 1.39568 13.8407 1.55196C13.2634 0.926836 12.4359 0.536133 11.5315 0.536133C9.78031 0.536133 8.37554 1.98174 8.37554 3.7399C8.37554 3.99386 8.39478 4.22828 8.45251 4.4627C5.83541 4.34549 3.5262 3.05617 1.96748 1.12219C0.851362 3.15384 2.10218 4.83387 2.92965 5.40039C2.42932 5.40039 1.92899 5.24411 1.50564 5.00969C1.50564 6.59203 2.60251 7.90089 4.02653 8.19392C3.71863 8.29159 3.02587 8.3502 2.60251 8.25252C3.00663 9.52231 4.18047 10.46 5.54676 10.4795C4.46913 11.3391 2.89116 12.0228 0.870605 11.8079C2.27538 12.7261 3.93031 13.2535 5.71995 13.2535C11.5315 13.2535 14.6874 8.36973 14.6874 4.15014C14.6874 4.01339 14.6874 3.87665 14.6681 3.7399C15.3224 3.25152 15.8612 2.685 16.2653 2.04034Z"
-                      fill="black"
-                    />
-                  </svg>
-                </button>
-              </a>
-            </div>
-          </div>
-          <span class="social-media__notice"
-            >* Instagram и twitter являются запрещенными соц.сетями в РФ</span
-          >
-        </section>
-      </div>
-      <section class="map">
-        <iframe
-          class="map__iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2419295.1426344425!2d34.26138521858544!3d53.68988041953008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x412f03c89ce986d3%3A0xa106adaa8e5d19f4!2sNew%20Balance!5e0!3m2!1sru!2sru!4v1718014806912!5m2!1sru!2sru"
-          width="600"
-          height="450"
-          style="border: 0"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </section>
-    </div>
+    <UIContacts :KurskInfo="KurskInfo"></UIContacts>
   </section>
   <section v-if="infoMoscowIsVisible" class="info-moscow">
-    <div class="content-flex">
-      <div>
-        <section class="contacts-main-flex">
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
-              <svg
-                width="10"
-                height="19"
-                viewBox="0 0 10 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 9.18307C7.20914 9.18307 9 7.35123 9 5.09153C9 2.83184 7.20914 1 5 1C2.79089 1 1 2.83184 1 5.09153C1 7.35123 2.79089 9.18307 5 9.18307ZM5 9.18307L5.00001 18"
-                  stroke="white"
-                  stroke-width="1.3"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <span class="contact-flex__info info">
-              <h2 class="info__title">Адрес:</h2>
-              <span class="info__content"
-                >Москва, Нижний Кисельный пер., д.4</span
-              >
-            </span>
-          </div>
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
-              <svg
-                width="15"
-                height="15"
-                viewBox="0 0 15 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.52941 1H5.58824L7.11765 4.82353L5.20588 5.97059C6.02485 7.63117 7.36883 8.97515 9.02941 9.79412L10.1765 7.88235L14 9.41176V12.4706C14 12.8762 13.8389 13.2652 13.552 13.552C13.2652 13.8389 12.8762 14 12.4706 14C9.48767 13.8187 6.67424 12.552 4.5611 10.4389C2.44797 8.32577 1.18127 5.51233 1 2.52941C1 2.12379 1.16113 1.73477 1.44795 1.44795C1.73477 1.16113 2.12379 1 2.52941 1Z"
-                  stroke="white"
-                  stroke-width="1.3"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <span class="contact-flex__info info">
-              <h2 class="info__title">Телефон:</h2>
-              <NuxtLink href="tel:+74956478820" class="info__content--big"
-                >+7 (495) 647-88-20</NuxtLink
-              >
-            </span>
-          </div>
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
-              <svg
-                width="17"
-                height="14"
-                viewBox="0 0 17 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 2.71429C1 2.25963 1.17559 1.82359 1.48816 1.5021C1.80072 1.18061 2.22464 1 2.66667 1H14.3333C14.7754 1 15.1993 1.18061 15.5118 1.5021C15.8244 1.82359 16 2.25963 16 2.71429M1 2.71429V11.2857C1 11.7404 1.17559 12.1764 1.48816 12.4979C1.80072 12.8194 2.22464 13 2.66667 13H14.3333C14.7754 13 15.1993 12.8194 15.5118 12.4979C15.8244 12.1764 16 11.7404 16 11.2857V2.71429M1 2.71429L8.5 7.85714L16 2.71429"
-                  stroke="white"
-                  stroke-width="1.3"
-                  stroke-miterlimit="10"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
-            <span class="contact-flex__info info">
-              <h2 class="info__title">Email:</h2>
-              <span class="info__content--underlined"
-                >ordersmoscow@store.ru</span
-              >
-            </span>
-          </div>
-        </section>
-        <section class="social-media">
-          <div class="social-media__social-media-flex social-media-flex">
-            <span class="social-media-flex__title">Мы в соц.сетях:</span>
-            <div class="social-media-flex__btns-flex btns-flex">
-              <button class="btns-flex__btn">
-                <a href="https://www.instagram.com/nike/" target="_blank">
-                  <svg
-                    class="social-media-flex__inst-icon"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g opacity="0.8">
-                      <path
-                        d="M16.9265 4.97643C16.8853 4.07395 16.7419 3.45764 16.5324 2.91843C16.3196 2.3527 15.9858 1.84027 15.5545 1.41671C15.1311 0.985395 14.6185 0.651494 14.0528 0.438552C13.5134 0.229104 12.8973 0.0858924 11.9948 0.0448825C11.0906 0.00348439 10.8018 -0.00634766 8.49926 -0.00634766C6.19677 -0.00634766 5.90789 0.00348439 5.00374 0.0446237C4.10126 0.0858924 3.48508 0.229233 2.94575 0.438811C2.38002 0.651623 1.8676 0.985395 1.44404 1.41671C1.01273 1.84014 0.678833 2.35257 0.465893 2.9183C0.256446 3.45764 0.113235 4.07395 0.0722258 4.9763C0.0308281 5.88059 0.0209961 6.16934 0.0209961 8.47185C0.0209961 10.7745 0.0308281 11.0634 0.0722258 11.9675C0.113365 12.8699 0.256705 13.4862 0.466281 14.0255C0.679091 14.5911 1.01286 15.1037 1.44417 15.5271C1.8676 15.9584 2.38015 16.2922 2.94588 16.505C3.48508 16.7147 4.10139 16.8579 5.00386 16.8992C5.90815 16.9405 6.1969 16.9502 8.49939 16.9502C10.8019 16.9502 11.0908 16.9405 11.9949 16.8992C12.8974 16.8579 13.5136 16.7147 14.0529 16.505C15.1917 16.0646 16.092 15.1644 16.5324 14.0255C16.7421 13.4862 16.8853 12.8699 16.9265 11.9675C16.9677 11.0632 16.9775 10.7745 16.9775 8.47198C16.9775 6.16934 16.9677 5.88059 16.9265 4.97643ZM15.4004 11.8981C15.3628 12.7247 15.2246 13.1736 15.1085 13.4724C14.8233 14.2118 14.2389 14.7962 13.4995 15.0814C13.2008 15.1975 12.7518 15.3357 11.9252 15.3733C11.0314 15.4142 10.7632 15.4227 8.49926 15.4227C6.23519 15.4227 5.96714 15.4142 5.07321 15.3733C4.24667 15.3357 3.79777 15.1975 3.49893 15.0814C3.13074 14.9455 2.79762 14.7288 2.52414 14.4471C2.2425 14.1737 2.02581 13.8407 1.88985 13.4724C1.7738 13.1736 1.63564 12.7247 1.59799 11.8981C1.55724 11.0041 1.54857 10.7359 1.54857 8.47211C1.54857 6.20815 1.55724 5.9401 1.59799 5.04603C1.63577 4.21936 1.7738 3.77045 1.88985 3.47174C2.02581 3.10342 2.24263 2.7703 2.52414 2.49681C2.79762 2.21518 3.13074 1.99848 3.49906 1.86265C3.79777 1.74647 4.24667 1.60844 5.07334 1.57066C5.96727 1.52991 6.23545 1.52124 8.49926 1.52124C10.7631 1.52124 11.0311 1.52991 11.9252 1.57079C12.7518 1.60844 13.2006 1.7466 13.4995 1.86265C13.8676 1.99861 14.2008 2.21531 14.4743 2.49681C14.7559 2.7703 14.9726 3.10342 15.1084 3.47174C15.2246 3.77045 15.3628 4.21936 15.4004 5.04603C15.4411 5.93997 15.4498 6.20815 15.4498 8.47198C15.4498 10.7359 15.4413 11.004 15.4004 11.8981Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M8.49913 4.11819C6.0947 4.11819 4.14551 6.06753 4.14551 8.47198C4.14551 10.8764 6.0947 12.8256 8.49913 12.8256C10.9037 12.8256 12.8529 10.8764 12.8529 8.47198C12.8529 6.06753 10.9037 4.11819 8.49913 4.11819ZM8.49913 11.298C6.93844 11.2979 5.67309 10.0327 5.67322 8.47185C5.67322 6.91114 6.93843 5.64578 8.49926 5.64578C10.0601 5.64591 11.3253 6.91114 11.3253 8.47185C11.3253 10.0327 10.06 11.298 8.49913 11.298Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M14.0423 3.94626C14.0423 4.50811 13.5868 4.96362 13.0249 4.96362C12.463 4.96362 12.0075 4.50811 12.0075 3.94626C12.0075 3.38428 12.463 2.92878 13.0249 2.92878C13.5868 2.92878 14.0423 3.38428 14.0423 3.94626Z"
-                        fill="black"
-                      />
-                    </g>
-                  </svg>
-                </a>
-              </button>
-              <button class="btns-flex__btn btns-flex">
-                <a href="https://t.me/nike_sneakers_9" target="_blank">
-                  <svg
-                    class="social-media-flex__telegram-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 48 48"
-                    width="20px"
-                    height="20px"
-                  >
-                    <path
-                      d="M39.175,10.016c1.687,0,2.131,1.276,1.632,4.272c-0.571,3.426-2.216,14.769-3.528,21.83 c-0.502,2.702-1.407,3.867-2.724,3.867c-0.724,0-1.572-0.352-2.546-0.995c-1.32-0.872-7.984-5.279-9.431-6.314 c-1.32-0.943-3.141-2.078-0.857-4.312c0.813-0.796,6.14-5.883,10.29-9.842c0.443-0.423,0.072-1.068-0.42-1.068 c-0.112,0-0.231,0.034-0.347,0.111c-5.594,3.71-13.351,8.859-14.338,9.53c-0.987,0.67-1.949,1.1-3.231,1.1 c-0.655,0-1.394-0.112-2.263-0.362c-1.943-0.558-3.84-1.223-4.579-1.477c-2.845-0.976-2.17-2.241,0.593-3.457 c11.078-4.873,25.413-10.815,27.392-11.637C36.746,10.461,38.178,10.016,39.175,10.016 M39.175,7.016L39.175,7.016 c-1.368,0-3.015,0.441-5.506,1.474L33.37,8.614C22.735,13.03,13.092,17.128,6.218,20.152c-1.074,0.473-4.341,1.91-4.214,4.916 c0.054,1.297,0.768,3.065,3.856,4.124l0.228,0.078c0.862,0.297,2.657,0.916,4.497,1.445c1.12,0.322,2.132,0.478,3.091,0.478 c1.664,0,2.953-0.475,3.961-1.028c-0.005,0.168-0.001,0.337,0.012,0.507c0.182,2.312,1.97,3.58,3.038,4.338l0.149,0.106 c1.577,1.128,8.714,5.843,9.522,6.376c1.521,1.004,2.894,1.491,4.199,1.491c2.052,0,4.703-1.096,5.673-6.318 c0.921-4.953,1.985-11.872,2.762-16.924c0.331-2.156,0.603-3.924,0.776-4.961c0.349-2.094,0.509-4.466-0.948-6.185 C42.208,7.875,41.08,7.016,39.175,7.016L39.175,7.016z"
-                      fill="black"
-                      opacity="0.8"
-                    />
-                  </svg>
-                </a>
-              </button>
-              <button class="btns-flex__btn btns-flex">
-                <a href="https://x.com/Nike" target="_blank">
-                  <svg
-                    class="social-media-flex__twitter-icon"
-                    width="20"
-                    height="18"
-                    viewBox="0 0 17 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      opacity="0.8"
-                      d="M16.2653 2.04034C15.688 2.2943 15.0915 2.47011 14.4565 2.54825C15.1107 2.15755 15.6111 1.53243 15.842 0.770555C15.2262 1.14172 14.5527 1.39568 13.8407 1.55196C13.2634 0.926836 12.4359 0.536133 11.5315 0.536133C9.78031 0.536133 8.37554 1.98174 8.37554 3.7399C8.37554 3.99386 8.39478 4.22828 8.45251 4.4627C5.83541 4.34549 3.5262 3.05617 1.96748 1.12219C0.851362 3.15384 2.10218 4.83387 2.92965 5.40039C2.42932 5.40039 1.92899 5.24411 1.50564 5.00969C1.50564 6.59203 2.60251 7.90089 4.02653 8.19392C3.71863 8.29159 3.02587 8.3502 2.60251 8.25252C3.00663 9.52231 4.18047 10.46 5.54676 10.4795C4.46913 11.3391 2.89116 12.0228 0.870605 11.8079C2.27538 12.7261 3.93031 13.2535 5.71995 13.2535C11.5315 13.2535 14.6874 8.36973 14.6874 4.15014C14.6874 4.01339 14.6874 3.87665 14.6681 3.7399C15.3224 3.25152 15.8612 2.685 16.2653 2.04034Z"
-                      fill="black"
-                    />
-                  </svg>
-                </a>
-              </button>
-            </div>
-          </div>
-          <span class="social-media__notice"
-            >* Instagram и twitter являются запрещенными соц.сетями в РФ</span
-          >
-        </section>
-      </div>
-      <section class="map">
-        <iframe
-          class="map__iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71827.59625176922!2d37.6217508!3d55.765235399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54ae60c3268e9%3A0x5c1b643ffcfa3395!2z0JzQsNCz0LDQt9C40L0gU25lYWtlcmhlYWQ!5e0!3m2!1sru!2sru!4v1718014750408!5m2!1sru!2sru"
-          width="600"
-          height="450"
-          style="border: 0"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </section>
-    </div>
+    <UIContacts :MoscowInfo="MoscowInfo"></UIContacts>
   </section>
   <div class="wide-border"></div>
   <section v-if="questionFormIsVisible" class="send-question">
@@ -459,6 +125,33 @@ const toggleMoscowBtn = () => {
   infoKurskIsVisible.value = false;
 };
 
+interface Contacts {
+  address: string;
+  phone: string;
+  email: string;
+  mapSrc: string;
+}
+
+const KurskInfo = ref<Contacts[]>([
+  {
+    address: "Курск, улица Карла Маркса 68, 2 этаж.",
+    phone: "+7 (918) 547-20-83",
+    email: "orderskursk@store.ru",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2419295.1426344425!2d34.26138521858544!3d53.68988041953008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x412f03c89ce986d3%3A0xa106adaa8e5d19f4!2sNew%20Balance!5e0!3m2!1sru!2sru!4v1718014806912!5m2!1sru!2sru",
+  },
+]);
+
+const MoscowInfo = ref<Contacts[]>([
+  {
+    address: "Москва, Нижний Кисельный пер., д.4",
+    phone: "+7 (495) 647-88-20",
+    email: "ordersmoscow@store.ru",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71827.59625176922!2d37.6217508!3d55.765235399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54ae60c3268e9%3A0x5c1b643ffcfa3395!2z0JzQsNCz0LDQt9C40L0gU25lYWtlcmhlYWQ!5e0!3m2!1sru!2sru!4v1718014750408!5m2!1sru!2sru",
+  },
+]);
+
 const name = ref("");
 const email = ref("");
 const question = ref("");
@@ -513,6 +206,14 @@ const showThankNotice = () => {
   if (name.value !== "" && emailIsValid.value && question.value !== "") {
     thankNoticeIsVisible.value = true;
     questionFormIsVisible.value = false;
+
+    setTimeout(() => {
+      thankNoticeIsVisible.value = false;
+      questionFormIsVisible.value = true;
+      name.value = "";
+      email.value = "";
+      question.value = "";
+    }, 12000);
   }
 };
 </script>
@@ -561,103 +262,6 @@ const showThankNotice = () => {
   &__moscow-btn.active {
     border: 1px solid #e8e8e8;
     border-bottom: none;
-  }
-}
-.contacts-main-flex {
-  display: flex;
-  flex-direction: column;
-  gap: 2.188rem;
-  margin-top: 1.5rem;
-}
-.contact-flex {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-
-  &__div {
-    @include flex-centered;
-    flex-shrink: 0;
-    width: 52px;
-    height: 52px;
-    background-color: $Light-Black;
-  }
-}
-.info {
-  display: flex;
-  flex-direction: column;
-
-  &__title {
-    font-family: "Pragmatica Medium";
-    font-size: 1.063rem;
-    line-height: 3rem;
-    margin: 0rem;
-  }
-  &__content {
-    font-family: "Pragmatica Book";
-    font-size: 1rem;
-    line-height: 1.375rem;
-    color: $Light-Black;
-  }
-  &__content--big {
-    font-family: "Pragmatica Medium";
-    font-size: 1.25rem;
-    color: $Light-Black;
-    text-decoration: none;
-  }
-  &__content--underlined {
-    font-family: "Pragmatica Book";
-    font-size: 1rem;
-    line-height: 1.5rem;
-    text-decoration: underline;
-    color: $Light-Black;
-  }
-}
-.social-media {
-  margin: 2.188rem 0;
-
-  &__notice {
-    display: block;
-    font-family: "Pragmatica Book";
-    font-size: 0.75rem;
-    margin-top: 0.75rem;
-    color: #a0a0a0;
-  }
-}
-.social-media-flex {
-  display: flex;
-  align-items: center;
-  gap: 1.375rem;
-
-  &__title {
-    font-family: "Pragmatica Book";
-    font-size: 0.875rem;
-  }
-}
-.btns-flex {
-  display: flex;
-  gap: 0.688rem;
-
-  &__btn {
-    @include btn;
-    background-color: #f5f5f5;
-    width: 46px;
-    height: 46px;
-  }
-  &__btn:hover svg path {
-    fill: $Light-Orange;
-    transition: fill 200ms ease;
-  }
-  &__btn:not(:hover) svg path {
-    fill: #000;
-    transition: fill 100ms ease;
-  }
-}
-.map {
-  margin: 0 -0.938rem;
-
-  &__iframe {
-    width: 100%;
-    height: 509px;
   }
 }
 .wide-border {
@@ -774,34 +378,6 @@ const showThankNotice = () => {
       font-size: 1.125rem;
     }
   }
-  .contacts-main-flex {
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 3.063rem;
-  }
-  .contact-flex {
-    flex-direction: column;
-    gap: 0rem;
-    width: 220px;
-  }
-  .info {
-    align-items: center;
-
-    &__content {
-      text-align: center;
-    }
-  }
-  .social-media {
-    &__notice {
-      text-align: center;
-    }
-  }
-  .social-media-flex {
-    justify-content: center;
-  }
-  .map {
-    margin: 0 calc((100vw - 44.874rem) / (-2));
-  }
   .send-question {
     margin-top: 3.125rem;
   }
@@ -834,9 +410,6 @@ const showThankNotice = () => {
       padding-right: calc((100vw - 44.75rem) / 2);
     }
   }
-  .map {
-    margin: 0rem calc((100vw - 44.75rem) / (-2));
-  }
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
@@ -857,40 +430,6 @@ const showThankNotice = () => {
     &__moscow-btn {
       width: 170px;
     }
-  }
-  .content-flex {
-    display: flex;
-    gap: 6.25rem;
-  }
-  .contacts-main-flex {
-    flex-direction: column;
-    margin-top: 5.813rem;
-  }
-  .contact-flex {
-    flex-direction: row;
-    gap: 1.5rem;
-  }
-  .info {
-    align-items: flex-start;
-
-    &__content {
-      text-align: left;
-    }
-    &__content--big {
-      width: 185px;
-    }
-  }
-  .social-media {
-    &__notice {
-      text-align: left;
-    }
-  }
-  .social-media-flex {
-    justify-content: left;
-  }
-  .map {
-    width: 100%;
-    margin: 3rem auto 0 auto;
   }
   .wide-border {
     display: block;
