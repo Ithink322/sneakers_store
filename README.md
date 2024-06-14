@@ -28,6 +28,6 @@ backend:
 
 ```
 npm install
-npm run serve
+nuxt dev
 ```
 
