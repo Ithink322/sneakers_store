@@ -1,111 +1,118 @@
 <template>
-  <UIBreadcrump :breadcrumpTitle="'О компании'"></UIBreadcrump>
-  <div class="about-container">
-    <h1 class="about-container__title">
-      ИНТЕРНЕТ-МАГАЗИН<br />
-      <div class="about-container__title-and-line-flex">
-        SWOOSH STORE
-        <div class="about-container__line"></div>
+  <UIBreadcrumb :breadcrumbTitle="'О компании'"></UIBreadcrumb>
+  <main>
+    <div class="about-container">
+      <h1 class="about-container__title">
+        ИНТЕРНЕТ-МАГАЗИН<br />
+        <div class="about-container__content-flex">
+          SWOOSH STORE
+          <span class="about-container__line"></span>
+        </div>
+      </h1>
+      <div class="content">
+        <p class="content__paragraph content__paragraph--margin">
+          Добро пожаловать в
+          <span class="content__text content__text--bold">Swoosh Store</span> –
+          ваш источник подлинных кроссовок Nike и<br
+            class="content__span-br content__span-br--from1024px"
+          />
+          непревзойденного стиля! Мы рады представить вам уникальную
+          онлайн-платформу, где вы<br
+            class="content__span-br content__span-br--from1024px"
+          />
+          сможете окунуться в мир инноваций и моды от легендарного бренда
+          спортивной обуви.
+        </p>
       </div>
-    </h1>
-    <span class="about-container__span">
-      <p class="about-container__paragraph--margin">
-        Добро пожаловать в
-        <span class="about-container__text--bold">Swoosh Store</span> – ваш
-        источник подлинных кроссовок Nike и<br
-          class="about-container__span-br--from1024px"
-        />
-        непревзойденного стиля! Мы рады представить вам уникальную
-        онлайн-платформу, где вы<br
-          class="about-container__span-br--from1024px"
-        />
-        сможете окунуться в мир инноваций и моды от легендарного бренда
-        спортивной обуви.
-      </p>
-    </span>
-    <img src="/imgs/about-hero.svg" alt="" class="about-container__hero" />
-  </div>
-  <div class="recomendations-span-and-mailing-flex">
-    <span class="recomendations-span">
-      <p class="recomendations-span__paragraph--margintop">
-        Наши кроссовки отличаются не только эстетическим великолепием, но и
-        функциональностью. Мы предлагаем широкий выбор моделей для разных видов
-        спорта, от бега до баскетбола, и для различных повседневных ситуаций.
-        Будь то икона стиля, такая как Air Max, или универсальная классика, как
-        Air Force 1 - у нас есть именно то, что подойдет вам.
-      </p>
-      <p>
-        На SwooshStore мы ценим ваше доверие и комфортность при покупке. Вся
-        наша обувь поставляется непосредственно от производителя, что
-        гарантирует вам аутентичность каждой пары кроссовок. Мы также предлагаем
-        удобные опции доставки и безопасные методы оплаты, чтобы сделать ваш
-        опыт покупки максимально приятным и беззаботным.
-      </p>
-      <p>
-        Присоединяйтесь к нашему сообществу любителей Nike, чтобы разделить
-        радость от качественной обуви и уникального стиля. Мы всегда готовы
-        помочь вам с выбором, ответить на вопросы и обеспечить вас идеальной
-        парой кроссовок, которая подчеркнет вашу индивидуальность и даст вам
-        уверенность в каждом шаге.
-      </p>
-      <p
-        class="recomendations-span__text--bold recomendations-span__paragraph--marginbottom"
-      >
-        Спасибо, что выбираете SwooshStore – ваш источник оригинальных кроссовок
-        Nike!
-      </p>
-    </span>
-    <form @submit.prevent="submitForm" class="mailing">
-      <div class="mailing__title-and-text-flex">
-        <span class="mailing__title">Подпишитесь на рассылку</span>
-        <span class="mailing__text"
-          >Регулярные скидки и спецпредложения, а так же новости компании.</span
+      <img src="/imgs/about-hero.svg" alt="" class="about-container__hero" />
+    </div>
+    <div class="recomm-mail-flex">
+      <div class="recomendations">
+        <p
+          class="recomendations__paragraph recomendations__paragraph--margintop"
         >
+          Наши кроссовки отличаются не только эстетическим великолепием, но и
+          функциональностью. Мы предлагаем широкий выбор моделей для разных
+          видов спорта, от бега до баскетбола, и для различных повседневных
+          ситуаций. Будь то икона стиля, такая как Air Max, или универсальная
+          классика, как Air Force 1 - у нас есть именно то, что подойдет вам.
+        </p>
+        <p>
+          На SwooshStore мы ценим ваше доверие и комфортность при покупке. Вся
+          наша обувь поставляется непосредственно от производителя, что
+          гарантирует вам аутентичность каждой пары кроссовок. Мы также
+          предлагаем удобные опции доставки и безопасные методы оплаты, чтобы
+          сделать ваш опыт покупки максимально приятным и беззаботным.
+        </p>
+        <p>
+          Присоединяйтесь к нашему сообществу любителей Nike, чтобы разделить
+          радость от качественной обуви и уникального стиля. Мы всегда готовы
+          помочь вам с выбором, ответить на вопросы и обеспечить вас идеальной
+          парой кроссовок, которая подчеркнет вашу индивидуальность и даст вам
+          уверенность в каждом шаге.
+        </p>
+        <p
+          class="recomendations__paragraph recomendations__text--bold recomendations__paragraph--marginbottom"
+        >
+          Спасибо, что выбираете SwooshStore – ваш источник оригинальных
+          кроссовок Nike!
+        </p>
       </div>
-      <div class="mailing__input-and-btn-and-text-flex">
-        <input
-          v-model="email"
-          :disabled="isEmailLocked"
-          @input="handleInput"
-          placeholder="Ваш Email"
-          type="text"
-          class="mailing__input"
-          :class="{
-            'invalid-email': !isValidEmail,
-            'success-message': isEmailLocked,
-          }"
-        />
-        <img
-          v-if="isEmailLocked"
-          class="mailing__input-arrow"
-          src="/imgs/green-arrow.svg"
-          alt=""
-        />
-        <span v-if="!isValidEmail" class="mailing__invalid-email-message"
-          >Введите корректный email адрес</span
-        >
-        <span v-if="emptyMessageIsVisible" class="mailing__empty-message"
-          >Введите email адрес</span
-        >
-        <button ref="followBtn" class="mailing__follow-btn">Подписаться</button>
-        <span class="mailing__privacy-policy-text"
-          >Согласен с
-          <span class="mailing__privacy-policy-text--underlined"
-            ><NuxtLink to="/PrivacyPolicy"
-              >политикой конфиденциальности</NuxtLink
+      <form @submit.prevent="submitForm" class="mailing">
+        <div class="mailing__content-flex">
+          <span class="mailing__title">Подпишитесь на рассылку</span>
+          <span class="mailing__text"
+            >Регулярные скидки и спецпредложения, а так же новости
+            компании.</span
+          >
+        </div>
+        <div class="mailing__wrapper-flex">
+          <input
+            v-model="email"
+            :disabled="isEmailLocked"
+            @input="handleInput"
+            placeholder="Ваш Email"
+            type="text"
+            class="mailing__input"
+            :class="{
+              'invalid-email': !isValidEmail,
+              'success-message': isEmailLocked,
+            }"
+          />
+          <img
+            v-if="isEmailLocked"
+            class="mailing__input-arrow"
+            src="/imgs/green-arrow.svg"
+            alt=""
+          />
+          <span v-if="!isValidEmail" class="mailing__invalid-email-message"
+            >Введите корректный email адрес</span
+          >
+          <span v-if="emptyMessageIsVisible" class="mailing__empty-message"
+            >Введите email адрес</span
+          >
+          <button ref="followBtn" class="mailing__follow-btn">
+            Подписаться
+          </button>
+          <span class="mailing__privacy-policy-text"
+            >Согласен с
+            <span class="mailing__privacy-policy-link"
+              ><NuxtLink to="/PrivacyPolicy"
+                >политикой конфиденциальности</NuxtLink
+              ></span
             ></span
-          ></span
-        >
-      </div>
-    </form>
-  </div>
-  <div class="benefits">
-    <UIBenefits></UIBenefits>
-  </div>
-  <div class="about-us-and-recent-publications-list-flex">
-    <UIAboutUs></UIAboutUs>
-    <UIRecentPublicationsList></UIRecentPublicationsList>
-  </div>
+          >
+        </div>
+      </form>
+    </div>
+    <div class="benefits">
+      <UIBenefits></UIBenefits>
+    </div>
+    <div class="about-us-publications-flex">
+      <UIAboutUs></UIAboutUs>
+      <UIRecentPublicationsList></UIRecentPublicationsList>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -153,7 +160,7 @@ const submitForm = () => {
     margin-top: 0.938rem;
     margin-bottom: 0rem;
   }
-  &__title-and-line-flex {
+  &__content-flex {
     display: flex;
     align-items: center;
     gap: 0.875rem;
@@ -168,24 +175,30 @@ const submitForm = () => {
     margin-left: -0.938rem;
     margin-right: -0.938rem;
   }
-  &__span {
+}
+.content {
+  &__paragraph {
     font-family: "Pragmatica Book";
-    font-size: 1rem;
-    color: #2e2e2e;
   }
-  &__span-br--from1024px {
-    display: none;
+  &__text--bold {
+    font-family: "Pragmatica Bold";
   }
   &__paragraph--margin {
     margin-top: 1.25rem;
     margin-bottom: 1.688rem;
   }
+  &__span-br--from1024px {
+    display: none;
+  }
 }
-.recomendations-span-and-mailing-flex {
+.recomm-mail-flex {
   display: flex;
   flex-direction: column;
 }
-.recomendations-span {
+.recomendations {
+  &__paragraph {
+    font-family: "Pragmatica Book";
+  }
   &__paragraph--margintop {
     margin-top: 1.563rem;
   }
@@ -201,7 +214,7 @@ const submitForm = () => {
   padding: 1.563rem;
   background-color: #f8f8f8;
 
-  &__title-and-text-flex {
+  &__content-flex {
     display: flex;
     flex-direction: column;
     gap: 0.813rem;
@@ -220,7 +233,7 @@ const submitForm = () => {
     font-size: 0.938rem;
     color: #393939;
   }
-  &__input-and-btn-and-text-flex {
+  &__wrapper-flex {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -271,7 +284,7 @@ const submitForm = () => {
     font-size: 0.813rem;
     color: #6b6e72;
   }
-  &__privacy-policy-text--underlined {
+  &__privacy-policy-link {
     text-decoration: underline;
     color: #6b6e72;
 
@@ -294,12 +307,12 @@ const submitForm = () => {
   color: #07961e;
   border-bottom: 1px solid #07961e;
 }
-.about-us-and-recent-publications-list-flex {
+.about-us-publications-flex {
   display: flex;
   flex-direction: column;
   gap: 2.688rem;
 }
-.about-us-and-recent-publications-list-flex
+.about-us-publications-flex
   .about-us-flex
   .about-us-flex__more-btn-link
   .more-btn {
@@ -321,10 +334,10 @@ const submitForm = () => {
       margin-right: calc((100vw - 44.874rem) / (-2));
     }
   }
-  .about-us-and-recent-publications-list-flex {
+  .about-us-publications-flex {
     gap: 3.125rem;
   }
-  .about-us-and-recent-publications-list-flex {
+  .about-us-publications-flex {
     margin-top: 4.375rem;
   }
   .benefits {
@@ -345,6 +358,11 @@ const submitForm = () => {
       display: block;
     }
   }
+  .content {
+    &__span-br--from1024px {
+      display: block;
+    }
+  }
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
@@ -354,7 +372,7 @@ const submitForm = () => {
       margin-right: calc((100vw - 71.875rem) / (-2));
     }
   }
-  .recomendations-span-and-mailing-flex {
+  .recomm-mail-flex {
     flex-direction: row;
     gap: 5rem;
     margin-top: 3.875rem;
@@ -362,7 +380,7 @@ const submitForm = () => {
   .benefits {
     margin-top: 6.875rem;
   }
-  .about-us-and-recent-publications-list-flex {
+  .about-us-publications-flex {
     margin-top: 0rem;
   }
   .mailing {
@@ -384,7 +402,7 @@ const submitForm = () => {
       font-size: 2.438rem;
     }
   }
-  .about-us-and-recent-publications-list-flex {
+  .about-us-publications-flex {
     margin-top: 3rem;
   }
 }

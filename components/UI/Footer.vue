@@ -1,24 +1,14 @@
 <template>
   <footer class="footer">
-    <div class="main-flex">
-      <div
-        class="footer__logo-and-social-media-and-lists-flex logo-and-social-media-and-lists-flex"
-      >
-        <div
-          class="footer__logo-and-social-media-flex logo-and-social-media-flex"
-        >
-          <img
-            src="/imgs/logo-footer.svg"
-            alt=""
-            class="logo-and-social-media-flex__logo"
-          />
-          <div
-            class="logo-and-social-media-flex__social-media-flex social-media-flex"
-          >
+    <div class="container">
+      <div class="footer__body body">
+        <div class="footer__content content">
+          <img src="/imgs/logo-footer.svg" alt="" class="content__logo" />
+          <div class="content__socials socials">
             <a href="https://www.instagram.com/nike/" target="_blank">
-              <button class="social-media-flex__btn">
+              <button class="socials__btn">
                 <svg
-                  class="social-media-flex__inst-icon"
+                  class="socials__inst-icon"
                   width="17"
                   height="17"
                   viewBox="0 0 17 17"
@@ -43,9 +33,9 @@
               </button>
             </a>
             <a href="https://t.me/nike_sneakers_9" target="_blank">
-              <button class="social-media-flex__btn">
+              <button class="socials__btn">
                 <svg
-                  class="social-media-flex__telegram-icon"
+                  class="socials__telegram-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 48 48"
                   width="17px"
@@ -60,9 +50,9 @@
               </button>
             </a>
             <a href="https://x.com/Nike" target="_blank">
-              <button class="social-media-flex__btn">
+              <button class="socials__btn">
                 <svg
-                  class="social-media-flex__twitter-icon"
+                  class="socials__twitter-icon"
                   width="17"
                   height="14"
                   viewBox="0 0 17 14"
@@ -83,13 +73,14 @@
           >Instagram и twitter являются<br class="footer__note-br" />
           запрещенными соц.сетями в РФ</span
         >
-        <nav class="footer__sections-flex sections-flex">
-          <div class="sections-flex--till768px">
-            <button @click="openInfoDropdown" class="sections-flex__btn">
-              <div class="sections-flex__btn-flex">
+        <nav class="dropdown">
+          <div class="dropdown--till768px">
+            <button @click="toggleInfoDropdown" class="dropdown__btn">
+              <div class="dropdown__content">
                 ИНФОРМАЦИЯ
                 <img
-                  class="sections-flex__info-arrow-icon-btn"
+                  class="dropdown__arrow-icon"
+                  :class="{ 'rotate-180': isDropdownActive('info') }"
                   src="/imgs/dropdown-arrow.svg"
                   alt=""
                 />
@@ -97,12 +88,13 @@
             </button>
             <ul
               class="footer__dropdown-list dropdown-list footer__dropdown-info-list"
+              :class="{ active: isDropdownActive('info') }"
             >
               <li class="dropdown-list__link">
                 <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Наш блог</NuxtLink>
+                <NuxtLink to="/Blog">Наш блог</NuxtLink>
               </li>
               <li class="dropdown-list__link">
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
@@ -111,11 +103,12 @@
                 <NuxtLink to="/Contacts">Контакты</NuxtLink>
               </li>
             </ul>
-            <button @click="openProductsDropdown" class="sections-flex__btn">
-              <div class="sections-flex__btn-flex">
+            <button @click="toggleProductsDropdown" class="dropdown__btn">
+              <div class="dropdown__content">
                 ТОВАРЫ
                 <img
-                  class="sections-flex__products-arrow-icon-btn"
+                  class="dropdown__arrow-icon"
+                  :class="{ 'rotate-180': isDropdownActive('products') }"
                   src="/imgs/dropdown-arrow.svg"
                   alt=""
                 />
@@ -123,6 +116,7 @@
             </button>
             <ul
               class="footer__dropdown-list dropdown-list footer__dropdown-products-list"
+              :class="{ active: isDropdownActive('products') }"
             >
               <li class="dropdown-list__link">
                 <NuxtLink to="">Каталог</NuxtLink>
@@ -140,11 +134,12 @@
                 <NuxtLink to="">Распродажа</NuxtLink>
               </li>
             </ul>
-            <button @click="openShopDropdown" class="sections-flex__btn">
-              <div class="sections-flex__btn-flex">
+            <button @click="toggleShopDropdown" class="dropdown__btn">
+              <div class="dropdown__content">
                 МАГАЗИН
                 <img
-                  class="sections-flex__shop-arrow-icon-btn"
+                  class="dropdown__arrow-icon"
+                  :class="{ 'rotate-180': isDropdownActive('shop') }"
                   src="/imgs/dropdown-arrow.svg"
                   alt=""
                 />
@@ -152,6 +147,7 @@
             </button>
             <ul
               class="footer__dropdown-list dropdown-list footer__dropdown-shop-list"
+              :class="{ active: isDropdownActive('shop') }"
             >
               <li class="dropdown-list__link">
                 <NuxtLink to="">Личный кабинет</NuxtLink>
@@ -174,7 +170,7 @@
                 <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink to="">Наш блог</NuxtLink>
+                <NuxtLink to="/Blog">Наш блог</NuxtLink>
               </li>
               <li class="list__link">
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
@@ -219,46 +215,40 @@
           </div>
         </nav>
       </div>
-      <div class="footer__subscribe-on-news subscribe-on-news">
+      <div class="footer__subscribe subscribe">
         <div>
-          <span class="subscribe-on-news__title">ПОДПИСКА НА НОВОСТИ</span>
-          <span class="subscribe-on-news__subtitle"
+          <span class="subscribe__title">ПОДПИСКА НА НОВОСТИ</span>
+          <span class="subscribe__subtitle"
             >Подпишитесь на новости и скидки</span
           >
         </div>
         <form
           @submit.prevent="submitForm"
-          class="subscribe-on-news__send-email-form send-email-form"
+          class="subscribe__email-form email-form"
         >
           <input
             v-model="email"
             @input="handleInput"
             placeholder="Email"
             type="text"
-            class="send-email-form__input"
+            class="email-form__input"
             :class="{ 'invalid-email': !isValidEmail }"
           />
-          <div class="send-email-form__border--vertical"></div>
-          <button class="send-email-form__btn">Подписаться</button>
+          <div class="email-form__border--vertical"></div>
+          <button class="email-form__btn">Подписаться</button>
         </form>
-        <span
-          class="subscribe-on-news__invalid-email-message"
-          v-if="!isValidEmail"
+        <span class="subscribe__invalid-email-message" v-if="!isValidEmail"
           >Некорректный email адрес</span
         >
-        <span
-          v-if="succesMessageIsVisible"
-          class="subscribe-on-news__success-message"
+        <span v-if="succesMessageIsVisible" class="subscribe__success-message"
           >Вы успешно подписались</span
         >
-        <span
-          v-if="emptyMessageIsVisible"
-          class="subscribe-on-news__empty-message"
+        <span v-if="emptyMessageIsVisible" class="subscribe__empty-message"
           >Введите email адрес</span
         >
-        <span class="subscribe-on-news__privacy-policy-text"
+        <span class="subscribe__privacy-policy-text"
           >Согласен с
-          <span class="subscribe-on-news__privacy-policy-text--emphasized"
+          <span class="subscribe__privacy-policy-text--emphasized"
             ><NuxtLink to="/PrivacyPolicy"
               >политикой конфиденциальности</NuxtLink
             ></span
@@ -266,7 +256,7 @@
         >
       </div>
     </div>
-    <div class="footer__copyright-and-privacy-policy-flex">
+    <div class="footer__info">
       <span class="footer__copyright-text"
         >© 2023 - Swoosh Store - Интернет-магазин ориганальных кроссовок</span
       >
@@ -280,18 +270,21 @@
 </template>
 
 <script setup lang="ts">
-const toggleMenu = (dropdownSelector: string) => {
-  const dropdown = document.querySelector<HTMLElement>(dropdownSelector)!;
-  dropdown.classList.toggle("dropdown-list__dropdown-list--opened");
+const activeDropdown = ref<string | null>(null);
+
+const toggleInfoDropdown = () => {
+  activeDropdown.value = activeDropdown.value === "info" ? null : "info";
 };
-const openInfoDropdown = () => {
-  toggleMenu(".footer__dropdown-info-list");
+const toggleProductsDropdown = () => {
+  activeDropdown.value =
+    activeDropdown.value === "products" ? null : "products";
 };
-const openProductsDropdown = () => {
-  toggleMenu(".footer__dropdown-products-list");
+const toggleShopDropdown = () => {
+  activeDropdown.value = activeDropdown.value === "shop" ? null : "shop";
 };
-const openShopDropdown = () => {
-  toggleMenu(".footer__dropdown-shop-list");
+
+const isDropdownActive = (dropdownName: string) => {
+  return activeDropdown.value === dropdownName;
 };
 
 const email = ref("");
@@ -351,10 +344,10 @@ const submitForm = () => {
   &__note-br {
     display: none;
   }
-  &__subscribe-on-news {
+  &__subscribe {
     margin: 1.875rem 0rem 1.25rem 0rem;
   }
-  &__copyright-and-privacy-policy-flex {
+  &__info {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -381,11 +374,11 @@ const submitForm = () => {
     color: inherit;
   }
 }
-.logo-and-social-media-flex {
+.content {
   display: flex;
   justify-content: space-between;
 }
-.social-media-flex {
+.socials {
   display: flex;
   gap: 0.688rem;
 
@@ -404,7 +397,7 @@ const submitForm = () => {
     transition: fill 100ms ease;
   }
 }
-.sections-flex {
+.dropdown {
   display: flex;
   flex-direction: column;
   margin-top: 1.875rem;
@@ -420,7 +413,7 @@ const submitForm = () => {
     width: 100%;
     padding: 0.625rem 0rem;
   }
-  &__btn-flex {
+  &__content {
     display: flex;
     gap: 0.625rem;
 
@@ -428,7 +421,7 @@ const submitForm = () => {
       margin-top: -0.25rem;
     }
   }
-  &__btn-flex::after {
+  &__content::after {
     content: "";
     position: absolute;
     left: 0rem;
@@ -437,6 +430,9 @@ const submitForm = () => {
     background-color: #dad9d9;
     opacity: 10%;
     margin-top: 1.5rem;
+  }
+  &__arrow-icon.rotate-180 {
+    transform: rotate(180deg); /* Rotate the arrow by 180 degrees */
   }
 }
 .dropdown-list {
@@ -464,16 +460,21 @@ const submitForm = () => {
   &__link:hover {
     color: $Light-Orange;
   }
-  &__dropdown-list--opened {
+  /*   &__dropdown-list--opened {
     max-height: 100vh;
     padding: 1.438rem 0rem 0.938rem 0rem;
     transition: max-height 0.1s ease-in-out, padding 0.2s ease-in-out;
-  }
+  } */
+}
+.dropdown-list.active {
+  max-height: 100vh;
+  padding: 1.438rem 0rem 0.938rem 0rem;
+  transition: max-height 0.1s ease-in-out, padding 0.2s ease-in-out;
 }
 .list--from768px {
   display: none;
 }
-.subscribe-on-news {
+.subscribe {
   &__title {
     display: block;
     text-align: center;
@@ -490,7 +491,7 @@ const submitForm = () => {
     margin-top: 0.938rem;
     cursor: pointer;
   }
-  &__send-email-form {
+  &__email-form {
     margin: 0.938rem 0.719rem 0.563rem 0.719rem;
   }
   &__privacy-policy-text {
@@ -521,14 +522,14 @@ const submitForm = () => {
     color: #07961e;
   }
 }
-.subscribe-on-news::after {
+.subscribe::after {
   content: "";
   position: absolute;
   border: 1px solid rgba(255, 255, 255, 5%);
   width: 100%;
   left: 0rem;
 }
-.send-email-form {
+.email-form {
   display: flex;
   padding: 0.75rem 1.063rem 0.75rem 1.063rem;
   border: 1px solid rgba(216, 221, 228, 0.09);
@@ -582,10 +583,10 @@ const submitForm = () => {
     &__note-br {
       display: block;
     }
-    &__subscribe-on-news {
+    &__subscribe {
       margin: 2.813rem 0rem 1.875rem 0rem;
     }
-    &__copyright-and-privacy-policy-flex {
+    &__info {
       flex-direction: row;
       justify-content: space-between;
     }
@@ -597,7 +598,7 @@ const submitForm = () => {
       margin-bottom: 0.5rem;
     }
   }
-  .logo-and-social-media-flex {
+  .content {
     flex-direction: column;
     justify-content: flex-start;
     gap: 3.584rem;
@@ -607,7 +608,7 @@ const submitForm = () => {
       width: 186px;
     }
   }
-  .social-media-flex {
+  .socials {
     &__btn {
       width: 46px;
       height: 46px;
@@ -619,14 +620,14 @@ const submitForm = () => {
       height: 20px;
     }
   }
-  .logo-and-social-media-and-lists-flex {
+  .body {
     display: flex;
   }
-  .sections-flex {
+  .dropdown {
     margin: 0;
     margin-left: auto;
   }
-  .sections-flex--till768px {
+  .dropdown--till768px {
     display: none;
   }
   .list--from768px {
@@ -662,7 +663,7 @@ const submitForm = () => {
       cursor: pointer;
     }
   }
-  .subscribe-on-news {
+  .subscribe {
     display: flex;
     align-items: center;
 
@@ -675,7 +676,7 @@ const submitForm = () => {
       white-space: nowrap;
       margin-top: 0.563rem;
     }
-    &__send-email-form {
+    &__email-form {
       margin: 0.938rem 0.719rem 0.563rem 2rem;
     }
     &__privacy-policy-text {
@@ -690,10 +691,10 @@ const submitForm = () => {
       margin: 6.25rem 0rem 0.5rem 16.35rem;
     }
   }
-  .subscribe-on-news::after {
+  .subscribe::after {
     bottom: 3.45rem;
   }
-  .send-email-form {
+  .email-form {
     &__input {
       font-size: 0.938rem;
     }
@@ -712,19 +713,19 @@ const submitForm = () => {
     padding: 3.125rem calc((100vw - 71.875rem) / 2) 2.063rem
       calc((100vw - 71.875rem) / 2);
 
-    &__copyright-and-privacy-policy-flex {
+    &__info {
       margin-top: 5.438rem;
     }
   }
-  .logo-and-social-media-and-lists-flex,
+  .body,
   .list--from768px {
     gap: 4rem;
   }
-  .main-flex {
+  .container {
     display: flex;
     gap: 4rem;
   }
-  .subscribe-on-news {
+  .subscribe {
     align-items: flex-start;
     flex-direction: column;
     margin: 0;
@@ -732,7 +733,7 @@ const submitForm = () => {
     &__subtitle {
       margin-top: 1.438rem;
     }
-    &__send-email-form {
+    &__email-form {
       margin: 0.938rem 0rem 0.563rem 0rem;
     }
     &__privacy-policy-text {
@@ -747,7 +748,7 @@ const submitForm = () => {
       margin: 0rem 0rem 0.5rem 0rem;
     }
   }
-  .subscribe-on-news::after {
+  .subscribe::after {
     bottom: 5.825rem;
   }
 }
@@ -757,22 +758,22 @@ const submitForm = () => {
     padding: 3.125rem calc((100vw - 85rem) / 2) 2.063rem
       calc((100vw - 85rem) / 2);
   }
-  .logo-and-social-media-and-lists-flex {
+  .body {
     gap: 7.5rem;
   }
-  .main-flex {
+  .container {
     gap: 7.5rem;
   }
   .list--from768px {
     gap: 6.95rem;
   }
-  .subscribe-on-news {
+  .subscribe {
     flex-direction: column;
   }
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
-  .main-flex {
+  .container {
     gap: 6.5rem;
   }
 }

@@ -1,13 +1,13 @@
 <template>
-  <div class="header__wishlist-counter-circle">
-    <span class="header__wishlist-counter-circle-text">0</span>
+  <div class="header__counter-circle">
+    <span class="header__counter-circle-text">0</span>
   </div>
 </template>
 
 <script setup></script>
 
 <style lang="scss" scoped>
-.header__wishlist-counter-circle {
+.header__counter-circle {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -20,13 +20,13 @@
   font-size: 0.625rem;
   color: #ffffff;
 }
-.header__wishlist-counter-circle {
+.header__counter-circle {
   margin-left: 1.5rem;
   margin-top: -1.1rem;
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .header__wishlist-counter-circle {
+  .header__counter-circle {
     width: 16px;
     height: 16px;
     margin-left: 3.8rem;

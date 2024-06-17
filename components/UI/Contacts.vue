@@ -1,10 +1,10 @@
 <template>
   <section class="info-kursk">
-    <div class="content-flex">
+    <div class="content">
       <div>
-        <section class="contacts-main-flex">
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
+        <section class="contacts">
+          <div class="contacts__contact contact">
+            <div class="contact__div">
               <svg
                 width="10"
                 height="19"
@@ -22,13 +22,15 @@
                 />
               </svg>
             </div>
-            <span class="contact-flex__info info">
+            <span class="contact__info info">
               <h2 class="info__title">Адрес:</h2>
-              <span class="info__content">{{ towmInfo[0].address }}</span>
+              <span class="info__content-address">{{
+                towmInfo[0].address
+              }}</span>
             </span>
           </div>
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
+          <div class="contacts__contact contact">
+            <div class="contact__div">
               <svg
                 width="15"
                 height="15"
@@ -46,15 +48,15 @@
                 />
               </svg>
             </div>
-            <span class="contact-flex__info info">
+            <span class="contact__info info">
               <h2 class="info__title">Телефон:</h2>
-              <NuxtLink href="tel:+79185472083" class="info__content--big">{{
+              <NuxtLink href="tel:+79185472083" class="info__phone">{{
                 towmInfo[0].phone
               }}</NuxtLink>
             </span>
           </div>
-          <div class="contacts-main-flex__contact-flex contact-flex">
-            <div class="contact-flex__div">
+          <div class="contacts__contact contact">
+            <div class="contact__div">
               <svg
                 width="17"
                 height="14"
@@ -72,24 +74,24 @@
                 />
               </svg>
             </div>
-            <span class="contact-flex__info info">
+            <span class="contact__info info">
               <h2 class="info__title">Email:</h2>
               <a
                 href="mailto:orderskursk@store.ru"
-                class="info__content--underlined"
+                class="info__email info__email--underlined"
                 >{{ towmInfo[0].email }}</a
               >
             </span>
           </div>
         </section>
         <section class="social-media">
-          <div class="social-media__social-media-flex social-media-flex">
-            <span class="social-media-flex__title">Мы в соц.сетях:</span>
-            <div class="social-media-flex__btns-flex btns-flex">
+          <div class="social-media__socials socials">
+            <span class="socials__title">Мы в соц.сетях:</span>
+            <div class="socials__btns-container btns-container">
               <a href="https://www.instagram.com/nike/" target="_blank">
-                <button class="btns-flex__btn">
+                <button class="btns-container__btn">
                   <svg
-                    class="social-media-flex__inst-icon"
+                    class="socials__inst-icon"
                     width="20"
                     height="20"
                     viewBox="0 0 17 17"
@@ -114,9 +116,9 @@
                 </button>
               </a>
               <a href="https://t.me/nike_sneakers_9" target="_blank">
-                <button class="btns-flex__btn btns-flex">
+                <button class="btns-container__btn">
                   <svg
-                    class="social-media-flex__telegram-icon"
+                    class="socials__telegram-icon"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 48 48"
                     width="20px"
@@ -131,9 +133,9 @@
                 </button>
               </a>
               <a href="https://x.com/Nike" target="_blank">
-                <button class="btns-flex__btn btns-flex">
+                <button class="btns-container__btn">
                   <svg
-                    class="social-media-flex__twitter-icon"
+                    class="socials__twitter-icon"
                     width="20"
                     height="18"
                     viewBox="0 0 17 14"
@@ -182,18 +184,17 @@ const props = defineProps<{
   MoscowInfo?: Contacts[];
 }>();
 const towmInfo = props.KurskInfo! ? props.KurskInfo! : props.MoscowInfo!;
-console.log("towmInfo:", towmInfo);
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
-.contacts-main-flex {
+.contacts {
   display: flex;
   flex-direction: column;
   gap: 2.188rem;
   margin-top: 1.5rem;
 }
-.contact-flex {
+.contact {
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -216,24 +217,26 @@ console.log("towmInfo:", towmInfo);
     line-height: 3rem;
     margin: 0rem;
   }
-  &__content {
+  &__content-address {
     font-family: "Pragmatica Book";
     font-size: 1rem;
     line-height: 1.375rem;
     color: $Light-Black;
   }
-  &__content--big {
+  &__phone {
     font-family: "Pragmatica Medium";
     font-size: 1.25rem;
     color: $Light-Black;
     text-decoration: none;
   }
-  &__content--underlined {
+  &__email {
     font-family: "Pragmatica Book";
     font-size: 1rem;
     line-height: 1.5rem;
-    text-decoration: underline;
     color: $Light-Black;
+  }
+  &__email--underlined {
+    text-decoration: underline;
   }
 }
 .social-media {
@@ -247,7 +250,7 @@ console.log("towmInfo:", towmInfo);
     color: #a0a0a0;
   }
 }
-.social-media-flex {
+.socials {
   display: flex;
   align-items: center;
   gap: 1.375rem;
@@ -257,7 +260,7 @@ console.log("towmInfo:", towmInfo);
     font-size: 0.875rem;
   }
 }
-.btns-flex {
+.btns-container {
   display: flex;
   gap: 0.688rem;
 
@@ -286,12 +289,12 @@ console.log("towmInfo:", towmInfo);
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .contacts-main-flex {
+  .contacts {
     flex-direction: row;
     justify-content: center;
     margin-top: 3.063rem;
   }
-  .contact-flex {
+  .contact {
     flex-direction: column;
     gap: 0rem;
     width: 220px;
@@ -299,7 +302,7 @@ console.log("towmInfo:", towmInfo);
   .info {
     align-items: center;
 
-    &__content {
+    &__content-address {
       text-align: center;
     }
   }
@@ -308,7 +311,7 @@ console.log("towmInfo:", towmInfo);
       text-align: center;
     }
   }
-  .social-media-flex {
+  .socials {
     justify-content: center;
   }
   .map {
@@ -323,25 +326,25 @@ console.log("towmInfo:", towmInfo);
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .content-flex {
+  .content {
     display: flex;
     gap: 6.25rem;
   }
-  .contacts-main-flex {
+  .contacts {
     flex-direction: column;
     margin-top: 5.813rem;
   }
-  .contact-flex {
+  .contact {
     flex-direction: row;
     gap: 1.5rem;
   }
   .info {
     align-items: flex-start;
 
-    &__content {
+    &__content-address {
       text-align: left;
     }
-    &__content--big {
+    &__phone {
       width: 185px;
     }
   }
@@ -350,7 +353,7 @@ console.log("towmInfo:", towmInfo);
       text-align: left;
     }
   }
-  .social-media-flex {
+  .socials {
     justify-content: left;
   }
   .map {

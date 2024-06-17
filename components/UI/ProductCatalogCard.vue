@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="slider">
-      <div class="card__heroes-flex--from320px">
+      <div class="card__heroes card__heroes--from320px">
         <div
           class="card__hero slide--from320px"
           v-for="(image, index) in props.product.heroes"
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div
-        class="card__heroes-flex--from1440px"
+        class="card__heroes card__heroes--from1440px"
         @mousemove="handleMouseMove"
         @mouseleave="showFirstImage"
       >
@@ -25,9 +25,9 @@
           <img :src="image" alt="Product Image" />
         </div>
       </div>
-      <div class="card__slider-indicators slider-indicators-flex">
+      <div class="card__slider-indicators slider-indicators">
         <div
-          class="slider-indicators-flex__indicator indicator"
+          class="slider-indicators__indicator indicator"
           v-for="(image, index) in props.product.heroes"
           :key="index"
           :class="{ active: index === activeIndex }"
@@ -61,8 +61,8 @@
     <div class="card__description description">
       <span class="description__category">{{ product.category }}</span>
       <span class="description__title">{{ product.title }}</span>
-      <div class="description__colors-flex">
-        <span class="description__colors-flex-text">Цвета: </span>
+      <div class="description__colors">
+        <span class="description__colors-text">Цвета: </span>
         <div
           v-for="circle in props.product.colors"
           :key="circle"
@@ -70,13 +70,9 @@
           class="description__colors-circle"
         ></div>
       </div>
-      <div class="description__prices-flex prices-flex">
-        <span class="prices-flex__current-price">{{
-          product.currentPrice
-        }}</span>
-        <span class="prices-flex__previous-price">{{
-          product.previousPrice
-        }}</span>
+      <div class="description__prices prices">
+        <span class="prices__current-price">{{ product.currentPrice }}</span>
+        <span class="prices__previous-price">{{ product.previousPrice }}</span>
       </div>
       <button class="description__add-to-cart-btn">
         <svg
@@ -122,7 +118,7 @@ onMounted(() => {
     let sliders = document.querySelectorAll<HTMLElement>(".slider")!;
     sliders.forEach((slider) => {
       let sliderContainer = slider.querySelector<HTMLElement>(
-          ".card__heroes-flex--from320px"
+          ".card__heroes--from320px"
         )!,
         slides = slider.querySelectorAll<HTMLElement>(".slide--from320px")!;
       let slideWidth = slides[0].offsetWidth,
@@ -180,7 +176,7 @@ onMounted(() => {
         sliderContainer.style.transform = `translateX(${translateX}px)`;
 
         let indicators = slider.querySelectorAll(
-          ".slider-indicators-flex__indicator"
+          ".slider-indicators__indicator"
         );
         indicators.forEach((indicator, index) => {
           indicator.classList.toggle("active", index === activeIndex);
@@ -226,12 +222,12 @@ const showFirstImage = () => {
   overflow: hidden;
   width: 100%;
 
-  &__heroes-flex--from320px {
+  &__heroes--from320px {
     display: flex;
     transition: transform 0.5s ease-in-out;
     cursor: pointer;
   }
-  &__heroes-flex--from1440px {
+  &__heroes--from1440px {
     display: none;
   }
   &__hero {
@@ -261,7 +257,7 @@ const showFirstImage = () => {
 .slide--from1440px.active {
   display: none;
 }
-.slider-indicators-flex {
+.slider-indicators {
   position: absolute;
   display: flex;
   gap: 0.563rem;
@@ -305,11 +301,11 @@ const showFirstImage = () => {
     font-family: "Pragmatica Book";
     font-size: 1rem;
   }
-  &__colors-flex {
+  &__colors {
     display: flex;
     gap: 0.625rem;
   }
-  &__colors-flex-text {
+  &__colors-text {
     font-family: "Pragmatica Book";
     font-size: 0.813rem;
     color: #2e2e2e;
@@ -326,7 +322,7 @@ const showFirstImage = () => {
     right: 0.625rem;
   }
 }
-.prices-flex {
+.prices {
   display: flex;
   flex-direction: column;
   gap: 0.063rem;
@@ -367,12 +363,12 @@ const showFirstImage = () => {
       left: 0rem;
     }
   }
-  .prices-flex {
+  .prices {
     flex-direction: row;
     align-items: center;
     gap: 0.625rem;
   }
-  .slider-indicators-flex {
+  .slider-indicators {
     &__indicator {
       width: 39px;
       height: 3px;
@@ -383,10 +379,10 @@ const showFirstImage = () => {
 /* 1440px = 90em */
 @media (min-width: 90em) {
   .card {
-    &__heroes-flex--from320px {
+    &__heroes--from320px {
       display: none;
     }
-    &__heroes-flex--from1440px {
+    &__heroes--from1440px {
       display: flex;
     }
     &__hero,
@@ -401,7 +397,7 @@ const showFirstImage = () => {
   .slide--from1440px.active {
     display: block;
   }
-  .slider-indicators-flex {
+  .slider-indicators {
     position: absolute;
     display: flex;
     gap: 0.563rem;

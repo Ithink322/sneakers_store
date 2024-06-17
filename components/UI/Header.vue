@@ -1,10 +1,10 @@
 <template>
-  <nav class="headers_nav">
+  <nav>
     <header class="header">
       <div class="header-top">
-        <ul class="header-top__titles-list-flex">
+        <ul class="header-top__titles-list">
           <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
-          <li><NuxtLink to="">Наш блог</NuxtLink></li>
+          <li><NuxtLink to="/Blog">Наш блог</NuxtLink></li>
           <li>
             <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
           </li>
@@ -16,12 +16,34 @@
         <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>
       </div>
       <div class="header-mid">
-        <div class="header-mid__titles-flex">
-          <div
-            @click="toggleCatalogMenu"
-            class="header-mid__burger-btn-and-burger-text-flex--from768px"
-          >
-            <button class="header-mid__burger-btn">
+        <div class="header-mid__titles-container">
+          <button @click="toggleBurgerMenu" class="header-mid__burger-btn">
+            <svg
+              width="36"
+              height="12"
+              viewBox="0 0 36 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="36"
+                y1="1.98633"
+                x2="13.0168"
+                y2="1.98633"
+                stroke="black"
+                stroke-width="2"
+              />
+              <line
+                x1="36"
+                y1="10.0137"
+                y2="10.0137"
+                stroke="black"
+                stroke-width="2"
+              />
+            </svg>
+          </button>
+          <div @click="toggleBurgerMenu" class="header-mid__menu-btn-body">
+            <button class="header-mid__menu-btn">
               <svg
                 width="36"
                 height="12"
@@ -34,24 +56,58 @@
                   y1="1.98633"
                   x2="13.0168"
                   y2="1.98633"
-                  stroke="black"
+                  :stroke="burgerLineStroke"
                   stroke-width="2"
                 />
                 <line
                   x1="36"
                   y1="10.0137"
                   y2="10.0137"
-                  stroke="black"
+                  :stroke="burgerLineStroke"
                   stroke-width="2"
                 />
               </svg>
             </button>
-            <span class="header-mid__burger-text--from768px"
-              ><span class="header-mid__burger-text--hidden-at1200px">Меню</span
-              ><span class="header-mid__burger-text--hidden-at320px"
+            <div class="header-mid__title header-mid__title--from768px">
+              <span
+                class="header-mid__title header-mid__title--visiblle-till1200px"
+                :class="{ active: burgerLineStroke === '#fb5a00' }"
+                >Меню</span
+              >
+            </div>
+          </div>
+          <div @click="toggleCatalogMenu" class="header-mid__catalog-btn-body">
+            <button class="header-mid__catalog-btn">
+              <svg
+                width="36"
+                height="12"
+                viewBox="0 0 36 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="36"
+                  y1="1.98633"
+                  x2="13.0168"
+                  y2="1.98633"
+                  :stroke="catalogLineStroke"
+                  stroke-width="2"
+                />
+                <line
+                  x1="36"
+                  y1="10.0137"
+                  y2="10.0137"
+                  :stroke="catalogLineStroke"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <div class="header-mid__title header-mid__title--from768px">
+              <span
+                class="header-mid__title header-mid__title--hidden-till1200px"
                 >Каталог</span
-              ></span
-            >
+              >
+            </div>
           </div>
           <ul class="header-mid__titles-list">
             <li><NuxtLink to="">Мужские</NuxtLink></li>
@@ -63,25 +119,35 @@
         <NuxtLink to="/" class="header-mid__logo">
           <img src="/imgs/logo.svg" alt=""
         /></NuxtLink>
-        <div class="header-mid__btns-flex">
-          <button class="header-mid__my-account-btn--from768px">
-            <svg
-              width="15"
-              height="20"
-              viewBox="0 0 15 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+        <div class="header-mid__btns-container">
+          <NuxtLink to="" class="header-mid__my-account-link">
+            <button
+              class="header-mid__btn header-mid__my-account-btn--from768px"
+              :class="{ active: activeButton === 'myAccount' }"
+              @click="setActiveButton('myAccount')"
             >
-              <path
-                d="M1 18.8636V16.8939C1 15.8492 1.45655 14.8472 2.2692 14.1084C3.08186 13.3696 4.18406 12.9545 5.33333 12.9545H9.66667C10.8159 12.9545 11.9181 13.3696 12.7308 14.1084C13.5435 14.8472 14 15.8492 14 16.8939V18.8636M3.16667 5.07576C3.16667 6.12055 3.62321 7.12255 4.43587 7.86133C5.24853 8.60011 6.35073 9.01516 7.5 9.01516C8.64927 9.01516 9.75147 8.60011 10.5641 7.86133C11.3768 7.12255 11.8333 6.12055 11.8333 5.07576C11.8333 4.03097 11.3768 3.02897 10.5641 2.29019C9.75147 1.55141 8.64927 1.13637 7.5 1.13637C6.35073 1.13637 5.24853 1.55141 4.43587 2.29019C3.62321 3.02897 3.16667 4.03097 3.16667 5.07576Z"
-                stroke="black"
-                stroke-width="1.3"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-          <button class="header-mid__search-btn--from768px">
+              <svg
+                width="15"
+                height="20"
+                viewBox="0 0 15 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 18.8636V16.8939C1 15.8492 1.45655 14.8472 2.2692 14.1084C3.08186 13.3696 4.18406 12.9545 5.33333 12.9545H9.66667C10.8159 12.9545 11.9181 13.3696 12.7308 14.1084C13.5435 14.8472 14 15.8492 14 16.8939V18.8636M3.16667 5.07576C3.16667 6.12055 3.62321 7.12255 4.43587 7.86133C5.24853 8.60011 6.35073 9.01516 7.5 9.01516C8.64927 9.01516 9.75147 8.60011 10.5641 7.86133C11.3768 7.12255 11.8333 6.12055 11.8333 5.07576C11.8333 4.03097 11.3768 3.02897 10.5641 2.29019C9.75147 1.55141 8.64927 1.13637 7.5 1.13637C6.35073 1.13637 5.24853 1.55141 4.43587 2.29019C3.62321 3.02897 3.16667 4.03097 3.16667 5.07576Z"
+                  stroke="black"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </NuxtLink>
+          <button
+            class="header-mid__search-btn header-mid__search-btn--from768px"
+            :class="{ active: searchIsActive }"
+            @click="toggleSearch"
+          >
             <svg
               width="16"
               height="16"
@@ -98,124 +164,88 @@
               />
             </svg>
           </button>
-          <button class="header-mid__wishlist-btn">
-            <svg
-              width="21"
-              height="18"
-              viewBox="0 0 21 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+          <NuxtLink to="">
+            <button
+              class="header-mid__wishlist-btn header-mid__btn"
+              :class="{ active: activeButton === 'wishlist' }"
+              @click="setActiveButton('wishlist')"
             >
-              <path
-                d="M18.4927 2.41114C18.0165 1.96386 17.4506 1.60896 16.8275 1.36681C16.2045 1.12465 15.5365 1 14.8618 1C14.1872 1 13.5191 1.12465 12.8961 1.36681C12.273 1.60896 11.7071 1.96386 11.2309 2.41114L10.5 3.10415L9.76908 2.41114C9.29286 1.96386 8.72699 1.60896 8.10392 1.36681C7.48085 1.12465 6.81284 1 6.1382 1C5.46355 1 4.79554 1.12465 4.17247 1.36681C3.5494 1.60896 2.98353 1.96386 2.50731 2.41114C0.494903 4.29472 0.3715 7.47548 2.906 9.89215L10.5 17L18.094 9.89215C20.6285 7.47548 20.5051 4.29472 18.4927 2.41114Z"
-                stroke="#211D19"
-                stroke-width="1.4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <UIWishlistCounterCircle></UIWishlistCounterCircle>
-          </button>
-          <button class="header-mid__cart-btn">
-            <svg
-              width="17"
-              height="18"
-              viewBox="0 0 17 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              <svg
+                width="21"
+                height="18"
+                viewBox="0 0 21 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.4927 2.41114C18.0165 1.96386 17.4506 1.60896 16.8275 1.36681C16.2045 1.12465 15.5365 1 14.8618 1C14.1872 1 13.5191 1.12465 12.8961 1.36681C12.273 1.60896 11.7071 1.96386 11.2309 2.41114L10.5 3.10415L9.76908 2.41114C9.29286 1.96386 8.72699 1.60896 8.10392 1.36681C7.48085 1.12465 6.81284 1 6.1382 1C5.46355 1 4.79554 1.12465 4.17247 1.36681C3.5494 1.60896 2.98353 1.96386 2.50731 2.41114C0.494903 4.29472 0.3715 7.47548 2.906 9.89215L10.5 17L18.094 9.89215C20.6285 7.47548 20.5051 4.29472 18.4927 2.41114Z"
+                  stroke="#211D19"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <UIWishlistCounterCircle></UIWishlistCounterCircle>
+            </button>
+          </NuxtLink>
+          <NuxtLink to="">
+            <button
+              class="header-mid__cart-btn header-mid__btn"
+              :class="{ active: activeButton === 'cart' }"
+              @click="setActiveButton('cart')"
             >
-              <path
-                d="M5.5659 8.11111V3.66667C5.5659 2.95942 5.87498 2.28115 6.42514 1.78105C6.9753 1.28095 7.72147 1 8.49951 1C9.27755 1 10.0237 1.28095 10.5739 1.78105C11.124 2.28115 11.4331 2.95942 11.4331 3.66667V8.11111M2.95597 5.44444H14.044C14.326 5.44441 14.6047 5.49981 14.8609 5.60684C15.1171 5.71388 15.3449 5.87001 15.5285 6.06454C15.7121 6.25906 15.8473 6.48739 15.9248 6.73385C16.0022 6.98032 16.0201 7.2391 15.9773 7.49244L14.7501 14.7387C14.6435 15.3684 14.2925 15.9426 13.7604 16.3574C13.2284 16.7722 12.5506 17.0002 11.8497 17H5.14933C4.44859 17 3.77101 16.7719 3.23919 16.3572C2.70738 15.9424 2.35646 15.3682 2.24995 14.7387L1.02272 7.49244C0.979863 7.2391 0.997778 6.98032 1.07524 6.73385C1.15271 6.48739 1.28788 6.25906 1.47151 6.06454C1.65514 5.87001 1.88288 5.71388 2.1391 5.60684C2.39533 5.49981 2.67399 5.44441 2.95597 5.44444Z"
-                stroke="#211D19"
-                stroke-width="1.4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <UICartCounterCircle></UICartCounterCircle>
-          </button>
+              <svg
+                width="17"
+                height="18"
+                viewBox="0 0 17 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.5659 8.11111V3.66667C5.5659 2.95942 5.87498 2.28115 6.42514 1.78105C6.9753 1.28095 7.72147 1 8.49951 1C9.27755 1 10.0237 1.28095 10.5739 1.78105C11.124 2.28115 11.4331 2.95942 11.4331 3.66667V8.11111M2.95597 5.44444H14.044C14.326 5.44441 14.6047 5.49981 14.8609 5.60684C15.1171 5.71388 15.3449 5.87001 15.5285 6.06454C15.7121 6.25906 15.8473 6.48739 15.9248 6.73385C16.0022 6.98032 16.0201 7.2391 15.9773 7.49244L14.7501 14.7387C14.6435 15.3684 14.2925 15.9426 13.7604 16.3574C13.2284 16.7722 12.5506 17.0002 11.8497 17H5.14933C4.44859 17 3.77101 16.7719 3.23919 16.3572C2.70738 15.9424 2.35646 15.3682 2.24995 14.7387L1.02272 7.49244C0.979863 7.2391 0.997778 6.98032 1.07524 6.73385C1.15271 6.48739 1.28788 6.25906 1.47151 6.06454C1.65514 5.87001 1.88288 5.71388 2.1391 5.60684C2.39533 5.49981 2.67399 5.44441 2.95597 5.44444Z"
+                  stroke="#211D19"
+                  stroke-width="1.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <UICartCounterCircle></UICartCounterCircle>
+            </button>
+          </NuxtLink>
         </div>
       </div>
     </header>
-    <UIBurgerMenu></UIBurgerMenu>
-    <UICatalogMenu></UICatalogMenu>
+    <UIBurgerMenu
+      v-if="isBurgerMenuOpen"
+      :isOpen="isBurgerMenuOpen"
+      @close="closeBurgerMenu"
+    ></UIBurgerMenu>
+    <UICatalogMenu :class="{ active: isCatalogMenuOpen }"></UICatalogMenu>
   </nav>
 </template>
 
 <script setup lang="ts">
-onMounted(() => {
-  if (window.innerWidth < 1200) {
-    const burgerMenu = document.querySelector<HTMLElement>(
-      ".burger-menu-shadow"
-    )!;
-    const burgerBtn = document.querySelector(".header-mid__burger-btn")!;
-    burgerBtn.addEventListener("click", () => {
-      burgerMenu.style.display = "block";
-    });
+const isBurgerMenuOpen = ref(false);
+const burgerLineStroke = ref("black");
 
-    /* styles from 768px to 1200px starts */
-    const burgerMenuBtn = document.querySelector<HTMLElement>(
-      ".header-mid__burger-btn-and-burger-text-flex--from768px"
-    )!;
-    burgerMenuBtn.addEventListener("click", () => {
-      const svgElement = document.querySelector(".header-mid__burger-btn svg")!;
-      const lines = Array.from(svgElement.querySelectorAll("line"));
-      lines.forEach((line) => {
-        line.setAttribute("stroke", "#fb5a00");
-      });
+const toggleBurgerMenu = () => {
+  isBurgerMenuOpen.value = !isBurgerMenuOpen.value;
+  burgerLineStroke.value =
+    isBurgerMenuOpen.value && window.innerWidth < 1200 ? "#fb5a00" : "black";
+};
+const closeBurgerMenu = () => {
+  isBurgerMenuOpen.value = false;
+  burgerLineStroke.value = "black";
+};
 
-      burgerMenu.style.display = "block";
-    });
-    /* styles from 768px to 1200px ends */
-  }
-
-  if (window.innerWidth >= 768) {
-    const buttons = Array.from(
-      document.querySelectorAll<HTMLButtonElement>(
-        ".header-mid__btns-flex button"
-      )
-    );
-
-    buttons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        buttons.forEach((btn) => {
-          btn.style.background = "#FFF";
-          const svg = btn.querySelector("svg")!;
-          const path = svg.querySelector("path")!;
-          path.setAttribute("stroke", "black");
-        });
-
-        const currentButton = event.currentTarget as HTMLElement;
-        currentButton.style.backgroundColor = "#000";
-        const svg = currentButton.querySelector("svg")!;
-        const path = svg.querySelector("path")!;
-        path.setAttribute("stroke", "#FFF");
-      });
-    });
-  }
-});
-
-let isActive = false;
+const isCatalogMenuOpen = ref(false);
+const catalogLineStroke = ref("black");
 const toggleCatalogMenu = () => {
-  const catalogMenu = document.querySelector(".catalog")!;
-  catalogMenu.classList.toggle("catalog__menu--opened");
+  isCatalogMenuOpen.value = !isCatalogMenuOpen.value;
+  catalogLineStroke.value = isCatalogMenuOpen.value ? "#fb5a00" : "black";
 
-  const svgElement = document.querySelector(".header-mid__burger-btn svg")!;
-  const lines = Array.from(svgElement.querySelectorAll("line"));
-  if (isActive) {
-    lines.forEach((line) => {
-      line.setAttribute("stroke", "black");
-    });
-    isActive = false;
-  } else {
-    lines.forEach((line) => {
-      line.setAttribute("stroke", "#fb5a00");
-    });
-    isActive = true;
-  }
-  const burgerFlex = document.querySelector(
-    ".header-mid__burger-btn-and-burger-text-flex--from768px"
-  )!;
+  const catalogMenu = document.querySelector(".catalog")!;
+  const burgerFlex = document.querySelector(".header-mid__catalog-btn-body")!;
 
   document.addEventListener("click", (event) => {
     const targetElement = event.target as HTMLElement;
@@ -224,13 +254,25 @@ const toggleCatalogMenu = () => {
       !catalogMenu.contains(targetElement) &&
       !burgerFlex.contains(targetElement)
     ) {
-      catalogMenu.classList.remove("catalog__menu--opened");
-      lines.forEach((line) => {
-        line.setAttribute("stroke", "black");
-      });
-      isActive = false;
+      catalogLineStroke.value = "black";
+      isCatalogMenuOpen.value = false;
     }
   });
+};
+
+const activeButton = ref<string | null>(null);
+const setActiveButton = (button: string) => {
+  activeButton.value = button;
+};
+
+const searchIsActive = ref(false);
+const toggleSearch = (event: MouseEvent | TouchEvent) => {
+  searchIsActive.value = true;
+
+  /* if (!(event.target as HTMLElement).closest(".header-mid__search-btn")) {
+    searchIsActive.value = false;
+    console.log("outside");
+  } */
 };
 </script>
 
@@ -249,6 +291,10 @@ const toggleCatalogMenu = () => {
   justify-content: space-between;
   width: 100%;
 
+  &__menu-btn-body,
+  &__catalog-btn-body {
+    display: none;
+  }
   &__burger-btn {
     @include btn;
     width: 59px;
@@ -256,14 +302,14 @@ const toggleCatalogMenu = () => {
     padding-right: 1.438rem;
     border-right: 1px solid #eaeaea;
   }
-  &__burger-text--from768px,
-  &__burger-text--hidden-at320px {
+  &__title--from768px,
+  &__title--hidden-till1200px {
     display: none;
   }
   &__titles-list {
     display: none;
   }
-  &__btns-flex {
+  &__btns-container {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -272,6 +318,7 @@ const toggleCatalogMenu = () => {
     padding-right: 0.5rem;
     height: 70px;
   }
+  &__my-account-link,
   &__my-account-btn--from768px,
   &__search-btn--from768px {
     display: none;
@@ -281,6 +328,13 @@ const toggleCatalogMenu = () => {
     @include btn;
   }
 }
+.header-mid__btn.active,
+.header-mid__search-btn.active {
+  background-color: $Dark-Black;
+}
+.active svg path {
+  stroke: white;
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .header {
@@ -288,24 +342,32 @@ const toggleCatalogMenu = () => {
     margin: 0 auto;
   }
   .header-mid {
-    &__burger-btn-and-burger-text-flex--from768px {
+    &__menu-btn-body {
       display: flex;
       align-items: center;
-      margin-right: auto;
       margin-left: 1.614rem;
       cursor: pointer;
     }
-    &__burger-btn {
+    &__menu-btn {
+      @include btn;
+      width: 59px;
+      height: 70px;
       border-right: none;
       padding-right: 0rem;
     }
-    &__burger-text--from768px {
+    &__burger-btn {
+      display: none;
+    }
+    &__title--from768px {
       display: block;
       margin-top: -0.1rem;
       font-family: "Pragmatica Medium", sans-serif;
       font-size: 0.938rem;
     }
-    &__titles-flex {
+    &__title--visiblle-till1200px.active {
+      color: #fb5a00;
+    }
+    &__titles-container {
       display: flex;
       order: 2;
       margin-right: auto;
@@ -318,7 +380,7 @@ const toggleCatalogMenu = () => {
       border-right: 1px solid #eaeaea;
       order: 1;
     }
-    &__btns-flex {
+    &__btns-container {
       order: 3;
       padding-left: 0rem;
       padding-right: 0rem;
@@ -355,18 +417,18 @@ const toggleCatalogMenu = () => {
     justify-content: space-between;
     height: 45px;
 
-    &__titles-list-flex {
+    &__titles-list {
       @include ul;
       display: flex;
       align-items: center;
       gap: 2.5rem;
     }
-    &__titles-list-flex li {
+    &__titles-list li {
       font-family: "Pragmatica Book";
       font-size: 0.875rem;
       cursor: pointer;
     }
-    &__titles-list-flex li a {
+    &__titles-list li a {
       color: #585858;
     }
   }
@@ -383,11 +445,27 @@ const toggleCatalogMenu = () => {
     margin-top: 2.72rem;
   }
   .header-mid {
-    &__burger-text--hidden-at1200px,
+    &__menu-btn-body {
+      display: none;
+    }
+    &__catalog-btn-body {
+      display: flex;
+      align-items: center;
+      margin-left: 1.614rem;
+      cursor: pointer;
+    }
+    &__catalog-btn {
+      @include btn;
+      width: 59px;
+      height: 70px;
+      border-right: none;
+      padding-right: 0rem;
+    }
+    &__title--visiblle-till1200px,
     &__my-account-btn--from768px {
       display: none;
     }
-    &__titles-flex {
+    &__titles-container {
       display: flex;
       align-items: center;
       gap: 3.563rem;
@@ -412,7 +490,7 @@ const toggleCatalogMenu = () => {
     &__titles-list li:hover a {
       color: $Light-Orange;
     }
-    &__burger-text--hidden-at320px {
+    &__title--hidden-till1200px {
       display: block;
     }
     &__wishlist-counter-circle,
@@ -422,13 +500,13 @@ const toggleCatalogMenu = () => {
       margin-left: 3.8rem;
       margin-top: -3.9rem;
     }
-    &__burger-btn-opened {
+    &__catalog-btn-opened {
       color: $Dark-Orange;
     }
-    &__burger-btn-and-burger-text-flex--from768px:hover {
+    &__catalog-btn-body:hover {
       color: $Dark-Orange;
     }
-    &__burger-btn-and-burger-text-flex--from768px:hover svg line {
+    &__catalog-btn-body:hover svg line {
       stroke: $Dark-Orange;
     }
   }
@@ -438,7 +516,7 @@ const toggleCatalogMenu = () => {
   .header {
     padding: 0rem calc((100vw - 85rem) / 2);
   }
-  .header-mid__titles-flex {
+  .header-mid__titles-container {
     margin-left: 11.755rem;
   }
 }

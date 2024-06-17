@@ -5,11 +5,11 @@
       <span class="banner__text">{{ hero.bannerText }}</span>
     </div>
     <span class="card__title">{{ hero.title }}</span>
-    <div class="card__description-flex description-flex">
+    <div class="card__desc desc">
       <img src="/imgs/plus-gray.svg" alt="" />
-      <div class="description-flex__text">{{ hero.description }}</div>
+      <div class="desc__text">{{ hero.description }}</div>
     </div>
-    <div class="card__btn-more-and-date-flex">
+    <div class="card__content">
       <button class="card__btn-more">Подробнее</button>
       <span class="card__date">{{ hero.date }}</span>
     </div>
@@ -38,6 +38,7 @@ const props = defineProps<{ hero: Hero }>();
   width: 89%;
   max-width: 296px;
   height: 387px;
+  cursor: pointer;
 
   &__hero {
     position: absolute;
@@ -55,11 +56,12 @@ const props = defineProps<{ hero: Hero }>();
     color: #fff;
     z-index: 2;
     top: 4rem;
+    transition: color 0.3s ease;
   }
-  &__description-flex {
+  &__desc {
     display: none;
   }
-  &__btn-more-and-date-flex {
+  &__content {
     position: relative;
     display: flex;
     align-items: center;
@@ -80,6 +82,9 @@ const props = defineProps<{ hero: Hero }>();
     font-size: 0.688rem;
     color: #fff;
   }
+}
+.card:hover .card__title {
+  color: $Dark-Orange;
 }
 .banner {
   position: absolute;
@@ -108,7 +113,7 @@ const props = defineProps<{ hero: Hero }>();
       font-size: 1.688rem;
       padding-right: 10rem;
     }
-    &__btn-more-and-date-flex {
+    &__content {
       bottom: -16.7rem;
     }
     &__btn-more {
@@ -118,7 +123,7 @@ const props = defineProps<{ hero: Hero }>();
       font-size: 0.813rem;
     }
   }
-  .description-flex {
+  .desc {
     position: absolute;
     display: flex;
     align-items: flex-start;

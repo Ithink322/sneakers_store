@@ -1,191 +1,182 @@
 <template>
-  <UIBreadcrump :breadcrumpTitle="'Индивидуальный заказ'"></UIBreadcrump>
-  <section class="entry">
-    <h1 class="entry__title">Индивидуальный заказ</h1>
-    <p class="entry__paragraph">
-      Здесь вы можете стать обладателем поистине уникальных и лимитированных
-      моделей кроссовок Nike, ожидая их<br
-        class="entry__paragraph-br--from1200px"
-      />
-      поступления в продажу. Мы ценим вашу страсть к стилю и предоставляем вам
-      уникальную возможность заказать<br
-        class="entry__paragraph-br--from1200px"
-      />
-      кроссовки, которые будут дополнением вашей индивидуальности.
-    </p>
-  </section>
-  <div class="order-conditions-and-contacts-flex">
-    <section class="order-conditions">
-      <h2 class="order-conditions__title">Условия заказа:</h2>
-      <div class="order-conditions__main-flex main-flex">
-        <div class="main-flex__num-and-point-flex num-and-point-flex">
-          <div class="num-and-point-flex__num">1.</div>
-          <div>
-            <span class="num-and-point-flex__text--bold">Выбор модели: </span>
-            <span class="num-and-point-flex__text"
-              >Ознакомьтесь с нашим каталогом лимитированных моделей и выберите
-              ту, которая вам больше всего понравилась.</span
-            >
-          </div>
-        </div>
-        <div class="main-flex__num-and-point-flex num-and-point-flex">
-          <div class="num-and-point-flex__num">2.</div>
-          <div>
-            <span class="num-and-point-flex__text--bold">Предоплата: </span>
-            <span class="num-and-point-flex__text"
-              >Для подтверждения вашего заказа требуется внести предоплату в
-              размере 100% от стоимости кроссовок.</span
-            >
-          </div>
-        </div>
-        <div class="main-flex__num-and-point-flex num-and-point-flex">
-          <div class="num-and-point-flex__num">3.</div>
-          <div>
-            <span class="num-and-point-flex__text--bold">Сроки ожидания: </span>
-            <span class="num-and-point-flex__text"
-              >Обычно срок поступления лимитированных кроссовок составляет 4-6
-              недель с момента оформления заказа и внесения предоплаты.</span
-            >
-          </div>
-        </div>
-        <div class="main-flex__num-and-point-flex num-and-point-flex">
-          <div class="num-and-point-flex__num">4.</div>
-          <div>
-            <span class="num-and-point-flex__text--bold"
-              >Уведомление о готовности:
-            </span>
-            <span class="num-and-point-flex__text"
-              >Как только заказанные кроссовки поступят в наш магазин, мы
-              отправим вам уведомление по электронной почте или SMS.</span
-            >
-          </div>
-        </div>
-        <div class="main-flex__num-and-point-flex num-and-point-flex">
-          <div class="num-and-point-flex__num">5.</div>
-          <div>
-            <span class="num-and-point-flex__text--bold">Доставка: </span>
-            <span class="num-and-point-flex__text"
-              >После полной оплаты мы доставим ваши уникальные кроссовки прямо к
-              вам по указанному адресу.</span
-            >
-          </div>
-        </div>
-      </div>
+  <UIBreadcrumb :breadcrumbTitle="'Индивидуальный заказ'"></UIBreadcrumb>
+  <main>
+    <section class="entry">
+      <h1 class="entry__title">Индивидуальный заказ</h1>
+      <p class="entry__slogan">
+        Здесь вы можете стать обладателем поистине уникальных и лимитированных
+        моделей кроссовок Nike, ожидая их<br
+          class="entry__slogan-br entry__slogan-br--from1200px"
+        />
+        поступления в продажу. Мы ценим вашу страсть к стилю и предоставляем вам
+        уникальную возможность заказать<br
+          class="entry__slogan-br entry__slogan-br--from1200px"
+        />
+        кроссовки, которые будут дополнением вашей индивидуальности.
+      </p>
     </section>
-    <section v-if="contactsIsVisible" class="contacts">
-      <form
-        @submit.prevent="submitForm"
-        class="contacts-main-flex contacts__main-flex"
-      >
-        <div
-          class="contacts-main-flex__input-and-label-flex input-and-label-flex"
-        >
-          <label for="username" class="input-and-label-flex__label label"
-            >Ваше имя <span class="label__star">*</span></label
-          >
-          <input
-            v-model="name"
-            @input="nameOnInput"
-            placeholder="Как вас зовут"
-            type="text"
-            class="input-and-label-flex__input"
-            id="username"
-            :class="{
-              'invalid-name': nameIsEmpty,
-            }"
-          />
-          <span
-            v-if="nameIsEmpty"
-            class="input-and-label-flex__notice input-and-label-flex__empty-notice"
-            >Важно заполнить это поле.</span
-          >
-        </div>
-        <div
-          class="contacts-main-flex__input-and-label-flex input-and-label-flex"
-        >
-          <label for="telephone" class="input-and-label-flex__label label"
-            >Номер телефона <span class="label__star">*</span></label
-          >
-          <input
-            v-model="phoneNumber"
-            @input="phoneOnInput"
-            placeholder="+7 (___) ___ - ___ - ___"
-            type="text"
-            class="input-and-label-flex__input"
-            id="telephone"
-            :class="{
-              'invalid-phone': phoneIsEmpty,
-            }"
-          />
-          <span
-            v-if="phoneIsEmpty"
-            class="input-and-label-flex__notice input-and-label-flex__empty-notice"
-            >Важно заполнить это поле.</span
-          >
-        </div>
-        <div
-          class="contacts-main-flex__input-and-label-flex input-and-label-flex"
-        >
-          <label for="email" class="input-and-label-flex__label label"
-            >Email <span class="label__star">*</span></label
-          >
-          <input
-            v-model="email"
-            @input="emailOnInput"
-            placeholder="Введите ваш email адрес"
-            type="text"
-            class="input-and-label-flex__input"
-            id="email"
-            :class="{
-              'invalid-email--empty': emailIsEmpty,
-              'invalid-email': !emailIsValid,
-            }"
-          />
-          <span
-            v-if="emailIsEmpty"
-            class="input-and-label-flex__notice input-and-label-flex__empty-notice"
-            >Важно заполнить это поле.</span
-          >
-          <span
-            v-if="!emailIsValid"
-            class="input-and-label-flex__notice input-and-label-flex__valid-notice"
-            >Введите корректный адрес электронной почты.</span
-          >
-        </div>
-        <div
-          class="contacts-main-flex__input-and-label-flex input-and-label-flex"
-        >
-          <label for="message" class="input-and-label-flex__label label"
-            >Сообщение</label
-          >
-          <textarea
-            placeholder="Укажите любой другой способ связи"
-            class="input-and-label-flex__textarea"
-            id="message"
-          ></textarea>
-        </div>
-        <div class="contacts-main-flex__send-flex send-flex">
-          <button class="send-flex__send-btn send-btn">
-            <div class="send-btn__flex">
-              <span class="send-btn__text">Отправить</span>
+    <div class="container">
+      <section class="order-conditions">
+        <h2 class="order-conditions__title">Условия заказа:</h2>
+        <div class="order-conditions__body body">
+          <div class="body__content content">
+            <div class="content__num">1.</div>
+            <div>
+              <span class="content__text--bold">Выбор модели: </span>
+              <span class="content__text"
+                >Ознакомьтесь с нашим каталогом лимитированных моделей и
+                выберите ту, которая вам больше всего понравилась.</span
+              >
             </div>
-            <div class="send-flex__send-btn-arrow send-btn__arrow">
-              <img src="/imgs/white-right-arrow.svg" alt="" />
+          </div>
+          <div class="body__content content">
+            <div class="content__num">2.</div>
+            <div>
+              <span class="content__text--bold">Предоплата: </span>
+              <span class="content__text"
+                >Для подтверждения вашего заказа требуется внести предоплату в
+                размере 100% от стоимости кроссовок.</span
+              >
             </div>
-          </button>
-          <span class="send-flex__note"
-            >Нажимая кнопку “Отправить” я соглашаюсь с
-            <span class="send-flex__note--underlined"
-              ><NuxtLink to="/PrivacyPolicy"
-                >политикой конфиденциальности</NuxtLink
+          </div>
+          <div class="body__content content">
+            <div class="content__num">3.</div>
+            <div>
+              <span class="content__text--bold">Сроки ожидания: </span>
+              <span class="content__text"
+                >Обычно срок поступления лимитированных кроссовок составляет 4-6
+                недель с момента оформления заказа и внесения предоплаты.</span
+              >
+            </div>
+          </div>
+          <div class="body__content content">
+            <div class="content__num">4.</div>
+            <div>
+              <span class="content__text--bold"
+                >Уведомление о готовности:
+              </span>
+              <span class="content__text"
+                >Как только заказанные кроссовки поступят в наш магазин, мы
+                отправим вам уведомление по электронной почте или SMS.</span
+              >
+            </div>
+          </div>
+          <div class="body__content content">
+            <div class="content__num">5.</div>
+            <div>
+              <span class="content__text--bold">Доставка: </span>
+              <span class="content__text"
+                >После полной оплаты мы доставим ваши уникальные кроссовки прямо
+                к вам по указанному адресу.</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+      <section v-if="contactsIsVisible" class="contacts">
+        <form @submit.prevent="submitForm" class="contacts-form">
+          <div class="contacts-form__body contacts-body">
+            <label for="username" class="contacts-body__label label"
+              >Ваше имя <span class="label__star">*</span></label
+            >
+            <input
+              v-model="name"
+              @input="nameOnInput"
+              placeholder="Как вас зовут"
+              type="text"
+              class="contacts-body__input"
+              id="username"
+              :class="{
+                'invalid-name': nameIsEmpty,
+              }"
+            />
+            <span
+              v-if="nameIsEmpty"
+              class="contacts-body__notice contacts-body__empty-notice"
+              >Важно заполнить это поле.</span
+            >
+          </div>
+          <div class="contacts-form__body contacts-body">
+            <label for="telephone" class="contacts-body__label label"
+              >Номер телефона <span class="label__star">*</span></label
+            >
+            <input
+              v-model="phoneNumber"
+              @input="phoneOnInput"
+              placeholder="+7 (___) ___ - ___ - ___"
+              type="text"
+              class="contacts-body__input"
+              id="telephone"
+              :class="{
+                'invalid-phone': phoneIsEmpty,
+              }"
+            />
+            <span
+              v-if="phoneIsEmpty"
+              class="contacts-body__notice contacts-body__empty-notice"
+              >Важно заполнить это поле.</span
+            >
+          </div>
+          <div class="contacts-form__body contacts-body">
+            <label for="email" class="contacts-body__label label"
+              >Email <span class="label__star">*</span></label
+            >
+            <input
+              v-model="email"
+              @input="emailOnInput"
+              placeholder="Введите ваш email адрес"
+              type="text"
+              class="contacts-body__input"
+              id="email"
+              :class="{
+                'invalid-email--empty': emailIsEmpty,
+                'invalid-email': !emailIsValid,
+              }"
+            />
+            <span
+              v-if="emailIsEmpty"
+              class="contacts-body__notice contacts-body__empty-notice"
+              >Важно заполнить это поле.</span
+            >
+            <span
+              v-if="!emailIsValid"
+              class="contacts-body__notice contacts-body__valid-notice"
+              >Введите корректный адрес электронной почты.</span
+            >
+          </div>
+          <div class="contacts-form__body contacts-body">
+            <label for="message" class="contacts-body__label label"
+              >Сообщение</label
+            >
+            <textarea
+              placeholder="Укажите любой другой способ связи"
+              class="contacts-body__textarea"
+              id="message"
+            ></textarea>
+          </div>
+          <div class="send">
+            <button class="send__send-btn send-btn">
+              <div class="send-btn__content">
+                <span class="send-btn__text">Отправить</span>
+              </div>
+              <div class="send-btn__arrow-area send-btn__arrow">
+                <img src="/imgs/white-right-arrow.svg" alt="" />
+              </div>
+            </button>
+            <span class="send__note"
+              >Нажимая кнопку “Отправить” я соглашаюсь с
+              <span class="send__note--underlined"
+                ><NuxtLink to="/PrivacyPolicy"
+                  >политикой конфиденциальности</NuxtLink
+                ></span
               ></span
-            ></span
-          >
-        </div>
-      </form>
-    </section>
-    <UIThankNotice v-if="thankNoticeIsVisible"></UIThankNotice>
-  </div>
+            >
+          </div>
+        </form>
+      </section>
+      <UIThankNotice v-if="thankNoticeIsVisible"></UIThankNotice>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -208,9 +199,6 @@ const phoneIsEmpty = ref(false);
 const emailIsEmpty = ref(false);
 const emailIsValid = ref(true);
 
-const thankNoticeIsVisible = ref(false);
-const contactsIsVisible = ref(true);
-
 const nameOnInput = () => {
   nameIsEmpty.value = name.value === "";
 };
@@ -223,6 +211,9 @@ const emailOnInput = () => {
 const phoneOnInput = () => {
   phoneIsEmpty.value = phoneNumber.value === "";
 };
+
+const thankNoticeIsVisible = ref(false);
+const contactsIsVisible = ref(true);
 
 const submitForm = () => {
   if (name.value === "") {
@@ -265,6 +256,10 @@ const submitForm = () => {
   ) {
     thankNoticeIsVisible.value = true;
     contactsIsVisible.value = false;
+    /* setTimeout(() => {
+      thankNoticeIsVisible.value = false;
+      questionFormIsVisible.value = true;
+    }, 12000); */
   }
 };
 </script>
@@ -280,21 +275,22 @@ const submitForm = () => {
     margin-top: 0.938rem;
     margin-bottom: 0rem;
   }
-  &__paragraph {
+  &__slogan {
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
     line-height: 1.625rem;
     margin-top: 0.938rem;
     margin-bottom: 0rem;
   }
-  &__paragraph-br--from1200px {
+  &__slogan-br--from1200px {
     display: none;
   }
 }
-.order-conditions-and-contacts-flex {
+.container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding: 0rem;
 }
 .order-conditions {
   &__title {
@@ -305,12 +301,12 @@ const submitForm = () => {
     margin-bottom: 1.125rem;
   }
 }
-.main-flex {
+.body {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
-.num-and-point-flex {
+.content {
   display: flex;
   gap: 1.125rem;
 
@@ -346,12 +342,12 @@ const submitForm = () => {
   background-color: #ffffff;
   padding: 1.25rem;
 }
-.contacts-main-flex {
+.contacts-form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
-.input-and-label-flex {
+.contacts-body {
   display: flex;
   flex-direction: column;
   gap: 0.313rem;
@@ -398,7 +394,7 @@ const submitForm = () => {
     color: #ff1515;
   }
 }
-.send-flex {
+.send {
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
@@ -427,7 +423,7 @@ const submitForm = () => {
   width: 246px;
   height: 65px;
 
-  &__flex {
+  &__content {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -455,10 +451,10 @@ const submitForm = () => {
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .main-flex {
+  .body {
     flex-flow: row wrap;
   }
-  .num-and-point-flex {
+  .content {
     display: flex;
     gap: 1.125rem;
     width: 348px;
@@ -467,7 +463,7 @@ const submitForm = () => {
     padding: 2.5rem;
   }
   .thank-notice {
-    &__paragraph {
+    &__slogan {
       margin: 0.625rem 3rem 0 3rem;
     }
   }
@@ -477,19 +473,19 @@ const submitForm = () => {
   .entry {
     margin-bottom: 2.313rem;
 
-    &__paragraph-br--from1200px {
+    &__slogan-br--from1200px {
       display: block;
     }
   }
-  .order-conditions-and-contacts-flex {
+  .container {
     flex-direction: row;
     align-items: center;
     gap: 2rem;
   }
-  .main-flex {
+  .body {
     flex-flow: column nowrap;
   }
-  .num-and-point-flex {
+  .content {
     width: fit-content;
   }
   .contacts {
@@ -499,7 +495,7 @@ const submitForm = () => {
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
-  .order-conditions-and-contacts-flex {
+  .container {
     gap: 4.438rem;
   }
 }

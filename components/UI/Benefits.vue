@@ -1,59 +1,55 @@
 <template>
-  <div class="benefits-main-flex">
-    <div class="benefits-main-flex__benefit-flex benefit-flex">
+  <div class="benefits">
+    <div class="benefits__body body">
       <img
         src="/imgs/benefit-icon-original-products.svg"
         alt=""
-        class="benefit-flex__icon"
+        class="body__icon"
       />
-      <div class="benefit-flex__title-and-text-flex">
-        <span class="benefit-flex__title">ТОЛЬКО ОРИГИНАЛЬНЫЕ ТОВАРЫ</span>
-        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
+      <div class="body__content">
+        <span class="body__title">ТОЛЬКО ОРИГИНАЛЬНЫЕ ТОВАРЫ</span>
+        <span class="body__text body__text--nowrapfrom1920px"
           >Гарантированная подлинность Nike и<br
-            class="benefit-flex__text-br--from1920px"
+            class="body__text-br--from1920px"
           />
           высокое качество кроссовок.</span
         >
       </div>
     </div>
-    <div class="benefits-main-flex__benefit-flex benefit-flex">
+    <div class="benefits__body body">
       <img
         src="/imgs/benefit-professional-service.svg"
         alt=""
-        class="benefit-flex__icon"
+        class="body__icon"
       />
-      <div class="benefit-flex__title-and-text-flex">
-        <span class="benefit-flex__title">ПРОФЕССИОНАЛЬНЫЙ СЕРВИС</span>
-        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
+      <div class="body__content">
+        <span class="body__title">ПРОФЕССИОНАЛЬНЫЙ СЕРВИС</span>
+        <span class="body__text body__text--nowrapfrom1920px"
           >Команда экспертов, готовых помочь с<br
-            class="benefit-flex__text-br--from1920px"
+            class="body__text-br body__text-br--from1920px"
           />
           выбором размера ответить на все вопросы.</span
         >
       </div>
     </div>
-    <div class="benefits-main-flex__benefit-flex benefit-flex">
-      <img
-        src="/imgs/benefit-exclusive-choice.svg"
-        alt=""
-        class="benefit-flex__icon"
-      />
-      <div class="benefit-flex__title-and-text-flex">
-        <span class="benefit-flex__title">ЭКСКЛЮЗИВНЫЙ ВЫБОР</span>
-        <span class="benefit-flex__text benefit-flex__text--nowrapfrom1920px"
+    <div class="benefits__body body">
+      <img src="/imgs/benefit-exclusive-choice.svg" alt="" class="body__icon" />
+      <div class="body__content">
+        <span class="body__title">ЭКСКЛЮЗИВНЫЙ ВЫБОР</span>
+        <span class="body__text body__text--nowrapfrom1920px"
           >Богатый ассортимент оригинальных<br
-            class="benefit-flex__text-br--from1920px"
+            class="body__text-br body__text-br--from1920px"
           />
           моделей Nike, включая редкие выпуски.</span
         >
       </div>
     </div>
   </div>
-  <div class="border-bottom-for-benefits-main-flex"></div>
+  <div class="border-bottom-benefits"></div>
 </template>
 
 <style lang="scss" scoped>
-.benefits-main-flex {
+.benefits {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -61,13 +57,13 @@
   margin-top: 1.875rem;
   height: auto;
 
-  &__benefit-flex {
+  &__body {
     display: flex;
     align-items: flex-start;
     gap: 1.688rem;
   }
 }
-.benefits-main-flex::before {
+.benefits::before {
   position: absolute;
   content: "";
   width: calc(100% + 1.876rem);
@@ -75,20 +71,20 @@
   left: -0.938rem;
   margin-top: -1.875rem;
 }
-.border-bottom-for-benefits-main-flex {
+.border-bottom-benefits {
   position: absolute;
   width: 100%;
   border: 1px solid #eaeaea;
   left: 0rem;
   margin-top: 1.875rem;
 }
-.benefit-flex {
+.body {
   &__icon {
     width: 40px;
     height: 40px;
     flex-shrink: 0;
   }
-  &__title-and-text-flex {
+  &__content {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -108,12 +104,12 @@
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .benefits-main-flex {
+  .benefits {
     position: static;
     flex-direction: row;
     gap: 0.406rem;
 
-    &__benefit-flex {
+    &__body {
       gap: 0.625rem;
     }
     &::before {
@@ -126,7 +122,7 @@
       bottom: 0rem;
     }
   }
-  .benefit-flex {
+  .body {
     &__title {
       font-size: 0.688rem;
     }
@@ -134,21 +130,21 @@
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .benefits-main-flex {
+  .benefits {
     margin-top: 3.125rem;
     gap: 3.875rem;
 
-    &__benefit-flex {
+    &__body {
       gap: 1.25rem;
     }
   }
-  .benefits-main-flex::before {
+  .benefits::before {
     margin-top: -3.125rem;
   }
-  .border-bottom-for-benefits-main-flex {
+  .border-bottom-benefits {
     margin-top: 2.9rem;
   }
-  .benefit-flex {
+  .body {
     &__title {
       font-size: 1.125rem;
     }
@@ -159,10 +155,10 @@
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
-  .benefit-flex__text--nowrapfrom1920px {
+  .body__text--nowrapfrom1920px {
     white-space: nowrap;
   }
-  .benefit-flex__text-br--from1920px {
+  .body__text-br--from1920px {
     display: block;
   }
 }

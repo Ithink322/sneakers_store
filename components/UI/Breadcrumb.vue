@@ -1,16 +1,16 @@
 <template>
-  <div class="breadcrump">
-    <span class="breadcrump__home-title"
+  <div class="breadcrumb">
+    <span class="breadcrumb__home-title"
       ><NuxtLink to="/">Swoosh Store</NuxtLink></span
     >
-    <img class="breadcrump__arrow" src="/imgs/gray-arrow.svg" alt="" />
-    <span class="breadcrump__main-title">{{ breadcrumpTitle }}</span>
+    <img class="breadcrumb__arrow" src="/imgs/gray-arrow.svg" alt="" />
+    <span class="breadcrumb__main-title">{{ breadcrumbTitle }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
 defineProps({
-  breadcrumpTitle: {
+  breadcrumbTitle: {
     type: String,
     required: true,
   },
@@ -18,7 +18,7 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-.breadcrump {
+.breadcrumb {
   display: flex;
   gap: 0.563rem;
   padding: 1.25rem 0rem;
@@ -40,7 +40,7 @@ defineProps({
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .breadcrump {
+  .breadcrumb {
     gap: 0.938rem;
 
     span {

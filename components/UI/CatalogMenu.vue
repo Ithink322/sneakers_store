@@ -1,11 +1,11 @@
 <template>
   <div class="catalog">
     <div class="catalog__menu menu">
-      <div class="menu__main-flex">
-        <div class="menu__lists-flex">
-          <div class="menu__column-flex">
+      <div class="menu__body">
+        <div class="menu__lists">
+          <div class="menu__column">
             <span class="menu__column-title">Лето</span>
-            <ul class="menu__column-list-flex">
+            <ul class="menu__column-list">
               <li><nuxt-link to="">Для бега</nuxt-link></li>
               <li><nuxt-link to="">Повседневные</nuxt-link></li>
               <li><nuxt-link to="">Треккинг</nuxt-link></li>
@@ -16,28 +16,28 @@
               <li><nuxt-link to="">Спортивные</nuxt-link></li>
             </ul>
           </div>
-          <div class="menu__column-flex menu__middle-column-flex">
-            <div class="menu__column-flex">
+          <div class="menu__column menu__middle-column">
+            <div class="menu__column">
               <span class="menu__column-title">Демисезон</span>
-              <ul class="menu__column-list-flex">
+              <ul class="menu__column-list">
                 <li><nuxt-link to="">Для бега</nuxt-link></li>
                 <li><nuxt-link to="">Повседневные</nuxt-link></li>
                 <li><nuxt-link to="">Треккинг</nuxt-link></li>
                 <li><nuxt-link to="">Кожаные</nuxt-link></li>
               </ul>
             </div>
-            <div class="menu__column-flex">
+            <div class="menu__column">
               <span class="menu__column-title">Зима</span>
-              <ul class="menu__column-list-flex">
+              <ul class="menu__column-list">
                 <li><nuxt-link to="">Утепленные</nuxt-link></li>
                 <li><nuxt-link to="">Повседневные</nuxt-link></li>
                 <li><nuxt-link to="">Кожаные</nuxt-link></li>
               </ul>
             </div>
           </div>
-          <div class="menu__column-flex">
+          <div class="menu__column">
             <span class="menu__column-title">Модели</span>
-            <ul class="menu__column-list-flex">
+            <ul class="menu__column-list">
               <li><nuxt-link to="">Nike Air Force 1</nuxt-link></li>
               <li><nuxt-link to="">Nike SB Dunk Low</nuxt-link></li>
               <li><nuxt-link to="">Nike Air Max 90</nuxt-link></li>
@@ -81,28 +81,28 @@
     transition: max-height 0.15s ease-in-out;
     z-index: 2;
   }
-  .catalog__menu--opened {
+  .catalog.active {
     max-height: 100vh;
     transition: max-height 0.15s ease-in-out;
   }
   .menu {
     position: relative;
 
-    &__main-flex {
+    &__body {
       display: flex;
       justify-content: space-between;
       padding: 2.5rem calc((100vw - 71.875rem) / 2);
     }
-    &__lists-flex {
+    &__lists {
       display: flex;
       gap: 6.7rem;
     }
-    &__column-flex {
+    &__column {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
     }
-    &__middle-column-flex {
+    &__middle-column {
       display: flex;
       flex-direction: column;
       gap: 1.875rem;
@@ -111,7 +111,7 @@
       font-family: "Pragmatica Medium";
       font-size: 1.125rem;
     }
-    &__column-list-flex {
+    &__column-list {
       display: flex;
       flex-direction: column;
       gap: 0.875rem;
@@ -119,11 +119,11 @@
       padding: 0rem;
       margin: 0rem;
     }
-    &__column-list-flex li {
+    &__column-list li {
       font-family: "Pragmatica Book";
       font-size: 0.875rem;
     }
-    &__column-list-flex li:hover {
+    &__column-list li:hover {
       color: $Blue;
       cursor: pointer;
     }
@@ -165,10 +165,10 @@
 /* 1440px = 90em */
 @media (min-width: 90em) {
   .menu {
-    &__main-flex {
+    &__body {
       padding: 2.5rem calc((100vw - 85rem) / 2);
     }
-    &__lists-flex {
+    &__lists {
       gap: 10.1rem;
     }
   }

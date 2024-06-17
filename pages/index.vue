@@ -1,328 +1,332 @@
 <template>
-  <div class="slider-advertises">
-    <div class="slider-advertises__overflow overflow">
-      <div class="overflow__flex">
-        <div class="overflow__slide overflow__slide-flex slide">
-          <div class="slide__title-and-text-flex">
-            <div>
-              <div class="slide__title-and-line-flex">
-                <span class="slide__title">AIR MAX</span>
-                <span class="slide__line"></span>
+  <main>
+    <div class="slider-sneakears">
+      <div class="slider-sneakears__overflow overflow">
+        <div class="overflow__container">
+          <div class="overflow__slide slide">
+            <div class="slide__body">
+              <div>
+                <div class="slide__content">
+                  <span class="slide__title">AIR MAX</span>
+                  <span class="slide__line"></span>
+                </div>
+                <span class="slide__title">FLYKNIT RACER</span>
               </div>
-              <span class="slide__title">FLYKNIT RACER</span>
+              <span class="slide__desc"
+                >Усиленный носок и прочный пластиковый каркас. Инновационная
+                технология раскрывается через перфорированную стельку</span
+              >
             </div>
-            <span class="slide__text"
-              >Усиленный носок и прочный пластиковый каркас. Инновационная
-              технология раскрывается через перфорированную стельку</span
-            >
+            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <div class="slide__text-link">
+              <span class="slide__text-price"
+                >от <span class="slide__price">9900 ₽</span></span
+              >
+              <NuxtLink to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__content">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
+            </div>
           </div>
-          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-          <div class="slide__text-price-and-more-btn-flex">
-            <span class="slide__text-price"
-              >от <span class="slide__price">9900 ₽</span></span
-            >
-            <NuxtLink to="">
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
+          <div class="overflow__slide slide">
+            <div class="slide__body">
+              <div>
+                <div class="slide__content">
+                  <span class="slide__title">AIR MAX</span>
+                  <span class="slide__line"></span>
                 </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
+                <span class="slide__title">FLYKNIT RACER</span>
+              </div>
+              <span class="slide__desc"
+                >Усиленный носок и прочный пластиковый каркас. Инновационная
+                технология раскрывается через перфорированную стельку</span
+              >
+            </div>
+            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <div class="slide__text-link">
+              <span class="slide__text-price"
+                >от <span class="slide__price">8800 ₽</span></span
+              >
+              <NuxtLink to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__content">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
+            </div>
+          </div>
+          <div class="overflow__slide slide">
+            <div class="slide__body">
+              <div>
+                <div class="slide__content">
+                  <span class="slide__title">AIR MAX</span>
+                  <span class="slide__line"></span>
                 </div>
-              </button>
-            </NuxtLink>
+                <span class="slide__title">FLYKNIT RACER</span>
+              </div>
+              <span class="slide__desc"
+                >Усиленный носок и прочный пластиковый каркас. Инновационная
+                технология раскрывается через перфорированную стельку</span
+              >
+            </div>
+            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <div class="slide__text-link">
+              <span class="slide__text-price"
+                >от <span class="slide__price">7700 ₽</span></span
+              >
+              <NuxtLink to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__content">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
+            </div>
+          </div>
+          <div class="overflow__slide slide">
+            <div class="slide__body">
+              <div>
+                <div class="slide__content">
+                  <span class="slide__title">AIR MAX</span>
+                  <span class="slide__line"></span>
+                </div>
+                <span class="slide__title">FLYKNIT RACER</span>
+              </div>
+              <span class="slide__desc"
+                >Усиленный носок и прочный пластиковый каркас. Инновационная
+                технология раскрывается через перфорированную стельку</span
+              >
+            </div>
+            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <div class="slide__text-link">
+              <span class="slide__text-price"
+                >от <span class="slide__price">6600 ₽</span></span
+              >
+              <NuxtLink to="">
+                <button class="slide__more-btn more-btn">
+                  <div class="more-btn__content">
+                    <span class="more-btn__text">Подробнее</span>
+                  </div>
+                  <div class="more-btn__arrow">
+                    <img src="/imgs/white-right-arrow.svg" alt="" />
+                  </div>
+                </button>
+              </NuxtLink>
+            </div>
           </div>
         </div>
-        <div class="overflow__slide overflow__slide-flex slide">
-          <div class="slide__title-and-text-flex">
-            <div>
-              <div class="slide__title-and-line-flex">
-                <span class="slide__title">AIR MAX</span>
-                <span class="slide__line"></span>
-              </div>
-              <span class="slide__title">FLYKNIT RACER</span>
-            </div>
-            <span class="slide__text"
-              >Усиленный носок и прочный пластиковый каркас. Инновационная
-              технология раскрывается через перфорированную стельку</span
-            >
-          </div>
-          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-          <div class="slide__text-price-and-more-btn-flex">
-            <span class="slide__text-price"
-              >от <span class="slide__price">8800 ₽</span></span
-            >
-            <NuxtLink to="">
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
-            </NuxtLink>
-          </div>
+        <div class="overflow__slider-controls slider-controls">
+          <button class="slider-controls__prev-btn">
+            <img src="/imgs/prev-btn-arrow.svg" alt="" />
+          </button>
+          <button class="slider-controls__next-btn">
+            <img src="/imgs/next-btn-arrow.svg" alt="" />
+          </button>
         </div>
-        <div class="overflow__slide overflow__slide-flex slide">
-          <div class="slide__title-and-text-flex">
-            <div>
-              <div class="slide__title-and-line-flex">
-                <span class="slide__title">AIR MAX</span>
-                <span class="slide__line"></span>
-              </div>
-              <span class="slide__title">FLYKNIT RACER</span>
-            </div>
-            <span class="slide__text"
-              >Усиленный носок и прочный пластиковый каркас. Инновационная
-              технология раскрывается через перфорированную стельку</span
-            >
-          </div>
-          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-          <div class="slide__text-price-and-more-btn-flex">
-            <span class="slide__text-price"
-              >от <span class="slide__price">7700 ₽</span></span
-            >
-            <NuxtLink to="">
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
-            </NuxtLink>
-          </div>
-        </div>
-        <div class="overflow__slide overflow__slide-flex slide">
-          <div class="slide__title-and-text-flex">
-            <div>
-              <div class="slide__title-and-line-flex">
-                <span class="slide__title">AIR MAX</span>
-                <span class="slide__line"></span>
-              </div>
-              <span class="slide__title">FLYKNIT RACER</span>
-            </div>
-            <span class="slide__text"
-              >Усиленный носок и прочный пластиковый каркас. Инновационная
-              технология раскрывается через перфорированную стельку</span
-            >
-          </div>
-          <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
-          <div class="slide__text-price-and-more-btn-flex">
-            <span class="slide__text-price"
-              >от <span class="slide__price">6600 ₽</span></span
-            >
-            <NuxtLink to="">
-              <button class="slide__more-btn more-btn">
-                <div class="more-btn__flex">
-                  <span class="more-btn__text">Подробнее</span>
-                </div>
-                <div class="more-btn__arrow">
-                  <img src="/imgs/white-right-arrow.svg" alt="" />
-                </div>
-              </button>
-            </NuxtLink>
-          </div>
+        <div class="overflow__indicators-flex indicators-flex">
+          <div
+            class="indicators-flex__indicator indicators-flex__indicator--active"
+          ></div>
+          <div class="indicators-flex__indicator"></div>
+          <div class="indicators-flex__indicator"></div>
+          <div class="indicators-flex__indicator"></div>
         </div>
       </div>
-      <div class="overflow__prev-and-next-btns-flex">
-        <button class="overflow__prev-btn">
-          <img src="/imgs/prev-btn-arrow.svg" alt="" />
+    </div>
+    <UIBenefits></UIBenefits>
+    <div class="latest-arrivals products-catalog">
+      <h2 class="latest-arrivals__title products-catalog__title">
+        ПОСЛЕДНИЕ<br />
+        ПОСТУПЛЕНИЯ
+      </h2>
+      <div class="latest-arrivals__btns-flex products-catalog__btns-flex">
+        <button
+          @click="latestArrivalsPrevSlide"
+          class="latest-arrivals__prev-btn latest-arrivals__btn products-catalog__btn"
+        >
+          <svg
+            width="34"
+            height="14"
+            viewBox="0 0 34 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.4"
+              d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
+              fill="black"
+            />
+          </svg>
         </button>
-        <button class="overflow__next-btn">
-          <img src="/imgs/next-btn-arrow.svg" alt="" />
+        <button
+          @click="latestArrivalsNextSlide"
+          class="latest-arrivals__next-btn latest-arrivals__btn products-catalog__btn"
+        >
+          <svg
+            width="34"
+            height="14"
+            viewBox="0 0 34 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
+              fill="black"
+            />
+          </svg>
         </button>
       </div>
-      <div class="overflow__indicators-flex indicators-flex">
-        <div
-          class="indicators-flex__indicator indicators-flex__indicator--active"
-        ></div>
-        <div class="indicators-flex__indicator"></div>
-        <div class="indicators-flex__indicator"></div>
-        <div class="indicators-flex__indicator"></div>
+      <UIProductsCatalogList
+        :latestProducts="latestProducts"
+      ></UIProductsCatalogList>
+    </div>
+    <div class="best-selling products-catalog">
+      <h2 class="best-selling__title products-catalog__title">
+        САМЫЕ<br />
+        ПРОДАВАЕМЫЕ
+      </h2>
+      <div class="best-selling__btns-flex products-catalog__btns-flex">
+        <button
+          @click="hitProductsPrevSlide"
+          class="best-selling__prev-btn latest-arrivals__btn products-catalog__btn"
+        >
+          <svg
+            width="34"
+            height="14"
+            viewBox="0 0 34 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.4"
+              d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
+              fill="black"
+            />
+          </svg>
+        </button>
+        <button
+          @click="hitProductsNextSlide"
+          class="best-selling__next-btn latest-arrivals__btn products-catalog__btn"
+        >
+          <svg
+            width="34"
+            height="14"
+            viewBox="0 0 34 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
+              fill="black"
+            />
+          </svg>
+        </button>
+      </div>
+      <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
+    </div>
+    <div class="season-hit">
+      <div class="season-hit__body">
+        <span class="season-hit__title">ХИТ СЕЗОНА</span>
+        <div class="season-hit__content">
+          <span class="season-hit__title">ОТ NIKE</span>
+          <span class="season-hit__line"></span>
+        </div>
+        <span class="season-hit__subtitle"
+          >Nike Air Max Alpha<br />
+          Trainer 5</span
+        >
+        <span class="season-hit__price-text"
+          >от <span class="season-hit__price">7 899 ₽</span></span
+        >
+      </div>
+      <NuxtLink to="">
+        <button class="season-hit__more-btn more-btn">
+          <div class="more-btn__content">
+            <span class="more-btn__text">Подробнее</span>
+          </div>
+          <div class="more-btn__arrow-area more-btn__arrow">
+            <img src="/imgs/white-right-arrow.svg" alt="" />
+          </div>
+        </button>
+      </NuxtLink>
+      <img
+        class="season-hit__hero season-hit__hero--from320px"
+        src="/imgs/season-hit-hero--from320px.svg"
+        alt=""
+      />
+      <img
+        class="season-hit__hero season-hit__hero--from1440px"
+        src="/imgs/season-hit-hero--from1440px.svg"
+        alt=""
+      />
+      <div class="season-hit__text">
+        <img src="/imgs/plus-gray.svg" alt="" />
+        <span class="season-hit__desc"
+          >Уникальная технология структуры стельки позволяет забыть про обувь на
+          ноге.</span
+        >
       </div>
     </div>
-  </div>
-  <UIBenefits></UIBenefits>
-  <div class="latest-arrivals products-catalog">
-    <h2 class="latest-arrivals__title products-catalog__title">
-      ПОСЛЕДНИЕ<br />
-      ПОСТУПЛЕНИЯ
-    </h2>
-    <div class="latest-arrivals__btns-flex products-catalog__btns-flex">
-      <button
-        @click="latestArrivalsPrevSlide"
-        class="latest-arrivals__prev-btn latest-arrivals__btn products-catalog__btn"
-      >
-        <svg
-          width="34"
-          height="14"
-          viewBox="0 0 34 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+    <UIRecentPublicationsList></UIRecentPublicationsList>
+    <UIProductsWithDiscountList></UIProductsWithDiscountList>
+    <div class="banners">
+      <div class="banners__collection-banner collection-banner">
+        <img
+          src="/imgs/collection-hero-1.svg"
+          alt=""
+          class="collection-banner__hero"
+        />
+        <span class="collection-banner__title"
+          >Новая коллекция в<br />
+          каталоге Nike Air<br />
+          Max Solo</span
         >
-          <path
-            opacity="0.4"
-            d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
-            fill="black"
-          />
-        </svg>
-      </button>
-      <button
-        @click="latestArrivalsNextSlide"
-        class="latest-arrivals__next-btn latest-arrivals__btn products-catalog__btn"
-      >
-        <svg
-          width="34"
-          height="14"
-          viewBox="0 0 34 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
-            fill="black"
-          />
-        </svg>
-      </button>
-    </div>
-    <UIProductsCatalogList
-      :latestProducts="latestProducts"
-    ></UIProductsCatalogList>
-  </div>
-  <div class="best-selling products-catalog">
-    <h2 class="best-selling__title products-catalog__title">
-      САМЫЕ<br />
-      ПРОДАВАЕМЫЕ
-    </h2>
-    <div class="best-selling__btns-flex products-catalog__btns-flex">
-      <button
-        @click="hitProductsPrevSlide"
-        class="best-selling__prev-btn latest-arrivals__btn products-catalog__btn"
-      >
-        <svg
-          width="34"
-          height="14"
-          viewBox="0 0 34 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            opacity="0.4"
-            d="M0.363604 7.6364C0.0121321 7.28493 0.012132 6.71508 0.363604 6.36361L6.09117 0.636042C6.44264 0.28457 7.01249 0.28457 7.36396 0.636041C7.71543 0.987513 7.71543 1.55736 7.36396 1.90883L2.27279 7L7.36396 12.0912C7.71543 12.4426 7.71543 13.0125 7.36396 13.364C7.01249 13.7154 6.44264 13.7154 6.09117 13.364L0.363604 7.6364ZM34 7.9L1 7.9L1 6.1L34 6.1L34 7.9Z"
-            fill="black"
-          />
-        </svg>
-      </button>
-      <button
-        @click="hitProductsNextSlide"
-        class="best-selling__next-btn latest-arrivals__btn products-catalog__btn"
-      >
-        <svg
-          width="34"
-          height="14"
-          viewBox="0 0 34 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M33.6364 6.3636C33.9879 6.71507 33.9879 7.28492 33.6364 7.63639L27.9088 13.364C27.5574 13.7154 26.9875 13.7154 26.636 13.364C26.2846 13.0125 26.2846 12.4426 26.636 12.0912L31.7272 7L26.636 1.90883C26.2846 1.55736 26.2846 0.987509 26.636 0.636037C26.9875 0.284565 27.5574 0.284565 27.9088 0.636037L33.6364 6.3636ZM-7.86805e-08 6.1L33 6.1L33 7.9L7.86805e-08 7.9L-7.86805e-08 6.1Z"
-            fill="black"
-          />
-        </svg>
-      </button>
-    </div>
-    <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
-  </div>
-  <div class="season-hit">
-    <div class="season-hit__content-flex">
-      <span class="season-hit__title">ХИТ СЕЗОНА</span>
-      <div class="season-hit__title-and-line-flex">
-        <span class="season-hit__title">ОТ NIKE</span>
-        <span class="season-hit__line"></span>
+        <button class="collection-banner__btn">Перейти в каталог</button>
       </div>
-      <span class="season-hit__subtitle"
-        >Nike Air Max Alpha<br />
-        Trainer 5</span
-      >
-      <span class="season-hit__price-text"
-        >от <span class="season-hit__price">7 899 ₽</span></span
-      >
+      <div class="banners__collection-banner collection-banner">
+        <img
+          src="/imgs/collection-hero-2.svg"
+          alt=""
+          class="collection-banner__hero"
+        />
+        <span class="collection-banner__title"
+          >Новая коллекция в<br />
+          каталоге Nike Air<br />
+          Max Solo</span
+        >
+        <button class="collection-banner__btn">Перейти в каталог</button>
+      </div>
     </div>
-    <NuxtLink to="">
-      <button class="season-hit__more-btn more-btn">
-        <div class="more-btn__flex">
-          <span class="more-btn__text">Подробнее</span>
-        </div>
-        <div class="season-hit__more-btn-arrow more-btn__arrow">
-          <img src="/imgs/white-right-arrow.svg" alt="" />
-        </div>
-      </button>
-    </NuxtLink>
-    <img
-      class="season-hit__hero--from320px"
-      src="/imgs/season-hit-hero--from320px.svg"
-      alt=""
-    />
-    <img
-      class="season-hit__hero--from1440px"
-      src="/imgs/season-hit-hero--from1440px.svg"
-      alt=""
-    />
-    <div class="season-hit__description-flex">
-      <img
-        src="/imgs/plus-gray.svg"
-        alt=""
-        class="season-hit__description-icon"
-      />
-      <span class="season-hit__description"
-        >Уникальная технология структуры стельки позволяет забыть про обувь на
-        ноге.</span
-      >
-    </div>
-  </div>
-  <UIRecentPublicationsList></UIRecentPublicationsList>
-  <UIProductsWithDiscountList></UIProductsWithDiscountList>
-  <div class="new-collection-banners-flex banners-flex">
-    <div class="banners-flex__collection-banner collection-banner">
-      <img
-        src="/imgs/collection-hero-1.svg"
-        alt=""
-        class="collection-banner__hero"
-      />
-      <span class="collection-banner__title"
-        >Новая коллекция в<br />
-        каталоге Nike Air<br />
-        Max Solo</span
-      >
-      <button class="collection-banner__btn">Перейти в каталог</button>
-    </div>
-    <div class="banners-flex__collection-banner collection-banner">
-      <img
-        src="/imgs/collection-hero-2.svg"
-        alt=""
-        class="collection-banner__hero"
-      />
-      <span class="collection-banner__title"
-        >Новая коллекция в<br />
-        каталоге Nike Air<br />
-        Max Solo</span
-      >
-      <button class="collection-banner__btn">Перейти в каталог</button>
-    </div>
-  </div>
-  <UIAboutUs></UIAboutUs>
+    <UIAboutUs></UIAboutUs>
+  </main>
 </template>
 
 <script setup lang="ts">
 onMounted(() => {
-  /* carousel for .overflow__flex from 1440px starts */
+  /* carousel for .overflow__container from 1440px starts */
   let slides = document.querySelectorAll(".overflow__slide");
-  const prevBtn = document.querySelector<HTMLElement>(".overflow__prev-btn")!,
-    nextBtn = document.querySelector<HTMLElement>(".overflow__next-btn")!,
-    carouselContainer = document.querySelector<HTMLElement>(".overflow__flex")!;
+  const prevBtn = document.querySelector<HTMLElement>(
+      ".slider-controls__prev-btn"
+    )!,
+    nextBtn = document.querySelector<HTMLElement>(
+      ".slider-controls__next-btn"
+    )!,
+    carouselContainer = document.querySelector<HTMLElement>(
+      ".overflow__container"
+    )!;
   let currentPosition = 0,
     currentIndex = 0,
     interval: any = null;
@@ -380,7 +384,7 @@ onMounted(() => {
       }
     });
   }
-  /* carousel for .overflow__flex from 1440px ends */
+  /* carousel for .overflow__container from 1440px ends */
 });
 
 interface Product {
@@ -1604,7 +1608,7 @@ let latestCurrentPosition = 0,
 
 onMounted(() => {
   SliderWrapper = document.querySelectorAll<HTMLElement>(
-    ".products-catalog__list-grid"
+    ".products-catalog__list"
   )!;
   SliderOverflow = document.querySelectorAll<HTMLElement>(
     ".products-catalog__overflow"
@@ -1815,29 +1819,27 @@ const hitProductsNextSlide = () => {
   overflow: hidden;
   padding-top: 2.375rem;
 
-  &__flex {
+  &__container {
     display: flex;
     transition: transform 0.5s ease-in-out;
   }
   &__slide {
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
     width: 100%;
   }
-  &__prev-and-next-btns-flex {
+  &__slider-controls {
     display: none;
   }
 }
-.overflow__slide-flex {
-  display: flex;
-  flex-direction: column;
-}
 .slide {
-  &__title-and-text-flex {
+  &__body {
     display: flex;
     flex-direction: column;
     gap: 0.563rem;
   }
-  &__title-and-line-flex {
+  &__content {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -1851,7 +1853,7 @@ const hitProductsNextSlide = () => {
     width: 110px;
     border: 1px solid $Dark-Black;
   }
-  &__text {
+  &__desc {
     display: block;
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
@@ -1863,7 +1865,7 @@ const hitProductsNextSlide = () => {
     width: calc(100% + 0.938rem * 2);
     margin-top: -2rem;
   }
-  &__text-price-and-more-btn-flex {
+  &__text-link {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -1888,8 +1890,9 @@ const hitProductsNextSlide = () => {
   background-color: $Light-Black;
   width: 246px;
   height: 65px;
+  z-index: 4;
 
-  &__flex {
+  &__content {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -1906,6 +1909,9 @@ const hitProductsNextSlide = () => {
     width: 65px;
     height: 65px;
     margin-left: auto;
+  }
+  &__arrow-area {
+    background-color: $Dark-Orange;
   }
 }
 .overflow__indicators-flex {
@@ -2006,7 +2012,7 @@ const hitProductsNextSlide = () => {
   overflow: hidden;
   margin: 4.375rem 0rem 3.75rem 0rem;
 
-  &__title-and-line-flex {
+  &__content {
     display: flex;
     gap: 0.625rem;
     align-items: center;
@@ -2045,9 +2051,6 @@ const hitProductsNextSlide = () => {
     max-width: 260px;
     background-color: $Light-Orange;
   }
-  &__more-btn-arrow {
-    background-color: $Dark-Orange;
-  }
   &__hero--from320px {
     width: calc(120% + 3.876rem);
     margin-top: 1.438rem;
@@ -2056,20 +2059,20 @@ const hitProductsNextSlide = () => {
   &__hero--from1440px {
     display: none;
   }
-  &__description-flex {
+  &__text {
     display: flex;
     gap: 0.875rem;
     align-items: flex-start;
     margin-top: -3rem;
   }
-  &__description {
+  &__desc {
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
     line-height: 165%;
     color: #fff;
   }
 }
-.banners-flex {
+.banners {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2083,10 +2086,13 @@ const hitProductsNextSlide = () => {
   padding: 1.875rem;
   left: 0rem;
   right: 0rem;
+  cursor: pointer;
+  overflow: hidden;
 
   &__hero {
     width: calc(100% + 3.75rem);
     margin: -1.875rem;
+    transition: transform 0.5s ease;
   }
   &__title {
     position: absolute;
@@ -2107,7 +2113,9 @@ const hitProductsNextSlide = () => {
     z-index: 2;
   }
 }
-
+.collection-banner:hover .collection-banner__hero {
+  transform: scale(1.1);
+}
 /* 360px = 22.5em */
 @media (min-width: 22.5em) {
   .products-catalog__btns-flex {
@@ -2121,18 +2129,16 @@ const hitProductsNextSlide = () => {
     }
   }
 }
-
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .overflow__slide-flex {
-    flex-direction: row;
-  }
   .slide {
-    &__title-and-text-flex {
+    flex-direction: row;
+
+    &__body {
       order: 0;
       margin-top: 3.188rem;
     }
-    &__text {
+    &__desc {
       padding-right: 65%;
     }
     &__hero {
@@ -2141,7 +2147,7 @@ const hitProductsNextSlide = () => {
       width: calc(54% + 1.563rem * 2);
       margin-top: -1.75rem;
     }
-    &__text-price-and-more-btn-flex {
+    &__text-link {
       margin-top: 15.1rem;
       margin-left: -56.2rem;
     }
@@ -2171,11 +2177,11 @@ const hitProductsNextSlide = () => {
       margin-top: -19rem;
       margin-left: 13rem;
     }
-    &__description-flex {
+    &__text {
       display: none;
     }
   }
-  .banners-flex {
+  .banners {
     flex-direction: row;
   }
   .collection-banner {
@@ -2188,25 +2194,29 @@ const hitProductsNextSlide = () => {
     &__title {
       font-size: 4.313rem;
     }
-    &__title-and-line-flex {
+    &__content {
       gap: 1.688rem;
     }
-    &__text {
+    &__desc {
       font-size: 1.125rem;
       padding-right: 55%;
     }
-    &__text-price-and-more-btn-flex {
+    &__text-link {
       margin-top: 19.5rem;
       margin-left: -67.5rem;
     }
   }
   .overflow {
     height: fit-content;
-    &__prev-and-next-btns-flex {
-      display: flex;
-      gap: 0.875rem;
+
+    &__slider-controls {
       margin-top: -14rem;
     }
+  }
+  .slider-controls {
+    display: flex;
+    gap: 0.875rem;
+
     &__prev-btn,
     &__next-btn {
       @include btn;
@@ -2245,7 +2255,7 @@ const hitProductsNextSlide = () => {
     &__hero--from320px {
       margin-left: 20rem;
     }
-    &__description-flex {
+    &__text {
       display: flex;
       margin-top: -11rem;
       margin-left: 50rem;
@@ -2270,7 +2280,7 @@ const hitProductsNextSlide = () => {
 /* 1440px = 90em */
 @media (min-width: 90em) {
   .slide {
-    &__title-and-text-flex {
+    &__body {
       margin-top: 7.875rem;
     }
     &__hero {
@@ -2278,14 +2288,14 @@ const hitProductsNextSlide = () => {
       margin-top: -4.25rem;
       width: calc(54% + 1.563rem * 2);
     }
-    &__text-price-and-more-btn-flex {
+    &__text-link {
       margin-top: 24.1rem;
     }
   }
   .overflow {
     height: 752px;
 
-    &__prev-and-next-btns-flex {
+    &__slider-controls {
       margin-top: -14.75rem;
     }
   }
@@ -2303,10 +2313,10 @@ const hitProductsNextSlide = () => {
     padding: 4.375rem;
     margin-top: 7.188rem;
 
-    &__content-flex {
+    &__body {
       margin-top: 1.7rem;
     }
-    &__title-and-line-flex {
+    &__content {
       gap: 1rem;
     }
     &__title {
@@ -2326,8 +2336,7 @@ const hitProductsNextSlide = () => {
       margin-top: -30rem;
       margin-left: -7rem;
     }
-    &__description-flex {
-      display: flex;
+    &__text {
       margin-top: -9rem;
       margin-left: 58rem;
     }
@@ -2339,7 +2348,7 @@ const hitProductsNextSlide = () => {
     width: 1500px;
     margin-left: -4.375rem;
 
-    &__description-flex {
+    &__text {
       margin-top: -13.3rem;
       margin-left: 67rem;
     }

@@ -4,8 +4,8 @@
       ПОСЛЕДНИЕ<br />
       ПУБЛИКАЦИИ
     </h2>
-    <div class="recent-publications__btns-flex btns-flex">
-      <button @click="PrevSlide" class="btns-flex__prev-btn btns-flex__btn">
+    <div class="recent-publications__btns btns">
+      <button @click="PrevSlide" class="btns__prev-btn btns__btn">
         <svg
           width="34"
           height="14"
@@ -20,7 +20,7 @@
           />
         </svg>
       </button>
-      <button @click="NextSlide" class="btns-flex__next-btn btns-flex__btn">
+      <button @click="NextSlide" class="btns__next-btn btns__btn">
         <svg
           width="34"
           height="14"
@@ -141,8 +141,8 @@ onMounted(() => {
 });
 
 const PrevSlide = () => {
-  const svgPathPrev = document.querySelector(".btns-flex__prev-btn svg path");
-  const svgPathNext = document.querySelector(".btns-flex__next-btn svg path");
+  const svgPathPrev = document.querySelector(".btns__prev-btn svg path");
+  const svgPathNext = document.querySelector(".btns__next-btn svg path");
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "1";
@@ -158,8 +158,8 @@ const PrevSlide = () => {
   SliderWrapper!.style.transform = `translateX(${CurrentPosition}px)`;
 };
 const NextSlide = () => {
-  const svgPathPrev = document.querySelector(".btns-flex__prev-btn svg path");
-  const svgPathNext = document.querySelector(".btns-flex__next-btn svg path");
+  const svgPathPrev = document.querySelector(".btns__prev-btn svg path");
+  const svgPathNext = document.querySelector(".btns__next-btn svg path");
 
   if (svgPathPrev && svgPathNext) {
     (svgPathPrev as HTMLElement).style.opacity = "0.4";
@@ -187,7 +187,7 @@ const NextSlide = () => {
     color: $Dark-Black;
     margin: 0rem;
   }
-  &__btns-flex {
+  &__btns {
     position: absolute;
     top: 0.4rem;
     right: 0rem;
@@ -203,7 +203,7 @@ const NextSlide = () => {
     transition: transform 0.5s ease-in-out;
   }
 }
-.btns-flex {
+.btns {
   display: flex;
   gap: 0.938rem;
 
@@ -214,7 +214,7 @@ const NextSlide = () => {
 
 /* 360px = 22.5em */
 @media (min-width: 22.5em) {
-  .btns-flex {
+  .btns {
     top: 2.438rem;
   }
 }

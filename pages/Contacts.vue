@@ -1,108 +1,110 @@
 <template>
-  <UIBreadcrump :breadcrumpTitle="'Наши контакты'"></UIBreadcrump>
-  <h1 class="title">Наши контакты</h1>
-  <nav class="nav-btns-flex">
-    <div
-      class="nav-btns-flex__border-bottom nav-btns-flex__border-bottom--left"
-    ></div>
-    <button
-      class="nav-btns-flex__kursk-btn"
-      :class="{ active: isKurskBtnActive }"
-      @click="toggleKurskBtn"
-    >
-      Курск
-    </button>
-    <button
-      class="nav-btns-flex__moscow-btn"
-      :class="{ active: isMoscowBtnActive }"
-      @click="toggleMoscowBtn"
-    >
-      Москва
-    </button>
-    <div
-      class="nav-btns-flex__border-bottom nav-btns-flex__border-bottom--right"
-    ></div>
-  </nav>
-  <section v-if="infoKurskIsVisible" class="info-kursk">
-    <UIContacts :KurskInfo="KurskInfo"></UIContacts>
-  </section>
-  <section v-if="infoMoscowIsVisible" class="info-moscow">
-    <UIContacts :MoscowInfo="MoscowInfo"></UIContacts>
-  </section>
-  <div class="wide-border"></div>
-  <section v-if="questionFormIsVisible" class="send-question">
-    <form @submit.prevent="submitForm" class="send-question-form">
-      <h2 class="send-question-form__title">
-        У вас есть вопросы? Напишите нам!
-      </h2>
-      <span class="send-question-form__span"
-        >Мы с радостью ответим на все интересующие вас вопросы.</span
+  <UIBreadcrumb :breadcrumbTitle="'Наши контакты'"></UIBreadcrumb>
+  <main>
+    <h1 class="title">Наши контакты</h1>
+    <nav class="city-selector">
+      <div
+        class="city-selector__border-bottom city-selector__border-bottom--left"
+      ></div>
+      <button
+        class="city-selector__kursk-btn"
+        :class="{ active: isKurskBtnActive }"
+        @click="toggleKurskBtn"
       >
-      <div class="send-question-form__main-flex main-flex">
-        <div class="main-flex__two-inputs-flex--from768px">
+        Курск
+      </button>
+      <button
+        class="city-selector__moscow-btn"
+        :class="{ active: isMoscowBtnActive }"
+        @click="toggleMoscowBtn"
+      >
+        Москва
+      </button>
+      <div
+        class="city-selector__border-bottom city-selector__border-bottom--right"
+      ></div>
+    </nav>
+    <section v-if="infoKurskIsVisible" class="info-kursk">
+      <UIContacts :KurskInfo="KurskInfo"></UIContacts>
+    </section>
+    <section v-if="infoMoscowIsVisible" class="info-moscow">
+      <UIContacts :MoscowInfo="MoscowInfo"></UIContacts>
+    </section>
+    <div class="wide-border"></div>
+    <section v-if="questionFormIsVisible" class="send-question">
+      <form @submit.prevent="submitForm" class="send-question-form">
+        <h2 class="send-question-form__title">
+          У вас есть вопросы? Напишите нам!
+        </h2>
+        <span class="send-question-form__text"
+          >Мы с радостью ответим на все интересующие вас вопросы.</span
+        >
+        <div class="send-question-form__content content">
+          <div class="content__wrapper content__wrapper--from768px">
+            <input
+              v-model="name"
+              @input="nameOnInput"
+              placeholder="Ваше имя"
+              type="text"
+              class="content__input"
+              :class="{
+                'invalid-name': nameIsEmpty,
+              }"
+            />
+            <span
+              v-if="nameIsEmpty"
+              class="content__notice content__notice-first-input"
+              >Важно заполнить это поле.</span
+            >
+            <input
+              v-model="email"
+              @input="emailOnInput"
+              placeholder="Ваш Email"
+              type="text"
+              class="content__input"
+              :class="{
+                'invalid-email--empty': emailIsEmpty,
+                'invalid-email': !emailIsValid,
+              }"
+            />
+            <span
+              v-if="emailIsEmpty"
+              class="content__notice content__notice-second-input"
+              >Важно заполнить это поле.</span
+            >
+            <span
+              v-if="!emailIsValid"
+              class="content__notice content__notice-second-input"
+              >Введите корректный email.</span
+            >
+          </div>
           <input
-            v-model="name"
-            @input="nameOnInput"
-            placeholder="Ваше имя"
+            v-model="question"
+            @input="questionOnInput"
+            placeholder="Текст вопроса"
             type="text"
-            class="main-flex__input"
+            class="content__input"
             :class="{
-              'invalid-name': nameIsEmpty,
+              'invalid-question': questionIsEmpty,
             }"
           />
           <span
-            v-if="nameIsEmpty"
-            class="main-flex__notice main-flex__notice-first-input"
+            v-if="questionIsEmpty"
+            class="content__notice content__notice-third-input"
             >Важно заполнить это поле.</span
           >
-          <input
-            v-model="email"
-            @input="emailOnInput"
-            placeholder="Ваш Email"
-            type="text"
-            class="main-flex__input"
-            :class="{
-              'invalid-email--empty': emailIsEmpty,
-              'invalid-email': !emailIsValid,
-            }"
-          />
-          <span
-            v-if="emailIsEmpty"
-            class="main-flex__notice main-flex__notice-second-input"
-            >Важно заполнить это поле.</span
-          >
-          <span
-            v-if="!emailIsValid"
-            class="main-flex__notice main-flex__notice-second-input"
-            >Введите корректный email.</span
+          <button class="content__btn">Отправить</button>
+          <span class="content__note"
+            >Нажимая кнопку “Отправить” я соглашаюсь с
+            <span class="content__link"
+              >политикой конфиденциальности</span
+            ></span
           >
         </div>
-        <input
-          v-model="question"
-          @input="questionOnInput"
-          placeholder="Текст вопроса"
-          type="text"
-          class="main-flex__input"
-          :class="{
-            'invalid-question': questionIsEmpty,
-          }"
-        />
-        <span
-          v-if="questionIsEmpty"
-          class="main-flex__notice main-flex__notice-third-input"
-          >Важно заполнить это поле.</span
-        >
-        <button class="main-flex__btn">Отправить</button>
-        <span class="main-flex__note"
-          >Нажимая кнопку “Отправить” я соглашаюсь с
-          <span class="main-flex__note--underlined"
-            >политикой конфиденциальности</span
-          ></span
-        >
-      </div>
-    </form>
-  </section>
-  <UIThankNotice v-if="thankNoticeIsVisible"></UIThankNotice>
+      </form>
+    </section>
+    <UIThankNotice v-if="thankNoticeIsVisible"></UIThankNotice>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -226,7 +228,7 @@ const showThankNotice = () => {
   margin-top: 0.938rem;
   margin-bottom: 1.5rem;
 }
-.nav-btns-flex {
+.city-selector {
   display: flex;
 
   &__border-bottom {
@@ -279,7 +281,7 @@ const showThankNotice = () => {
     color: #1d1d27;
     margin: 0rem;
   }
-  &__span {
+  &__text {
     display: block;
     text-align: center;
     font-family: "Pragmatica Book";
@@ -290,12 +292,12 @@ const showThankNotice = () => {
     margin-bottom: 0.938rem;
   }
 }
-.main-flex {
+.content {
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
 
-  &__two-inputs-flex--from768px {
+  &__wrapper--from768px {
     display: flex;
     flex-direction: column;
     gap: 1.875rem;
@@ -326,7 +328,7 @@ const showThankNotice = () => {
     font-size: 0.813rem;
     color: #6b6e72;
   }
-  &__note--underlined {
+  &__link {
     text-decoration: underline;
   }
   &__notice {
@@ -347,7 +349,7 @@ const showThankNotice = () => {
 
 /* 350px = 21.875em */
 @media (min-width: 21.875em) {
-  .nav-btns-flex {
+  .city-selector {
     &__border-bottom--right {
       flex-grow: 1;
     }
@@ -362,7 +364,7 @@ const showThankNotice = () => {
   .title {
     margin-bottom: 1.875rem;
   }
-  .nav-btns-flex {
+  .city-selector {
     margin: 0rem calc((100vw - 44.874rem) / (-2));
 
     &__border-bottom--left {
@@ -381,8 +383,8 @@ const showThankNotice = () => {
   .send-question {
     margin-top: 3.125rem;
   }
-  .main-flex {
-    &__two-inputs-flex--from768px {
+  .content {
+    &__wrapper--from768px {
       flex-direction: row;
     }
     &__notice-first-input {
@@ -400,7 +402,7 @@ const showThankNotice = () => {
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
-  .nav-btns-flex {
+  .city-selector {
     margin: 0rem calc((100vw - 44.75rem) / (-2));
 
     &__border-bottom--left {
@@ -417,7 +419,7 @@ const showThankNotice = () => {
     font-size: 2.813rem;
     margin-top: 1.563rem;
   }
-  .nav-btns-flex {
+  .city-selector {
     margin: 0rem calc((100vw - 71.875rem) / (-2));
 
     &__border-bottom--left {
@@ -448,12 +450,12 @@ const showThankNotice = () => {
     &__title {
       font-size: 2.188rem;
     }
-    &__span {
+    &__text {
       font-size: 1.188rem;
       line-height: 2.75rem;
     }
   }
-  .main-flex {
+  .content {
     &__btn {
       width: 360px;
       margin: 0 auto;
@@ -465,7 +467,7 @@ const showThankNotice = () => {
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
-  .nav-btns-flex {
+  .city-selector {
     margin: 0rem calc((100vw - 85rem) / (-2));
 
     &__border-bottom--left {

@@ -38,23 +38,21 @@
         />
       </svg>
     </button>
-    <div class="card__description-flex description-flex">
-      <span class="description-flex__category">{{ hero.category }}</span>
-      <span class="description-flex__title">{{ hero.title }}</span>
-      <div class="description-flex__colors-flex colors-flex">
-        <span class="colors-flex__text">Цвета:</span>
+    <div class="card__desc desc">
+      <span class="desc__category">{{ hero.category }}</span>
+      <span class="desc__title">{{ hero.title }}</span>
+      <div class="desc__colors colors">
+        <span class="colors__text">Цвета:</span>
         <div
           v-for="circle in props.hero.colors"
           :key="circle"
           :style="{ backgroundColor: circle }"
-          class="colors-flex__color-circle"
+          class="colors__color-circle"
         ></div>
       </div>
-      <div class="description-flex__prices-flex prices-flex">
-        <span class="prices-flex__current-price">{{ hero.currentPrice }}</span>
-        <span class="prices-flex__previous-price">{{
-          hero.previousPrice
-        }}</span>
+      <div class="desc__prices prices">
+        <span class="prices__current-price">{{ hero.currentPrice }}</span>
+        <span class="prices__previous-price">{{ hero.previousPrice }}</span>
       </div>
     </div>
   </div>
@@ -112,7 +110,7 @@ const props = defineProps<{ hero: Hero }>();
     bottom: 2.188rem;
   }
 }
-.description-flex {
+.desc {
   display: flex;
   flex-direction: column;
   gap: 1.125rem;
@@ -127,12 +125,12 @@ const props = defineProps<{ hero: Hero }>();
     font-size: 1.125rem;
     color: $Dark-Black;
   }
-  &__colors-flex {
+  &__colors {
     display: flex;
     gap: 0.625rem;
   }
 }
-.colors-flex {
+.colors {
   &__text {
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
@@ -144,7 +142,7 @@ const props = defineProps<{ hero: Hero }>();
     height: 15px;
   }
 }
-.prices-flex {
+.prices {
   display: flex;
   align-items: center;
   gap: 0.625rem;
@@ -170,7 +168,7 @@ const props = defineProps<{ hero: Hero }>();
     width: 522px;
     height: 241px;
   }
-  .description-flex {
+  .desc {
     margin: 1.25rem 0rem;
   }
 }
@@ -188,7 +186,7 @@ const props = defineProps<{ hero: Hero }>();
       margin-bottom: -1rem;
     }
   }
-  .description-flex {
+  .desc {
     width: 386px;
 
     &__category {

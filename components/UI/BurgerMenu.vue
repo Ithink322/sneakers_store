@@ -1,24 +1,24 @@
 <template>
-  <div class="burger-menu-shadow">
+  <div class="burger-menu-shadow" :class="{ active: props.isOpen }">
     <button @click="closeBurgerMenu" class="burger-menu-shadow__close-btn">
       <img src="/imgs/cross.svg" alt="cross" />
     </button>
     <nav class="burger-menu">
-      <form class="burger-menu__search-form">
+      <form class="burger-menu__search-form search-form">
         <input
           placeholder="Поиск по каталогу товаров..."
           type="text"
-          class="burger-menu__input"
+          class="search-form__input"
         />
-        <button class="burger-menu__search-btn">
+        <button class="search-form__search-btn">
           <img src="/imgs/search-icon.svg" alt="" />
         </button>
       </form>
-      <div class="burger-menu__btns-flex">
+      <nav class="burger-menu__body">
         <UISignUpOrSignInOrMyAccountBtn
           style="margin-left: 0.938rem"
         ></UISignUpOrSignInOrMyAccountBtn>
-        <div class="burger-menu__wishlist-and-cart-btns-flex">
+        <div class="burger-menu__content">
           <button class="burger-menu__wishlist-btn">
             <img src="/imgs/wishlist-icon.svg" alt="" />
             <UIWishlistCounterCircle></UIWishlistCounterCircle>
@@ -28,143 +28,148 @@
             <UICartCounterCircle></UICartCounterCircle>
           </button>
         </div>
-      </div>
-      <div class="burger-menu__catalogs-and-sections-btns-flex">
+      </nav>
+      <div class="burger-menu__container">
         <button
-          @click="openCatalogDropDownMenu"
-          class="burger-menu__catalog-btn burger-menu__catalog-btn-catalog"
+          @click="toggleCatalogDropDownMenu"
+          class="burger-menu__catalog-btn burger-menu__main-btn"
+          :class="{ active: isCatalogBtnActive }"
         >
           КАТАЛОГ
         </button>
-        <div class="burger-menu__dropdown-menu">
+        <div class="dropdown" :class="{ active: isCatalogBtnActive }">
           <button
-            @click="openSummerDropDownMenu"
-            class="burger-menu__dropdown-menu-title-btn burger-menu__dropdown-menu-title-summer-btn"
+            @click="toggleSummerDropdown"
+            class="dropdown__title-btn dropdown__title-summer-btn"
           >
             Лето
             <img
               src="/imgs/arrow-icon.svg"
               alt=""
-              class="burger-menu__dropdown-menu-title-arrow-summer-btn"
+              class="dropdown__arrow-icon-summer"
             />
           </button>
           <div
-            class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-summer-flex"
+            class="dropdown__subtitles dropdown__subtitles-summer"
+            :class="{ active: isDropdownActive('Summer') }"
           >
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Для бега</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Повседневные</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Треккинг</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Для футбола</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Для волейбола</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to="">
                 Для баскетбола</NuxtLink
               >
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Для тенниса</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Спортивные</NuxtLink>
             </button>
           </div>
           <button
-            @click="openDemiSeasonDropDownMenu"
-            class="burger-menu__dropdown-menu-title-btn burger-menu__dropdown-menu-title-demi-season-btn"
+            @click="toggleDemiSeasonDropdown"
+            class="dropdown__title-btn dropdown__title-demi-season-btn"
           >
             Демисезон
             <img
               src="/imgs/arrow-icon.svg"
               alt=""
-              class="burger-menu__dropdown-menu-title-arrow-demi-season-btn"
+              class="dropdown__arrow-icon-demi-season"
             />
           </button>
           <div
-            class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-demi-season-flex"
+            class="dropdown__subtitles dropdown__subtitles-demi-season"
+            :class="{ active: isDropdownActive('DemiSeason') }"
           >
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Для бега</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Повседневные</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Треккинг</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Кожаные</NuxtLink>
             </button>
           </div>
           <button
-            @click="openWinterDropDownMenu"
-            class="burger-menu__dropdown-menu-title-btn burger-menu__dropdown-menu-title-winter-btn"
+            @click="toggleWinterDropdown"
+            class="dropdown__title-btn dropdown__title-winter-btn"
           >
             Зима
             <img
               src="/imgs/arrow-icon.svg"
               alt=""
-              class="burger-menu__dropdown-menu-title-arrow-winter-btn"
+              class="dropdown__arrow-icon-winter"
             />
           </button>
           <div
-            class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-winter-flex"
+            class="dropdown__subtitles dropdown__subtitles-winter"
+            :class="{ active: isDropdownActive('Winter') }"
           >
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Утепленные</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Повседневные</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Кожаные</NuxtLink>
             </button>
           </div>
           <button
-            @click="openModelsDropDownMenu"
-            class="burger-menu__dropdown-menu-title-btn burger-menu__dropdown-menu-title-models-btn"
+            @click="toggleModelsDropdown"
+            class="dropdown__title-btn dropdown__title-models-btn"
           >
             Модели
             <img
               src="/imgs/arrow-icon.svg"
               alt=""
-              class="burger-menu__dropdown-menu-title-arrow-models-btn"
+              class="dropdown__arrow-icon-models"
             />
           </button>
           <div
-            class="burger-menu__dropdown-menu-subtitles-btns-flex burger-menu__dropdown-menu-subtitles-btns-models-flex"
+            class="dropdown__subtitles dropdown__subtitles-models"
+            :class="{ active: isDropdownActive('Models') }"
           >
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to="">
                 Nike Air Force 1</NuxtLink
               >
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to="">
                 Nike SB Dunk Low</NuxtLink
               >
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to="">
                 Nike Air Max 90</NuxtLink
               >
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Nike Shox</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to=""> Nike Blazer</NuxtLink>
             </button>
-            <button class="burger-menu__dropdown-menu-subtitle-btn">
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to="">
                 Nike Air Max Plus</NuxtLink
               >
@@ -187,7 +192,7 @@
           <NuxtLink @click="closeBurgerMenu" to="/AboutUs">О магазине</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="">Наш блог</NuxtLink>
+          <NuxtLink @click="closeBurgerMenu" to="/Blog">Наш блог</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
           <NuxtLink @click="closeBurgerMenu" to="/DeliveryAndPayment"
@@ -208,96 +213,50 @@
 </template>
 
 <script setup lang="ts">
+const props = defineProps(["isOpen"]);
+
 const closeBurgerMenu = () => {
-  document.querySelector<HTMLElement>(".burger-menu-shadow")!.style.display =
-    "none";
+  emit("close");
+};
+const emit = defineEmits(["close"]);
 
-  /* styles from 768px to 1200px starts */
-  const svgElement = document.querySelector(".header-mid__burger-btn svg")!;
-  const lines = Array.from(svgElement.querySelectorAll("line"));
-  lines.forEach((line) => {
-    line.setAttribute("stroke", "black");
-  });
-  /* styles from 768px to 1200px ends */
+const isCatalogBtnActive = ref(false);
+const toggleCatalogDropDownMenu = () => {
+  isCatalogBtnActive.value = !isCatalogBtnActive.value;
 };
 
-const toggleMenu = (
-  btnSelector: string,
-  menuSelector: string,
-  bgColor: string,
-  textColor: string
-) => {
-  const btn = document.querySelector<HTMLElement>(btnSelector)!;
-  const menu = document.querySelector<HTMLElement>(menuSelector)!;
-
-  btn.style.backgroundColor = bgColor;
-  btn.style.color = textColor;
-  menu.classList.toggle("burger-menu__dropdown-menu--opened");
+const activeDropdown = ref<string | null>(null);
+const toggleSummerDropdown = () => {
+  activeDropdown.value = activeDropdown.value === "Summer" ? null : "Summer";
+};
+const toggleDemiSeasonDropdown = () => {
+  activeDropdown.value =
+    activeDropdown.value === "DemiSeason" ? null : "DemiSeason";
+};
+const toggleWinterDropdown = () => {
+  activeDropdown.value = activeDropdown.value === "Winter" ? null : "Winter";
+};
+const toggleModelsDropdown = () => {
+  activeDropdown.value = activeDropdown.value === "Models" ? null : "Models";
 };
 
-const catalogButtonClicked = ref(false);
-const summerBtnClicked = ref(false);
-const demiSeasonBtnClicked = ref(false);
-const winterBtnClicked = ref(false);
-const modelsBtnClicked = ref(false);
-
-const openCatalogDropDownMenu = () => {
-  catalogButtonClicked.value = !catalogButtonClicked.value;
-  toggleMenu(
-    ".burger-menu__catalog-btn-catalog",
-    ".burger-menu__dropdown-menu",
-    catalogButtonClicked.value ? "#000" : "#fff",
-    catalogButtonClicked.value ? "#fff" : "#000"
-  );
-};
-
-const openSubMenu = (btnClicked: Ref<boolean>, flexSelector: string) => {
-  btnClicked.value = !btnClicked.value;
-  const flexMenu = document.querySelector(flexSelector)!;
-  flexMenu.classList.toggle(
-    "burger-menu__dropdown-menu-subtitles-btns-flex--opened"
-  );
-};
-
-const openSummerDropDownMenu = () => {
-  openSubMenu(
-    summerBtnClicked,
-    ".burger-menu__dropdown-menu-subtitles-btns-summer-flex"
-  );
-};
-
-const openDemiSeasonDropDownMenu = () => {
-  openSubMenu(
-    demiSeasonBtnClicked,
-    ".burger-menu__dropdown-menu-subtitles-btns-demi-season-flex"
-  );
-};
-
-const openWinterDropDownMenu = () => {
-  openSubMenu(
-    winterBtnClicked,
-    ".burger-menu__dropdown-menu-subtitles-btns-winter-flex"
-  );
-};
-
-const openModelsDropDownMenu = () => {
-  openSubMenu(
-    modelsBtnClicked,
-    ".burger-menu__dropdown-menu-subtitles-btns-models-flex"
-  );
+const isDropdownActive = (dropdownName: string) => {
+  return activeDropdown.value === dropdownName;
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .burger-menu-shadow {
-  display: none;
   position: absolute;
   background: rgba(0, 0, 0, 0.54);
   width: 100%;
   height: 100vh;
   top: 0rem;
   z-index: 2;
+}
+.burger-menu-shadow.active {
+  display: block;
 }
 .burger-menu-shadow__close-btn {
   @include btn;
@@ -314,14 +273,64 @@ const openModelsDropDownMenu = () => {
   overflow-y: scroll;
   overflow-x: hidden;
 
-  &__search-form {
+  &__body {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background: #f9f9f9;
-    height: 70px;
-    border-bottom: 1px solid #eaeaea;
   }
+  &__content {
+    display: flex;
+  }
+  &__wishlist-btn,
+  &__cart-btn {
+    @include btn;
+    width: 58px;
+    height: 58px;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #eaeaea;
+  }
+  &__main-btn {
+    transition: all 0.1s ease;
+  }
+  &__main-btn.active {
+    color: #fff;
+    background-color: $Dark-Black;
+  }
+  &__catalog-btn {
+    @include btn;
+    justify-content: left;
+    height: 51px;
+    width: 100%;
+    padding-left: 0.938rem;
+    border-bottom: 1px solid #eaeaea;
+    font-family: "Pragmatica Medium";
+    font-size: 0.875rem;
+  }
+  &__section-btn {
+    @include btn;
+    justify-content: left;
+    height: 45px;
+    width: 100%;
+    padding-left: 0.938rem;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+
+    a {
+      text-decoration: none;
+      color: $Dark-Black;
+    }
+  }
+}
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9f9f9;
+  height: 70px;
+  border-bottom: 1px solid #eaeaea;
+
   &__input {
     @include input;
     margin-left: 0.938rem;
@@ -337,76 +346,26 @@ const openModelsDropDownMenu = () => {
       outline: none;
     }
   }
-
   &__search-btn {
     @include btn;
     width: 70px;
     height: 70px;
     border-left: 1px solid #eaeaea;
   }
+}
+.dropdown {
+  flex-direction: column;
+  padding: 0 1.563rem;
+  min-width: max-content;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
 
-  &__btns-flex {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__wishlist-and-cart-btns-flex {
-    display: flex;
-  }
-  &__wishlist-btn,
-  &__cart-btn {
-    @include btn;
-    width: 58px;
-    height: 58px;
-  }
-
-  &__catalogs-and-sections-btns-flex {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid #eaeaea;
-  }
-
-  &__catalog-btn {
-    @include btn;
-    justify-content: left;
-    height: 51px;
-    width: 100%;
-    padding-left: 0.938rem;
-    border-bottom: 1px solid #eaeaea;
-    font-family: "Pragmatica Medium";
-    font-size: 0.875rem;
-  }
-
-  &__section-btn {
-    @include btn;
-    justify-content: left;
-    height: 45px;
-    width: 100%;
-    padding-left: 0.938rem;
-    font-family: "Pragmatica Book";
-    font-size: 0.938rem;
-
-    a {
-      text-decoration: none;
-      color: $Dark-Black;
-    }
-  }
-
-  &__dropdown-menu {
-    flex-direction: column;
-    padding: 0 1.563rem;
-    min-width: max-content;
-    overflow: hidden;
-    max-height: 0;
+  &--opened {
+    max-height: 100vh;
     transition: max-height 0.3s ease-in-out;
-
-    &--opened {
-      max-height: 100vh;
-      transition: max-height 0.3s ease-in-out;
-    }
   }
-
-  &__dropdown-menu-title-btn {
+  &__title-btn {
     @include btn;
     height: 43px;
     width: 100%;
@@ -414,21 +373,18 @@ const openModelsDropDownMenu = () => {
     font-family: "Pragmatica Medium";
     font-size: 0.938rem;
   }
-
-  &__dropdown-menu-subtitles-btns-flex {
+  &__subtitles {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.3s ease-in-out;
-
-    &--opened {
-      display: flex;
-      flex-direction: column;
-      max-height: 100vh;
-      transition: max-height 0.3s ease-in-out;
-    }
   }
-
-  &__dropdown-menu-subtitle-btn {
+  &__subtitles.active {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    transition: max-height 0.3s ease-in-out;
+  }
+  &__subtitle-btn {
     @include btn;
     width: 100%;
     height: 27px;
@@ -436,6 +392,22 @@ const openModelsDropDownMenu = () => {
     font-family: "Pragmatica Book";
     font-size: 0.875rem;
     padding-left: 1rem;
+  }
+}
+.dropdown.active {
+  max-height: 100vh;
+  transition: max-height 0.3s ease-in-out;
+}
+/* 768px = 48em */
+@media (min-width: 48em) {
+  .search-form {
+    display: none;
+  }
+}
+/* 1200px = 75em */
+@media (min-width: 75em) {
+  .burger-menu-shadow {
+    visibility: hidden;
   }
 }
 </style>
