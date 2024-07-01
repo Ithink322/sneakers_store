@@ -189,9 +189,9 @@
           </svg>
         </button>
       </div>
-      <UIProductsCatalogList
+      <UIProductsInSliderList
         :latestProducts="latestProducts"
-      ></UIProductsCatalogList>
+      ></UIProductsInSliderList>
     </div>
     <div class="best-selling products-catalog">
       <h2 class="best-selling__title products-catalog__title">
@@ -235,7 +235,9 @@
           </svg>
         </button>
       </div>
-      <UIProductsCatalogList :hitProducts="hitProducts"></UIProductsCatalogList>
+      <UIProductsInSliderList
+        :hitProducts="hitProducts"
+      ></UIProductsInSliderList>
     </div>
     <div class="season-hit">
       <div class="season-hit__body">
@@ -280,7 +282,7 @@
         >
       </div>
     </div>
-    <UIRecentPublicationsList></UIRecentPublicationsList>
+    <UIRecentPostsList></UIRecentPostsList>
     <UIProductsWithDiscountList></UIProductsWithDiscountList>
     <div class="banners">
       <div class="banners__collection-banner collection-banner">
@@ -315,6 +317,20 @@
 </template>
 
 <script setup lang="ts">
+import { latestProducts } from "@/data/ProductsInSlider";
+import { hitProducts } from "@/data/ProductsInSlider";
+
+useHead({
+  title: "Sneakers store",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Sneakers store is the perfect destination for buying original nike shoes. We're passionate about delivering original quality to our customers. Explore our website!",
+    },
+  ],
+});
+
 onMounted(() => {
   /* carousel for .overflow__container from 1440px starts */
   let slides = document.querySelectorAll(".overflow__slide");
@@ -387,19 +403,7 @@ onMounted(() => {
   /* carousel for .overflow__container from 1440px ends */
 });
 
-interface Product {
-  id: number;
-  heroes: string[];
-  category: string;
-  title: string;
-  colors: string[];
-  currentPrice: string;
-  previousPrice: string;
-  bannerBackgroundColor: string;
-  bannerText: string;
-}
-
-const latestProducts = ref<Product[]>([
+/* const latestProducts = ref<Product[]>([
   {
     id: 1,
     heroes: [
@@ -992,62 +996,11 @@ const latestProducts = ref<Product[]>([
     bannerBackgroundColor: "#3f71bc",
     bannerText: "ХИТ",
   },
-]);
+]); */
 
-const hitProducts = ref<Product[]>([
+/* const hitProducts = ref<Product[]>([
   {
     id: 1,
-    heroes: [
-      "/imgs/sneakers-hero-1.svg",
-      "/imgs/sneakers-hero-1-2.svg",
-      "/imgs/sneakers-hero-1-3.svg",
-      "/imgs/sneakers-hero-1-4.svg",
-      "/imgs/sneakers-hero-1.svg",
-      "/imgs/sneakers-hero-1-2.svg",
-    ],
-    category: "ЖЕНСКИЕ",
-    title: "Nike Air VaporMax 2020 Flyknit",
-    colors: ["#A8B7BF", "#2A2C2D", "#F81D2A", "#F8F8F9"],
-    currentPrice: "7 899 ₽",
-    previousPrice: "11 699 ₽",
-    bannerBackgroundColor: "#000000",
-    bannerText: "НОВИНКА",
-  },
-  {
-    id: 2,
-    heroes: [
-      "/imgs/sneakers-hero-2.svg",
-      "/imgs/sneakers-hero-2-2.svg",
-      "/imgs/sneakers-hero-2-3.svg",
-      "/imgs/sneakers-hero-2-4.svg",
-      "/imgs/sneakers-hero-2.svg",
-    ],
-    category: "МУЖСКИЕ",
-    title: "Nike Air VaporMax 2021 Flyknit",
-    colors: ["#6F97CC", "#2A2C2D", "#F8F8F9"],
-    currentPrice: "5 999 ₽",
-    previousPrice: "7 899 ₽",
-    bannerBackgroundColor: "#ff6915",
-    bannerText: "-20%",
-  },
-  {
-    id: 3,
-    heroes: [
-      "/imgs/sneakers-hero-3.svg",
-      "/imgs/sneakers-hero-3-2.svg",
-      "/imgs/sneakers-hero-3-3.svg",
-      "/imgs/sneakers-hero-3-4.svg",
-    ],
-    category: "ЖЕНСКИЕ",
-    title: "Nike Air VaporMax 2022 Flyknit",
-    colors: ["#64E1CB", "#4296C3", "#D81F64", "#F8F8F9"],
-    currentPrice: "6 329 ₽",
-    previousPrice: "9 900 ₽",
-    bannerBackgroundColor: "#3f71bc",
-    bannerText: "ХИТ",
-  },
-  {
-    id: 4,
     heroes: [
       "/imgs/sneakers-hero-4.svg",
       "/imgs/sneakers-hero-4-2.svg",
@@ -1062,7 +1015,7 @@ const hitProducts = ref<Product[]>([
     bannerText: "ХИТ",
   },
   {
-    id: 5,
+    id: 2,
     heroes: [
       "/imgs/sneakers-hero-5.svg",
       "/imgs/sneakers-hero-5-2.svg",
@@ -1080,7 +1033,7 @@ const hitProducts = ref<Product[]>([
     bannerText: "НОВИНКА",
   },
   {
-    id: 6,
+    id: 3,
     heroes: [
       "/imgs/sneakers-hero-6.svg",
       "/imgs/sneakers-hero-6-2.svg",
@@ -1095,6 +1048,57 @@ const hitProducts = ref<Product[]>([
     previousPrice: "7 899 ₽",
     bannerBackgroundColor: "#ff6915",
     bannerText: "-25%",
+  },
+  {
+    id: 4,
+    heroes: [
+      "/imgs/sneakers-hero-1.svg",
+      "/imgs/sneakers-hero-1-2.svg",
+      "/imgs/sneakers-hero-1-3.svg",
+      "/imgs/sneakers-hero-1-4.svg",
+      "/imgs/sneakers-hero-1.svg",
+      "/imgs/sneakers-hero-1-2.svg",
+    ],
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air VaporMax 2020 Flyknit",
+    colors: ["#A8B7BF", "#2A2C2D", "#F81D2A", "#F8F8F9"],
+    currentPrice: "7 899 ₽",
+    previousPrice: "11 699 ₽",
+    bannerBackgroundColor: "#000000",
+    bannerText: "НОВИНКА",
+  },
+  {
+    id: 5,
+    heroes: [
+      "/imgs/sneakers-hero-2.svg",
+      "/imgs/sneakers-hero-2-2.svg",
+      "/imgs/sneakers-hero-2-3.svg",
+      "/imgs/sneakers-hero-2-4.svg",
+      "/imgs/sneakers-hero-2.svg",
+    ],
+    category: "МУЖСКИЕ",
+    title: "Nike Air VaporMax 2021 Flyknit",
+    colors: ["#6F97CC", "#2A2C2D", "#F8F8F9"],
+    currentPrice: "5 999 ₽",
+    previousPrice: "7 899 ₽",
+    bannerBackgroundColor: "#ff6915",
+    bannerText: "-20%",
+  },
+  {
+    id: 6,
+    heroes: [
+      "/imgs/sneakers-hero-3.svg",
+      "/imgs/sneakers-hero-3-2.svg",
+      "/imgs/sneakers-hero-3-3.svg",
+      "/imgs/sneakers-hero-3-4.svg",
+    ],
+    category: "ЖЕНСКИЕ",
+    title: "Nike Air VaporMax 2022 Flyknit",
+    colors: ["#64E1CB", "#4296C3", "#D81F64", "#F8F8F9"],
+    currentPrice: "6 329 ₽",
+    previousPrice: "9 900 ₽",
+    bannerBackgroundColor: "#3f71bc",
+    bannerText: "ХИТ",
   },
   {
     id: 7,
@@ -1587,7 +1591,7 @@ const hitProducts = ref<Product[]>([
     bannerBackgroundColor: "#3f71bc",
     bannerText: "ХИТ",
   },
-]);
+]); */
 
 /* carousels with arrows for .products-catalog__list-grid starts */
 let SliderWrapper: NodeListOf<HTMLElement> | null = null;
@@ -1613,6 +1617,7 @@ onMounted(() => {
   SliderOverflow = document.querySelectorAll<HTMLElement>(
     ".products-catalog__overflow"
   )!;
+  /* SliderOverflow = ref(null); */
   latestSliderWrapper = SliderWrapper[0];
   hitSliderWrapper = SliderWrapper[1];
   latestSliderOverflow = SliderOverflow[0];
@@ -1890,7 +1895,6 @@ const hitProductsNextSlide = () => {
   background-color: $Light-Black;
   width: 246px;
   height: 65px;
-  z-index: 4;
 
   &__content {
     display: flex;
@@ -2047,9 +2051,11 @@ const hitProductsNextSlide = () => {
     font-size: 1.375rem;
   }
   &__more-btn {
+    position: relative;
     width: 100%;
     max-width: 260px;
     background-color: $Light-Orange;
+    z-index: 2;
   }
   &__hero--from320px {
     width: calc(120% + 3.876rem);
@@ -2226,7 +2232,10 @@ const hitProductsNextSlide = () => {
       background-color: #ffffff;
       border: 1px solid #e2e2e2;
       z-index: 3;
+      transition: background-color 0.3s ease;
     }
+    &__prev-btn:hover,
+    &__next-btn:hover,
     &__prev-btn:focus,
     &__next-btn:focus {
       background-color: #f6f6f6;

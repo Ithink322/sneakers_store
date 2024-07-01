@@ -15,9 +15,7 @@
         </button>
       </form>
       <nav class="burger-menu__body">
-        <UISignUpOrSignInOrMyAccountBtn
-          style="margin-left: 0.938rem"
-        ></UISignUpOrSignInOrMyAccountBtn>
+        <UIMyAccountBtn style="margin-left: 0.938rem"></UIMyAccountBtn>
         <div class="burger-menu__content">
           <button class="burger-menu__wishlist-btn">
             <img src="/imgs/wishlist-icon.svg" alt="" />
@@ -192,7 +190,9 @@
           <NuxtLink @click="closeBurgerMenu" to="/AboutUs">О магазине</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="/Blog">Наш блог</NuxtLink>
+          <NuxtLink @click="closeBurgerMenu" to="/blog/all-posts"
+            >Наш блог</NuxtLink
+          >
         </button>
         <button class="burger-menu__section-btn">
           <NuxtLink @click="closeBurgerMenu" to="/DeliveryAndPayment"

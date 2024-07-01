@@ -4,7 +4,7 @@
       <div class="header-top">
         <ul class="header-top__titles-list">
           <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
-          <li><NuxtLink to="/Blog">Наш блог</NuxtLink></li>
+          <li><NuxtLink to="/blog/all-posts">Наш блог</NuxtLink></li>
           <li>
             <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
           </li>
@@ -13,7 +13,7 @@
             <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
           </li>
         </ul>
-        <UISignUpOrSignInOrMyAccountBtn></UISignUpOrSignInOrMyAccountBtn>
+        <UIMyAccountBtn></UIMyAccountBtn>
       </div>
       <div class="header-mid">
         <div class="header-mid__titles-container">
@@ -319,7 +319,6 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
     height: 70px;
   }
   &__my-account-link,
-  &__my-account-btn--from768px,
   &__search-btn--from768px {
     display: none;
   }
@@ -393,6 +392,9 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       width: 71px;
       height: 70px;
     }
+    &__my-account-link {
+      display: block;
+    }
     &__my-account-btn--from768px,
     &__search-btn--from768px,
     &__wishlist-btn {
@@ -430,6 +432,10 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
     }
     &__titles-list li a {
       color: #585858;
+      transition: color 0.3s ease;
+    }
+    &__titles-list li:hover a {
+      color: $Dark-Orange;
     }
   }
   .header {
@@ -453,6 +459,7 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       align-items: center;
       margin-left: 1.614rem;
       cursor: pointer;
+      transition: color 0.3s ease;
     }
     &__catalog-btn {
       @include btn;
@@ -460,6 +467,12 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       height: 70px;
       border-right: none;
       padding-right: 0rem;
+    }
+    &__catalog-btn-body:hover {
+      color: $Dark-Orange;
+    }
+    &__catalog-btn-body:hover svg line {
+      stroke: $Dark-Orange;
     }
     &__title--visiblle-till1200px,
     &__my-account-btn--from768px {
@@ -485,7 +498,9 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       cursor: pointer;
       display: flex;
       align-items: center;
-      transition: color 100ms ease;
+    }
+    &__titles-list li a {
+      transition: color 0.3s ease;
     }
     &__titles-list li:hover a {
       color: $Light-Orange;
@@ -499,15 +514,6 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       height: 16px;
       margin-left: 3.8rem;
       margin-top: -3.9rem;
-    }
-    &__catalog-btn-opened {
-      color: $Dark-Orange;
-    }
-    &__catalog-btn-body:hover {
-      color: $Dark-Orange;
-    }
-    &__catalog-btn-body:hover svg line {
-      stroke: $Dark-Orange;
     }
   }
 }

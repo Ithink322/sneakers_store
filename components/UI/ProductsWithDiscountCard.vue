@@ -6,9 +6,9 @@
     </div>
     <button class="card__add-to-wishlist-btn">
       <svg
-        width="23px"
-        height="20px"
-        viewBox="0 0 23 20"
+        width="21"
+        height="18"
+        viewBox="0 0 21 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -23,9 +23,9 @@
     </button>
     <button class="card__add-to-cart-btn">
       <svg
-        width="22px"
-        height="24px"
-        viewBox="0 0 22 24"
+        width="22"
+        height="24"
+        viewBox="0 0 17 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -59,16 +59,7 @@
 </template>
 
 <script setup lang="ts">
-interface Hero {
-  id: number;
-  hero: string;
-  discount: string;
-  category: string;
-  title: string;
-  colors: string[];
-  currentPrice: string;
-  previousPrice: string;
-}
+import type { Hero } from "@/types/ProductsWithDiscount";
 
 const props = defineProps<{ hero: Hero }>();
 </script>
@@ -82,6 +73,7 @@ const props = defineProps<{ hero: Hero }>();
   width: 230px;
   height: 388px;
   flex-shrink: 0;
+  cursor: pointer;
 
   &__hero {
     height: 180px;
@@ -103,11 +95,23 @@ const props = defineProps<{ hero: Hero }>();
     top: 1.25rem;
     right: 1.25rem;
   }
+  &__add-to-wishlist-btn svg path {
+    transition: stroke 0.3s ease;
+  }
+  &__add-to-wishlist-btn:hover svg path {
+    stroke: $Dark-Orange;
+  }
   &__add-to-cart-btn {
     position: absolute;
     @include btn;
     right: 1.25rem;
     bottom: 2.188rem;
+  }
+  &__add-to-cart-btn svg path {
+    transition: stroke 0.3s ease;
+  }
+  &__add-to-cart-btn:hover svg path {
+    stroke: $Dark-Orange;
   }
 }
 .desc {
@@ -124,11 +128,15 @@ const props = defineProps<{ hero: Hero }>();
     font-family: "Pragmatica Book";
     font-size: 1.125rem;
     color: $Dark-Black;
+    transition: color 0.3s ease;
   }
   &__colors {
     display: flex;
     gap: 0.625rem;
   }
+}
+.desc:hover .desc__title {
+  color: $Dark-Orange;
 }
 .colors {
   &__text {
@@ -167,6 +175,11 @@ const props = defineProps<{ hero: Hero }>();
     align-items: center;
     width: 522px;
     height: 241px;
+
+    &__add-to-wishlist-btn svg {
+      width: 23px;
+      height: 20px;
+    }
   }
   .desc {
     margin: 1.25rem 0rem;

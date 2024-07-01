@@ -12,8 +12,10 @@
   "dependencies": {
     "@nuxt/content": "^2.12.1",
     "@nuxt/kit": "^3.11.2",
+    "@pinia/nuxt": "^0.5.1",
     "inputmask": "^5.0.9",
     "nuxt": "^3.11.0",
+    "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },

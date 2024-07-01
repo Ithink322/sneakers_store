@@ -94,7 +94,7 @@
                 <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="/Blog">Наш блог</NuxtLink>
+                <NuxtLink to="/blog/all-posts">Наш блог</NuxtLink>
               </li>
               <li class="dropdown-list__link">
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
@@ -170,7 +170,7 @@
                 <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink to="/Blog">Наш блог</NuxtLink>
+                <NuxtLink to="/blog/all-posts">Наш блог</NuxtLink>
               </li>
               <li class="list__link">
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
@@ -712,6 +712,7 @@ const submitForm = () => {
   .footer {
     padding: 3.125rem calc((100vw - 71.875rem) / 2) 2.063rem
       calc((100vw - 71.875rem) / 2);
+    margin-top: 7.5rem;
 
     &__info {
       margin-top: 5.438rem;

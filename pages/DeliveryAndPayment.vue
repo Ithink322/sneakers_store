@@ -103,6 +103,19 @@
   </main>
 </template>
 
+<script setup lang="ts">
+useHead({
+  title: "Delivery & Payment",
+  meta: [
+    {
+      name: "description",
+      content:
+        "We strive to make the process of receiving your order as convenient and transparent as possible. Please check the shipping options and payment methods provided on the page.",
+    },
+  ],
+});
+</script>
+
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .entry {

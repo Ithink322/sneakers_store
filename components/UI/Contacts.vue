@@ -173,12 +173,8 @@
 </template>
 
 <script setup lang="ts">
-interface Contacts {
-  address: string;
-  phone: string;
-  email: string;
-  mapSrc: string;
-}
+import type { Contacts } from "@/types/Contacts";
+
 const props = defineProps<{
   KurskInfo?: Contacts[];
   MoscowInfo?: Contacts[];

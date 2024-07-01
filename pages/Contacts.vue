@@ -108,6 +108,18 @@
 </template>
 
 <script setup lang="ts">
+import type { Contacts } from "@/types/Contacts";
+
+useHead({
+  title: "Contacts",
+  meta: [
+    {
+      name: "description",
+      content: "Here you can find our contacts in different cities.",
+    },
+  ],
+});
+
 const isKurskBtnActive = ref(true);
 const isMoscowBtnActive = ref(false);
 const infoKurskIsVisible = ref(true);
@@ -126,13 +138,6 @@ const toggleMoscowBtn = () => {
   infoMoscowIsVisible.value = true;
   infoKurskIsVisible.value = false;
 };
-
-interface Contacts {
-  address: string;
-  phone: string;
-  email: string;
-  mapSrc: string;
-}
 
 const KurskInfo = ref<Contacts[]>([
   {

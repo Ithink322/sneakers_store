@@ -58,97 +58,29 @@
           кроссовок Nike!
         </p>
       </div>
-      <form @submit.prevent="submitForm" class="mailing">
-        <div class="mailing__content-flex">
-          <span class="mailing__title">Подпишитесь на рассылку</span>
-          <span class="mailing__text"
-            >Регулярные скидки и спецпредложения, а так же новости
-            компании.</span
-          >
-        </div>
-        <div class="mailing__wrapper-flex">
-          <input
-            v-model="email"
-            :disabled="isEmailLocked"
-            @input="handleInput"
-            placeholder="Ваш Email"
-            type="text"
-            class="mailing__input"
-            :class="{
-              'invalid-email': !isValidEmail,
-              'success-message': isEmailLocked,
-            }"
-          />
-          <img
-            v-if="isEmailLocked"
-            class="mailing__input-arrow"
-            src="/imgs/green-arrow.svg"
-            alt=""
-          />
-          <span v-if="!isValidEmail" class="mailing__invalid-email-message"
-            >Введите корректный email адрес</span
-          >
-          <span v-if="emptyMessageIsVisible" class="mailing__empty-message"
-            >Введите email адрес</span
-          >
-          <button ref="followBtn" class="mailing__follow-btn">
-            Подписаться
-          </button>
-          <span class="mailing__privacy-policy-text"
-            >Согласен с
-            <span class="mailing__privacy-policy-link"
-              ><NuxtLink to="/PrivacyPolicy"
-                >политикой конфиденциальности</NuxtLink
-              ></span
-            ></span
-          >
-        </div>
-      </form>
+      <UIMailing></UIMailing>
     </div>
     <div class="benefits">
       <UIBenefits></UIBenefits>
     </div>
-    <div class="about-us-publications-flex">
+    <div class="about-us-posts-flex">
       <UIAboutUs></UIAboutUs>
-      <UIRecentPublicationsList></UIRecentPublicationsList>
+      <UIRecentPostsList></UIRecentPostsList>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-const email = ref("");
-const isValidEmail = ref(true);
-const emptyMessageIsVisible = ref(false);
-const followBtn = ref<HTMLButtonElement | null>(null);
-const isEmailLocked = ref(false);
-
-const handleInput = () => {
-  emptyMessageIsVisible.value = email.value ? false : true;
-  isValidEmail.value = true;
-};
-
-const submitForm = () => {
-  const emailRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/;
-
-  if (email.value) {
-    isValidEmail.value = emailRegex.test(email.value);
-  } else {
-    isValidEmail.value = false;
-  }
-
-  if (isValidEmail.value && email.value) {
-    emptyMessageIsVisible.value = false;
-    followBtn.value!.textContent = "Вы подписались!";
-    isEmailLocked.value = true;
-  } else if (email.value === "") {
-    isValidEmail.value = true;
-    emptyMessageIsVisible.value = true;
-  } else {
-    emptyMessageIsVisible.value = false;
-    isValidEmail.value = false;
-  }
-};
+useHead({
+  title: "About us",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Welcome to the Swoosh Store - your source of authentic Nike sneakers and unbeatable style! We are pleased to present you with a unique online platform where you can plunge into the world of innovation and fashion from the legendary brand of sports shoes.",
+    },
+  ],
+});
 </script>
 
 <style lang="scss">
@@ -209,113 +141,15 @@ const submitForm = () => {
     margin-bottom: 1.563rem;
   }
 }
-.mailing {
-  position: relative;
-  padding: 1.563rem;
-  background-color: #f8f8f8;
-
-  &__content-flex {
-    display: flex;
-    flex-direction: column;
-    gap: 0.813rem;
-  }
-  &__title {
-    display: block;
-    text-align: center;
-    font-family: "Pragmatica Book";
-    font-size: 1.5rem;
-    color: $Dark-Black;
-  }
-  &__text {
-    display: block;
-    text-align: center;
-    font-family: "Pragmatica Book";
-    font-size: 0.938rem;
-    color: #393939;
-  }
-  &__wrapper-flex {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 0.813rem;
-  }
-  &__input {
-    @include input;
-    outline: none;
-    padding: 0.625rem;
-    font-family: "Pragmatica Book";
-    font-size: 1rem;
-    color: #2b2b2b;
-    border-bottom: 1px solid $Light-Black;
-  }
-  &__input::placeholder {
-    font-family: "Pragmatica Book";
-    font-size: 1rem;
-    color: #2b2b2b;
-  }
-  &__input-arrow {
-    position: absolute;
-    width: 16px;
-    height: 19px;
-    margin-top: 0.6rem;
-    right: 1.563rem;
-  }
-  &__invalid-email-message,
-  &__empty-message {
-    display: block;
-    font-family: "Pragmatica Book";
-    font-size: 1rem;
-    color: #f81d2a;
-    margin-top: -0.75rem;
-  }
-  &__follow-btn {
-    @include btn;
-    width: 100%;
-    background-color: $Light-Black;
-    padding: 1.438rem 0;
-    font-family: "Pragmatica Medium";
-    font-size: 1rem;
-    color: #fff;
-  }
-  &__privacy-policy-text {
-    display: block;
-    text-align: center;
-    font-family: "Pragmatica Book";
-    font-size: 0.813rem;
-    color: #6b6e72;
-  }
-  &__privacy-policy-link {
-    text-decoration: underline;
-    color: #6b6e72;
-
-    a {
-      color: #6b6e72;
-    }
-  }
-}
 .benefits {
   margin-top: 3.75rem;
 }
-.invalid-email {
-  color: #f81d2a;
-  border-bottom: 1px solid #f81d2a;
-}
-.invalid-email::placeholder {
-  color: #f81d2a;
-}
-.success-message {
-  color: #07961e;
-  border-bottom: 1px solid #07961e;
-}
-.about-us-publications-flex {
+.about-us-posts-flex {
   display: flex;
   flex-direction: column;
   gap: 2.688rem;
 }
-.about-us-publications-flex
-  .about-us-flex
-  .about-us-flex__more-btn-link
-  .more-btn {
+.about-us-posts-flex .about-us-flex .about-us-flex__more-btn-link .more-btn {
   visibility: hidden;
 }
 .about-us-flex__more-btn-link {
@@ -334,10 +168,10 @@ const submitForm = () => {
       margin-right: calc((100vw - 44.874rem) / (-2));
     }
   }
-  .about-us-publications-flex {
+  .about-us-posts-flex {
     gap: 3.125rem;
   }
-  .about-us-publications-flex {
+  .about-us-posts-flex {
     margin-top: 4.375rem;
   }
   .benefits {
@@ -374,18 +208,15 @@ const submitForm = () => {
   }
   .recomm-mail-flex {
     flex-direction: row;
+    align-items: center;
     gap: 5rem;
     margin-top: 3.875rem;
   }
   .benefits {
     margin-top: 6.875rem;
   }
-  .about-us-publications-flex {
+  .about-us-posts-flex {
     margin-top: 0rem;
-  }
-  .mailing {
-    width: 440px;
-    flex-shrink: 0;
   }
 }
 /* 1440px = 90em */
@@ -402,7 +233,7 @@ const submitForm = () => {
       font-size: 2.438rem;
     }
   }
-  .about-us-publications-flex {
+  .about-us-posts-flex {
     margin-top: 3rem;
   }
 }
