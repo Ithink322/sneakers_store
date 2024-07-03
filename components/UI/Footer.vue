@@ -94,7 +94,7 @@
                 <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="/blog/all-posts">Наш блог</NuxtLink>
+                <NuxtLink :to="'/blog/' + enCategory">Наш блог</NuxtLink>
               </li>
               <li class="dropdown-list__link">
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
@@ -170,7 +170,7 @@
                 <NuxtLink to="/AboutUs">О магазине</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink to="/blog/all-posts">Наш блог</NuxtLink>
+                <NuxtLink :to="'/blog/' + enCategory">Наш блог</NuxtLink>
               </li>
               <li class="list__link">
                 <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
@@ -270,6 +270,10 @@
 </template>
 
 <script setup lang="ts">
+import { usePostsStore } from "@/store/Posts";
+const store = usePostsStore();
+const enCategory = store.enCategory;
+
 const activeDropdown = ref<string | null>(null);
 
 const toggleInfoDropdown = () => {

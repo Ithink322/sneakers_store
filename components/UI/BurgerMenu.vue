@@ -190,7 +190,7 @@
           <NuxtLink @click="closeBurgerMenu" to="/AboutUs">О магазине</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="/blog/all-posts"
+          <NuxtLink @click="closeBurgerMenu" :to="'/blog/' + enCategory"
             >Наш блог</NuxtLink
           >
         </button>
@@ -213,6 +213,10 @@
 </template>
 
 <script setup lang="ts">
+import { usePostsStore } from "@/store/Posts";
+const store = usePostsStore();
+const enCategory = store.enCategory;
+
 const props = defineProps(["isOpen"]);
 
 const closeBurgerMenu = () => {

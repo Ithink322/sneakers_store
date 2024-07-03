@@ -4,38 +4,44 @@ import type { BlogPost } from "@/types/BlogPosts";
 interface PostsState {
   allPosts: BlogPost[];
   filteredPosts: BlogPost[];
-  blogPage: number;
+  currentPage: number;
   postsPerPage: number;
   enCategory: string;
   ruCategory: string;
+  title: string;
 }
 
 export const usePostsStore = defineStore("postStore", {
   state: (): PostsState => ({
     allPosts: [],
     filteredPosts: [],
-    blogPage: 1,
+    currentPage: 1,
     postsPerPage: 10,
     enCategory: "all-posts",
     ruCategory: "ВСЕ ПУБЛИКАЦИИ",
+    title: "Блог",
   }),
   getters: {
     totalPages(state): number {
       return Math.ceil(state.filteredPosts.length / state.postsPerPage);
     },
     paginatedPosts(state): BlogPost[] {
-      const start = (state.blogPage - 1) * state.postsPerPage;
+      const start = (state.currentPage - 1) * state.postsPerPage;
       const end = start + state.postsPerPage;
       return state.filteredPosts.slice(start, end);
+    },
+    getTitle(state): string {
+      return (
+        state.ruCategory.charAt(0).toUpperCase() +
+        state.ruCategory.slice(1).toLowerCase()
+      );
     },
   },
   actions: {
     setAllPosts(posts: BlogPost[]) {
       this.allPosts = posts;
-      this.filteredPosts = posts;
     },
     filterPosts(category: string) {
-      this.blogPage = 1;
       if (category === "ВСЕ ПУБЛИКАЦИИ") {
         this.filteredPosts = this.allPosts;
       } else {
@@ -45,13 +51,19 @@ export const usePostsStore = defineStore("postStore", {
       }
     },
     setPage(page: number) {
-      this.blogPage = page;
+      this.currentPage = page;
     },
     setEnCategory(category: string) {
       this.enCategory = category;
     },
     setRuCategory(category: string) {
       this.ruCategory = category;
+      this.title = this.getTitle;
     },
+  },
+  persist: {
+    key: "blog-store",
+    storage: typeof window !== "undefined" ? sessionStorage : undefined,
+    paths: ["currentPage", "enCategory", "ruCategory", "title"],
   },
 });

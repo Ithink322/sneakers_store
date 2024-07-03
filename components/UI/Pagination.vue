@@ -27,7 +27,7 @@
           class="page-wrapper__btn"
           v-for="pageNum in totalPages"
           :key="pageNum"
-          :class="{ active: store.blogPage === pageNum }"
+          :class="{ active: store.currentPage === pageNum }"
           @click="changePage(pageNum)"
         >
           {{ pageNum }}
@@ -62,8 +62,8 @@ const store = usePostsStore();
 const totalPages = computed(() => store.totalPages);
 
 const prevPage = () => {
-  if (store.blogPage > 1) {
-    store.setPage(store.blogPage - 1);
+  if (store.currentPage > 1) {
+    store.setPage(store.currentPage - 1);
     updateTranslate();
   } else {
     store.setPage(totalPages.value);
@@ -72,8 +72,8 @@ const prevPage = () => {
 };
 
 const nextPage = () => {
-  if (store.blogPage < store.totalPages) {
-    store.setPage(store.blogPage + 1);
+  if (store.currentPage < store.totalPages) {
+    store.setPage(store.currentPage + 1);
     updateTranslate();
   } else {
     store.setPage(1);
@@ -82,12 +82,14 @@ const nextPage = () => {
 };
 
 const changePage = (pageNum: number) => {
-  store.blogPage = pageNum;
+  store.currentPage = pageNum;
   updateTranslate();
 };
 
 const translateValue = ref(0);
-const updateTranslate = () => {
+const updateTranslate = async () => {
+  await nextTick();
+
   const buttonWidth =
     document.querySelector<HTMLElement>(".page-wrapper__btn")!.offsetWidth;
   const pagination = document.querySelector<HTMLElement>(".pagination")!;
@@ -95,15 +97,19 @@ const updateTranslate = () => {
     window.getComputedStyle(pagination).getPropertyValue("gap")
   );
 
-  if (store.blogPage > 1) {
+  if (store.currentPage > 1) {
     translateValue.value =
-      -((store.blogPage - 1) * (buttonWidth + gapValue)) +
+      -((store.currentPage - 1) * (buttonWidth + gapValue)) +
       buttonWidth +
       gapValue;
   } else {
     translateValue.value = 0;
   }
 };
+
+onMounted(async () => {
+  await updateTranslate();
+});
 
 watch(
   () => store.filteredPosts,

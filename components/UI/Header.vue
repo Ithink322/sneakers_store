@@ -4,7 +4,7 @@
       <div class="header-top">
         <ul class="header-top__titles-list">
           <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
-          <li><NuxtLink to="/blog/all-posts">Наш блог</NuxtLink></li>
+          <li><NuxtLink :to="'/blog/' + enCategory">Наш блог</NuxtLink></li>
           <li>
             <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
           </li>
@@ -225,6 +225,10 @@
 </template>
 
 <script setup lang="ts">
+import { usePostsStore } from "@/store/Posts";
+const store = usePostsStore();
+const enCategory = store.enCategory;
+
 const isBurgerMenuOpen = ref(false);
 const burgerLineStroke = ref("black");
 

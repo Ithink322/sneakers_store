@@ -1,7 +1,9 @@
 <template>
-  <UIBreadcrumb :breadcrumbTitle="breadcrumbTitle"></UIBreadcrumb>
+  <UIBreadcrumb :breadcrumbTitle="title"></UIBreadcrumb>
   <main>
-    <h1 class="title">Блог</h1>
+    <h1 class="title">
+      {{ title }}
+    </h1>
     <div class="posts-list">
       <nav class="dropdown">
         <button
@@ -75,13 +77,6 @@ numOfArtices.value = countBlogPostsWithBannerText(blogPosts, "СТАТЬИ");
 numOfAdvices.value = countBlogPostsWithBannerText(blogPosts, "СОВЕТЫ");
 numOfOverviews.value = countBlogPostsWithBannerText(blogPosts, "ОБЗОРЫ");
 
-const breadcrumbTitle = ref("Блог");
-/* const updateBreadcrumbTitle = (title: string) => {
-  const capitalizedTitle =
-    title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
-  breadcrumbTitle.value = capitalizedTitle;
-}; */
-
 const options = [
   { value: "ВСЕ ПУБЛИКАЦИИ", counter: numOfAllPosts },
   { value: "НОВОСТИ", counter: numOfNews },
@@ -112,7 +107,6 @@ const router = useRouter();
 const selectedCategory = ref("");
 const selectOption = (value: string) => {
   if (value === "ВСЕ ПУБЛИКАЦИИ") {
-    /* emit("updateBreadcrumbTitle", "Блог"); */
     selectedCategory.value = "all-posts";
   } else if (value === "НОВОСТИ") {
     selectedCategory.value = "news";
@@ -133,7 +127,13 @@ const closeDropdown = () => {
   isDropdownOpen.value = false;
 };
 
+onMounted(() => {
+  selectedValue.value = store.ruCategory;
+});
+
 const store = usePostsStore();
+const title = computed(() => store.title);
+
 store.setAllPosts(blogPosts);
 </script>
 

@@ -20,6 +20,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@types/inputmask": "^5.0.7",
     "sass": "^1.72.0",
     "typescript": "^5.4.2",

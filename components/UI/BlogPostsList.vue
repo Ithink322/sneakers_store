@@ -12,7 +12,10 @@ import { usePostsStore } from "@/store/Posts";
 
 const store = usePostsStore();
 const paginatedPosts = computed(() => store.paginatedPosts);
-store.filterPosts(store.ruCategory);
+
+onMounted(() => {
+  store.filterPosts(store.ruCategory);
+});
 
 useHead({
   title: `Blog | ${store.enCategory}`,
@@ -24,6 +27,4 @@ useHead({
     },
   ],
 });
-
-/* const emit = defineEmits(["updateBreadcrumbTitle"]); */
 </script>
