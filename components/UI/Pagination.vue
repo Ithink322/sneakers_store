@@ -61,32 +61,38 @@ import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
 const totalPages = computed(() => store.totalPages);
 
+const router = useRouter();
 const prevPage = () => {
   if (store.currentPage > 1) {
     store.setPage(store.currentPage - 1);
-    updateTranslate();
+    const url = `/blog/${store.enCategory}/${store.currentPage}`;
+    router.push(url);
   } else {
     store.setPage(totalPages.value);
-    updateTranslate();
   }
+  updateTranslate();
 };
 
 const nextPage = () => {
   if (store.currentPage < store.totalPages) {
     store.setPage(store.currentPage + 1);
-    updateTranslate();
+    const url = `/blog/${store.enCategory}/${store.currentPage}`;
+    router.push(url);
   } else {
     store.setPage(1);
-    updateTranslate();
   }
-};
-
-const changePage = (pageNum: number) => {
-  store.currentPage = pageNum;
   updateTranslate();
 };
 
-const translateValue = ref(0);
+const changePage = (pageNum: number) => {
+  store.setPage(pageNum);
+  const url = `/blog/${store.enCategory}/${pageNum}`;
+  router.push(url);
+  updateTranslate();
+};
+
+/* const translateValue = ref(0); */
+let translateValue = computed(() => store.translateValue);
 const updateTranslate = async () => {
   await nextTick();
 
@@ -98,26 +104,19 @@ const updateTranslate = async () => {
   );
 
   if (store.currentPage > 1) {
-    translateValue.value =
+    const newTranslateValue =
       -((store.currentPage - 1) * (buttonWidth + gapValue)) +
       buttonWidth +
       gapValue;
+    store.updateTranslateValue(newTranslateValue);
   } else {
-    translateValue.value = 0;
+    store.updateTranslateValue(0);
   }
 };
 
 onMounted(async () => {
   await updateTranslate();
 });
-
-watch(
-  () => store.filteredPosts,
-  () => {
-    store.setPage(1);
-    translateValue.value = 0;
-  }
-);
 </script>
 
 <style lang="scss" scoped>

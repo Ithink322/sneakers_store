@@ -9,6 +9,7 @@ interface PostsState {
   enCategory: string;
   ruCategory: string;
   title: string;
+  translateValue: number;
 }
 
 export const usePostsStore = defineStore("postStore", {
@@ -20,6 +21,7 @@ export const usePostsStore = defineStore("postStore", {
     enCategory: "all-posts",
     ruCategory: "ВСЕ ПУБЛИКАЦИИ",
     title: "Блог",
+    translateValue: 0,
   }),
   getters: {
     totalPages(state): number {
@@ -59,6 +61,12 @@ export const usePostsStore = defineStore("postStore", {
     setRuCategory(category: string) {
       this.ruCategory = category;
       this.title = this.getTitle;
+    },
+    updateTranslateValue(newTranslateValue: number) {
+      this.translateValue = newTranslateValue;
+    },
+    resetTranslateValue() {
+      this.translateValue = 0;
     },
   },
   persist: {

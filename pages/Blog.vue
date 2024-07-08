@@ -1,8 +1,8 @@
 <template>
-  <UIBreadcrumb :breadcrumbTitle="title"></UIBreadcrumb>
+  <UIBreadcrumb :breadcrumbTitle="store.title"></UIBreadcrumb>
   <main>
     <h1 class="title">
-      {{ title }}
+      {{ store.title }}
     </h1>
     <div class="posts-list">
       <nav class="dropdown">
@@ -120,7 +120,9 @@ const selectOption = (value: string) => {
   selectedValue.value = value;
   store.setEnCategory(selectedCategory.value);
   store.setRuCategory(selectedValue.value);
-  router.push(`/blog/${selectedCategory.value}`);
+  store.currentPage = 1;
+  store.resetTranslateValue();
+  router.push(`/blog/${selectedCategory.value}/1`);
   closeDropdown();
 };
 const closeDropdown = () => {
@@ -132,8 +134,6 @@ onMounted(() => {
 });
 
 const store = usePostsStore();
-const title = computed(() => store.title);
-
 store.setAllPosts(blogPosts);
 </script>
 

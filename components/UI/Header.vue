@@ -4,7 +4,12 @@
       <div class="header-top">
         <ul class="header-top__titles-list">
           <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
-          <li><NuxtLink :to="'/blog/' + enCategory">Наш блог</NuxtLink></li>
+          <li>
+            <NuxtLink
+              :to="'/blog/' + store.enCategory + '/' + store.currentPage"
+              >Наш блог</NuxtLink
+            >
+          </li>
           <li>
             <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
           </li>
@@ -227,7 +232,14 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
-const enCategory = store.enCategory;
+
+onBeforeMount(() => {
+  console.log("Server side enCategory:", store.enCategory);
+});
+
+onMounted(() => {
+  console.log("Client side enCategory:", store.enCategory);
+});
 
 const isBurgerMenuOpen = ref(false);
 const burgerLineStroke = ref("black");

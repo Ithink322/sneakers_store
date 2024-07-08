@@ -16,5 +16,4 @@ export default defineNuxtConfig({
   },
   css: ["~/assets/App.scss"],
   modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
-  /* plugins: [{ src: "~/plugins/pinia.ts", mode: "client" }], */
 });
