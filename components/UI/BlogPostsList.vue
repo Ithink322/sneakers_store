@@ -15,6 +15,7 @@ const paginatedPosts = computed(() => store.paginatedPosts);
 
 onMounted(() => {
   store.filterPosts(store.ruCategory);
+  /* console.log("paginatedPosts.value:", paginatedPosts.value); */
 });
 
 useHead({

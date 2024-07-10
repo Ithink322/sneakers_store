@@ -85,7 +85,6 @@ const options = [
   { value: "ОБЗОРЫ", counter: numOfOverviews },
 ];
 
-const selectedValue = ref("Рубрики");
 const isDropdownOpen = ref(false);
 
 onBeforeMount(() => {
@@ -102,6 +101,7 @@ const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
+const selectedValue = ref("Рубрики");
 const router = useRouter();
 
 const selectedCategory = ref("");
@@ -129,12 +129,66 @@ const closeDropdown = () => {
   isDropdownOpen.value = false;
 };
 
-onMounted(() => {
-  selectedValue.value = store.ruCategory;
-});
-
 const store = usePostsStore();
 store.setAllPosts(blogPosts);
+
+const route = useRoute();
+const pageNum = parseInt(route.params.page);
+const totalPages = computed(() => store.totalPages);
+
+definePageMeta({
+  middleware: ["validate-blog"],
+});
+
+/* const handleError = () => {
+  router.push("/error");
+}; */
+
+const updateCategory = () => {
+  if (route.params.category === "all-posts") {
+    selectedCategory.value = "all-posts";
+    selectedValue.value = "ВСЕ ПУБЛИКАЦИИ";
+  } else if (route.params.category === "news") {
+    selectedCategory.value = "news";
+    selectedValue.value = "НОВОСТИ";
+  } else if (route.params.category === "articles") {
+    selectedCategory.value = "articles";
+    selectedValue.value = "СТАТЬИ";
+  } else if (route.params.category === "advices") {
+    selectedCategory.value = "advices";
+    selectedValue.value = "СОВЕТЫ";
+  } else if (route.params.category === "overviews") {
+    selectedCategory.value = "overviews";
+    selectedValue.value = "ОБЗОРЫ";
+  } else {
+    /* handleError(); */
+    return;
+  }
+  store.setEnCategory(selectedCategory.value);
+  store.setRuCategory(selectedValue.value);
+  store.filterPosts(store.ruCategory);
+};
+
+const checkPageValidity = () => {
+  if (pageNum > totalPages.value) {
+    /* handleError(); */
+  } else {
+    store.currentPage = pageNum;
+  }
+};
+
+onMounted(() => {
+  updateCategory();
+  checkPageValidity();
+});
+
+watch(
+  () => route.params.category,
+  (newCategory) => {
+    updateCategory();
+    checkPageValidity();
+  }
+);
 </script>
 
 <style lang="scss" scoped>

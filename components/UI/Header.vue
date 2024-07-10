@@ -233,13 +233,13 @@
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
 
-onBeforeMount(() => {
+/* onBeforeMount(() => {
   console.log("Server side enCategory:", store.enCategory);
 });
 
 onMounted(() => {
   console.log("Client side enCategory:", store.enCategory);
-});
+}); */
 
 const isBurgerMenuOpen = ref(false);
 const burgerLineStroke = ref("black");

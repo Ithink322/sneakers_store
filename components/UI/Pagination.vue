@@ -20,6 +20,7 @@
     </button>
     <div class="container">
       <div
+        ref="paginationWrapper"
         class="page-wrapper"
         :style="{ transform: `translateX(${translateValue}px)` }"
       >
@@ -69,6 +70,8 @@ const prevPage = () => {
     router.push(url);
   } else {
     store.setPage(totalPages.value);
+    const url = `/blog/${store.enCategory}/${totalPages.value}`;
+    router.push(url);
   }
   updateTranslate();
 };
@@ -80,6 +83,8 @@ const nextPage = () => {
     router.push(url);
   } else {
     store.setPage(1);
+    const url = `/blog/${store.enCategory}/1`;
+    router.push(url);
   }
   updateTranslate();
 };
@@ -91,14 +96,21 @@ const changePage = (pageNum: number) => {
   updateTranslate();
 };
 
-/* const translateValue = ref(0); */
+const paginationWrapper = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  paginationWrapper.value = document.querySelector<HTMLElement>(".pagination")!;
+  updateTranslate();
+});
+
 let translateValue = computed(() => store.translateValue);
 const updateTranslate = async () => {
   await nextTick();
 
-  const buttonWidth =
-    document.querySelector<HTMLElement>(".page-wrapper__btn")!.offsetWidth;
-  const pagination = document.querySelector<HTMLElement>(".pagination")!;
+  const button =
+    paginationWrapper.value?.querySelector<HTMLElement>(".page-wrapper__btn")!;
+  const pagination = paginationWrapper.value!;
+  const buttonWidth = button.offsetWidth;
   const gapValue = parseInt(
     window.getComputedStyle(pagination).getPropertyValue("gap")
   );
@@ -113,10 +125,6 @@ const updateTranslate = async () => {
     store.updateTranslateValue(0);
   }
 };
-
-onMounted(async () => {
-  await updateTranslate();
-});
 </script>
 
 <style lang="scss" scoped>

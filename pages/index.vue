@@ -970,9 +970,6 @@ const hitProductsNextSlide = () => {
     &__text-price {
       text-align: left;
     }
-    &__more-btn {
-      order: 1;
-    }
   }
   .indicators-flex {
     margin-top: -1.4rem;
