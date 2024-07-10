@@ -1,3 +1,0 @@
-<template>
-  <UIBlogPostsList></UIBlogPostsList>
-</template>
