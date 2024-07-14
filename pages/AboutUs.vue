@@ -5,15 +5,15 @@
       <h1 class="about-container__title">
         ИНТЕРНЕТ-МАГАЗИН<br />
         <div class="about-container__content-flex">
-          SWOOSH STORE
+          SNEAKERS STORE
           <span class="about-container__line"></span>
         </div>
       </h1>
       <div class="content">
         <p class="content__paragraph content__paragraph--margin">
           Добро пожаловать в
-          <span class="content__text content__text--bold">Swoosh Store</span> –
-          ваш источник подлинных кроссовок Nike и<br
+          <span class="content__text content__text--bold">Sneakers Store</span>
+          – ваш источник подлинных кроссовок Nike и<br
             class="content__span-br content__span-br--from1024px"
           />
           непревзойденного стиля! Мы рады представить вам уникальную
@@ -38,7 +38,7 @@
           классика, как Air Force 1 - у нас есть именно то, что подойдет вам.
         </p>
         <p>
-          На SwooshStore мы ценим ваше доверие и комфортность при покупке. Вся
+          На SneakersStore мы ценим ваше доверие и комфортность при покупке. Вся
           наша обувь поставляется непосредственно от производителя, что
           гарантирует вам аутентичность каждой пары кроссовок. Мы также
           предлагаем удобные опции доставки и безопасные методы оплаты, чтобы
@@ -54,7 +54,7 @@
         <p
           class="recomendations__paragraph recomendations__text--bold recomendations__paragraph--marginbottom"
         >
-          Спасибо, что выбираете SwooshStore – ваш источник оригинальных
+          Спасибо, что выбираете SneakersStore – ваш источник оригинальных
           кроссовок Nike!
         </p>
       </div>
@@ -72,12 +72,17 @@
 
 <script setup lang="ts">
 useHead({
-  title: "About us",
+  title: "О нас - Sneakers Store | Ваша команда любителей Nike",
   meta: [
     {
       name: "description",
       content:
-        "Welcome to the Swoosh Store - your source of authentic Nike sneakers and unbeatable style! We are pleased to present you with a unique online platform where you can plunge into the world of innovation and fashion from the legendary brand of sports shoes.",
+        "Sneakers Store - команда настоящих энтузиастов Nike, которые знают все о кроссовках этой легендарной марки. Узнайте о нашей истории и стремлении сделать ваш выбор Nike максимально удобным.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Sneakers Store, о нас, команда, история, интернет-магазин, Nike, кроссовки Nike",
     },
   ],
 });

@@ -105,12 +105,17 @@
 
 <script setup lang="ts">
 useHead({
-  title: "Delivery & Payment",
+  title: "Доставка и оплата - Sneakers Store | Условия доставки Nike",
   meta: [
     {
       name: "description",
       content:
-        "We strive to make the process of receiving your order as convenient and transparent as possible. Please check the shipping options and payment methods provided on the page.",
+        "Узнайте о вариантах доставки, стоимости и сроках доставки заказов Nike в Sneakers Store. Ознакомьтесь с доступными способами оплаты.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Sneakers Store, доставка, оплата, условия доставки, способы оплаты, сроки доставки, Nike, кроссовки Nike",
     },
   ],
 });

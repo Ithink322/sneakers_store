@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <UIHeader></UIHeader>
-    <main class="page-container">
+    <div class="page-container">
       <NuxtPage></NuxtPage>
-    </main>
+    </div>
     <UIFooter></UIFooter>
   </div>
 </template>

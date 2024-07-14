@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NuxtError } from "#app";
+import type { NuxtError } from "@nuxt/types";
 
 const props = defineProps({
   error: Object as () => NuxtError,
@@ -130,6 +130,8 @@ const handleError = () => clearError({ redirect: "/" });
     border: 1px solid #c1c1c1;
     padding: 1.25rem 3rem 1.25rem 1.25rem;
     width: 100%;
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
   }
   &__input::placeholder {
     font-family: "Pragmatica Book";

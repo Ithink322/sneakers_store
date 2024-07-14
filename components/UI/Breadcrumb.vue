@@ -1,7 +1,7 @@
 <template>
   <div class="breadcrumb">
     <span class="breadcrumb__home-title"
-      ><NuxtLink to="/">Swoosh Store</NuxtLink></span
+      ><NuxtLink to="/">Sneakers Store</NuxtLink></span
     >
     <img class="breadcrumb__arrow" src="/imgs/gray-arrow.svg" alt="" />
     <span class="breadcrumb__main-title">{{ breadcrumbTitle }}</span>

@@ -6,7 +6,10 @@
           <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
           <li>
             <NuxtLink
-              :to="'/blog/' + store.enCategory + '/' + store.currentPage"
+              :to="{
+                path: '/blog/' + store.enCategory,
+                query: { page: currentPage },
+              }"
               >Наш блог</NuxtLink
             >
           </li>
@@ -232,6 +235,8 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
+const currentPage = computed(() => store.currentPage);
+console.log("currentPage:", currentPage.value);
 
 /* onBeforeMount(() => {
   console.log("Server side enCategory:", store.enCategory);

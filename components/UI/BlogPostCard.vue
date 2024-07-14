@@ -1,27 +1,43 @@
 <template>
-  <div class="post-card card">
-    <img :src="post.hero" alt="" class="card__hero" />
-    <div class="card__body">
-      <div class="card__banner banner">
-        <span class="banner__text">{{ post.bannerText }}</span>
-      </div>
-      <span class="card__title">{{ post.title }}</span>
-      <div class="card__content">
-        <button class="card__btn-more">Подробнее</button>
-        <span class="card__date">{{ post.date }}</span>
+  <NuxtLink
+    class="link"
+    :to="{
+      path: `/blog/${enCategory}/${slugify(props.post.title)}`,
+    }"
+  >
+    <div @click="saveSinglePost" class="post-card card">
+      <img :src="post.hero" alt="" class="card__hero" />
+      <div class="card__body">
+        <div class="card__category category">
+          <span class="category__text">{{ post.category }}</span>
+        </div>
+        <span class="card__title">{{ post.title }}</span>
+        <div class="card__content">
+          <button class="card__btn-more">Подробнее</button>
+          <span class="card__date">{{ post.date }}</span>
+        </div>
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">
+import { slugify } from "@/utils/helpers";
+import { usePostsStore } from "@/store/Posts";
 import type { BlogPost } from "@/types/BlogPosts";
-defineProps({
+const props = defineProps({
   post: {
     type: Object as () => BlogPost,
     required: true,
   },
 });
+
+const store = usePostsStore();
+const enCategory = computed(() => store.enCategory);
+
+const saveSinglePost = () => {
+  localStorage.setItem("SinglePost", JSON.stringify(props.post));
+};
 </script>
 
 <style lang="scss" scoped>
@@ -84,7 +100,7 @@ defineProps({
     color: #fff;
   }
 }
-.banner {
+.category {
   position: absolute;
   padding: 0.625rem;
   background-color: #dbe5eb;
@@ -94,6 +110,9 @@ defineProps({
     font-family: "Pragmatica Medium";
     font-size: 0.75rem;
   }
+}
+.link {
+  color: $Dark-Black;
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {

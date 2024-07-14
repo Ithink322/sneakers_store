@@ -192,7 +192,10 @@
         <button class="burger-menu__section-btn">
           <NuxtLink
             @click="closeBurgerMenu"
-            :to="'/blog/' + store.enCategory + '/' + store.currentPage"
+            :to="{
+              path: '/blog/' + store.enCategory,
+              query: { page: currentPage },
+            }"
             >Наш блог</NuxtLink
           >
         </button>
@@ -217,6 +220,7 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
+const currentPage = computed(() => store.currentPage);
 
 const props = defineProps(["isOpen"]);
 

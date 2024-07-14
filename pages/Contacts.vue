@@ -111,11 +111,17 @@
 import type { Contacts } from "@/types/Contacts";
 
 useHead({
-  title: "Contacts",
+  title: "Контакты - Sneakers Store | Свяжитесь с нами по вопросам Nike",
   meta: [
     {
       name: "description",
-      content: "Here you can find our contacts in different cities.",
+      content:
+        "Свяжитесь с нами по телефону, электронной почте или через форму обратной связи.  Мы поможем вам найти идеальные кроссовки Nike!",
+    },
+    {
+      name: "keywords",
+      content:
+        "Sneakers Store, контакты, телефон, email, форма обратной связи, Nike, кроссовки Nike",
     },
   ],
 });

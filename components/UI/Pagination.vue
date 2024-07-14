@@ -62,16 +62,13 @@ import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
 const totalPages = computed(() => store.totalPages);
 
-const router = useRouter();
 const prevPage = () => {
   if (store.currentPage > 1) {
     store.setPage(store.currentPage - 1);
-    const url = `/blog/${store.enCategory}/${store.currentPage}`;
-    router.push(url);
+    router.replace({ query: { ...route.query, page: store.currentPage } });
   } else {
     store.setPage(totalPages.value);
-    const url = `/blog/${store.enCategory}/${totalPages.value}`;
-    router.push(url);
+    router.replace({ query: { ...route.query, page: totalPages.value } });
   }
   updateTranslate();
 };
@@ -79,22 +76,22 @@ const prevPage = () => {
 const nextPage = () => {
   if (store.currentPage < store.totalPages) {
     store.setPage(store.currentPage + 1);
-    const url = `/blog/${store.enCategory}/${store.currentPage}`;
-    router.push(url);
+    router.replace({ query: { ...route.query, page: store.currentPage } });
   } else {
     store.setPage(1);
-    const url = `/blog/${store.enCategory}/1`;
-    router.push(url);
+    router.replace({ query: { ...route.query, page: 1 } });
   }
   updateTranslate();
 };
 
 const changePage = (pageNum: number) => {
   store.setPage(pageNum);
-  const url = `/blog/${store.enCategory}/${pageNum}`;
-  router.push(url);
+  router.replace({ query: { ...route.query, page: pageNum } });
   updateTranslate();
 };
+
+const router = useRouter();
+const route = useRoute();
 
 const paginationWrapper = ref<HTMLElement | null>(null);
 

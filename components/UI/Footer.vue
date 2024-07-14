@@ -95,7 +95,10 @@
               </li>
               <li class="dropdown-list__link">
                 <NuxtLink
-                  :to="'/blog/' + store.enCategory + '/' + store.currentPage"
+                  :to="{
+                    path: '/blog/' + store.enCategory,
+                    query: { page: currentPage },
+                  }"
                   >Наш блог</NuxtLink
                 >
               </li>
@@ -174,7 +177,10 @@
               </li>
               <li class="list__link">
                 <NuxtLink
-                  :to="'/blog/' + store.enCategory + '/' + store.currentPage"
+                  :to="{
+                    path: '/blog/' + store.enCategory,
+                    query: { page: currentPage },
+                  }"
                   >Наш блог</NuxtLink
                 >
               </li>
@@ -264,7 +270,7 @@
     </div>
     <div class="footer__info">
       <span class="footer__copyright-text"
-        >© 2023 - Swoosh Store - Интернет-магазин ориганальных кроссовок</span
+        >© 2024 - Sneakers Store - Интернет-магазин ориганальных кроссовок</span
       >
       <span class="footer__privacy-policy-text"
         ><NuxtLink to="/PrivacyPolicy"
@@ -278,6 +284,7 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
+const currentPage = computed(() => store.currentPage);
 
 const activeDropdown = ref<string | null>(null);
 

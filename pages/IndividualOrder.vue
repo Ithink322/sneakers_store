@@ -183,12 +183,18 @@
 import Inputmask from "inputmask";
 
 useHead({
-  title: "Individual order",
+  title:
+    "Индивидуальный заказ Nike - Sneakers Store | Создайте свою идеальную пару",
   meta: [
     {
       name: "description",
       content:
-        "Here you can become the owner of truly unique and limited models of Nike sneakers, waiting for them on sale. We appreciate your passion for style and give you a unique opportunity to order sneakers that will complement your personality.",
+        "Закажите индивидуальную пару кроссовок Nike в Sneakers Store! Выберите модель, цвет, материалы и создайте уникальную пару, отражающую ваш стиль.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Sneakers Store, индивидуальный заказ, Nike, кроссовки Nike, дизайн, персонализация",
     },
   ],
 });

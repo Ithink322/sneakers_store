@@ -8,6 +8,7 @@ interface PostsState {
   postsPerPage: number;
   enCategory: string;
   ruCategory: string;
+  isDropdownInteracted: boolean;
   title: string;
   translateValue: number;
 }
@@ -19,7 +20,8 @@ export const usePostsStore = defineStore("postStore", {
     currentPage: 1,
     postsPerPage: 10,
     enCategory: "all-posts",
-    ruCategory: "ВСЕ ПУБЛИКАЦИИ",
+    ruCategory: "Рубрики",
+    isDropdownInteracted: false,
     title: "Блог",
     translateValue: 0,
   }),
@@ -48,18 +50,16 @@ export const usePostsStore = defineStore("postStore", {
         this.filteredPosts = this.allPosts;
       } else {
         this.filteredPosts = this.allPosts.filter(
-          (post) => post.bannerText.toLowerCase() === category.toLowerCase()
+          (post) => post.category.toLowerCase() === category.toLowerCase()
         );
       }
     },
     setPage(page: number) {
       this.currentPage = page;
     },
-    setEnCategory(category: string) {
-      this.enCategory = category;
-    },
-    setRuCategory(category: string) {
-      this.ruCategory = category;
+    setCategory(enCategory: string, ruCategory: string) {
+      this.enCategory = enCategory;
+      this.ruCategory = ruCategory;
       this.title = this.getTitle;
     },
     updateTranslateValue(newTranslateValue: number) {
@@ -71,7 +71,13 @@ export const usePostsStore = defineStore("postStore", {
   },
   persist: {
     key: "blog-store",
-    storage: typeof window !== "undefined" ? sessionStorage : undefined,
-    paths: ["currentPage", "enCategory", "ruCategory", "title"],
+    storage: typeof window !== "undefined" ? localStorage : undefined,
+    paths: [
+      "currentPage",
+      "enCategory",
+      "ruCategory",
+      "title",
+      "isDropdownInteracted",
+    ],
   },
 });

@@ -321,12 +321,17 @@ import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 
 useHead({
-  title: "Sneakers store",
+  title: "Sneakers Store - Купить Nike онлайн | Огромный выбор моделей",
   meta: [
     {
       name: "description",
       content:
-        "Sneakers store is the perfect destination for buying original nike shoes. We're passionate about delivering original quality to our customers. Explore our website!",
+        "Sneakers Store - ваш интернет-магазин кроссовок Nike. Широкий ассортимент моделей для мужчин и женщин, доступные цены и быстрая доставка. Найдите свою идеальную пару Nike сегодня!",
+    },
+    {
+      name: "keywords",
+      content:
+        "Nike, кроссовки Nike, купить Nike, интернет-магазин, Sneakers Store, мужские кроссовки Nike, женские кроссовки Nike, спортивная обувь Nike, доставка, цены",
     },
   ],
 });
