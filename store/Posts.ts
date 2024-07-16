@@ -35,6 +35,9 @@ export const usePostsStore = defineStore("postStore", {
       return state.filteredPosts.slice(start, end);
     },
     getTitle(state): string {
+      if (!state.isDropdownInteracted) {
+        return "Блог";
+      }
       return (
         state.ruCategory.charAt(0).toUpperCase() +
         state.ruCategory.slice(1).toLowerCase()

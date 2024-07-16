@@ -50,7 +50,12 @@
               />
             </svg>
           </button>
-          <div @click="toggleBurgerMenu" class="header-mid__menu-btn-body">
+          <div
+            @click="toggleBurgerMenu"
+            @mouseover="handleHover"
+            @mouseleave="handleLeave"
+            class="header-mid__menu-btn-body"
+          >
             <button class="header-mid__menu-btn">
               <svg
                 width="36"
@@ -84,7 +89,11 @@
               >
             </div>
           </div>
-          <div @click="toggleCatalogMenu" class="header-mid__catalog-btn-body">
+          <div
+            @mouseover="handleHover"
+            @mouseleave="handleLeave"
+            class="header-mid__catalog-btn-body"
+          >
             <button class="header-mid__catalog-btn">
               <svg
                 width="36"
@@ -228,7 +237,11 @@
       :isOpen="isBurgerMenuOpen"
       @close="closeBurgerMenu"
     ></UIBurgerMenu>
-    <UICatalogMenu :class="{ active: isCatalogMenuOpen }"></UICatalogMenu>
+    <UICatalogMenu
+      @mouseover="handleHover"
+      @mouseleave="handleLeave"
+      :class="{ active: isCatalogMenuOpen }"
+    ></UICatalogMenu>
   </nav>
 </template>
 
@@ -261,24 +274,24 @@ const closeBurgerMenu = () => {
 
 const isCatalogMenuOpen = ref(false);
 const catalogLineStroke = ref("black");
-const toggleCatalogMenu = () => {
-  isCatalogMenuOpen.value = !isCatalogMenuOpen.value;
-  catalogLineStroke.value = isCatalogMenuOpen.value ? "#fb5a00" : "black";
 
+const handleHover = () => {
+  isCatalogMenuOpen.value = true;
+  burgerLineStroke.value = "#fb5a00";
+};
+
+const handleLeave = (event: MouseEvent) => {
+  setTimeout(() => 2000);
   const catalogMenu = document.querySelector(".catalog")!;
-  const burgerFlex = document.querySelector(".header-mid__catalog-btn-body")!;
-
-  document.addEventListener("click", (event) => {
-    const targetElement = event.target as HTMLElement;
-
-    if (
-      !catalogMenu.contains(targetElement) &&
-      !burgerFlex.contains(targetElement)
-    ) {
-      catalogLineStroke.value = "black";
-      isCatalogMenuOpen.value = false;
-    }
-  });
+  const burgerBtn = document.querySelector(".header-mid__catalog-btn-body")!;
+  const targetElement = event.relatedTarget as HTMLElement;
+  if (
+    !catalogMenu.contains(targetElement) &&
+    !burgerBtn.contains(targetElement)
+  ) {
+    isCatalogMenuOpen.value = false;
+    burgerLineStroke.value = "black";
+  }
 };
 
 const activeButton = ref<string | null>(null);

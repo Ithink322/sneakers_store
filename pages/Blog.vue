@@ -1,20 +1,20 @@
 <template>
-  <UIBreadcrumb :breadcrumbTitle="store.title"></UIBreadcrumb>
+  <UIBreadcrumb :breadcrumbTitle="title"></UIBreadcrumb>
   <main>
-    <h1 v-if="isBlogListPage" class="title">
-      {{ store.title }}
+    <h1 v-if="isBlogListVisible" class="title">
+      {{ title }}
     </h1>
-    <div v-if="isBlogListPage" class="posts-list">
+    <div v-if="isBlogListVisible" class="posts-list">
       <UIDropDown></UIDropDown>
       <UIMailing class="mailing mailing--visible-from1200px"></UIMailing>
       <NuxtPage></NuxtPage>
     </div>
-    <UIPagination v-if="isBlogListPage"></UIPagination>
+    <UIPagination v-if="isBlogListVisible"></UIPagination>
     <UIMailing
-      v-if="isBlogListPage"
+      v-if="isBlogListVisible"
       class="mailing mailing--visible-till1200px"
     ></UIMailing>
-    <NuxtPage v-if="!isBlogListPage"></NuxtPage>
+    <NuxtPage v-if="!isBlogListVisible"></NuxtPage>
   </main>
 </template>
 
@@ -38,8 +38,10 @@ useHead({
   ],
 });
 
+const title = computed(() => store.getTitle);
+
 const route = useRoute();
-const isBlogListPage = computed(() => !route.params.id);
+const isBlogListVisible = computed(() => !route.params.id);
 
 const store = usePostsStore();
 const router = useRouter();
