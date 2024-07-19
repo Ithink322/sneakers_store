@@ -53,10 +53,6 @@ store.setAllPosts(blogPosts);
 const pageNum = parseInt(route.query.page);
 const totalPages = computed(() => store.totalPages);
 
-/* definePageMeta({
-  middleware: ["validate-blog"],
-}); */
-
 const categoryMapping: { [key: string]: string } = {
   "all-posts": "ВСЕ ПУБЛИКАЦИИ",
   news: "НОВОСТИ",
@@ -75,12 +71,16 @@ const updateCategory = () => {
     store.ruCategory = selectedValue;
     store.setCategory(selectedCategory.value, selectedValue);
     store.filterPosts(store.ruCategory);
+  } else {
+    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
 };
 
 const checkPageValidity = () => {
-  if (pageNum <= totalPages.value) {
+  if (pageNum <= totalPages.value && pageNum > 0) {
     store.currentPage = pageNum;
+  } else {
+    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
 };
 

@@ -22,16 +22,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">9900 ₽</span></span
               >
-              <NuxtLink to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__content">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
+              <UIButtonWithArrow
+                class="slide__more-btn"
+                :link="''"
+              ></UIButtonWithArrow>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -53,16 +47,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">8800 ₽</span></span
               >
-              <NuxtLink to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__content">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
+              <UIButtonWithArrow
+                class="slide__more-btn"
+                :link="''"
+              ></UIButtonWithArrow>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -84,16 +72,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">7700 ₽</span></span
               >
-              <NuxtLink to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__content">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
+              <UIButtonWithArrow
+                class="slide__more-btn"
+                :link="''"
+              ></UIButtonWithArrow>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -115,16 +97,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">6600 ₽</span></span
               >
-              <NuxtLink to="">
-                <button class="slide__more-btn more-btn">
-                  <div class="more-btn__content">
-                    <span class="more-btn__text">Подробнее</span>
-                  </div>
-                  <div class="more-btn__arrow">
-                    <img src="/imgs/white-right-arrow.svg" alt="" />
-                  </div>
-                </button>
-              </NuxtLink>
+              <UIButtonWithArrow
+                class="slide__more-btn"
+                :link="''"
+              ></UIButtonWithArrow>
             </div>
           </div>
         </div>
@@ -254,16 +230,12 @@
           >от <span class="season-hit__price">7 899 ₽</span></span
         >
       </div>
-      <NuxtLink to="">
-        <button class="season-hit__more-btn more-btn">
-          <div class="more-btn__content">
-            <span class="more-btn__text">Подробнее</span>
-          </div>
-          <div class="more-btn__arrow-area more-btn__arrow">
-            <img src="/imgs/white-right-arrow.svg" alt="" />
-          </div>
-        </button>
-      </NuxtLink>
+      <UIButtonWithArrow
+        class="season-hit__more-btn"
+        :link="''"
+        :bodyBgColor="'#ff6915'"
+        :arrowBgColor="'#fb5a00'"
+      ></UIButtonWithArrow>
       <img
         class="season-hit__hero season-hit__hero--from320px"
         src="/imgs/season-hit-hero--from320px.svg"
@@ -705,34 +677,6 @@ const hitProductsNextSlide = () => {
     margin: 0rem auto;
   }
 }
-.more-btn {
-  @include btn;
-  background-color: $Light-Black;
-  width: 246px;
-  height: 65px;
-
-  &__content {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  &__text {
-    font-family: "Pragmatica Medium";
-    font-size: 1rem;
-    color: #fff;
-  }
-  &__arrow {
-    @include btn;
-    background-color: $Dark-Black;
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
-    margin-left: auto;
-  }
-  &__arrow-area {
-    background-color: $Dark-Orange;
-  }
-}
 .overflow__indicators-flex {
   width: fit-content;
   margin: 2.5rem auto 3.125rem auto;
@@ -869,7 +813,6 @@ const hitProductsNextSlide = () => {
     position: relative;
     width: 100%;
     max-width: 260px;
-    background-color: $Light-Orange;
     z-index: 2;
   }
   &__hero--from320px {

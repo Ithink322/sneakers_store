@@ -25,16 +25,10 @@
       </span>
     </div>
     <img src="/imgs/about-us-hero.webp" alt="" class="about-us__hero" />
-    <NuxtLink to="/AboutUs" class="about-us__more-btn-link">
-      <button class="about-us__more-btn more-btn">
-        <div class="more-btn__flex">
-          <span class="more-btn__text">Подробнее</span>
-        </div>
-        <div class="more-btn__arrow">
-          <img src="/imgs/white-right-arrow.svg" alt="" />
-        </div>
-      </button>
-    </NuxtLink>
+    <UIButtonWithArrow
+      class="about-us__more-btn about-us__more-btn-link"
+      :link="'/AboutUs'"
+    ></UIButtonWithArrow>
   </div>
 </template>
 

@@ -155,14 +155,12 @@
             ></textarea>
           </div>
           <div class="send">
-            <button class="send__send-btn send-btn">
-              <div class="send-btn__content">
-                <span class="send-btn__text">Отправить</span>
-              </div>
-              <div class="send-btn__arrow-area send-btn__arrow">
-                <img src="/imgs/white-right-arrow.svg" alt="" />
-              </div>
-            </button>
+            <UIButtonWithArrow
+              class="send__send-btn"
+              :bodyBgColor="'#ff6915'"
+              :arrowBgColor="'#fb5a00'"
+              :content="'Отправить'"
+            ></UIButtonWithArrow>
             <span class="send__note"
               >Нажимая кнопку “Отправить” я соглашаюсь с
               <span class="send__note--underlined"

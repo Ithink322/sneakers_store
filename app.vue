@@ -23,6 +23,9 @@ body {
   background-color: #fff;
   margin: 0rem auto;
 }
+a {
+  text-decoration: none;
+}
 .page-container {
   padding: 0rem 0.938rem;
 }

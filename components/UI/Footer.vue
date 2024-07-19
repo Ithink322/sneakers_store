@@ -3,7 +3,9 @@
     <div class="container">
       <div class="footer__body body">
         <div class="footer__content content">
-          <img src="/imgs/logo-footer.svg" alt="" class="content__logo" />
+          <NuxtLink to="/">
+            <img src="/imgs/logo-footer.svg" alt="" class="content__logo" />
+          </NuxtLink>
           <div class="content__socials socials">
             <a href="https://www.instagram.com/nike/" target="_blank">
               <button class="socials__btn">
