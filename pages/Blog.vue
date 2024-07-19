@@ -5,8 +5,10 @@
       {{ title }}
     </h1>
     <div v-if="isBlogListVisible" class="posts-list">
-      <UIDropDown></UIDropDown>
-      <UIMailing class="mailing mailing--visible-from1200px"></UIMailing>
+      <div class="sidebar">
+        <UIDropDown></UIDropDown>
+        <UIMailing class="mailing mailing--visible-from1200px"></UIMailing>
+      </div>
       <NuxtPage></NuxtPage>
     </div>
     <UIPagination v-if="isBlogListVisible"></UIPagination>
@@ -156,17 +158,26 @@ watch(
     grid-template-columns: 1fr 1fr 325px;
     grid-template-rows: auto;
     grid-template-areas:
-      "post-1 post-2 dropdown"
-      "post-3 post-4 mailing"
-      "post-5 post-6 ..."
-      "post-7 post-8 ..."
-      "post-9 post-10 ...";
+      "post-1 post-2 sidebar"
+      "post-3 post-4 sidebar"
+      "post-5 post-6 sidebar"
+      "post-7 post-8 sidebar"
+      "post-9 post-10 sidebar";
     row-gap: 0.938rem;
     margin-bottom: 5.625rem;
   }
+  .sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 3rem;
+    margin-bottom: 19.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+    height: fit-content;
+  }
   .mailing {
     display: block;
-    grid-area: mailing;
     width: 325px;
     margin-top: 0.938rem;
     margin-bottom: calc(0.938rem - 100%);
@@ -180,6 +191,9 @@ watch(
   .posts-list {
     grid-template-columns: 1fr 1fr 355px;
     gap: 1.25rem;
+  }
+  .sidebar {
+    margin-bottom: 21rem;
   }
   .mailing {
     width: 355px;
