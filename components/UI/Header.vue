@@ -249,8 +249,8 @@
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
 const currentPage = computed(() => store.currentPage);
-console.log("currentPage:", currentPage.value);
-
+/* console.log("currentPage:", currentPage.value);
+ */
 /* onBeforeMount(() => {
   console.log("Server side enCategory:", store.enCategory);
 });

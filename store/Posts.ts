@@ -8,7 +8,6 @@ interface PostsState {
   postsPerPage: number;
   enCategory: string;
   ruCategory: string;
-  isDropdownInteracted: boolean;
   title: string;
   translateValue: number;
 }
@@ -20,9 +19,8 @@ export const usePostsStore = defineStore("postStore", {
     currentPage: 1,
     postsPerPage: 10,
     enCategory: "all-posts",
-    ruCategory: "Рубрики",
-    isDropdownInteracted: false,
-    title: "Блог",
+    ruCategory: "Все публикации",
+    title: "Все публикации",
     translateValue: 0,
   }),
   getters: {
@@ -35,9 +33,6 @@ export const usePostsStore = defineStore("postStore", {
       return state.filteredPosts.slice(start, end);
     },
     getTitle(state): string {
-      if (!state.isDropdownInteracted) {
-        return "Блог";
-      }
       return (
         state.ruCategory.charAt(0).toUpperCase() +
         state.ruCategory.slice(1).toLowerCase()

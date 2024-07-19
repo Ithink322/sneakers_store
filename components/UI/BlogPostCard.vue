@@ -5,7 +5,7 @@
       path: `/blog/${enCategory}/${slugify(props.post.title)}`,
     }"
   >
-    <div @click="saveSinglePost" class="post-card card">
+    <div class="post-card card">
       <img :src="post.hero" alt="" class="card__hero" />
       <div class="card__body">
         <div class="card__category category">
@@ -34,10 +34,6 @@ const props = defineProps({
 
 const store = usePostsStore();
 const enCategory = computed(() => store.enCategory);
-
-const saveSinglePost = () => {
-  localStorage.setItem("SinglePost", JSON.stringify(props.post));
-};
 </script>
 
 <style lang="scss" scoped>

@@ -44,9 +44,7 @@ const route = useRoute();
 const isBlogListVisible = computed(() => !route.params.id);
 
 const store = usePostsStore();
-const router = useRouter();
-
-let selectedCategory = store.enCategory;
+let selectedCategory = ref("");
 
 store.setAllPosts(blogPosts);
 
@@ -71,11 +69,9 @@ const updateCategory = () => {
     categoryMapping[category as keyof typeof categoryMapping];
 
   if (selectedValue) {
-    if (selectedCategory !== store.enCategory) {
-      store.isDropdownInteracted = true;
-    }
-    selectedCategory = category;
-    store.setCategory(selectedCategory, selectedValue);
+    selectedCategory.value = category;
+    store.ruCategory = selectedValue;
+    store.setCategory(selectedCategory.value, selectedValue);
     store.filterPosts(store.ruCategory);
   }
 };
@@ -93,9 +89,11 @@ onMounted(() => {
 
 watch(
   () => route.params.category,
-  (newCategory) => {
-    updateCategory();
-    checkPageValidity();
+  (newCategory, oldCategory) => {
+    if (newCategory !== oldCategory) {
+      updateCategory();
+      checkPageValidity();
+    }
   }
 );
 </script>

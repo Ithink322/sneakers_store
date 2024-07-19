@@ -117,26 +117,14 @@
 </template>
 
 <script setup lang="ts">
-import type { BlogPost } from "@/types/BlogPosts";
 import { blogPosts } from "@/data/Blogposts";
 import { slugify, unslugify } from "@/utils/helpers";
 
 const route = useRoute();
 const post = computed(() => {
   const title = unslugify(route.params.id);
-  console.log("title:", title);
   return blogPosts.find((post) => unslugify(slugify(post.title)) === title);
 });
-console.log("post.value:", post.value);
-
-/* const post = ref<BlogPost | null>(null);
-
-onMounted(() => {
-  const savedPost = localStorage.getItem("SinglePost");
-  if (savedPost) {
-    post.value = JSON.parse(savedPost);
-  }
-}); */
 
 watch(post, (newPost) => {
   if (newPost) {
@@ -358,11 +346,13 @@ p {
   }
   .sidebar {
     position: sticky;
+    top: 3rem;
     flex-direction: column;
     gap: 2.25rem;
     width: 325px;
     margin-top: 5rem;
-    top: 0;
+    margin-bottom: 12rem;
+    height: fit-content;
   }
   .mailing--from1200px {
     width: 325px;

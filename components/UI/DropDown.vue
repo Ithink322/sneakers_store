@@ -5,7 +5,7 @@
       :class="{ active: isDropdownOpen }"
       @click="toggleDropdown"
     >
-      <span>{{ dropdownTitle }}</span>
+      <span>{{ store.ruCategory }}</span>
       <svg
         class="dropdown__button-icon"
         width="8"
@@ -28,7 +28,7 @@
         :class="{
           active: selectedValue === option.value,
         }"
-        @click="selectOption(option.value)"
+        @click="selectCategory(option.value)"
       >
         <span>{{ option.value }}</span>
         <div class="dropdown__counter-border">
@@ -88,7 +88,7 @@ const selectedValue = ref("");
 const router = useRouter();
 
 const selectedCategory = ref("");
-const selectOption = (value: string) => {
+const selectCategory = async (value: string) => {
   if (value === "ВСЕ ПУБЛИКАЦИИ") {
     selectedCategory.value = "all-posts";
   } else if (value === "НОВОСТИ") {
@@ -103,27 +103,28 @@ const selectOption = (value: string) => {
   if (selectedValue.value !== value) {
     selectedValue.value = value;
     store.setCategory(selectedCategory.value, selectedValue.value);
+    await nextTick();
+    await router.replace({
+      path: `/blog/${selectedCategory.value}`,
+      query: { page: 1 },
+    });
     store.currentPage = 1;
     store.resetTranslateValue();
-    router.replace({
-      path: `/blog/${selectedCategory.value}`,
-      query: {
-        page: 1,
-      },
-    });
-    store.isDropdownInteracted = true;
   }
   closeDropdown();
 };
 const closeDropdown = () => {
   isDropdownOpen.value = false;
 };
-const dropdownTitle = computed(() =>
-  store.isDropdownInteracted ? store.ruCategory : "Рубрики"
-);
 onMounted(() => {
   selectedValue.value = store.ruCategory;
 });
+watch(
+  () => store.ruCategory,
+  (newValue) => {
+    selectedValue.value = newValue;
+  }
+);
 </script>
 
 <style lang="scss" scoped>
