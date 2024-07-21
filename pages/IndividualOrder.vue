@@ -432,31 +432,6 @@ const submitForm = () => {
     }
   }
 }
-.send-btn {
-  @include btn;
-  background-color: $Light-Orange;
-  width: 246px;
-  height: 65px;
-
-  &__content {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  &__text {
-    font-family: "Pragmatica Medium";
-    font-size: 1rem;
-    color: #fff;
-  }
-  &__arrow {
-    @include btn;
-    background-color: $Dark-Orange;
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
-    margin-left: auto;
-  }
-}
 .invalid-name::placeholder,
 .invalid-email,
 .invalid-email::placeholder,

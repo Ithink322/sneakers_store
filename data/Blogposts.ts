@@ -2,7 +2,7 @@ import type { BlogPost } from "@/types/BlogPosts";
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -37,7 +37,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 2,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -63,7 +63,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 3,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 4,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -122,7 +122,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 5,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -148,7 +148,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 6,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -174,7 +174,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 7,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -207,7 +207,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 8,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -232,7 +232,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 9,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -264,7 +264,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 10,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -288,7 +288,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 11,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -312,7 +312,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 12,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -346,7 +346,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 13,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -371,7 +371,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 14,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -396,7 +396,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 15,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -422,7 +422,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 16,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -455,7 +455,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 17,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -481,7 +481,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 18,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -507,7 +507,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 19,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -539,7 +539,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 20,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -574,7 +574,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 21,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -609,7 +609,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 22,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -643,7 +643,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 23,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -667,7 +667,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 24,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -692,7 +692,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 25,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -724,7 +724,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 26,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -750,7 +750,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 27,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -783,7 +783,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 28,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -809,7 +809,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 29,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -835,7 +835,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 30,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -860,7 +860,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 31,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -886,7 +886,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 32,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -911,7 +911,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 33,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -943,7 +943,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 34,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -968,7 +968,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 35,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -1002,7 +1002,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 36,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -1028,7 +1028,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 37,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -1054,7 +1054,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 38,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -1089,7 +1089,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 39,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -1122,7 +1122,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 40,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -1146,7 +1146,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 41,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -1172,7 +1172,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 42,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -1205,7 +1205,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 43,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -1240,7 +1240,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 44,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -1265,7 +1265,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 45,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -1297,7 +1297,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 46,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -1323,7 +1323,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 47,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -1357,7 +1357,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 48,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -1383,7 +1383,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 49,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -1408,7 +1408,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 50,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -1432,7 +1432,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 51,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -1458,7 +1458,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 52,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -1484,7 +1484,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 53,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -1509,7 +1509,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 54,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -1543,7 +1543,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 55,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -1575,7 +1575,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 56,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -1601,7 +1601,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 57,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -1626,7 +1626,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 58,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -1661,7 +1661,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 59,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -1694,7 +1694,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 60,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -1718,7 +1718,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 61,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -1750,7 +1750,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 62,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -1775,7 +1775,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 63,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -1799,7 +1799,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 64,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -1825,7 +1825,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 65,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -1859,7 +1859,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 66,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -1885,7 +1885,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 67,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -1918,7 +1918,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 68,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -1953,7 +1953,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 69,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -1978,7 +1978,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 70,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -2004,7 +2004,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 71,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -2037,7 +2037,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 72,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -2062,7 +2062,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 73,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -2094,7 +2094,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 74,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -2128,7 +2128,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 75,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -2152,7 +2152,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 76,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -2178,7 +2178,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 77,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -2203,7 +2203,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 78,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -2238,7 +2238,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 79,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -2264,7 +2264,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 80,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -2290,7 +2290,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 81,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -2316,7 +2316,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 82,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -2341,7 +2341,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 83,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -2374,7 +2374,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 84,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -2409,7 +2409,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 85,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -2441,7 +2441,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 86,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -2467,7 +2467,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 87,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -2493,7 +2493,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 88,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -2519,7 +2519,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 89,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -2553,7 +2553,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 90,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -2577,7 +2577,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 91,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -2601,7 +2601,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 92,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -2627,7 +2627,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 93,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -2660,7 +2660,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 94,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -2695,7 +2695,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 95,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -2720,7 +2720,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 96,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -2752,7 +2752,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 97,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -2778,7 +2778,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 98,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -2812,7 +2812,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 99,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -2838,7 +2838,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 100,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -2863,7 +2863,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 101,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -2898,7 +2898,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 102,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -2924,7 +2924,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 103,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -2958,7 +2958,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 104,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -2983,7 +2983,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 105,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -3009,7 +3009,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 106,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -3035,7 +3035,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 107,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -3068,7 +3068,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 108,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -3093,7 +3093,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 109,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -3125,7 +3125,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 110,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -3149,7 +3149,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 111,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -3173,7 +3173,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 112,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -3207,7 +3207,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 113,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -3232,7 +3232,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 114,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -3257,7 +3257,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 115,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -3283,7 +3283,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 116,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -3316,7 +3316,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 117,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -3342,7 +3342,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 118,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -3369,7 +3369,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     id: 119,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -3401,7 +3401,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 120,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -3436,7 +3436,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 121,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -3471,7 +3471,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 122,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -3505,7 +3505,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 123,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -3529,7 +3529,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 124,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -3554,7 +3554,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 125,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -3586,7 +3586,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 126,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -3612,7 +3612,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 127,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -3645,7 +3645,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 128,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -3671,7 +3671,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 129,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -3697,7 +3697,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 130,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -3722,7 +3722,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 131,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -3748,7 +3748,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 132,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -3773,7 +3773,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 133,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -3805,7 +3805,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 134,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -3830,7 +3830,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 135,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -3864,7 +3864,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 136,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -3890,7 +3890,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 137,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -3916,7 +3916,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 138,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -3951,7 +3951,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 139,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -3984,7 +3984,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 140,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -4008,7 +4008,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 141,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -4034,7 +4034,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 142,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -4067,7 +4067,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 143,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -4102,7 +4102,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 144,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -4127,7 +4127,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 145,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -4159,7 +4159,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 146,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -4185,7 +4185,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 147,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -4219,7 +4219,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 148,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -4245,7 +4245,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 149,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -4270,7 +4270,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 150,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -4294,7 +4294,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 151,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -4320,7 +4320,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 152,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -4346,7 +4346,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 153,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -4371,7 +4371,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 154,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -4405,7 +4405,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 155,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -4437,7 +4437,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 156,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -4463,7 +4463,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 157,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -4488,7 +4488,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 158,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -4523,7 +4523,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 159,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -4556,7 +4556,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 160,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -4580,7 +4580,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 161,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -4612,7 +4612,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 162,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -4637,7 +4637,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 163,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -4661,7 +4661,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 164,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -4687,7 +4687,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 165,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -4721,7 +4721,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 166,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -4747,7 +4747,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 167,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -4780,7 +4780,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 168,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -4815,7 +4815,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 169,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -4840,7 +4840,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 170,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -4866,7 +4866,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 171,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -4899,7 +4899,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 172,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -4924,7 +4924,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 173,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -4956,7 +4956,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 174,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -4990,7 +4990,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 175,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -5014,7 +5014,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 176,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -5040,7 +5040,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 177,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -5065,7 +5065,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 178,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -5100,7 +5100,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 179,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -5126,7 +5126,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 180,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -5152,7 +5152,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 181,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -5178,7 +5178,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 182,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -5203,7 +5203,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 183,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -5236,7 +5236,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 184,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -5271,7 +5271,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 185,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -5303,7 +5303,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 186,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -5329,7 +5329,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 187,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -5355,7 +5355,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 188,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -5381,7 +5381,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 189,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -5415,7 +5415,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 190,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -5439,7 +5439,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 191,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -5463,7 +5463,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 192,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -5489,7 +5489,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 193,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -5522,7 +5522,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 194,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -5557,7 +5557,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 195,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -5582,7 +5582,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 196,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -5614,7 +5614,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 197,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -5640,7 +5640,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 198,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -5674,7 +5674,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 199,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -5700,7 +5700,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 200,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -5725,7 +5725,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 201,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -5760,7 +5760,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 202,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -5786,7 +5786,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 203,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -5820,7 +5820,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 204,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -5845,7 +5845,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 205,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -5871,7 +5871,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 206,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -5897,7 +5897,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 207,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -5930,7 +5930,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 208,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -5955,7 +5955,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 209,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -5987,7 +5987,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 210,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -6011,7 +6011,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 211,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -6035,7 +6035,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 212,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -6069,7 +6069,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 213,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -6094,7 +6094,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 214,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -6119,7 +6119,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 215,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -6145,7 +6145,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 216,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -6178,7 +6178,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 217,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -6204,7 +6204,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 218,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -6231,7 +6231,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     id: 219,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -6263,7 +6263,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 220,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -6298,7 +6298,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 221,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -6333,7 +6333,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 222,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -6367,7 +6367,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 223,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -6391,7 +6391,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 224,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -6416,7 +6416,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 225,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -6448,7 +6448,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 226,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -6474,7 +6474,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 227,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -6507,7 +6507,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 228,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -6533,7 +6533,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 229,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -6559,7 +6559,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 230,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -6584,7 +6584,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 231,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -6610,7 +6610,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 232,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -6635,7 +6635,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 233,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -6667,7 +6667,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 234,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -6692,7 +6692,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 235,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -6726,7 +6726,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 236,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -6752,7 +6752,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 237,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -6778,7 +6778,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 238,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -6813,7 +6813,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 239,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -6846,7 +6846,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 240,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -6870,7 +6870,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 241,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -6896,7 +6896,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 242,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -6929,7 +6929,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 243,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -6964,7 +6964,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 244,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -6989,7 +6989,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 245,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -7021,7 +7021,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 246,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -7047,7 +7047,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 247,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -7081,7 +7081,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 248,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -7107,7 +7107,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 249,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -7132,7 +7132,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 250,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -7156,7 +7156,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 251,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -7191,7 +7191,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 252,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -7217,7 +7217,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 253,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -7251,7 +7251,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 254,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -7276,7 +7276,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 255,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -7302,7 +7302,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 256,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -7328,7 +7328,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 257,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -7361,7 +7361,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 258,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -7386,7 +7386,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 259,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -7418,7 +7418,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 260,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -7442,7 +7442,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 261,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -7466,7 +7466,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 262,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -7500,7 +7500,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 263,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -7525,7 +7525,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 264,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -7550,7 +7550,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 265,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -7576,7 +7576,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 266,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -7609,7 +7609,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 267,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -7635,7 +7635,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 268,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -7662,7 +7662,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     id: 269,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -7694,7 +7694,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 270,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -7729,7 +7729,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 271,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -7764,7 +7764,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 272,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -7798,7 +7798,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 273,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -7822,7 +7822,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 274,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -7847,7 +7847,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 275,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -7879,7 +7879,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 276,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -7905,7 +7905,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 277,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -7938,7 +7938,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 278,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -7964,7 +7964,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 279,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -7990,7 +7990,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 280,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -8015,7 +8015,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 281,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -8041,7 +8041,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 282,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -8066,7 +8066,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 283,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -8098,7 +8098,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 284,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -8123,7 +8123,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 285,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -8157,7 +8157,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 286,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -8183,7 +8183,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 287,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -8209,7 +8209,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 288,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -8244,7 +8244,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 289,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -8277,7 +8277,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 290,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -8301,7 +8301,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 291,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -8327,7 +8327,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 292,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -8360,7 +8360,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 293,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -8395,7 +8395,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 294,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -8420,7 +8420,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 295,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -8452,7 +8452,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 296,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -8478,7 +8478,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 297,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -8512,7 +8512,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 298,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -8538,7 +8538,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 299,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -8563,7 +8563,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 300,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -8587,7 +8587,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 301,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -8613,7 +8613,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 302,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -8639,7 +8639,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 303,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -8664,7 +8664,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 304,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -8698,7 +8698,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 305,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -8730,7 +8730,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 306,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -8756,7 +8756,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 307,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -8781,7 +8781,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 308,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -8816,7 +8816,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 309,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -8849,7 +8849,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 310,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -8873,7 +8873,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 311,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -8905,7 +8905,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 312,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -8930,7 +8930,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 313,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -8954,7 +8954,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 314,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -8980,7 +8980,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 315,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -9014,7 +9014,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 316,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -9040,7 +9040,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 317,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -9073,7 +9073,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 318,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -9108,7 +9108,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 319,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -9133,7 +9133,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 320,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -9159,7 +9159,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 321,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -9192,7 +9192,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 322,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -9217,7 +9217,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 323,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -9249,7 +9249,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 324,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -9283,7 +9283,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 325,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -9307,7 +9307,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 326,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -9333,7 +9333,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 327,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -9358,7 +9358,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 328,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -9393,7 +9393,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 329,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -9419,7 +9419,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 330,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -9445,7 +9445,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 331,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -9471,7 +9471,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 332,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -9496,7 +9496,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 333,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -9529,7 +9529,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 334,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -9564,7 +9564,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 335,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -9596,7 +9596,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 336,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -9622,7 +9622,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 337,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -9648,7 +9648,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 338,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -9674,7 +9674,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 339,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -9708,7 +9708,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 340,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -9732,7 +9732,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 341,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -9756,7 +9756,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 342,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -9782,7 +9782,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 343,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -9815,7 +9815,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 344,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -9850,7 +9850,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 345,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -9875,7 +9875,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 346,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -9907,7 +9907,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 347,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -9933,7 +9933,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 348,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -9967,7 +9967,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 349,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -9993,7 +9993,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 350,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -10018,7 +10018,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 351,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -10053,7 +10053,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 352,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -10079,7 +10079,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 353,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -10113,7 +10113,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 354,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -10138,7 +10138,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 355,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -10164,7 +10164,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 356,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -10190,7 +10190,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 357,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -10223,7 +10223,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 358,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -10248,7 +10248,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 359,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -10280,7 +10280,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 360,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -10304,7 +10304,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 361,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -10328,7 +10328,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 362,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -10362,7 +10362,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 363,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -10387,7 +10387,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 364,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -10412,7 +10412,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 365,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -10438,7 +10438,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 366,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -10471,7 +10471,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 367,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -10497,7 +10497,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 368,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -10524,7 +10524,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     id: 369,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -10556,7 +10556,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 370,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -10591,7 +10591,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 371,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -10626,7 +10626,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 372,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -10660,7 +10660,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 373,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -10684,7 +10684,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 374,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -10709,7 +10709,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 375,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -10741,7 +10741,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 376,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -10767,7 +10767,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 377,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -10800,7 +10800,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 378,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -10826,7 +10826,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 379,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -10852,7 +10852,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 380,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -10877,7 +10877,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 381,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -10903,7 +10903,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 382,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -10928,7 +10928,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 383,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -10960,7 +10960,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 384,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -10985,7 +10985,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 385,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -11019,7 +11019,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 386,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -11045,7 +11045,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 387,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -11071,7 +11071,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 388,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -11106,7 +11106,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 389,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -11139,7 +11139,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 390,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -11163,7 +11163,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 391,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -11189,7 +11189,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 392,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -11222,7 +11222,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 393,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -11257,7 +11257,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 394,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -11282,7 +11282,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 395,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -11314,7 +11314,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 396,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -11340,7 +11340,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 397,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -11374,7 +11374,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 398,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -11400,7 +11400,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 399,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -11425,7 +11425,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 400,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -11449,7 +11449,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 401,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -11475,7 +11475,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 402,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -11501,7 +11501,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 403,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -11526,7 +11526,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 404,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -11560,7 +11560,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 405,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -11592,7 +11592,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 406,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -11618,7 +11618,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 407,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -11643,7 +11643,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 408,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -11678,7 +11678,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 409,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -11711,7 +11711,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 410,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -11735,7 +11735,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 411,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -11767,7 +11767,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 412,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -11792,7 +11792,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 413,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -11816,7 +11816,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 414,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -11842,7 +11842,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 415,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -11876,7 +11876,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 416,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -11902,7 +11902,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 417,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -11935,7 +11935,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 418,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -11970,7 +11970,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 419,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -11995,7 +11995,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 420,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -12021,7 +12021,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 421,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -12054,7 +12054,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 422,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -12079,7 +12079,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 423,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -12111,7 +12111,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 424,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -12145,7 +12145,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 425,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -12169,7 +12169,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 426,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -12195,7 +12195,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 427,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -12220,7 +12220,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 428,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -12255,7 +12255,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 429,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -12281,7 +12281,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 430,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -12307,7 +12307,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 431,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -12333,7 +12333,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 432,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -12358,7 +12358,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 433,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -12391,7 +12391,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 434,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -12426,7 +12426,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 435,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -12458,7 +12458,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 436,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -12484,7 +12484,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 437,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -12510,7 +12510,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 438,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -12536,7 +12536,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 439,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -12570,7 +12570,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 440,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -12594,7 +12594,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 441,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -12618,7 +12618,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 442,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -12644,7 +12644,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 443,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -12677,7 +12677,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 444,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -12712,7 +12712,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 445,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -12737,7 +12737,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 446,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -12769,7 +12769,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 447,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -12795,7 +12795,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 448,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -12829,7 +12829,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 449,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -12855,7 +12855,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 450,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -12880,7 +12880,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 451,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -12915,7 +12915,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 452,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -12941,7 +12941,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 453,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -12975,7 +12975,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 454,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -13000,7 +13000,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 455,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -13026,7 +13026,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 456,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -13052,7 +13052,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 457,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -13085,7 +13085,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 458,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -13110,7 +13110,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 459,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -13142,7 +13142,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 460,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -13166,7 +13166,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 461,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -13190,7 +13190,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 462,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -13224,7 +13224,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 463,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -13249,7 +13249,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 464,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -13274,7 +13274,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 465,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -13300,7 +13300,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 466,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -13333,7 +13333,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 467,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -13359,7 +13359,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 468,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -13386,7 +13386,7 @@ export const blogPosts: BlogPost[] = [
 
   {
     id: 469,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -13418,7 +13418,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 470,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -13453,7 +13453,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 471,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -13488,7 +13488,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 472,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -13522,7 +13522,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 473,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -13546,7 +13546,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 474,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -13571,7 +13571,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 475,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -13603,7 +13603,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 476,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -13629,7 +13629,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 477,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -13662,7 +13662,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 478,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -13688,7 +13688,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 479,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -13714,7 +13714,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 480,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -13739,7 +13739,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 481,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -13765,7 +13765,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 482,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -13790,7 +13790,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 483,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -13822,7 +13822,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 484,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -13847,7 +13847,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 485,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -13881,7 +13881,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 486,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -13907,7 +13907,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 487,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -13933,7 +13933,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 488,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -13968,7 +13968,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 489,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -14001,7 +14001,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 490,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",
@@ -14025,7 +14025,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 491,
-    hero: "/imgs/blog-hero-5.svg",
+    hero: "/imgs/blog-hero-5.jpg",
     category: "СОВЕТЫ",
     title: "Как правильно ухаживать за кроссовками",
     date: "25 Июля 2024",
@@ -14051,7 +14051,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 492,
-    hero: "/imgs/blog-hero-7.svg",
+    hero: "/imgs/blog-hero-7.jpg",
     category: "СТАТЬИ",
     title: "Выбираем кроссовки, когда глаза разбигаются",
     date: "28 Апреля 2021",
@@ -14084,7 +14084,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 493,
-    hero: "/imgs/blog-hero-1.svg",
+    hero: "/imgs/blog-hero-1.jpg",
     category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     date: "10 Августа 2023",
@@ -14119,7 +14119,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 494,
-    hero: "/imgs/blog-hero-8.svg",
+    hero: "/imgs/blog-hero-8.jpg",
     category: "ОБЗОРЫ",
     title: "Поделимся мнением профессионалов о их любимых парах Nike",
     date: "3 Июня 2021",
@@ -14144,7 +14144,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 495,
-    hero: "/imgs/blog-hero-9.svg",
+    hero: "/imgs/blog-hero-9.jpg",
     category: "СОВЕТЫ",
     title: "Как выбрать высокую обувь?",
     date: "5 Августа 2021",
@@ -14176,7 +14176,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 496,
-    hero: "/imgs/blog-hero-2.svg",
+    hero: "/imgs/blog-hero-2.jpg",
     category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     date: "5 Апреля 2024",
@@ -14202,7 +14202,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 497,
-    hero: "/imgs/blog-hero-3.svg",
+    hero: "/imgs/blog-hero-3.jpg",
     category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     date: "28 Мая 2024",
@@ -14236,7 +14236,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 498,
-    hero: "/imgs/blog-hero-6.svg",
+    hero: "/imgs/blog-hero-6.jpg",
     category: "НОВОСТИ",
     title: "Коженные кроссовки в ассортименте",
     date: "14 февраля 2024",
@@ -14262,7 +14262,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 499,
-    hero: "/imgs/blog-hero-4.svg",
+    hero: "/imgs/blog-hero-4.jpg",
     category: "ОБЗОРЫ",
     title: "Новые Nike Air Jordan уже в продаже!",
     date: "18 Июня 2024",
@@ -14287,7 +14287,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 500,
-    hero: "/imgs/blog-hero-10.svg",
+    hero: "/imgs/blog-hero-10.jpg",
     category: "НОВОСТИ",
     title: "Открылся новый салон Nike",
     date: "6 Сентября 2023",

@@ -2,7 +2,7 @@ import type { Hero } from "@/types/ProductsWithDiscount";
 export const heroes: Hero[] = [
   {
     id: 1,
-    hero: "/imgs/with-discount-hero-1.svg",
+    hero: "/imgs/with-discount-hero-1.jpg",
     discount: "-20%",
     category: "ЖЕНСКИЕ",
     title: "Nike Air 2023 Dragon",
@@ -12,7 +12,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 2,
-    hero: "/imgs/with-discount-hero-2.svg",
+    hero: "/imgs/with-discount-hero-2.jpg",
     discount: "-30%",
     category: "МУЖСКИЕ",
     title: "Nike Air VaporMax 2023 Flyknit",
@@ -22,7 +22,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 3,
-    hero: "/imgs/with-discount-hero-2.svg",
+    hero: "/imgs/with-discount-hero-2.jpg",
     discount: "-27%",
     category: "МУЖСКИЕ",
     title: "Nike Air 2025 Dragon",
@@ -32,7 +32,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 4,
-    hero: "/imgs/with-discount-hero-1.svg",
+    hero: "/imgs/with-discount-hero-1.jpg",
     discount: "-25%",
     category: "ЖЕНСКИЕ",
     title: "Nike Air VaporMax 2026 Flyknit",
@@ -42,7 +42,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 5,
-    hero: "/imgs/with-discount-hero-1.svg",
+    hero: "/imgs/with-discount-hero-1.jpg",
     discount: "-20%",
     category: "ЖЕНСКИЕ",
     title: "Nike Air 2023 Dragon",
@@ -52,7 +52,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 6,
-    hero: "/imgs/with-discount-hero-2.svg",
+    hero: "/imgs/with-discount-hero-2.jpg",
     discount: "-30%",
     category: "МУЖСКИЕ",
     title: "Nike Air VaporMax 2023 Flyknit",
@@ -62,7 +62,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 7,
-    hero: "/imgs/with-discount-hero-2.svg",
+    hero: "/imgs/with-discount-hero-2.jpg",
     discount: "-27%",
     category: "МУЖСКИЕ",
     title: "Nike Air 2025 Dragon",
@@ -72,7 +72,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 8,
-    hero: "/imgs/with-discount-hero-1.svg",
+    hero: "/imgs/with-discount-hero-1.jpg",
     discount: "-25%",
     category: "ЖЕНСКИЕ",
     title: "Nike Air VaporMax 2026 Flyknit",
@@ -82,7 +82,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 9,
-    hero: "/imgs/with-discount-hero-2.svg",
+    hero: "/imgs/with-discount-hero-2.jpg",
     discount: "-27%",
     category: "МУЖСКИЕ",
     title: "Nike Air 2025 Dragon",
@@ -92,7 +92,7 @@ export const heroes: Hero[] = [
   },
   {
     id: 10,
-    hero: "/imgs/with-discount-hero-1.svg",
+    hero: "/imgs/with-discount-hero-1.jpg",
     discount: "-25%",
     category: "ЖЕНСКИЕ",
     title: "Nike Air VaporMax 2026 Flyknit",

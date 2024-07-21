@@ -15,7 +15,7 @@
     </div>
     <div class="about-us__text about-us__text-2">
       <strong>Легендарное наследие Nike:</strong><br />
-      <span class="about-us__text-2 about-us__text-2--margin-top">
+      <span class="about-us__text-2--margin-top">
         Sneakers Store - это место, где история и стиль сливаются воедино. Мы
         гордимся тем, что предлагаем вам только оригинальные кроссовки Nike,
         продукцию, которая воплощает более чем полувековое наследие инноваций,
@@ -74,31 +74,6 @@
     margin: 0 auto;
   }
 }
-.more-btn {
-  @include btn;
-  background-color: $Light-Black;
-  width: 246px;
-  height: 65px;
-
-  &__flex {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  &__text {
-    font-family: "Pragmatica Medium";
-    font-size: 1rem;
-    color: #fff;
-  }
-  &__arrow {
-    @include btn;
-    background-color: $Dark-Black;
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
-    margin-left: auto;
-  }
-}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .about-us {
@@ -112,10 +87,6 @@
     &__text-2 {
       order: 1;
       margin-right: calc((100vw - 44.874rem) / 2);
-    }
-    &__text {
-      font-family: "Pragmatica Book";
-      font-size: 0.938rem;
     }
     &__hero {
       width: 50vw;

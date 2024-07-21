@@ -2,7 +2,7 @@
   <div class="recent-posts-card card slide">
     <img :src="hero.hero" alt="" class="card__hero" />
     <div class="card__banner banner">
-      <span class="banner__text">{{ hero.bannerText }}</span>
+      <span class="banner__text">{{ hero.category }}</span>
     </div>
     <span class="card__title">{{ hero.title }}</span>
     <div class="card__desc desc">
@@ -17,15 +17,7 @@
 </template>
 
 <script setup lang="ts">
-interface Hero {
-  id: number;
-  hero: string;
-  bannerText: string;
-  title: string;
-  description: string;
-  date: string;
-}
-
+import type { Hero } from "@/types/RecentPosts";
 const props = defineProps<{ hero: Hero }>();
 </script>
 

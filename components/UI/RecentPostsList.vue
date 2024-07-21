@@ -48,20 +48,13 @@
 </template>
 
 <script setup lang="ts">
-interface Hero {
-  id: number;
-  hero: string;
-  bannerText: string;
-  title: string;
-  description: string;
-  date: string;
-}
-
-const heroes = ref<Hero[]>([
+import type { Hero } from "@/types/RecentPosts";
+import { heroes } from "@/data/RecentPosts";
+/* const heroes = ref<Hero[]>([
   {
     id: 1,
     hero: "imgs/recent-posts-hero-1.svg",
-    bannerText: "СОВЕТЫ",
+    category: "СОВЕТЫ",
     title: "Десять советов по выбору кроссовок для спорта",
     description: "Рассказываем все тонкости выбора правильной обуви.",
     date: "10 Августа 2023",
@@ -69,7 +62,7 @@ const heroes = ref<Hero[]>([
   {
     id: 2,
     hero: "imgs/recent-posts-hero-2.svg",
-    bannerText: "НОВОСТИ",
+    category: "НОВОСТИ",
     title: "Наш каталог пополнился новыми коллекциями",
     description: "С радостью сообщаем вам о расширении ассортимента.",
     date: "5 Апреля 2024",
@@ -77,12 +70,12 @@ const heroes = ref<Hero[]>([
   {
     id: 3,
     hero: "imgs/recent-posts-hero-3.svg",
-    bannerText: "СТАТЬИ",
+    category: "СТАТЬИ",
     title: "Кроссовки как повседневная обувь. Плюсы и минусы",
     description: "Рассказываем все тонкости выбора правильной обуви.",
     date: "28 Мая 2024",
   },
-]);
+]); */
 
 let SliderWrapper: HTMLElement | null = null;
 let SliderOverflow: HTMLElement | null = null;

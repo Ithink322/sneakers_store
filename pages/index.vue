@@ -17,7 +17,7 @@
                 технология раскрывается через перфорированную стельку</span
               >
             </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <img class="slide__hero" src="/imgs/advertise-hero.webp" alt="" />
             <div class="slide__text-link">
               <span class="slide__text-price"
                 >от <span class="slide__price">9900 ₽</span></span
@@ -42,7 +42,7 @@
                 технология раскрывается через перфорированную стельку</span
               >
             </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <img class="slide__hero" src="/imgs/advertise-hero.webp" alt="" />
             <div class="slide__text-link">
               <span class="slide__text-price"
                 >от <span class="slide__price">8800 ₽</span></span
@@ -67,7 +67,7 @@
                 технология раскрывается через перфорированную стельку</span
               >
             </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <img class="slide__hero" src="/imgs/advertise-hero.webp" alt="" />
             <div class="slide__text-link">
               <span class="slide__text-price"
                 >от <span class="slide__price">7700 ₽</span></span
@@ -92,7 +92,7 @@
                 технология раскрывается через перфорированную стельку</span
               >
             </div>
-            <img class="slide__hero" src="/imgs/advertise-hero.png" alt="" />
+            <img class="slide__hero" src="/imgs/advertise-hero.webp" alt="" />
             <div class="slide__text-link">
               <span class="slide__text-price"
                 >от <span class="slide__price">6600 ₽</span></span
@@ -243,7 +243,7 @@
       />
       <img
         class="season-hit__hero season-hit__hero--from1440px"
-        src="/imgs/season-hit-hero--from1440px.svg"
+        src="/imgs/season-hit-hero--from1440px.webp"
         alt=""
       />
       <div class="season-hit__text">
