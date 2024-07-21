@@ -107,14 +107,14 @@
                   y1="1.98633"
                   x2="13.0168"
                   y2="1.98633"
-                  :stroke="catalogLineStroke"
+                  :stroke="catalogColorBind"
                   stroke-width="2"
                 />
                 <line
                   x1="36"
                   y1="10.0137"
                   y2="10.0137"
-                  :stroke="catalogLineStroke"
+                  :stroke="catalogColorBind"
                   stroke-width="2"
                 />
               </svg>
@@ -122,6 +122,7 @@
             <div class="header-mid__title header-mid__title--from768px">
               <span
                 class="header-mid__title header-mid__title--hidden-till1200px"
+                :class="{ active: catalogColorBind === '#fb5a00' }"
                 >Каталог</span
               >
             </div>
@@ -249,15 +250,6 @@
 import { usePostsStore } from "@/store/Posts";
 const store = usePostsStore();
 const currentPage = computed(() => store.currentPage);
-/* console.log("currentPage:", currentPage.value);
- */
-/* onBeforeMount(() => {
-  console.log("Server side enCategory:", store.enCategory);
-});
-
-onMounted(() => {
-  console.log("Client side enCategory:", store.enCategory);
-}); */
 
 const isBurgerMenuOpen = ref(false);
 const burgerLineStroke = ref("black");
@@ -273,11 +265,11 @@ const closeBurgerMenu = () => {
 };
 
 const isCatalogMenuOpen = ref(false);
-const catalogLineStroke = ref("black");
+const catalogColorBind = ref("black");
 
 const handleHover = () => {
   isCatalogMenuOpen.value = true;
-  burgerLineStroke.value = "#fb5a00";
+  catalogColorBind.value = "#fb5a00";
 };
 
 const handleLeave = (event: MouseEvent) => {
@@ -290,7 +282,7 @@ const handleLeave = (event: MouseEvent) => {
     !burgerBtn.contains(targetElement)
   ) {
     isCatalogMenuOpen.value = false;
-    burgerLineStroke.value = "black";
+    catalogColorBind.value = "black";
   }
 };
 
@@ -507,6 +499,9 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
     }
     &__catalog-btn-body:hover svg line {
       stroke: $Dark-Orange;
+    }
+    &__title.active {
+      color: #fb5a00;
     }
     &__title--visiblle-till1200px,
     &__my-account-btn--from768px {
