@@ -2,7 +2,7 @@ import { blogPosts } from "@/data/Blogposts";
 import type { BlogPost } from "@/types/BlogPosts";
 import type { Hero } from "@/types/RecentPosts";
 
-export const recentPosts: BlogPost[] = blogPosts.slice(-3);
+const recentPosts: BlogPost[] = blogPosts.slice(-3);
 
 export const heroes: Hero[] = recentPosts.map((post) => ({
   id: post.id,

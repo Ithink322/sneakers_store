@@ -380,7 +380,7 @@ onMounted(() => {
   /* carousel for .overflow__container from 1440px ends */
 });
 
-/* carousels with arrows for .products-catalog__list-grid starts */
+/* carousels with arrows for .products-catalog__list starts */
 let SliderWrapper: NodeListOf<HTMLElement> | null = null;
 let SliderOverflow: NodeListOf<HTMLElement> | null = null;
 let latestSliderWrapper: HTMLElement | null = null;
@@ -397,6 +397,9 @@ let latestCurrentPosition = 0,
   hitCurrentPosition = 0,
   hitCurrentIndex = 0;
 
+let isPageScrolling = ref(false);
+let scrollTimeout: number | null = null;
+
 onMounted(() => {
   SliderWrapper = document.querySelectorAll<HTMLElement>(
     ".products-catalog__list"
@@ -404,7 +407,6 @@ onMounted(() => {
   SliderOverflow = document.querySelectorAll<HTMLElement>(
     ".products-catalog__overflow"
   )!;
-  /* SliderOverflow = ref(null); */
   latestSliderWrapper = SliderWrapper[0];
   hitSliderWrapper = SliderWrapper[1];
   latestSliderOverflow = SliderOverflow[0];
@@ -416,21 +418,26 @@ onMounted(() => {
   windowWidth = window.innerWidth;
   slides = windowWidth < 768 ? 8 : 11;
 
+  window.addEventListener("scroll", () => {
+    isPageScrolling.value = true;
+    if (scrollTimeout !== null) {
+      clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = window.setTimeout(() => {
+      isPageScrolling.value = false;
+    }, 100);
+    /* console.log("isPageScrolling.value:", isPageScrolling.value) */
+  });
+
   /* touchscreen sliders for .products-catalog__overflow starts */
   latestSliderWrapper!.style.transform = "translateX(0)";
 
-  latestSliderOverflow!.addEventListener(
-    "touchstart",
-    latestHandleTouchStart,
-    false
-  );
-  latestSliderOverflow!.addEventListener(
-    "touchmove",
-    latestHandleTouchMove,
-    false
-  );
+  latestSliderOverflow!.addEventListener("touchstart", latestHandleTouchStart);
+  latestSliderOverflow!.addEventListener("touchmove", latestHandleTouchMove);
 
   function latestHandleTouchStart(e: TouchEvent) {
+    if (isPageScrolling.value) return;
+
     let targetElement = e.target as HTMLElement;
     let isTargetOrParentHasCardHeroClass = false;
 
@@ -451,9 +458,7 @@ onMounted(() => {
   }
 
   function latestHandleTouchMove(e: TouchEvent) {
-    if (!startX) {
-      return;
-    }
+    if (isPageScrolling.value || !startX) return;
 
     let currentX = e.touches[0].clientX;
     let diffX = startX - currentX;
@@ -473,6 +478,8 @@ onMounted(() => {
   hitSliderOverflow!.addEventListener("touchmove", hitHandleTouchMove, false);
 
   function hitHandleTouchStart(e: TouchEvent) {
+    if (isPageScrolling.value) return;
+
     let targetElement = e.target as HTMLElement;
     let isTargetOrParentHasCardHeroClass = false;
 
@@ -493,9 +500,7 @@ onMounted(() => {
   }
 
   function hitHandleTouchMove(e: TouchEvent) {
-    if (!startX) {
-      return;
-    }
+    if (isPageScrolling.value || !startX) return;
 
     let currentX = e.touches[0].clientX;
     let diffX = startX - currentX;
@@ -602,7 +607,7 @@ const hitProductsNextSlide = () => {
   }
   hitSliderWrapper!.style.transform = `translateX(${hitCurrentPosition}%)`;
 };
-/* carousels with arrows for .products-catalog__list-grid ends */
+/* carousels with arrows for .products-catalog__list ends */
 </script>
 
 <style lang="scss" scoped>

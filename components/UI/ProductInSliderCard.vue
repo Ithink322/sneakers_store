@@ -101,10 +101,22 @@ import type { Product } from "@/types/ProductsInSlider";
 const props = defineProps<{ product: Product }>();
 
 let windowWidth = 0;
+let isPageScrolling = ref(false);
+let scrollTimeout: number | null = null;
 onMounted(() => {
   windowWidth = window.innerWidth;
   /* touchscreen slider from 320px to 1440px starts */
   if (windowWidth < 1440) {
+    window.addEventListener("scroll", () => {
+      isPageScrolling.value = true;
+      if (scrollTimeout !== null) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = window.setTimeout(() => {
+        isPageScrolling.value = false;
+      }, 100);
+    });
+
     let sliders = document.querySelectorAll<HTMLElement>(".slider")!;
     sliders.forEach((slider) => {
       let sliderContainer = slider.querySelector<HTMLElement>(
@@ -122,14 +134,13 @@ onMounted(() => {
       let startY: number | null = null;
 
       function handleTouchStart(event: TouchEvent) {
+        if (isPageScrolling.value) return;
         startX = event.touches[0].clientX;
         startY = event.touches[0].clientY;
       }
 
       function handleTouchMove(event: TouchEvent) {
-        if (!startX || !startY) {
-          return;
-        }
+        if (isPageScrolling.value || !startX || !startY) return;
 
         let currentX = event.touches[0].clientX;
         let diffX = startX - currentX;
@@ -144,11 +155,6 @@ onMounted(() => {
           currentIndex--;
           startX = null;
           moveSlider();
-        }
-
-        if (diffY > diffX) {
-          /* event.preventDefault();
-          event.stopPropagation(); */
         }
       }
 
