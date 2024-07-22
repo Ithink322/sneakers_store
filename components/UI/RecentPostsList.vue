@@ -56,9 +56,13 @@ let SlideWidth: number = 0;
 let SlidesLength: number = 0;
 let gap: number = 0;
 let startX: number | null = null;
+let startY: number | null = null;
 
 let CurrentPosition = 0,
   CurrentIndex = 0;
+
+let isPageScrolling = false;
+let scrollTimeout: number | null = null;
 
 onMounted(() => {
   SliderWrapper = document.querySelector<HTMLElement>(".recent-posts__list")!;
@@ -73,22 +77,39 @@ onMounted(() => {
   );
 
   /* touchscreen sliders for .recent-posts__overflow starts */
+  window.addEventListener("scroll", () => {
+    isPageScrolling = true;
+    if (scrollTimeout !== null) {
+      clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = window.setTimeout(() => {
+      isPageScrolling = false;
+    }, 100);
+  });
+
   SliderWrapper!.style.transform = "translateX(0)";
 
   SliderOverflow!.addEventListener("touchstart", HandleTouchStart, false);
   SliderOverflow!.addEventListener("touchmove", HandleTouchMove, false);
 
   function HandleTouchStart(e: TouchEvent) {
+    if (isPageScrolling) return;
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
   }
 
   function HandleTouchMove(e: TouchEvent) {
-    if (!startX) {
-      return;
-    }
+    if (isPageScrolling || !startX || !startY) return;
 
     let currentX = e.touches[0].clientX;
+    let currentY = e.touches[0].clientY;
     let diffX = startX - currentX;
+    let diffY = startY - currentY;
+
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      isPageScrolling = true;
+      return;
+    }
 
     if (diffX > 0 && CurrentIndex < SlidesLength + 1) {
       startX = null;

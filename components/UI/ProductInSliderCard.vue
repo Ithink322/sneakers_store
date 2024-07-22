@@ -101,19 +101,19 @@ import type { Product } from "@/types/ProductsInSlider";
 const props = defineProps<{ product: Product }>();
 
 let windowWidth = 0;
-let isPageScrolling = ref(false);
+let isPageScrolling = false;
 let scrollTimeout: number | null = null;
 onMounted(() => {
   windowWidth = window.innerWidth;
   /* touchscreen slider from 320px to 1440px starts */
   if (windowWidth < 1440) {
     window.addEventListener("scroll", () => {
-      isPageScrolling.value = true;
+      isPageScrolling = true;
       if (scrollTimeout !== null) {
         clearTimeout(scrollTimeout);
       }
       scrollTimeout = window.setTimeout(() => {
-        isPageScrolling.value = false;
+        isPageScrolling = false;
       }, 100);
     });
 
@@ -133,19 +133,24 @@ onMounted(() => {
       let startX: number | null = null;
       let startY: number | null = null;
 
-      function handleTouchStart(event: TouchEvent) {
-        if (isPageScrolling.value) return;
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
+      function handleTouchStart(e: TouchEvent) {
+        if (isPageScrolling) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
       }
 
-      function handleTouchMove(event: TouchEvent) {
-        if (isPageScrolling.value || !startX || !startY) return;
+      function handleTouchMove(e: TouchEvent) {
+        if (isPageScrolling || !startX || !startY) return;
 
-        let currentX = event.touches[0].clientX;
+        let currentX = e.touches[0].clientX;
+        let currentY = e.touches[0].clientY;
         let diffX = startX - currentX;
-        let currentY = event.touches[0].clientY;
-        let diffY = Math.abs(startY - currentY);
+        let diffY = startY - currentY;
+
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+          isPageScrolling = true;
+          return;
+        }
 
         if (diffX > 0 && currentIndex < slides.length) {
           currentIndex++;

@@ -391,13 +391,14 @@ let flex_gap: number = 0;
 let windowWidth: number = 0;
 let slides: number = 8;
 let startX: number | null = null;
+let startY: number | null = null;
 
 let latestCurrentPosition = 0,
   latestCurrentIndex = 0,
   hitCurrentPosition = 0,
   hitCurrentIndex = 0;
 
-let isPageScrolling = ref(false);
+let isPageScrolling = false;
 let scrollTimeout: number | null = null;
 
 onMounted(() => {
@@ -417,26 +418,24 @@ onMounted(() => {
     100;
   windowWidth = window.innerWidth;
   slides = windowWidth < 768 ? 8 : 11;
-
+  /* touchscreen sliders for .products-catalog__overflow starts */
   window.addEventListener("scroll", () => {
-    isPageScrolling.value = true;
+    isPageScrolling = true;
     if (scrollTimeout !== null) {
       clearTimeout(scrollTimeout);
     }
     scrollTimeout = window.setTimeout(() => {
-      isPageScrolling.value = false;
+      isPageScrolling = false;
     }, 100);
-    /* console.log("isPageScrolling.value:", isPageScrolling.value) */
   });
 
-  /* touchscreen sliders for .products-catalog__overflow starts */
   latestSliderWrapper!.style.transform = "translateX(0)";
 
   latestSliderOverflow!.addEventListener("touchstart", latestHandleTouchStart);
   latestSliderOverflow!.addEventListener("touchmove", latestHandleTouchMove);
 
   function latestHandleTouchStart(e: TouchEvent) {
-    if (isPageScrolling.value) return;
+    if (isPageScrolling) return;
 
     let targetElement = e.target as HTMLElement;
     let isTargetOrParentHasCardHeroClass = false;
@@ -454,14 +453,22 @@ onMounted(() => {
 
     if (!isTargetOrParentHasCardHeroClass) {
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
     }
   }
 
   function latestHandleTouchMove(e: TouchEvent) {
-    if (isPageScrolling.value || !startX) return;
+    if (isPageScrolling || !startX || !startY) return;
 
     let currentX = e.touches[0].clientX;
+    let currentY = e.touches[0].clientY;
     let diffX = startX - currentX;
+    let diffY = startY - currentY;
+
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      isPageScrolling = true;
+      return;
+    }
 
     if (diffX > 0 && latestCurrentIndex < slides + 1) {
       startX = null;
@@ -478,7 +485,7 @@ onMounted(() => {
   hitSliderOverflow!.addEventListener("touchmove", hitHandleTouchMove, false);
 
   function hitHandleTouchStart(e: TouchEvent) {
-    if (isPageScrolling.value) return;
+    if (isPageScrolling) return;
 
     let targetElement = e.target as HTMLElement;
     let isTargetOrParentHasCardHeroClass = false;
@@ -496,14 +503,22 @@ onMounted(() => {
 
     if (!isTargetOrParentHasCardHeroClass) {
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
     }
   }
 
   function hitHandleTouchMove(e: TouchEvent) {
-    if (isPageScrolling.value || !startX) return;
+    if (isPageScrolling || !startX || !startY) return;
 
     let currentX = e.touches[0].clientX;
+    let currentY = e.touches[0].clientY;
     let diffX = startX - currentX;
+    let diffY = startY - currentY;
+
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      isPageScrolling = true;
+      return;
+    }
 
     if (diffX > 0 && hitCurrentIndex < slides + 1) {
       startX = null;
