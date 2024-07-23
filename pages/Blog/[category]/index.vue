@@ -23,21 +23,29 @@ import { usePostsStore } from "@/store/Posts";
 
 const store = usePostsStore();
 const title = computed(() => store.getTitle);
-useHead({
-  title: `Блог о Nike - Sneakers Store | ${title.value}`,
-  meta: [
-    {
-      name: "description",
-      content:
-        "Наш блог - это кладезь информации о Nike. Обзоры новинок, советы по выбору и уходу за кроссовками Nike, статьи, а также актуальные новости. Подписывайтесь, чтобы быть в курсе!",
-    },
-    {
-      name: "keywords",
-      content:
-        "блог, Nike, Sneakers Store, новости, статьи, советы, обзоры, выбор кроссовок Nike, уход за кроссовками Nike",
-    },
-  ],
-});
+watch(
+  title,
+  (newTitle) => {
+    nextTick(() => {
+      useHead({
+        title: `Блог о Nike - Sneakers Store | ${title.value}`,
+        meta: [
+          {
+            name: "description",
+            content:
+              "Наш блог - это кладезь информации о Nike. Обзоры новинок, советы по выбору и уходу за кроссовками Nike, статьи, а также актуальные новости. Подписывайтесь, чтобы быть в курсе!",
+          },
+          {
+            name: "keywords",
+            content:
+              "блог, Nike, Sneakers Store, новости, статьи, советы, обзоры, выбор кроссовок Nike, уход за кроссовками Nike",
+          },
+        ],
+      });
+    });
+  },
+  { immediate: true }
+);
 
 store.setAllPosts(blogPosts);
 
