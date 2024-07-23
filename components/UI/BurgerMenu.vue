@@ -147,6 +147,11 @@
             :class="{ active: isDropdownActive('Models') }"
           >
             <button class="dropdown__subtitle-btn">
+              <NuxtLink @click="closeBurgerMenu" to="/Catalog">
+                Все модели</NuxtLink
+              >
+            </button>
+            <button class="dropdown__subtitle-btn">
               <NuxtLink @click="closeBurgerMenu" to="">
                 Nike Air Force 1</NuxtLink
               >

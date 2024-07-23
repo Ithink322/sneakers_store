@@ -1,11 +1,11 @@
 <template>
   <div class="products-catalog__overflow" ref="overflow">
     <div class="products-catalog__list">
-      <UIProductInSliderCard
+      <UIProductCard
         v-for="product in productList"
         :product="product"
         :key="product.id"
-      ></UIProductInSliderCard>
+      ></UIProductCard>
     </div>
   </div>
 </template>

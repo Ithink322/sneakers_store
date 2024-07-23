@@ -1,11 +1,11 @@
 export interface Product {
   id: number;
   heroes: string[];
-  category: string;
+  gender: string;
   title: string;
   colors: string[];
   currentPrice: string;
   previousPrice: string;
-  bannerBackgroundColor: string;
-  bannerText: string;
+  categoryBackgroundColor: string;
+  category: string;
 }

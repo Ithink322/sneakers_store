@@ -25,6 +25,7 @@ body {
 }
 a {
   text-decoration: none;
+  color: #000000;
 }
 .page-container {
   padding: 0rem 0.938rem;

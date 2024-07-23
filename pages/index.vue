@@ -401,6 +401,15 @@ let latestCurrentPosition = 0,
 let isPageScrolling = false;
 let scrollTimeout: number | null = null;
 
+const updateSliderSettings = () => {
+  const gap = window.getComputedStyle(latestSliderWrapper!);
+  flex_gap =
+    (parseInt(gap.getPropertyValue("gap")) / latestSliderWrapper!.offsetWidth) *
+    100;
+  windowWidth = window.innerWidth;
+  slides = windowWidth < 768 ? 8 : 11;
+};
+
 onMounted(() => {
   SliderWrapper = document.querySelectorAll<HTMLElement>(
     ".products-catalog__list"
@@ -418,6 +427,8 @@ onMounted(() => {
     100;
   windowWidth = window.innerWidth;
   slides = windowWidth < 768 ? 8 : 11;
+  updateSliderSettings();
+  window.addEventListener("resize", updateSliderSettings);
   /* touchscreen sliders for .products-catalog__overflow starts */
   window.addEventListener("scroll", () => {
     isPageScrolling = true;

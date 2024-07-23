@@ -100,7 +100,6 @@ const setCategory = () => {
   padding: 0.625rem;
   background-color: #dbe5eb;
   width: fit-content;
-  color: $Dark-Black;
   z-index: 2;
 
   &__text {

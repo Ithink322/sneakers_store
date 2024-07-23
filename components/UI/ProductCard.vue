@@ -36,10 +36,10 @@
       </div>
     </div>
     <div
-      class="card__banner banner"
-      :style="{ backgroundColor: product.bannerBackgroundColor }"
+      class="card__category category"
+      :style="{ backgroundColor: product.categoryBackgroundColor }"
     >
-      <span class="banner__text">{{ product.bannerText }}</span>
+      <span class="category__text">{{ product.category }}</span>
     </div>
     <button class="card__wishlist-btn">
       <svg
@@ -59,7 +59,7 @@
       </svg>
     </button>
     <div class="card__desc desc">
-      <span class="desc__category">{{ product.category }}</span>
+      <span class="desc__gender">{{ product.gender }}</span>
       <span class="desc__title">{{ product.title }}</span>
       <div class="desc__colors">
         <span class="desc__colors-text">Цвета: </span>
@@ -241,7 +241,7 @@ const showFirstImage = () => {
     min-height: 150px;
     object-fit: cover;
   }
-  &__banner {
+  &__category {
     position: absolute;
     margin: 0.625rem 0rem 0rem 0.625rem;
   }
@@ -282,7 +282,7 @@ const showFirstImage = () => {
     background: #333333;
   }
 }
-.banner {
+.category {
   padding: 0.313rem 0.375rem;
   width: fit-content;
 
@@ -297,7 +297,7 @@ const showFirstImage = () => {
   flex-direction: column;
   gap: 0.5rem;
 
-  &__category {
+  &__gender {
     font-family: "Pragmatica Medium";
     font-size: 0.688rem;
     color: #747474;
@@ -355,14 +355,14 @@ const showFirstImage = () => {
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .banner {
+  .category {
     padding: 0.625rem;
   }
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
   .card {
-    &__banner {
+    &__category {
       margin: 1.25rem 0rem 0rem 1.25rem;
     }
     &__wishlist-btn {
@@ -375,7 +375,7 @@ const showFirstImage = () => {
     }
   }
   .desc {
-    &__category {
+    &__gender {
       font-size: 0.75rem;
     }
     &__title {
