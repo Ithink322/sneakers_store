@@ -3,6 +3,6 @@ export interface Hero {
   hero: string;
   category: string;
   title: string;
-  description: string;
+  desc: string;
   date: string;
 }

@@ -2,7 +2,7 @@
   <NuxtLink
     class="link"
     :to="{
-      path: `/blog/${enCategory}/${slugify(props.post.title)}`,
+      path: `/blog/${routeCategory}/${slugify(props.post.title)}`,
     }"
   >
     <div class="post-card card">
@@ -33,7 +33,7 @@ const props = defineProps({
 });
 
 const store = usePostsStore();
-const enCategory = computed(() => store.enCategory);
+const routeCategory = computed(() => store.routeCategory);
 </script>
 
 <style lang="scss" scoped>

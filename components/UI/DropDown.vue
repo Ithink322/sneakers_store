@@ -89,18 +89,18 @@ const router = useRouter();
 
 const selectedCategory = ref("");
 const selectCategory = async (value: string) => {
-  if (value === "ВСЕ ПУБЛИКАЦИИ") {
-    selectedCategory.value = "all-posts";
-  } else if (value === "НОВОСТИ") {
-    selectedCategory.value = "news";
-  } else if (value === "СТАТЬИ") {
-    selectedCategory.value = "articles";
-  } else if (value === "СОВЕТЫ") {
-    selectedCategory.value = "advices";
-  } else if (value === "ОБЗОРЫ") {
-    selectedCategory.value = "overviews";
-  }
   if (selectedValue.value !== value) {
+    if (value === "ВСЕ ПУБЛИКАЦИИ") {
+      selectedCategory.value = "все-публикации";
+    } else if (value === "НОВОСТИ") {
+      selectedCategory.value = "новости";
+    } else if (value === "СТАТЬИ") {
+      selectedCategory.value = "статьи";
+    } else if (value === "СОВЕТЫ") {
+      selectedCategory.value = "советы";
+    } else if (value === "ОБЗОРЫ") {
+      selectedCategory.value = "обзоры";
+    }
     selectedValue.value = value;
     store.setCategory(selectedCategory.value, selectedValue.value);
     await nextTick();

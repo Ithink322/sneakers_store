@@ -193,7 +193,7 @@
           <NuxtLink
             @click="closeBurgerMenu"
             :to="{
-              path: '/blog/' + store.enCategory,
+              path: '/blog/' + store.routeCategory,
               query: { page: currentPage },
             }"
             >Наш блог</NuxtLink

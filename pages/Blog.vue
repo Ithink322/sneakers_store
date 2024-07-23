@@ -24,28 +24,33 @@
 import { blogPosts } from "@/data/Blogposts";
 import { usePostsStore } from "@/store/Posts";
 
-useHead({
-  title: "Блог о Nike - Sneakers Store | Новости, статьи, советы и обзоры",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Наш блог - это кладезь информации о Nike. Обзоры новинок, советы по выбору и уходу за кроссовками Nike, статьи, а также актуальные новости. Подписывайтесь, чтобы быть в курсе!",
-    },
-    {
-      name: "keywords",
-      content:
-        "блог, Nike, Sneakers Store, новости, статьи, советы, обзоры, выбор кроссовок Nike, уход за кроссовками Nike",
-    },
-  ],
-});
-
+const store = usePostsStore();
 const title = computed(() => store.getTitle);
+watch(
+  title,
+  (newTitle) => {
+    useHead({
+      title: `Блог о Nike - Sneakers Store | ${newTitle}`,
+      meta: [
+        {
+          name: "description",
+          content:
+            "Наш блог - это кладезь информации о Nike. Обзоры новинок, советы по выбору и уходу за кроссовками Nike, статьи, а также актуальные новости. Подписывайтесь, чтобы быть в курсе!",
+        },
+        {
+          name: "keywords",
+          content:
+            "блог, Nike, Sneakers Store, новости, статьи, советы, обзоры, выбор кроссовок Nike, уход за кроссовками Nike",
+        },
+      ],
+    });
+  },
+  { immediate: true }
+);
 
 const route = useRoute();
 const isBlogListVisible = computed(() => !route.params.id);
 
-const store = usePostsStore();
 let selectedCategory = ref("");
 
 store.setAllPosts(blogPosts);
@@ -54,11 +59,11 @@ const pageNum = parseInt(route.query.page);
 const totalPages = computed(() => store.totalPages);
 
 const categoryMapping: { [key: string]: string } = {
-  "all-posts": "ВСЕ ПУБЛИКАЦИИ",
-  news: "НОВОСТИ",
-  articles: "СТАТЬИ",
-  advices: "СОВЕТЫ",
-  overviews: "ОБЗОРЫ",
+  "все-публикации": "ВСЕ ПУБЛИКАЦИИ",
+  новости: "НОВОСТИ",
+  статьи: "СТАТЬИ",
+  советы: "СОВЕТЫ",
+  обзоры: "ОБЗОРЫ",
 };
 
 const updateCategory = () => {
@@ -77,7 +82,7 @@ const updateCategory = () => {
 };
 
 const checkPageValidity = () => {
-  if (pageNum <= totalPages.value && pageNum > 0) {
+  if (route.query.page && pageNum <= totalPages.value && pageNum > 0) {
     store.currentPage = pageNum;
   } else {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
@@ -85,19 +90,11 @@ const checkPageValidity = () => {
 };
 
 onMounted(() => {
-  updateCategory();
-  checkPageValidity();
-});
-
-watch(
-  () => route.params.category,
-  (newCategory, oldCategory) => {
-    if (newCategory !== oldCategory) {
-      updateCategory();
-      checkPageValidity();
-    }
+  if (route.query.page) {
+    updateCategory();
+    checkPageValidity();
   }
-);
+});
 </script>
 
 <style lang="scss" scoped>

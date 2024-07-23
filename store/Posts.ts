@@ -6,7 +6,7 @@ interface PostsState {
   filteredPosts: BlogPost[];
   currentPage: number;
   postsPerPage: number;
-  enCategory: string;
+  routeCategory: string;
   ruCategory: string;
   title: string;
   translateValue: number;
@@ -18,7 +18,7 @@ export const usePostsStore = defineStore("postStore", {
     filteredPosts: [],
     currentPage: 1,
     postsPerPage: 10,
-    enCategory: "all-posts",
+    routeCategory: "все-публикации",
     ruCategory: "Все публикации",
     title: "Все публикации",
     translateValue: 0,
@@ -55,8 +55,8 @@ export const usePostsStore = defineStore("postStore", {
     setPage(page: number) {
       this.currentPage = page;
     },
-    setCategory(enCategory: string, ruCategory: string) {
-      this.enCategory = enCategory;
+    setCategory(routeCategory: string, ruCategory: string) {
+      this.routeCategory = routeCategory;
       this.ruCategory = ruCategory;
       this.title = this.getTitle;
     },
@@ -72,7 +72,7 @@ export const usePostsStore = defineStore("postStore", {
     storage: typeof window !== "undefined" ? localStorage : undefined,
     paths: [
       "currentPage",
-      "enCategory",
+      "routeCategory",
       "ruCategory",
       "title",
       "isDropdownInteracted",

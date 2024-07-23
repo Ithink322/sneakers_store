@@ -9,6 +9,6 @@ export const heroes: Hero[] = recentPosts.map((post) => ({
   hero: post.hero,
   category: post.category,
   title: post.title,
-  description: post.desc,
+  desc: post.desc,
   date: post.date,
 }));

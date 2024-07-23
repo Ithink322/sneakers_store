@@ -98,7 +98,7 @@
               <li class="dropdown-list__link">
                 <NuxtLink
                   :to="{
-                    path: '/blog/' + store.enCategory,
+                    path: '/blog/' + store.routeCategory,
                     query: { page: currentPage },
                   }"
                   >Наш блог</NuxtLink
@@ -180,7 +180,7 @@
               <li class="list__link">
                 <NuxtLink
                   :to="{
-                    path: '/blog/' + store.enCategory,
+                    path: '/blog/' + store.routeCategory,
                     query: { page: currentPage },
                   }"
                   >Наш блог</NuxtLink

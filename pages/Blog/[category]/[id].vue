@@ -22,9 +22,6 @@
               :key="section.header"
             >
               <h2 class="content__title">{{ section.header }}</h2>
-              <!-- <p v-for="paragraph in section.paragraphs" :key="paragraph">
-        {{ paragraph }}
-      </p> -->
               <p
                 class="content__text"
                 v-for="paragraph in section.paragraphs"
@@ -126,30 +123,26 @@ const post = computed(() => {
   return blogPosts.find((post) => unslugify(slugify(post.title)) === title);
 });
 
-watch(post, (newPost) => {
-  if (newPost) {
-    useHead({
-      title: `${newPost.title} - Блог о Nike`,
-      meta: [
-        {
-          name: "description",
-          content: newPost.intro,
-        },
-        {
-          name: "keywords",
-          content: `Nike, кроссовки, блог, ${newPost.category.toLowerCase()}`,
-        },
-        {
-          property: "og:title",
-          content: newPost.title,
-        },
-        {
-          property: "og:description",
-          content: newPost.intro,
-        },
-      ],
-    });
-  }
+useHead({
+  title: `${post.value!.title} - Блог о Nike`,
+  meta: [
+    {
+      name: "description",
+      content: post.value!.intro,
+    },
+    {
+      name: "keywords",
+      content: `Nike, кроссовки, блог, ${post.value!.category.toLowerCase()}`,
+    },
+    {
+      property: "og:title",
+      content: post.value!.title,
+    },
+    {
+      property: "og:description",
+      content: post.value!.intro,
+    },
+  ],
 });
 </script>
 

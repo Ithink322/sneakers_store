@@ -1,32 +1,49 @@
 <template>
-  <div class="recent-posts-card card slide">
-    <img :src="hero.hero" alt="" class="card__hero" />
-    <div class="card__banner banner">
-      <span class="banner__text">{{ hero.category }}</span>
+  <nuxt-link
+    class="link"
+    @click="setCategory"
+    :to="`blog/` + hero.category.toLowerCase() + '/' + slugify(hero.title)"
+  >
+    <div class="recent-posts-card card slide">
+      <img :src="hero.hero" alt="" class="card__hero" />
+      <div class="card__category category">
+        <span class="category__text">{{ hero.category }}</span>
+      </div>
+      <span class="card__title">{{ hero.title }}</span>
+      <div class="card__desc desc">
+        <img src="/imgs/plus-gray.svg" alt="" />
+        <div class="desc__text">{{ hero.desc }}</div>
+      </div>
+      <div class="card__content">
+        <button class="card__btn-more">Подробнее</button>
+        <span class="card__date">{{ hero.date }}</span>
+      </div>
     </div>
-    <span class="card__title">{{ hero.title }}</span>
-    <div class="card__desc desc">
-      <img src="/imgs/plus-gray.svg" alt="" />
-      <div class="desc__text">{{ hero.description }}</div>
-    </div>
-    <div class="card__content">
-      <button class="card__btn-more">Подробнее</button>
-      <span class="card__date">{{ hero.date }}</span>
-    </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script setup lang="ts">
 import type { Hero } from "@/types/RecentPosts";
+import { slugify } from "@/utils/helpers";
+import { usePostsStore } from "@/store/Posts";
 const props = defineProps<{ hero: Hero }>();
+
+const store = usePostsStore();
+const setCategory = () => {
+  console.log(props.hero.category);
+  store.ruCategory = props.hero.category;
+  store.setCategory(props.hero.category.toLowerCase(), store.ruCategory);
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
-.card {
+.link {
   position: relative;
-  padding: 1.25rem 1.25rem 1.875rem 1.25rem;
   flex-shrink: 0;
+}
+.card {
+  padding: 1.25rem 1.25rem 1.875rem 1.25rem;
   width: 89%;
   max-width: 296px;
   height: 387px;
@@ -78,11 +95,12 @@ const props = defineProps<{ hero: Hero }>();
 .card:hover .card__title {
   color: $Dark-Orange;
 }
-.banner {
+.category {
   position: absolute;
   padding: 0.625rem;
   background-color: #dbe5eb;
   width: fit-content;
+  color: $Dark-Black;
   z-index: 2;
 
   &__text {
