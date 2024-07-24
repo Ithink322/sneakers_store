@@ -127,10 +127,7 @@ useHead({
   margin-bottom: 1.375rem;
 
   &__title {
-    font-family: "Pragmatica Medium";
-    font-size: 1.563rem;
     margin-top: 0.938rem;
-    margin-bottom: 0rem;
   }
   &__desc {
     font-family: "Pragmatica Book";
@@ -220,9 +217,6 @@ useHead({
   .entry {
     margin-top: 1.563rem;
 
-    &__title {
-      font-size: 2.813rem;
-    }
     &__desc {
       font-size: 1.125rem;
     }

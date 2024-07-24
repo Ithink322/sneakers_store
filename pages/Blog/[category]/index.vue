@@ -13,7 +13,6 @@
     </div>
     <UIPagination></UIPagination>
     <UIMailing class="mailing mailing--visible-till1200px"></UIMailing>
-    <NuxtPage></NuxtPage>
   </main>
 </template>
 
@@ -101,8 +100,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .title {
-  font-family: "Pragmatica Medium";
-  font-size: 1.563rem;
   color: $Dark-Black;
   margin-top: 0.938rem;
   margin-bottom: 1.25rem;
@@ -149,9 +146,6 @@ onMounted(() => {
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .title {
-    font-size: 2.813rem;
-  }
   .posts-list {
     grid-template-columns: 1fr 1fr 325px;
     grid-template-rows: auto;

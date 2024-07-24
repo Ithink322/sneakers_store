@@ -1,5 +1,5 @@
 <template>
-  <div class="catalog">
+  <div v-if="isCatalogMenuOpen" class="catalog">
     <div class="catalog__menu menu">
       <div class="menu__body">
         <div class="menu__lists">
@@ -38,6 +38,11 @@
           <div class="menu__column">
             <span class="menu__column-title">Модели</span>
             <ul class="menu__column-list">
+              <li>
+                <nuxt-link @click="closeCatalogMenu" to="/Catalog"
+                  >Все модели</nuxt-link
+                >
+              </li>
               <li><nuxt-link to="">Nike Air Force 1</nuxt-link></li>
               <li><nuxt-link to="">Nike SB Dunk Low</nuxt-link></li>
               <li><nuxt-link to="">Nike Air Max 90</nuxt-link></li>
@@ -47,7 +52,7 @@
             </ul>
           </div>
         </div>
-        <nuxt-link to="">
+        <nuxt-link @click="closeCatalogMenu" to="/Catalog">
           <div class="menu__hero-card hero-card">
             <span class="hero-card__title"
               >Новая коллекция в каталоге Nike Air Max Solo</span
@@ -62,6 +67,16 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useCatalogMenu } from "@/store/CatalogMenu";
+
+const store = useCatalogMenu();
+const isCatalogMenuOpen = computed(() => store.isCatalogMenuOpen);
+const closeCatalogMenu = () => {
+  store.closeCatalogMenu();
+};
+</script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";

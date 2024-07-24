@@ -92,10 +92,8 @@ useHead({
 @import "@/assets/App.scss";
 .about-container {
   &__title {
-    font-family: "Pragmatica Medium";
     font-size: 1.5rem;
     margin-top: 0.938rem;
-    margin-bottom: 0rem;
   }
   &__content-flex {
     display: flex;

@@ -27,6 +27,11 @@ a {
   text-decoration: none;
   color: #000000;
 }
+h1 {
+  font-family: "Pragmatica Medium";
+  font-size: 1.563rem;
+  margin: 0;
+}
 .page-container {
   padding: 0rem 0.938rem;
 }
@@ -44,6 +49,10 @@ a {
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
+  h1 {
+    font-family: "Pragmatica Medium";
+    font-size: 2.813rem;
+  }
   .page-container {
     padding: 0rem calc((100vw - 71.875rem) / 2);
   }

@@ -428,11 +428,7 @@ useHead({
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .title {
-  font-family: "Pragmatica Medium";
-  font-size: 1.563rem;
-  color: $Dark-Black;
   margin-top: 0.75rem;
-  margin-bottom: 0rem;
 }
 .note {
   padding: 0.938rem;
@@ -468,7 +464,6 @@ useHead({
 /* 1200px = 75em */
 @media (min-width: 75em) {
   .title {
-    font-size: 2.813rem;
     margin-top: 1.563rem;
   }
   .note {

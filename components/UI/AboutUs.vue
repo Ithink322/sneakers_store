@@ -1,12 +1,12 @@
 <template>
   <div class="about-us">
-    <h1 class="about-us__title">
+    <h2 class="about-us__title">
       ИНТЕРНЕТ-МАГАЗИН<br />
       <div class="about-us__content">
         SNEAKERS STORE
         <div class="about-us__line"></div>
       </div>
-    </h1>
+    </h2>
     <div class="about-us__text about-us__text-1">
       Добро пожаловать в <strong>Sneakers Store</strong> – ваш источник
       подлинных кроссовок Nike и непревзойденного стиля! Мы рады представить вам

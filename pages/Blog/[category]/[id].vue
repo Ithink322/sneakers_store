@@ -1,4 +1,5 @@
 <template>
+  <UIBreadcrumb :breadcrumbTitle="title"></UIBreadcrumb>
   <div class="single-container">
     <div>
       <div v-if="post">
@@ -116,6 +117,10 @@
 <script setup lang="ts">
 import { blogPosts } from "@/data/Blogposts";
 import { slugify, unslugify } from "@/utils/helpers";
+import { usePostsStore } from "@/store/Posts";
+
+const store = usePostsStore();
+const title = computed(() => store.getTitle);
 
 const route = useRoute();
 const post = computed(() => {
@@ -154,8 +159,6 @@ p {
   margin: 0;
 }
 .title {
-  font-family: "Pragmatica Medium";
-  font-size: 1.563rem;
   margin-top: 0.938rem;
 }
 .info {
@@ -298,7 +301,6 @@ p {
     gap: 1.25rem;
   }
   .title {
-    font-size: 2.813rem;
     margin-top: 1.563rem;
   }
   .info {

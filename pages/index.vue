@@ -257,32 +257,36 @@
     <UIRecentPostsList></UIRecentPostsList>
     <UIProductsWithDiscountList></UIProductsWithDiscountList>
     <div class="banners">
-      <div class="banners__collection-banner collection-banner">
-        <img
-          src="/imgs/collection-hero-1.svg"
-          alt=""
-          class="collection-banner__hero"
-        />
-        <span class="collection-banner__title"
-          >Новая коллекция в<br />
-          каталоге Nike Air<br />
-          Max Solo</span
-        >
-        <button class="collection-banner__btn">Перейти в каталог</button>
-      </div>
-      <div class="banners__collection-banner collection-banner">
-        <img
-          src="/imgs/collection-hero-2.svg"
-          alt=""
-          class="collection-banner__hero"
-        />
-        <span class="collection-banner__title"
-          >Новая коллекция в<br />
-          каталоге Nike Air<br />
-          Max Solo</span
-        >
-        <button class="collection-banner__btn">Перейти в каталог</button>
-      </div>
+      <NuxtLink to="/Catalog">
+        <div class="banners__collection-banner collection-banner">
+          <img
+            src="/imgs/collection-hero-1.svg"
+            alt=""
+            class="collection-banner__hero"
+          />
+          <span class="collection-banner__title"
+            >Новая коллекция в<br />
+            каталоге Nike Air<br />
+            Max Solo</span
+          >
+          <button class="collection-banner__btn">Перейти в каталог</button>
+        </div>
+      </NuxtLink>
+      <NuxtLink to="/Catalog">
+        <div class="banners__collection-banner collection-banner">
+          <img
+            src="/imgs/collection-hero-2.svg"
+            alt=""
+            class="collection-banner__hero"
+          />
+          <span class="collection-banner__title"
+            >Новая коллекция в<br />
+            каталоге Nike Air<br />
+            Max Solo</span
+          >
+          <button class="collection-banner__btn">Перейти в каталог</button>
+        </div>
+      </NuxtLink>
     </div>
     <UIAboutUs></UIAboutUs>
   </main>

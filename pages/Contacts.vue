@@ -234,8 +234,6 @@ const showThankNotice = () => {
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .title {
-  font-family: "Pragmatica Medium";
-  font-size: 1.563rem;
   margin-top: 0.938rem;
   margin-bottom: 1.5rem;
 }
@@ -427,7 +425,6 @@ const showThankNotice = () => {
 /* 1200px = 75em */
 @media (min-width: 75em) {
   .title {
-    font-size: 2.813rem;
     margin-top: 1.563rem;
   }
   .city-selector {

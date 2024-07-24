@@ -248,6 +248,7 @@
 
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
+import { useCatalogMenu } from "@/store/CatalogMenu";
 const store = usePostsStore();
 const currentPage = computed(() => store.currentPage);
 
@@ -264,12 +265,14 @@ const closeBurgerMenu = () => {
   burgerLineStroke.value = "black";
 };
 
-const isCatalogMenuOpen = ref(false);
-const catalogColorBind = ref("black");
+const catalogMenuStore = useCatalogMenu();
+const isCatalogMenuOpen = computed(() => catalogMenuStore.isCatalogMenuOpen);
+/* const catalogColorBind = ref("black"); */
+const catalogColorBind = computed(() => catalogMenuStore.catalogColorBind);
 
 const handleHover = () => {
-  isCatalogMenuOpen.value = true;
-  catalogColorBind.value = "#fb5a00";
+  catalogMenuStore.openCatalogMenu();
+  /* catalogColorBind.value = "#fb5a00"; */
 };
 
 const handleLeave = (event: MouseEvent) => {
@@ -281,8 +284,8 @@ const handleLeave = (event: MouseEvent) => {
     !catalogMenu.contains(targetElement) &&
     !burgerBtn.contains(targetElement)
   ) {
-    isCatalogMenuOpen.value = false;
-    catalogColorBind.value = "black";
+    catalogMenuStore.closeCatalogMenu();
+    /* catalogColorBind.value = "black"; */
   }
 };
 
@@ -493,6 +496,9 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       height: 70px;
       border-right: none;
       padding-right: 0rem;
+    }
+    &__catalog-btn.active {
+      color: #fb5a00;
     }
     &__catalog-btn-body:hover {
       color: $Dark-Orange;

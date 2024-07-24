@@ -285,10 +285,7 @@ const submitForm = () => {
   margin-bottom: 1.875rem;
 
   &__title {
-    font-family: "Pragmatica Medium";
-    font-size: 1.563rem;
     margin-top: 0.938rem;
-    margin-bottom: 0rem;
   }
   &__slogan {
     font-family: "Pragmatica Book";
