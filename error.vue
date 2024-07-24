@@ -13,12 +13,12 @@
       </h1>
       <img
         class="container__hero container__hero--from320px"
-        src="/imgs/404-from320px.svg"
+        src="/imgs/404-from320px.jpg"
         alt=""
       />
       <img
         class="container__hero container__hero--from768px"
-        src="/imgs/404-from768px.svg"
+        src="/imgs/404-from768px.jpg"
         alt=""
       />
       <p class="container__info">
@@ -53,14 +53,12 @@
           />
         </svg>
       </form>
-      <button @click="handleError" class="container__btn btn">
-        <div class="btn__content">
-          <span class="btn__text">На главную</span>
-        </div>
-        <div class="btn__arrow-area btn__arrow">
-          <img src="/imgs/white-right-arrow.svg" alt="" />
-        </div>
-      </button>
+      <UIButtonWithArrow
+        @click="handleError"
+        :to="'/'"
+        :content="'На главную'"
+        class="container__btn"
+      ></UIButtonWithArrow>
     </div>
   </main>
   <UIFooter></UIFooter>
@@ -117,6 +115,7 @@ const handleError = () => clearError({ redirect: "/" });
     color: #292929;
   }
   &__btn {
+    width: fit-content;
     margin: 0 auto;
   }
 }
@@ -142,34 +141,6 @@ const handleError = () => clearError({ redirect: "/" });
     position: absolute;
     top: 1.25rem;
     right: 1.25rem;
-  }
-}
-.btn {
-  @include btn;
-  background-color: $Light-Black;
-  width: 246px;
-  height: 65px;
-
-  &__content {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-  &__text {
-    font-family: "Pragmatica Medium";
-    font-size: 1rem;
-    color: #fff;
-  }
-  &__arrow {
-    @include btn;
-    background-color: $Dark-Black;
-    flex-shrink: 0;
-    width: 65px;
-    height: 65px;
-    margin-left: auto;
-  }
-  &__arrow-area {
-    background-color: $Dark-Black;
   }
 }
 
@@ -233,15 +204,15 @@ const handleError = () => clearError({ redirect: "/" });
       margin: -13.5rem 0 0 0;
       text-align: left;
     }
+    &__btn {
+      margin: 0;
+      order: 3;
+    }
   }
   .search-form {
     margin: 0.938rem 0 2.5rem 0;
     width: 532px;
     order: 2;
-  }
-  .btn {
-    margin: 0;
-    order: 3;
   }
 }
 /* 1440px = 90em */
@@ -257,11 +228,11 @@ const handleError = () => clearError({ redirect: "/" });
       order: 0;
     }
     &__hero {
-      width: 950px;
-      height: 606px;
+      width: 875px;
+      height: 565px;
       margin-top: -31.75rem;
       margin-bottom: 3.438rem;
-      margin-right: -4rem;
+      margin-right: -1rem;
       order: 4;
     }
     &__info {
@@ -271,6 +242,14 @@ const handleError = () => clearError({ redirect: "/" });
   }
   .search-form {
     order: 2;
+  }
+}
+/* 1920px = 120em */
+@media (min-width: 120em) {
+  .container {
+    &__hero {
+      margin-right: -2rem;
+    }
   }
 }
 </style>

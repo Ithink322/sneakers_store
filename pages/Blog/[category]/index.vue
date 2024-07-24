@@ -23,29 +23,24 @@ import { usePostsStore } from "@/store/Posts";
 
 const store = usePostsStore();
 const title = computed(() => store.getTitle);
-watch(
-  title,
-  (newTitle) => {
-    nextTick(() => {
-      useHead({
-        title: `Блог о Nike - Sneakers Store | ${title.value}`,
-        meta: [
-          {
-            name: "description",
-            content:
-              "Наш блог - это кладезь информации о Nike. Обзоры новинок, советы по выбору и уходу за кроссовками Nike, статьи, а также актуальные новости. Подписывайтесь, чтобы быть в курсе!",
-          },
-          {
-            name: "keywords",
-            content:
-              "блог, Nike, Sneakers Store, новости, статьи, советы, обзоры, выбор кроссовок Nike, уход за кроссовками Nike",
-          },
-        ],
-      });
-    });
-  },
-  { immediate: true }
-);
+
+onMounted(() => {
+  useHead({
+    title: `Блог о Nike - Sneakers Store | ${title.value}`,
+    meta: [
+      {
+        name: "description",
+        content:
+          "Наш блог - это кладезь информации о Nike. Обзоры новинок, советы по выбору и уходу за кроссовками Nike, статьи, а также актуальные новости. Подписывайтесь, чтобы быть в курсе!",
+      },
+      {
+        name: "keywords",
+        content:
+          "блог, Nike, Sneakers Store, новости, статьи, советы, обзоры, выбор кроссовок Nike, уход за кроссовками Nike",
+      },
+    ],
+  });
+});
 
 store.setAllPosts(blogPosts);
 
@@ -63,19 +58,25 @@ const categoryMapping: { [key: string]: string } = {
   обзоры: "ОБЗОРЫ",
 };
 
+const router = useRouter();
 const updateCategory = () => {
-  const category = route.params.category;
+  const category = route.params.category.toLowerCase();
   const selectedValue =
     categoryMapping[category as keyof typeof categoryMapping];
 
   if (selectedValue) {
+    if (route.params.category !== category) {
+      router.replace({
+        name: route.name,
+        params: { ...route.params, category },
+        query: { ...route.query },
+      });
+    }
     selectedCategory.value = category;
+    store.routeCategory = category;
     store.ruCategory = selectedValue;
-    /* console.log("selectedCategory.value:", selectedCategory.value); */
     store.setCategory(selectedCategory.value, selectedValue);
     store.filterPosts(store.ruCategory);
-    /* console.log("route.params.category:", route.params.category); */
-    store.routeCategory = route.params.category.toLowerCase();
   } else {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
@@ -84,7 +85,6 @@ const updateCategory = () => {
 const checkPageValidity = () => {
   if (route.query.page && pageNum <= totalPages.value && pageNum > 0) {
     store.currentPage = pageNum;
-    /*     console.log("category checkPageValidity:", route.params.category); */
   } else {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
