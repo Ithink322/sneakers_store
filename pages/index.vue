@@ -257,7 +257,7 @@
     <UIRecentPostsList></UIRecentPostsList>
     <UIProductsWithDiscountList></UIProductsWithDiscountList>
     <div class="banners">
-      <NuxtLink to="/Catalog">
+      <NuxtLink class="link" to="/Catalog">
         <div class="banners__collection-banner collection-banner">
           <img
             src="/imgs/collection-hero-1.svg"
@@ -272,7 +272,7 @@
           <button class="collection-banner__btn">Перейти в каталог</button>
         </div>
       </NuxtLink>
-      <NuxtLink to="/Catalog">
+      <NuxtLink class="link" to="/Catalog">
         <div class="banners__collection-banner collection-banner">
           <img
             src="/imgs/collection-hero-2.svg"
@@ -980,7 +980,7 @@ const hitProductsNextSlide = () => {
   .banners {
     flex-direction: row;
   }
-  .collection-banner {
+  .link {
     flex-grow: 1;
   }
 }

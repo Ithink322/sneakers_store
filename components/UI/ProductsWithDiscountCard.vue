@@ -39,7 +39,7 @@
       </svg>
     </button>
     <div class="card__desc desc">
-      <span class="desc__category">{{ hero.category }}</span>
+      <span class="desc__gender">{{ hero.gender }}</span>
       <span class="desc__title">{{ hero.title }}</span>
       <div class="desc__colors colors">
         <span class="colors__text">Цвета:</span>
@@ -59,9 +59,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Hero } from "@/types/ProductsWithDiscount";
+import type { Product } from "@/types/Product";
 
-const props = defineProps<{ hero: Hero }>();
+const props = defineProps<{ hero: Product }>();
 </script>
 
 <style lang="scss" scoped>
@@ -119,7 +119,7 @@ const props = defineProps<{ hero: Hero }>();
   flex-direction: column;
   gap: 1.125rem;
 
-  &__category {
+  &__gender {
     font-family: "Pragmatica Medium";
     font-size: 0.688rem;
     color: #747474;
@@ -202,7 +202,7 @@ const props = defineProps<{ hero: Hero }>();
   .desc {
     width: 386px;
 
-    &__category {
+    &__gender {
       font-size: 0.75rem;
     }
     &__title {

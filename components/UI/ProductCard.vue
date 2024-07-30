@@ -96,7 +96,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from "@/types/ProductsInSlider";
+import type { Product } from "@/types/Product";
 
 const props = defineProps<{ product: Product }>();
 
@@ -221,6 +221,7 @@ const showFirstImage = () => {
   flex-direction: column;
   gap: 0.938rem;
   overflow: hidden;
+  height: fit-content;
   width: 100%;
   cursor: pointer;
 
@@ -258,8 +259,7 @@ const showFirstImage = () => {
     stroke: $Dark-Orange;
   }
   &__slider-indicators {
-    bottom: 9.8rem;
-    left: 0rem;
+    margin-top: -1rem;
   }
 }
 .slide--from1440px,
@@ -370,8 +370,7 @@ const showFirstImage = () => {
       right: 1.25rem;
     }
     &__slider-indicators {
-      bottom: 8.5rem;
-      left: 0rem;
+      margin-top: -1.875rem;
     }
   }
   .desc {

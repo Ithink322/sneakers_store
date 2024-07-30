@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from "@/types/ProductsInSlider";
+import type { Product } from "@/types/Product";
 
 const props = defineProps<{
   latestProducts?: Product[];
