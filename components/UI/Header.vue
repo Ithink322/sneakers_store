@@ -3,22 +3,39 @@
     <header class="header">
       <div class="header-top">
         <ul class="header-top__titles-list">
-          <li><NuxtLink to="/AboutUs">О магазине</NuxtLink></li>
+          <li>
+            <NuxtLink :class="{ active: isActive('/AboutUs') }" to="/AboutUs"
+              >О магазине</NuxtLink
+            >
+          </li>
           <li>
             <NuxtLink
+              :class="{ active: route.path.startsWith('/blog') }"
               :to="{
-                path: '/blog/' + store.routeCategory,
+                path: '/blog/' + routeCategory,
                 query: { page: currentPage },
               }"
               >Наш блог</NuxtLink
             >
           </li>
           <li>
-            <NuxtLink to="/DeliveryAndPayment">Доставка и оплата</NuxtLink>
+            <NuxtLink
+              :class="{ active: isActive('/DeliveryAndPayment') }"
+              to="/DeliveryAndPayment"
+              >Доставка и оплата</NuxtLink
+            >
           </li>
-          <li><NuxtLink to="/Contacts">Контакты</NuxtLink></li>
           <li>
-            <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
+            <NuxtLink :class="{ active: isActive('/Contacts') }" to="/Contacts"
+              >Контакты</NuxtLink
+            >
+          </li>
+          <li>
+            <NuxtLink
+              :class="{ active: isActive('/IndividualOrder') }"
+              to="/IndividualOrder"
+              >Индивидуальный заказ</NuxtLink
+            >
           </li>
         </ul>
         <UIMyAccountBtn></UIMyAccountBtn>
@@ -250,7 +267,13 @@
 import { usePostsStore } from "@/store/Posts";
 import { useCatalogMenu } from "@/store/CatalogMenu";
 const store = usePostsStore();
+const routeCategory = computed(() => store.routeCategory);
 const currentPage = computed(() => store.currentPage);
+
+const route = useRoute();
+const isActive = (path: string) => {
+  return route.path === path;
+};
 
 const isBurgerMenuOpen = ref(false);
 const burgerLineStroke = ref("black");
@@ -259,20 +282,22 @@ const toggleBurgerMenu = () => {
   isBurgerMenuOpen.value = !isBurgerMenuOpen.value;
   burgerLineStroke.value =
     isBurgerMenuOpen.value && window.innerWidth < 1200 ? "#fb5a00" : "black";
+  if (isBurgerMenuOpen.value) {
+    document.body.style.overflow = "hidden";
+  }
 };
 const closeBurgerMenu = () => {
   isBurgerMenuOpen.value = false;
   burgerLineStroke.value = "black";
+  document.body.style.overflow = "";
 };
 
 const catalogMenuStore = useCatalogMenu();
 const isCatalogMenuOpen = computed(() => catalogMenuStore.isCatalogMenuOpen);
-/* const catalogColorBind = ref("black"); */
 const catalogColorBind = computed(() => catalogMenuStore.catalogColorBind);
 
 const handleHover = () => {
   catalogMenuStore.openCatalogMenu();
-  /* catalogColorBind.value = "#fb5a00"; */
 };
 
 const handleLeave = (event: MouseEvent) => {
@@ -285,7 +310,6 @@ const handleLeave = (event: MouseEvent) => {
     !burgerBtn.contains(targetElement)
   ) {
     catalogMenuStore.closeCatalogMenu();
-    /* catalogColorBind.value = "black"; */
   }
 };
 
@@ -466,6 +490,9 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
     &__titles-list li:hover a {
       color: $Dark-Orange;
     }
+    &__titles-list li a.active {
+      color: $Dark-Orange;
+    }
   }
   .header {
     padding: 0rem calc((100vw - 71.875rem) / 2);
@@ -487,6 +514,7 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       display: flex;
       align-items: center;
       margin-left: 1.614rem;
+      margin-bottom: -1px;
       cursor: pointer;
       transition: color 0.3s ease;
     }

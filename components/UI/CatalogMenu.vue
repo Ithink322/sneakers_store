@@ -39,7 +39,12 @@
             <span class="menu__column-title">Модели</span>
             <ul class="menu__column-list">
               <li>
-                <nuxt-link @click="closeCatalogMenu" to="/Catalog"
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  :to="{
+                    path: '/catalog',
+                    query: { page: currentCatalogPage },
+                  }"
                   >Все модели</nuxt-link
                 >
               </li>
@@ -70,12 +75,16 @@
 
 <script setup lang="ts">
 import { useCatalogMenu } from "@/store/CatalogMenu";
+import { useProductsStore } from "@/store/Products";
 
 const store = useCatalogMenu();
 const isCatalogMenuOpen = computed(() => store.isCatalogMenuOpen);
 const closeCatalogMenu = () => {
   store.closeCatalogMenu();
 };
+
+const catalogStore = useProductsStore();
+const currentCatalogPage = computed(() => catalogStore.currentPage);
 </script>
 
 <style lang="scss" scoped>

@@ -69,8 +69,9 @@ onMounted(() => {
   SliderOverflow = document.querySelector<HTMLElement>(
     ".recent-posts__overflow"
   )!;
-  SlideWidth = document.querySelector<HTMLElement>(".link")!.offsetWidth;
-  SlidesLength = document.querySelectorAll(".link").length;
+  SlideWidth = document.querySelector<HTMLElement>(".card-link")!.offsetWidth;
+  SlidesLength = document.querySelectorAll(".card-link").length;
+  console.log(SlidesLength);
   gap = parseFloat(
     window.getComputedStyle(SliderWrapper).getPropertyValue("gap")
   );

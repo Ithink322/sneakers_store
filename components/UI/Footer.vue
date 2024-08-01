@@ -98,8 +98,8 @@
               <li class="dropdown-list__link">
                 <NuxtLink
                   :to="{
-                    path: '/blog/' + store.routeCategory,
-                    query: { page: currentPage },
+                    path: '/blog/' + blogStore.routeCategory,
+                    query: { page: currentBlogPage },
                   }"
                   >Наш блог</NuxtLink
                 >
@@ -127,7 +127,13 @@
               :class="{ active: isDropdownActive('products') }"
             >
               <li class="dropdown-list__link">
-                <NuxtLink to="">Каталог</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: currentCatalogPage },
+                  }"
+                  >Каталог</NuxtLink
+                >
               </li>
               <li class="dropdown-list__link">
                 <NuxtLink to="">Детские кроссовки</NuxtLink>
@@ -180,8 +186,8 @@
               <li class="list__link">
                 <NuxtLink
                   :to="{
-                    path: '/blog/' + store.routeCategory,
-                    query: { page: currentPage },
+                    path: '/blog/' + blogStore.routeCategory,
+                    query: { page: currentBlogPage },
                   }"
                   >Наш блог</NuxtLink
                 >
@@ -196,7 +202,13 @@
             <ul class="footer__list list">
               <span class="list__title">ТОВАРЫ</span>
               <li class="list__link">
-                <NuxtLink to="">Каталог</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: currentCatalogPage },
+                  }"
+                  >Каталог</NuxtLink
+                >
               </li>
               <li class="list__link">
                 <NuxtLink to="">Детские кроссовки</NuxtLink>
@@ -285,8 +297,12 @@
 
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
-const store = usePostsStore();
-const currentPage = computed(() => store.currentPage);
+import { useProductsStore } from "@/store/Products";
+const blogStore = usePostsStore();
+const currentBlogPage = computed(() => blogStore.currentPage);
+
+const catalogStore = useProductsStore();
+const currentCatalogPage = computed(() => catalogStore.currentPage);
 
 const activeDropdown = ref<string | null>(null);
 

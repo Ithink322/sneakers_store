@@ -42,6 +42,9 @@
 </template>
 
 <script setup lang="ts">
+import { products } from "@/data/CatalogProducts";
+import { useProductsStore } from "@/store/Products";
+
 useHead({
   title: "Sneakers Store - Каталог товаров | Огромный выбор моделей",
   meta: [
@@ -58,7 +61,33 @@ useHead({
   ],
 });
 
+const store = useProductsStore();
+store.setAllProducts(products);
+store.filterProducts(products);
+
+const route = useRoute();
+
+watch(
+  () => route.query.page,
+  (newPage) => store.setPage(Number(newPage) || 1),
+  { immediate: true }
+);
+
+const totalPages = computed(() => store.totalPages);
+const pageNum = parseInt(route.query.page as string);
+const checkPageValidity = () => {
+  if (route.query.page && pageNum <= totalPages.value && pageNum > 0) {
+    store.currentPage = pageNum;
+  } else {
+    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  }
+};
+
 const totalProducts = ref(0);
+
+onMounted(() => {
+  checkPageValidity();
+});
 </script>
 
 <style lang="scss" scoped>

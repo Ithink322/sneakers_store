@@ -44,9 +44,25 @@ onMounted(() => {
 store.setAllPosts(blogPosts);
 
 const route = useRoute();
+
+watch(
+  () => route.params.category,
+  (newCategory) =>
+    store.setCategory(
+      newCategory as string,
+      (newCategory as string).toUpperCase()
+    ),
+  { immediate: true }
+);
+watch(
+  () => route.query.page,
+  (newPage) => store.setPage(Number(newPage) || 1),
+  { immediate: true }
+);
+
 let selectedCategory = ref("");
 
-const pageNum = parseInt(route.query.page);
+const pageNum = parseInt(route.query.page as string);
 const totalPages = computed(() => store.totalPages);
 
 const categoryMapping: { [key: string]: string } = {
@@ -59,7 +75,7 @@ const categoryMapping: { [key: string]: string } = {
 
 const router = useRouter();
 const updateCategory = () => {
-  const category = route.params.category.toLowerCase();
+  const category = (route.params.category as string).toLowerCase();
   const selectedValue =
     categoryMapping[category as keyof typeof categoryMapping];
 

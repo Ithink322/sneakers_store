@@ -257,7 +257,13 @@
     <UIRecentPostsList></UIRecentPostsList>
     <UIProductsWithDiscountList></UIProductsWithDiscountList>
     <div class="banners">
-      <NuxtLink class="link" to="/Catalog">
+      <NuxtLink
+        class="link"
+        :to="{
+          path: '/catalog',
+          query: { page: currentCatalogPage },
+        }"
+      >
         <div class="banners__collection-banner collection-banner">
           <img
             src="/imgs/collection-hero-1.svg"
@@ -272,7 +278,13 @@
           <button class="collection-banner__btn">Перейти в каталог</button>
         </div>
       </NuxtLink>
-      <NuxtLink class="link" to="/Catalog">
+      <NuxtLink
+        class="link"
+        :to="{
+          path: '/catalog',
+          query: { page: currentCatalogPage },
+        }"
+      >
         <div class="banners__collection-banner collection-banner">
           <img
             src="/imgs/collection-hero-2.svg"
@@ -293,6 +305,7 @@
 </template>
 
 <script setup lang="ts">
+import { useProductsStore } from "@/store/Products";
 import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 
@@ -311,6 +324,9 @@ useHead({
     },
   ],
 });
+
+const catalogStore = useProductsStore();
+const currentCatalogPage = computed(() => catalogStore.currentPage);
 
 onMounted(() => {
   /* carousel for .overflow__container from 1440px starts */

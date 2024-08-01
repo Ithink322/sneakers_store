@@ -147,7 +147,13 @@
             :class="{ active: isDropdownActive('Models') }"
           >
             <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to="/Catalog">
+              <NuxtLink
+                @click="closeBurgerMenu"
+                :to="{
+                  path: '/catalog',
+                  query: { page: currentCatalogPage },
+                }"
+              >
                 Все модели</NuxtLink
               >
             </button>
@@ -224,8 +230,12 @@
 
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
+import { useProductsStore } from "@/store/Products";
 const store = usePostsStore();
 const currentPage = computed(() => store.currentPage);
+
+const catalogStore = useProductsStore();
+const currentCatalogPage = computed(() => catalogStore.currentPage);
 
 const props = defineProps(["isOpen"]);
 

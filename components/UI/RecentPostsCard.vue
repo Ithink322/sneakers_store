@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    class="link"
+    class="card-link"
     @click="setCategory"
     :to="`blog/` + hero.category.toLowerCase() + '/' + slugify(hero.title)"
   >
@@ -30,7 +30,6 @@ const props = defineProps<{ hero: Hero }>();
 
 const store = usePostsStore();
 const setCategory = () => {
-  console.log(props.hero.category);
   store.ruCategory = props.hero.category;
   store.setCategory(props.hero.category.toLowerCase(), store.ruCategory);
 };
@@ -38,7 +37,7 @@ const setCategory = () => {
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
-.link {
+.card-link {
   position: relative;
   flex-shrink: 0;
 }

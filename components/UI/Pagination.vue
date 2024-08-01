@@ -25,10 +25,11 @@
         :style="{ transform: `translateX(${translateValue}px)` }"
       >
         <button
+          ref="buttons"
           class="page-wrapper__btn"
           v-for="pageNum in totalPages"
           :key="pageNum"
-          :class="{ active: store.currentPage === pageNum }"
+          :class="{ active: store?.currentPage === pageNum }"
           @click="changePage(pageNum)"
         >
           {{ pageNum }}
@@ -58,68 +59,107 @@
 
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
-
-const store = usePostsStore();
-const totalPages = computed(() => store.totalPages);
-
-const prevPage = () => {
-  if (store.currentPage > 1) {
-    store.setPage(store.currentPage - 1);
-    router.replace({ query: { ...route.query, page: store.currentPage } });
-  } else {
-    store.setPage(totalPages.value);
-    router.replace({ query: { ...route.query, page: totalPages.value } });
-  }
-  updateTranslate();
-};
-
-const nextPage = () => {
-  if (store.currentPage < store.totalPages) {
-    store.setPage(store.currentPage + 1);
-    router.replace({ query: { ...route.query, page: store.currentPage } });
-  } else {
-    store.setPage(1);
-    router.replace({ query: { ...route.query, page: 1 } });
-  }
-  updateTranslate();
-};
-
-const changePage = (pageNum: number) => {
-  store.setPage(pageNum);
-  router.replace({ query: { ...route.query, page: pageNum } });
-  updateTranslate();
-};
+import { useProductsStore } from "@/store/Products";
 
 const router = useRouter();
 const route = useRoute();
 
-const paginationWrapper = ref<HTMLElement | null>(null);
+type StoreType =
+  | ReturnType<typeof usePostsStore>
+  | ReturnType<typeof useProductsStore>;
+let store = ref<StoreType | null>(null);
 
+const setStore = () => {
+  const normalizedPath = route.path.toLowerCase();
+  if (normalizedPath.startsWith("/blog")) {
+    store.value = usePostsStore();
+  } else if (normalizedPath.startsWith("/catalog")) {
+    store.value = useProductsStore();
+  }
+};
+watch(
+  () => route.path,
+  () => {
+    setStore();
+  },
+  { immediate: true }
+);
+
+const totalPages = computed(() => store.value?.totalPages ?? 10);
+
+const prevPage = () => {
+  if (store.value) {
+    if (store.value.currentPage > 1) {
+      store.value.setPage(store.value.currentPage - 1);
+      router.replace({
+        query: { ...route.query, page: store.value.currentPage },
+      });
+    } else {
+      store.value.setPage(totalPages.value);
+      router.replace({ query: { ...route.query, page: totalPages.value } });
+    }
+    updateTranslate();
+    window.scrollTo(0, 0);
+  }
+};
+
+const nextPage = () => {
+  if (store.value) {
+    if (store.value.currentPage < store.value.totalPages) {
+      store.value.setPage(store.value.currentPage + 1);
+      router.replace({
+        query: { ...route.query, page: store.value.currentPage },
+      });
+    } else {
+      store.value.setPage(1);
+      router.replace({ query: { ...route.query, page: 1 } });
+    }
+    updateTranslate();
+    window.scrollTo(0, 0);
+  }
+};
+
+const changePage = (pageNum: number) => {
+  if (store.value) {
+    store.value.setPage(pageNum);
+    router.replace({ query: { ...route.query, page: pageNum } });
+    updateTranslate();
+    window.scrollTo(0, 0);
+  }
+};
+
+const paginationWrapper = ref<HTMLElement | null>(null);
+const buttons = ref<HTMLElement[]>([]);
 onMounted(() => {
   paginationWrapper.value = document.querySelector<HTMLElement>(".pagination")!;
   updateTranslate();
 });
 
-let translateValue = computed(() => store.translateValue);
+const translateValue = computed(() => store.value?.translateValue ?? 0);
 const updateTranslate = async () => {
   await nextTick();
 
-  const button =
-    paginationWrapper.value?.querySelector<HTMLElement>(".page-wrapper__btn")!;
-  const pagination = paginationWrapper.value!;
-  const buttonWidth = button.offsetWidth;
-  const gapValue = parseInt(
-    window.getComputedStyle(pagination).getPropertyValue("gap")
-  );
+  if (store.value && paginationWrapper.value) {
+    buttons.value = Array.from(
+      paginationWrapper.value.querySelectorAll<HTMLElement>(
+        ".page-wrapper__btn"
+      )
+    );
 
-  if (store.currentPage > 1) {
-    const newTranslateValue =
-      -((store.currentPage - 1) * (buttonWidth + gapValue)) +
-      buttonWidth +
-      gapValue;
-    store.updateTranslateValue(newTranslateValue);
-  } else {
-    store.updateTranslateValue(0);
+    const buttonWidth = buttons.value[0].offsetWidth;
+    const gapValue = parseInt(
+      window.getComputedStyle(paginationWrapper.value).getPropertyValue("gap")
+    );
+
+    if (store.value.currentPage > 1) {
+      const newTranslateValue =
+        -((store.value.currentPage - 1) * (buttonWidth + gapValue)) +
+        buttonWidth +
+        gapValue;
+      store.value.updateTranslateValue(newTranslateValue);
+    } else {
+      store.value.updateTranslateValue(0);
+    }
   }
 };
 </script>
