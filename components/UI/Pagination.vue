@@ -120,7 +120,7 @@ const nextPage = () => {
 };
 
 const changePage = (pageNum: number) => {
-  if (store.value) {
+  if (store.value && store.value.currentPage !== pageNum) {
     store.value.setPage(pageNum);
     router.replace({ query: { ...route.query, page: pageNum } });
     updateTranslate();

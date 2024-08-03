@@ -2,9 +2,11 @@
   <UIBreadcrumb :breadcrumbTitle="'Каталог товаров'"></UIBreadcrumb>
   <div class="titles-container">
     <h1 class="titles-container__title">Все модели</h1>
-    <span class="titles-container__text">{{ totalProducts }} товаров</span>
+    <span class="titles-container__text"
+      >{{ totalProducts }} {{ conjugateTovar(totalProducts) }}</span
+    >
   </div>
-  <button class="filters-btn">
+  <button @click="openFiltersMenu" class="filters-btn">
     <svg
       width="24"
       height="24"
@@ -37,6 +39,43 @@
     </svg>
     СБРОСИТЬ ВСЁ
   </button>
+  <div v-if="isFiltersOpened" class="filters-menu-shadow">
+    <button @click="closeFiltersMenu" class="filters-menu-shadow__close-btn">
+      <img src="/imgs/cross.svg" alt="cross" />
+    </button>
+    <div class="filters-menu">
+      <div class="slider-range">
+        <div class="slider-range__range" id="range-slider"></div>
+        <div class="slider-range__range-body">
+          <div class="slider-range__range-content">
+            <input
+              type="number"
+              min="6329"
+              max="16790"
+              placeholder="6 329"
+              class="slider-range__input"
+              id="input-0"
+              ref="minPrice"
+            />
+            <span class="slider-range__sign">₽</span>
+          </div>
+          <div class="slider-range__border"></div>
+          <div class="slider-range__range-content">
+            <input
+              type="number"
+              min="6329"
+              max="16790"
+              placeholder="16 790"
+              class="slider-range__input"
+              id="input-1"
+              ref="maxPrice"
+            />
+            <span class="slider-range__sign">₽</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <UIProductList></UIProductList>
   <UIPagination></UIPagination>
 </template>
@@ -44,6 +83,9 @@
 <script setup lang="ts">
 import { products } from "@/data/CatalogProducts";
 import { useProductsStore } from "@/store/Products";
+import noUiSlider from "nouislider";
+import type { target } from "nouislider";
+/* import "nouislider/dist/nouislider.css"; */
 
 useHead({
   title: "Sneakers Store - Каталог товаров | Огромный выбор моделей",
@@ -83,18 +125,88 @@ const checkPageValidity = () => {
   }
 };
 
-const totalProducts = ref(0);
+const totalProducts = ref(store.filteredProducts.length);
+const conjugateTovar = (count: number): string => {
+  const lastDigit = count % 10;
+  const lastTwoDigits = count % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+    return "товаров";
+  }
+
+  if (lastDigit === 1) {
+    return "товар";
+  } else if (lastDigit >= 2 && lastDigit <= 4) {
+    return "товара";
+  } else {
+    return "товаров";
+  }
+};
+
+const setupSlider = () => {
+  /* prices range slider starts */
+  const rangeSlider = document.getElementById("range-slider")! as target;
+  if (rangeSlider) {
+    noUiSlider.create(rangeSlider, {
+      start: [6329, 16790],
+      connect: true,
+      step: 10,
+      range: {
+        min: [6329],
+        max: [16790],
+      },
+    });
+
+    const input0 = document.getElementById("input-0")! as HTMLInputElement,
+      input1 = document.getElementById("input-1")! as HTMLInputElement;
+    const inputs = [input0, input1];
+
+    rangeSlider.noUiSlider!.on(
+      "update",
+      (values: (number | string)[], handle: number) => {
+        inputs[handle].value = Math.round(Number(values[handle])).toString();
+      }
+    );
+
+    const setRangeSlider = (i: number, value: string) => {
+      let arr: (number | null)[] = [null, null];
+      arr[i] = parseInt(value);
+      rangeSlider.noUiSlider!.set(arr);
+    };
+
+    inputs.forEach((el, index) => {
+      el.addEventListener("change", (e) => {
+        setRangeSlider(index, (e.currentTarget! as HTMLInputElement).value);
+      });
+    });
+  }
+  /* prices range slider ends */
+};
 
 onMounted(() => {
   checkPageValidity();
 });
+
+const isFiltersOpened = ref(false);
+const openFiltersMenu = () => {
+  isFiltersOpened.value = true;
+  window.scrollTo(0, 0);
+  document.body.style.overflow = "hidden";
+  nextTick(() => {
+    setupSlider();
+  });
+};
+const closeFiltersMenu = () => {
+  isFiltersOpened.value = false;
+  document.body.style.overflow = "";
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .titles-container {
   display: flex;
-  gap: 0.875rem;
+  gap: 0.5rem;
   align-items: center;
   margin: 1.875rem 0;
 
@@ -137,6 +249,130 @@ onMounted(() => {
   font-family: "Pragmatica Medium";
   font-size: 0.75rem;
 }
+.filters-menu-shadow {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.54);
+  width: 100%;
+  height: 100vh;
+  top: 0rem;
+  margin-left: -0.938rem;
+  z-index: 2;
+}
+.filters-menu-shadow__close-btn {
+  @include btn;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+.filters-menu {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  max-width: 328px;
+  height: 100vh;
+  padding: 2.188rem 1.25rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* hide input number arrows for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* hide input number arrows for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.slider-range {
+  &__range {
+    width: 100%;
+    margin: 1.875rem 0;
+  }
+  &__range-body {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  &__range-content {
+    position: relative;
+  }
+  &__input {
+    text-align: center;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 0.75rem 1.875rem;
+    border-bottom: 1px solid #b5b5b5;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    color: #343434;
+  }
+  &__input::placeholder {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    color: #b5b5b5;
+  }
+  &__sign {
+    position: absolute;
+    margin-left: -0.5rem;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 39px;
+    color: #343434;
+  }
+  &__border {
+    width: 15px;
+    height: 2px;
+    border-radius: 1px;
+    flex-shrink: 0;
+    background: #b5b5b5;
+  }
+}
+.noUi-target {
+  background-color: #dfdfdf;
+  border: none;
+  height: 2px;
+}
+.noUi-connect {
+  background-color: $Dark-Black;
+}
+.noUi-handle::after,
+.noUi-handle::before {
+  display: none;
+}
+.noUi-handle {
+  box-shadow: none;
+  border-radius: 50%;
+  border: 2px solid $Dark-Black;
+  background-color: #fff;
+  cursor: pointer;
+}
+.noUi-horizontal .noUi-handle {
+  width: 20px;
+  height: 20px;
+  top: -0.6rem;
+}
+/* .slider-range__range .noUi-target {
+  background-color: #dfdfdf;
+  border: none;
+  height: 2px;
+}
+.slider-range__range .noUi-base .noUi-connects .noUi-connect {
+  background-color: $Dark-Black;
+}
+.slider-range__range .noUi-handle {
+  box-shadow: none;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background-color: #fff;
+  cursor: pointer;
+}
+.slider-range__range .noUi-horizontal .noUi-handle {
+  width: 20px;
+  height: 20px;
+  top: -0.6rem;
+} */
 /* 768px = 48em */
 @media (min-width: 48em) {
   .filters-btn {
@@ -161,6 +397,13 @@ onMounted(() => {
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
+  .titles-container {
+    gap: 0.813rem;
+
+    &__text {
+      font-size: 0.938rem;
+    }
+  }
   .filters-btn {
     &::before,
     &::after {

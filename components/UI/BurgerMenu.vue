@@ -31,7 +31,10 @@
         <button
           @click="toggleCatalogDropDownMenu"
           class="burger-menu__catalog-btn burger-menu__main-btn"
-          :class="{ active: isCatalogBtnActive }"
+          :class="{
+            active: isCatalogBtnActive,
+            activetitle: isActive('/catalog'),
+          }"
         >
           КАТАЛОГ
         </button>
@@ -198,11 +201,17 @@
           <NuxtLink @click="closeBurgerMenu" to="">РАСПРОДАЖА</NuxtLink>
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="/AboutUs">О магазине</NuxtLink>
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :class="{ active: isActive('/AboutUs') }"
+            to="/AboutUs"
+            >О магазине</NuxtLink
+          >
         </button>
         <button class="burger-menu__section-btn">
           <NuxtLink
             @click="closeBurgerMenu"
+            :class="{ active: route.path.startsWith('/blog') }"
             :to="{
               path: '/blog/' + store.routeCategory,
               query: { page: currentPage },
@@ -211,15 +220,26 @@
           >
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="/DeliveryAndPayment"
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :class="{ active: isActive('/DeliveryAndPayment') }"
+            to="/DeliveryAndPayment"
             >Доставка и оплата</NuxtLink
           >
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="/Contacts">Контакты</NuxtLink>
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :class="{ active: isActive('/Contacts') }"
+            to="/Contacts"
+            >Контакты</NuxtLink
+          >
         </button>
         <button class="burger-menu__section-btn">
-          <NuxtLink @click="closeBurgerMenu" to="/IndividualOrder"
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :class="{ active: isActive('/IndividualOrder') }"
+            to="/IndividualOrder"
             >Индивидуальный заказ</NuxtLink
           >
         </button>
@@ -233,6 +253,11 @@ import { usePostsStore } from "@/store/Posts";
 import { useProductsStore } from "@/store/Products";
 const store = usePostsStore();
 const currentPage = computed(() => store.currentPage);
+
+const route = useRoute();
+const isActive = (path: string) => {
+  return route.path === path;
+};
 
 const catalogStore = useProductsStore();
 const currentCatalogPage = computed(() => catalogStore.currentPage);
@@ -318,6 +343,9 @@ const isDropdownActive = (dropdownName: string) => {
   &__main-btn {
     transition: all 0.1s ease;
   }
+  &__main-btn.activetitle {
+    color: $Light-Orange;
+  }
   &__main-btn.active {
     color: #fff;
     background-color: $Dark-Black;
@@ -341,9 +369,8 @@ const isDropdownActive = (dropdownName: string) => {
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
 
-    a {
-      text-decoration: none;
-      color: $Dark-Black;
+    a.active {
+      color: $Light-Orange;
     }
   }
 }

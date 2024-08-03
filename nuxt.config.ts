@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: true },
+
   app: {
     head: {
       title: "Sneakers store",
@@ -14,10 +15,14 @@ export default defineNuxtConfig({
       ],
     },
   },
-  css: ["~/assets/App.scss"],
+
+  css: ["~/assets/App.scss", "nouislider/dist/nouislider.min.css"],
+
   modules: [
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "@nuxt/content",
   ],
+
+  compatibilityDate: "2024-08-02",
 });

@@ -283,6 +283,7 @@ const toggleBurgerMenu = () => {
   burgerLineStroke.value =
     isBurgerMenuOpen.value && window.innerWidth < 1200 ? "#fb5a00" : "black";
   if (isBurgerMenuOpen.value) {
+    window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
   }
 };

@@ -1,5 +1,6 @@
 <template>
   <NuxtLink
+    @click="setPost"
     class="link"
     :to="{
       path: `/blog/${routeCategory}/${slugify(props.post.title)}`,
@@ -25,6 +26,7 @@
 import { slugify } from "@/utils/helpers";
 import { usePostsStore } from "@/store/Posts";
 import type { BlogPost } from "@/types/BlogPosts";
+import { useSinglePostStore } from "@/store/SinglePost";
 const props = defineProps({
   post: {
     type: Object as () => BlogPost,
@@ -34,6 +36,11 @@ const props = defineProps({
 
 const store = usePostsStore();
 const routeCategory = computed(() => store.routeCategory);
+
+const postStore = useSinglePostStore();
+const setPost = () => {
+  /* postStore.setPost(props.post.id); */
+};
 </script>
 
 <style lang="scss" scoped>
