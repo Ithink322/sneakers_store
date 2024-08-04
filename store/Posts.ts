@@ -12,7 +12,7 @@ interface PostsState {
   translateValue: number;
 }
 
-export const usePostsStore = defineStore("postStore", {
+export const usePostsStore = defineStore("postsStore", {
   state: (): PostsState => ({
     allPosts: [],
     filteredPosts: [],

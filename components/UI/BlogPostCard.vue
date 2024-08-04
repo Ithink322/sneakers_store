@@ -39,7 +39,7 @@ const routeCategory = computed(() => store.routeCategory);
 
 const postStore = useSinglePostStore();
 const setPost = () => {
-  /* postStore.setPost(props.post.id); */
+  postStore.setPost(props.post.id);
 };
 </script>
 

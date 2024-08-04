@@ -115,39 +115,47 @@
 </template>
 
 <script setup lang="ts">
-import { blogPosts } from "@/data/Blogposts";
-import { slugify, unslugify } from "@/utils/helpers";
 import { usePostsStore } from "@/store/Posts";
+import { useSinglePostStore } from "@/store/SinglePost";
+import type { BlogPost } from "@/types/BlogPosts";
+import { blogPosts } from "@/data/Blogposts";
 
 const store = usePostsStore();
 const title = computed(() => store.getTitle);
 
-const route = useRoute();
-const post = computed(() => {
-  const title = unslugify(route.params.id);
-  return blogPosts.find((post) => unslugify(slugify(post.title)) === title);
+const postStore = useSinglePostStore();
+const post = ref<BlogPost>();
+const fetchPost = () => {
+  post.value = blogPosts.find((post) => post.id === postStore.id);
+};
+onMounted(() => {
+  fetchPost();
 });
 
-useHead({
-  title: `${post.value!.title} - Блог о Nike`,
-  meta: [
-    {
-      name: "description",
-      content: post.value!.intro,
-    },
-    {
-      name: "keywords",
-      content: `Nike, кроссовки, блог, ${post.value!.category.toLowerCase()}`,
-    },
-    {
-      property: "og:title",
-      content: post.value!.title,
-    },
-    {
-      property: "og:description",
-      content: post.value!.intro,
-    },
-  ],
+watchEffect(() => {
+  if (post.value) {
+    useHead({
+      title: `${post.value.title} - Блог о Nike`,
+      meta: [
+        {
+          name: "description",
+          content: post.value.intro,
+        },
+        {
+          name: "keywords",
+          content: `Nike, кроссовки, блог, ${post.value.category.toLowerCase()}`,
+        },
+        {
+          property: "og:title",
+          content: post.value.title,
+        },
+        {
+          property: "og:description",
+          content: post.value.intro,
+        },
+      ],
+    });
+  }
 });
 </script>
 
