@@ -53,12 +53,12 @@
           />
         </svg>
       </form>
-      <UIButtonWithArrow
+      <UIButton
         @click="handleError"
         :to="'/'"
         :content="'На главную'"
         class="container__btn"
-      ></UIButtonWithArrow>
+      ></UIButton>
     </div>
   </main>
   <UIFooter></UIFooter>

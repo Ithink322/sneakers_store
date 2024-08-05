@@ -30,6 +30,7 @@ a {
 h1 {
   font-family: "Pragmatica Medium";
   font-size: 1.563rem;
+  line-height: 31px;
   margin: 0;
 }
 .page-container {

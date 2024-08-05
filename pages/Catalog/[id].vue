@@ -38,7 +38,62 @@
         </div>
       </div>
     </div>
-    <h1 class="title">{{ product.title }}</h1>
+    <div class="details">
+      <h1 class="details__title">Кроссовки {{ product.title }}</h1>
+      <p
+        class="details__desc"
+        v-html="showFullDescription ? product.desc : shortDescription"
+      ></p>
+      <button class="details__desc-toggle-btn" @click="toggleDescription">
+        {{ showFullDescription ? "Скрыть описание" : "Полное описание" }}
+      </button>
+      <div class="details__colors">
+        Цвета:
+        <button
+          @click="setActiveColor(index)"
+          class="details__color-btn"
+          v-for="(color, index) in product.colors"
+          :key="color"
+          :class="{ active: activeColorIndex === index }"
+        >
+          <div
+            class="details__color-btn-fill"
+            :style="{ backgroundColor: color }"
+          ></div>
+        </button>
+      </div>
+      <div class="details__size-info">
+        <span class="details__size-text">Размер (EU):</span>
+        <button class="details__size-chart-btn">Размерная таблица</button>
+      </div>
+      <div class="details__sizes-body">
+        <button
+          @click="setActiveSize(index)"
+          class="details__size-btn"
+          v-for="(size, index) in product.sizes"
+          :key="size"
+          :class="{ active: activeSizeIndex === index }"
+        >
+          {{ size }}
+        </button>
+      </div>
+      <div class="details__body">
+        <div class="details__prices">
+          <span class="details__current-price">{{ product.currentPrice }}</span>
+          <div class="details__previous-price">{{ product.previousPrice }}</div>
+        </div>
+        <div class="details__counter">
+          <button class="details__decrease-btn">-</button>
+          <span class="details__counter-text">1</span>
+          <button class="details__increase-btn">+</button>
+        </div>
+        <UIButton
+          class="details__add-to-cart-btn"
+          :content="'Добавить в корзину'"
+          :icon="'/imgs/add-to-cart-icon.svg'"
+        ></UIButton>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,8 +107,21 @@ const product = ref<Product>();
 const fetchProduct = () => {
   product.value = products.find((product) => product.id === productStore.id);
 };
+
+const route = useRoute();
+const checkTitleValidity = () => {
+  const title = products.find(
+    (product) =>
+      product.title.toLowerCase() ==
+      unslugify(route.params.id as string).toLowerCase()
+  );
+  if (!title) {
+    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  }
+};
 onMounted(() => {
   fetchProduct();
+  checkTitleValidity();
 });
 
 watchEffect(() => {
@@ -132,6 +200,32 @@ const updateTranslate = async () => {
     translateValue.value = -adjustedIndex * (buttonWidth + gapValue);
   }
 };
+
+const showFullDescription = ref(false);
+const shortDescription = ref("");
+
+onMounted(() => {
+  const dashIndex = product.value!.desc.indexOf("<br/>");
+  if (dashIndex !== -1) {
+    shortDescription.value = product.value!.desc.substring(0, dashIndex);
+  } else {
+    shortDescription.value = product.value!.desc;
+  }
+});
+
+const toggleDescription = () => {
+  showFullDescription.value = !showFullDescription.value;
+};
+
+const activeColorIndex = ref(0);
+const setActiveColor = (index: number) => {
+  activeColorIndex.value = index;
+};
+
+const activeSizeIndex = ref(0);
+const setActiveSize = (index: number) => {
+  activeSizeIndex.value = index;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -160,8 +254,6 @@ const updateTranslate = async () => {
     width: 28px;
     height: 25px;
   }
-  &__hero {
-  }
 }
 .heroes-slider {
   overflow: hidden;
@@ -180,6 +272,114 @@ const updateTranslate = async () => {
     border: 2px solid $Dark-Black;
   }
 }
-.title {
+.details {
+  &__title {
+    margin: 1.563rem 0 0.938rem 0;
+  }
+  &__desc {
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    line-height: 24px;
+    margin: 0 0 0.625rem 0;
+    color: #4b4b4b;
+  }
+  &__desc-toggle-btn {
+    @include btn;
+    border-bottom: 2px dotted #929292;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    color: #4b4b4b;
+  }
+  &__colors {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 2.188rem 0 1.313rem 0;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #2e2e2e;
+  }
+  &__color-btn {
+    position: relative;
+    @include btn;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+
+    &.active {
+      width: 25px;
+      height: 25px;
+      padding: 5px;
+      outline: 1px solid #a1a1a1;
+    }
+  }
+  &__color-btn-fill {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+  }
+  &__size-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__size-text {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #2e2e2e;
+  }
+  &__size-chart-btn {
+    @include btn;
+    border-bottom: 1px solid #2e2e2e;
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    color: #2e2e2e;
+  }
+  &__sizes-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin: 0.938rem 0 1.313rem 0;
+  }
+  &__size-btn {
+    @include btn;
+    flex-shrink: 0;
+    width: 75px;
+    height: 45px;
+    border-radius: 4px;
+    border: 1px solid #efefef;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    color: #302f2f;
+
+    &.active,
+    &:hover {
+      background-color: $Light-Black;
+      color: #ffffff;
+    }
+  }
+  &__body {
+  }
+  &__prices {
+  }
+  &__current-price {
+  }
+  &__previous-price {
+  }
+  &__counter {
+  }
+  &__decrease-btn {
+  }
+  &__counter-text {
+  }
+  &__increase-btn {
+  }
+  /* &__add-to-cart-btn {
+    width: 100%;
+  }
+  &__add-to-cart-btn:hover {
+    color: $Dark-Orange;
+  } */
 }
 </style>

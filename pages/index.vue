@@ -22,10 +22,7 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">9900 ₽</span></span
               >
-              <UIButtonWithArrow
-                class="slide__more-btn"
-                :link="''"
-              ></UIButtonWithArrow>
+              <UIButton class="slide__more-btn" :link="''"></UIButton>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -47,10 +44,7 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">8800 ₽</span></span
               >
-              <UIButtonWithArrow
-                class="slide__more-btn"
-                :link="''"
-              ></UIButtonWithArrow>
+              <UIButton class="slide__more-btn" :link="''"></UIButton>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -72,10 +66,7 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">7700 ₽</span></span
               >
-              <UIButtonWithArrow
-                class="slide__more-btn"
-                :link="''"
-              ></UIButtonWithArrow>
+              <UIButton class="slide__more-btn" :link="''"></UIButton>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -97,10 +88,7 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">6600 ₽</span></span
               >
-              <UIButtonWithArrow
-                class="slide__more-btn"
-                :link="''"
-              ></UIButtonWithArrow>
+              <UIButton class="slide__more-btn" :link="''"></UIButton>
             </div>
           </div>
         </div>
@@ -230,12 +218,12 @@
           >от <span class="season-hit__price">7 899 ₽</span></span
         >
       </div>
-      <UIButtonWithArrow
+      <UIButton
         class="season-hit__more-btn"
         :link="''"
         :bodyBgColor="'#ff6915'"
         :arrowBgColor="'#fb5a00'"
-      ></UIButtonWithArrow>
+      ></UIButton>
       <img
         class="season-hit__hero season-hit__hero--from320px"
         src="/imgs/season-hit-hero--from320px.svg"

@@ -119,6 +119,7 @@ import { usePostsStore } from "@/store/Posts";
 import { useSinglePostStore } from "@/store/SinglePost";
 import type { BlogPost } from "@/types/BlogPosts";
 import { blogPosts } from "@/data/Blogposts";
+import { unslugify } from "@/utils/helpers";
 
 const store = usePostsStore();
 const title = computed(() => store.getTitle);
@@ -128,8 +129,21 @@ const post = ref<BlogPost>();
 const fetchPost = () => {
   post.value = blogPosts.find((post) => post.id === postStore.id);
 };
+
+const route = useRoute();
+const checkTitleValidity = () => {
+  const title = blogPosts.find(
+    (post) =>
+      post.title.toLowerCase() ==
+      unslugify(route.params.id as string).toLowerCase()
+  );
+  if (!title) {
+    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  }
+};
 onMounted(() => {
   fetchPost();
+  checkTitleValidity();
 });
 
 watchEffect(() => {

@@ -25,10 +25,10 @@
       </span>
     </div>
     <img src="/imgs/about-us-hero.webp" alt="" class="about-us__hero" />
-    <UIButtonWithArrow
+    <UIButton
       class="about-us__more-btn about-us__more-btn-link"
       :link="'/AboutUs'"
-    ></UIButtonWithArrow>
+    ></UIButton>
   </div>
 </template>
 

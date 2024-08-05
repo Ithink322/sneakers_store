@@ -1,11 +1,11 @@
 <template>
   <NuxtLink :to="link">
-    <button class="more-btn" :style="{ backgroundColor: bodyBgColor }">
-      <div class="more-btn__content">
-        <span class="more-btn__text">{{ content }}</span>
+    <button class="btn" :style="{ backgroundColor: bodyBgColor }">
+      <div class="btn__content">
+        <span class="btn__text">{{ content }}</span>
       </div>
-      <div class="more-btn__arrow" :style="{ backgroundColor: arrowBgColor }">
-        <img src="/imgs/white-right-arrow.svg" alt="" />
+      <div class="btn__icon" :style="{ backgroundColor: arrowBgColor }">
+        <img :src="icon ? icon : '/imgs/white-right-arrow.svg'" alt="" />
       </div>
     </button>
   </NuxtLink>
@@ -17,6 +17,7 @@ const props = defineProps<{
   bodyBgColor?: string;
   arrowBgColor?: string;
   content?: string;
+  icon?: string;
 }>();
 
 const defaultBtnBgColor = "#1e1e1e";
@@ -33,7 +34,7 @@ const content = props.content || defaultContent;
 a {
   display: flex;
 }
-.more-btn {
+.btn {
   @include btn;
   width: 246px;
   height: 65px;
@@ -48,7 +49,7 @@ a {
     font-size: 1rem;
     color: #fff;
   }
-  &__arrow {
+  &__icon {
     @include btn;
     flex-shrink: 0;
     width: 65px;

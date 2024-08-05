@@ -38,9 +38,9 @@
     <div class="with-discount__overflow">
       <div class="with-discount__list">
         <UIProductsWithDiscountCard
-          v-for="hero in heroes"
-          :hero="hero"
-          :key="hero.id"
+          v-for="product in products"
+          :product="product"
+          :key="product.id"
         ></UIProductsWithDiscountCard>
       </div>
     </div>
@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { heroes } from "@/data/ProductsWithDiscount";
+import { products } from "@/data/ProductsWithDiscount";
 
 let SliderWrapper: HTMLElement | null = null;
 let SliderOverflow: HTMLElement | null = null;
