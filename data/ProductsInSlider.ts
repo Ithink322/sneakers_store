@@ -956,7 +956,7 @@ export const latestProducts: Product[] = [
 
 export const hitProducts: Product[] = [
   {
-    id: 1,
+    id: 4,
     heroes: [
       "/imgs/sneakers-hero-4.svg",
       "/imgs/sneakers-hero-4-2.svg",
@@ -981,7 +981,7 @@ export const hitProducts: Product[] = [
     category: "ХИТ",
   },
   {
-    id: 2,
+    id: 5,
     heroes: [
       "/imgs/sneakers-hero-5.svg",
       "/imgs/sneakers-hero-5-2.svg",
@@ -1009,7 +1009,7 @@ export const hitProducts: Product[] = [
     category: "НОВИНКА",
   },
   {
-    id: 3,
+    id: 6,
     heroes: [
       "/imgs/sneakers-hero-6.svg",
       "/imgs/sneakers-hero-6-2.svg",
@@ -1036,7 +1036,7 @@ export const hitProducts: Product[] = [
     category: "-25%",
   },
   {
-    id: 4,
+    id: 1,
     heroes: [
       "/imgs/sneakers-hero-1.svg",
       "/imgs/sneakers-hero-1-2.svg",
@@ -1064,7 +1064,7 @@ export const hitProducts: Product[] = [
     category: "НОВИНКА",
   },
   {
-    id: 5,
+    id: 2,
     heroes: [
       "/imgs/sneakers-hero-2.svg",
       "/imgs/sneakers-hero-2-2.svg",
@@ -1091,7 +1091,7 @@ export const hitProducts: Product[] = [
     category: "-20%",
   },
   {
-    id: 6,
+    id: 3,
     heroes: [
       "/imgs/sneakers-hero-3.svg",
       "/imgs/sneakers-hero-3-2.svg",

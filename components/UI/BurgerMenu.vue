@@ -298,7 +298,7 @@ const isDropdownActive = (dropdownName: string) => {
 @import "@/assets/App.scss";
 .burger-menu-shadow {
   position: absolute;
-  background: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.747);
   width: 100%;
   height: 100vh;
   top: 0rem;

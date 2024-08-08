@@ -1,5 +1,5 @@
 <template>
-  <div class="products-catalog__overflow" ref="overflow">
+  <div class="products-catalog__overflow">
     <div class="products-catalog__list">
       <UIProductCard
         v-for="product in productList"
@@ -12,14 +12,7 @@
 
 <script setup lang="ts">
 import type { Product } from "@/types/Product";
-
-const props = defineProps<{
-  latestProducts?: Product[];
-  hitProducts?: Product[];
-}>();
-const productList = props.latestProducts
-  ? props.latestProducts
-  : props.hitProducts;
+const props = defineProps<{ productList: Product[] }>();
 </script>
 
 <style lang="scss" scoped>

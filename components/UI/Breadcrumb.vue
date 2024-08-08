@@ -20,15 +20,16 @@ defineProps({
 <style lang="scss" scoped>
 .breadcrumb {
   display: flex;
+  align-items: center;
   gap: 0.563rem;
   padding: 1.25rem 0rem;
 
   span {
     font-family: "Pragmatica Book";
     font-size: 0.75rem;
-    white-space: nowrap;
   }
   &__home-title {
+    white-space: nowrap;
     a {
       text-decoration: none;
       color: #868686;
