@@ -114,8 +114,12 @@ onMounted(() => {
 
   latestSliderWrapper!.style.transform = "translateX(0)";
 
-  latestSliderOverflow!.addEventListener("touchstart", latestHandleTouchStart);
-  latestSliderOverflow!.addEventListener("touchmove", latestHandleTouchMove);
+  latestSliderOverflow!.addEventListener("touchstart", latestHandleTouchStart, {
+    passive: true,
+  });
+  latestSliderOverflow!.addEventListener("touchmove", latestHandleTouchMove, {
+    passive: true,
+  });
 
   function latestHandleTouchStart(e: TouchEvent) {
     if (isPageScrolling) return;
@@ -164,8 +168,12 @@ onMounted(() => {
 
   latestSliderWrapper!.style.transform = "translateX(0)";
 
-  hitSliderOverflow!.addEventListener("touchstart", hitHandleTouchStart, false);
-  hitSliderOverflow!.addEventListener("touchmove", hitHandleTouchMove, false);
+  hitSliderOverflow!.addEventListener("touchstart", hitHandleTouchStart, {
+    passive: true,
+  });
+  hitSliderOverflow!.addEventListener("touchmove", hitHandleTouchMove, {
+    passive: true,
+  });
 
   function hitHandleTouchStart(e: TouchEvent) {
     if (isPageScrolling) return;

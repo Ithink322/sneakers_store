@@ -326,7 +326,6 @@ const fetchProduct = () => {
 };
 
 const route = useRoute();
-console.log(route.params.id);
 const checkTitleValidity = () => {
   const title = products.find(
     (product) =>
@@ -379,39 +378,49 @@ watch(
 
 const sliderWrapper = ref<HTMLElement | null>(null);
 const buttons = ref<HTMLElement[]>([]);
-const isSliderActive = ref(true);
 onMounted(() => {
-  if (window.innerWidth < 768) {
-    nextTick(() => {
-      sliderWrapper.value = document.querySelector<HTMLElement>(
-        ".heroes-slider__wrapper"
-      );
-      updateTranslate();
-    });
-  }
+  initSlider();
   window.addEventListener("resize", handleWindowResize);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleWindowResize);
 });
 
 const handleWindowResize = () => {
   if (window.innerWidth < 768) {
-    isSliderActive.value = true;
+    initSlider();
+    updateTranslate();
   } else {
-    isSliderActive.value = false;
+    translateValue.value = 0;
   }
-  translateValue.value = 0;
+};
+
+const initSlider = () => {
+  nextTick(() => {
+    sliderWrapper.value = document.querySelector<HTMLElement>(
+      ".heroes-slider__wrapper"
+    );
+    buttons.value = Array.from(
+      sliderWrapper.value!.querySelectorAll<HTMLElement>(
+        ".heroes-slider__small-hero"
+      )
+    );
+  });
 };
 
 const selectHero = (hero: string, index: number) => {
   selectedHero.value = hero;
   selectedIndex.value = index;
-  updateTranslate();
+  if (window.innerWidth < 768) {
+    updateTranslate();
+  }
 };
 
 const translateValue = ref(0);
 const updateTranslate = async () => {
   await nextTick();
 
-  if (sliderWrapper.value && isSliderActive.value) {
+  if (sliderWrapper.value) {
     buttons.value = Array.from(
       sliderWrapper.value.querySelectorAll<HTMLElement>(
         ".heroes-slider__small-hero"
@@ -434,7 +443,6 @@ const updateTranslate = async () => {
 
 const showFullDescription = ref(false);
 const shortDescription = ref("");
-
 onMounted(() => {
   const dashIndex = product.value!.desc.indexOf("<br/>");
   if (dashIndex !== -1) {
@@ -503,7 +511,7 @@ let wrapper = ref<HTMLElement | null>(null);
 const showSection = (section: string, event: Event) => {
   activeSection.value = section;
 
-  if (wrapper.value) {
+  if (wrapper.value && window.innerWidth < 768) {
     const button = event.currentTarget as HTMLElement;
     const buttons = Array.from(wrapper.value.children) as HTMLElement[];
 
@@ -521,8 +529,11 @@ const showSection = (section: string, event: Event) => {
     wrapper.value.style.transform = `translateX(-${translateX}px)`;
   }
 };
+
 const handleTouchMove = (event: TouchEvent) => {
-  wrapper.value!.style.transform = `translateX(0px)`;
+  if (window.innerWidth < 768) {
+    wrapper.value!.style.transform = `translateX(0px)`;
+  }
 };
 const container = ref<HTMLElement | null>(null);
 onMounted(() => {
@@ -531,7 +542,16 @@ onMounted(() => {
       passive: true,
     });
   });
+  window.addEventListener("resize", handleSLiderResize);
 });
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleSLiderResize);
+});
+const handleSLiderResize = () => {
+  if (window.innerWidth >= 768) {
+    wrapper.value!.style.transform = `translateX(0px)`;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

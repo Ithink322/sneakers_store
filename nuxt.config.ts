@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/App.scss", "nouislider/dist/nouislider.min.css"],
+  css: ["nouislider/dist/nouislider.min.css"],
 
   modules: [
     "@pinia/nuxt",

@@ -144,8 +144,10 @@ onMounted(() => {
         currentIndex = 0,
         activeIndex = 0;
 
-      slider.addEventListener("touchstart", handleTouchStart, false);
-      slider.addEventListener("touchmove", handleTouchMove, false);
+      slider.addEventListener("touchstart", handleTouchStart, {
+        passive: true,
+      });
+      slider.addEventListener("touchmove", handleTouchMove, { passive: true });
 
       let startX: number | null = null;
       let startY: number | null = null;

@@ -88,8 +88,12 @@ onMounted(() => {
 
   SliderWrapper!.style.transform = "translateX(0)";
 
-  SliderOverflow!.addEventListener("touchstart", HandleTouchStart, false);
-  SliderOverflow!.addEventListener("touchmove", HandleTouchMove, false);
+  SliderOverflow!.addEventListener("touchstart", HandleTouchStart, {
+    passive: true,
+  });
+  SliderOverflow!.addEventListener("touchmove", HandleTouchMove, {
+    passive: true,
+  });
 
   function HandleTouchStart(e: TouchEvent) {
     if (isPageScrolling) return;

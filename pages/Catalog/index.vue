@@ -44,36 +44,101 @@
       <img src="/imgs/cross.svg" alt="cross" />
     </button>
     <div class="filters-menu">
-      <div class="slider-range">
-        <div class="slider-range__range" id="range-slider"></div>
-        <div class="slider-range__range-body">
-          <div class="slider-range__range-content">
-            <input
-              type="number"
-              min="6329"
-              max="16790"
-              placeholder="6 329"
-              class="slider-range__input"
-              id="input-0"
-              ref="minPrice"
-            />
-            <span class="slider-range__sign">₽</span>
-          </div>
-          <div class="slider-range__border"></div>
-          <div class="slider-range__range-content">
-            <input
-              type="number"
-              min="6329"
-              max="16790"
-              placeholder="16 790"
-              class="slider-range__input"
-              id="input-1"
-              ref="maxPrice"
-            />
-            <span class="slider-range__sign">₽</span>
+      <div>
+        <span class="filters-menu__title">ЦЕНА:</span>
+        <div class="slider-range">
+          <div class="slider-range__range" id="range-slider"></div>
+          <div class="slider-range__range-body">
+            <div class="slider-range__range-content">
+              <input
+                type="number"
+                min="6329"
+                max="16790"
+                placeholder="6 329"
+                class="slider-range__input"
+                id="input-0"
+                ref="minPrice"
+              />
+              <span class="slider-range__sign">₽</span>
+            </div>
+            <div class="slider-range__border"></div>
+            <div class="slider-range__range-content">
+              <input
+                type="number"
+                min="6329"
+                max="16790"
+                placeholder="16 790"
+                class="slider-range__input"
+                id="input-1"
+                ref="maxPrice"
+              />
+              <span class="slider-range__sign">₽</span>
+            </div>
           </div>
         </div>
       </div>
+      <div class="filters-menu__container">
+        <span class="filters-menu__title">РАЗМЕРЫ (EU):</span>
+        <div class="filters-menu__sizes">
+          <button
+            @click="toggleActiveSize(size)"
+            class="filters-menu__size-btn"
+            v-for="size in sizes"
+            :key="size"
+            :class="{ active: isSizeActive(size) }"
+          >
+            {{ size }}
+          </button>
+        </div>
+      </div>
+      <div class="filters-menu__container">
+        <span class="filters-menu__title">ЦВЕТ:</span>
+        <div
+          class="filters-menu__colors"
+          v-for="(name, hex) in colors"
+          :key="hex"
+        >
+          <div class="filters-menu__color-btn" @click="toggleActiveColor(hex)">
+            <div
+              class="filters-menu__color-circle"
+              :class="{ active: isColorActive(hex) }"
+            >
+              <div
+                class="filters-menu__color-circle-fill"
+                :style="{ backgroundColor: hex }"
+              ></div>
+            </div>
+            <span class="filters-menu__color-text">{{ name }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="filters-menu__container">
+        <span class="filters-menu__title">МАТЕРИАЛ:</span>
+        <div
+          class="filters-menu__material"
+          v-for="material in materials"
+          :key="material"
+        >
+          <input type="checkbox" class="filters-menu__material-checkbox" />
+          <label class="filters-menu__material-text">{{ material }}</label>
+        </div>
+      </div>
+      <button class="filters-menu__reset-all-btn">
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.7"
+            d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+            fill="#6C757D"
+          />
+        </svg>
+        СБРОСИТЬ ВСЁ
+      </button>
     </div>
   </div>
   <UIProductList></UIProductList>
@@ -85,7 +150,7 @@ import { products } from "@/data/CatalogProducts";
 import { useProductsStore } from "@/store/Products";
 import noUiSlider from "nouislider";
 import type { target } from "nouislider";
-/* import "nouislider/dist/nouislider.css"; */
+import { sizes, colors, materials } from "@/data/filters";
 
 useHead({
   title: "Sneakers Store - Каталог товаров | Огромный выбор моделей",
@@ -200,9 +265,35 @@ const closeFiltersMenu = () => {
   isFiltersOpened.value = false;
   document.body.style.overflow = "";
 };
+
+const activeSizes = ref<number[]>([]);
+const activeColors = ref<string[]>([]);
+const toggleActiveSize = (size: number) => {
+  const index = activeSizes.value.indexOf(size);
+  if (index > -1) {
+    activeSizes.value.splice(index, 1);
+  } else {
+    activeSizes.value.push(size);
+  }
+  console.log("activeSizes.value:", activeSizes.value);
+};
+const toggleActiveColor = (colorHex: string) => {
+  const index = activeColors.value.indexOf(colorHex);
+  if (index > -1) {
+    activeColors.value.splice(index, 1);
+  } else {
+    activeColors.value.push(colorHex);
+  }
+};
+const isSizeActive = (size: number) => {
+  return activeSizes.value.includes(size);
+};
+const isColorActive = (colorHex: string) => {
+  return activeColors.value.includes(colorHex);
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/App.scss";
 .titles-container {
   display: flex;
@@ -266,13 +357,122 @@ const closeFiltersMenu = () => {
 }
 .filters-menu {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
   background: #fff;
   width: 90%;
   max-width: 328px;
   height: 100vh;
   padding: 2.188rem 1.25rem;
+  padding: 2.188rem 1.25rem 8.75rem 1.25rem;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.875rem;
+  }
+  &__title {
+    font-family: "Pragmatica Bold";
+    font-size: 0.875rem;
+  }
+  &__sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+  &__size-btn {
+    @include btn;
+    flex-shrink: 0;
+    width: 54px;
+    height: 45px;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+
+    &.active,
+    &:hover {
+      background-color: $Light-Black;
+      color: #ffffff;
+    }
+  }
+  &__colors {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+  }
+  &__color-btn,
+  &__material {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+  &__color-circle {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    outline: 1px solid #a1a1a1;
+
+    &.active {
+      outline: 1px solid $Dark-Black;
+    }
+  }
+  &__color-circle-fill {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+  }
+  &__color-text,
+  &__material-text {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+  }
+  &__material-checkbox[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #d6d6d6;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__material-checkbox[type="checkbox"]:checked {
+    border: none;
+  }
+  &__material-checkbox[type="checkbox"]:checked:before {
+    content: "";
+    background: url("/imgs/tick.svg") no-repeat center center / 14px 10px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: $Dark-Black;
+    font-size: 14px;
+    text-align: center;
+  }
+  &__reset-all-btn {
+    @include btn;
+    position: fixed;
+    height: 70px;
+    width: 90%;
+    max-width: 328px;
+    background-color: #fbfbfb;
+    display: flex;
+    gap: 0.625rem;
+    left: 0rem;
+    bottom: 0rem;
+    border-top: 1px solid #dfdfdf;
+    font-family: "Pragmatica Book";
+    font-size: 0.75rem;
+  }
 }
 /* hide input number arrows for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -286,16 +486,12 @@ input[type="number"] {
 }
 .slider-range {
   &__range {
-    width: 100%;
     margin: 1.875rem 0;
   }
   &__range-body {
     display: flex;
     align-items: center;
     gap: 0.875rem;
-  }
-  &__range-content {
-    position: relative;
   }
   &__input {
     text-align: center;
@@ -333,13 +529,10 @@ input[type="number"] {
   background-color: #dfdfdf;
   border: none;
   height: 2px;
+  padding-right: 12px;
 }
 .noUi-connect {
   background-color: $Dark-Black;
-}
-.noUi-handle::after,
-.noUi-handle::before {
-  display: none;
 }
 .noUi-handle {
   box-shadow: none;
@@ -347,34 +540,26 @@ input[type="number"] {
   border: 2px solid $Dark-Black;
   background-color: #fff;
   cursor: pointer;
+
+  &::after,
+  &::before {
+    display: none;
+  }
 }
 .noUi-horizontal .noUi-handle {
-  width: 20px;
-  height: 20px;
-  top: -0.6rem;
+  width: 14px;
+  height: 14px;
+  top: -0.4rem;
 }
-/* .slider-range__range .noUi-target {
-  background-color: #dfdfdf;
-  border: none;
-  height: 2px;
+.noUi-handle-lower,
+.noUi-handle-upper {
+  transform: translateX(-4px);
 }
-.slider-range__range .noUi-base .noUi-connects .noUi-connect {
-  background-color: $Dark-Black;
-}
-.slider-range__range .noUi-handle {
-  box-shadow: none;
-  border-radius: 50%;
-  border: 2px solid #000;
-  background-color: #fff;
-  cursor: pointer;
-}
-.slider-range__range .noUi-horizontal .noUi-handle {
-  width: 20px;
-  height: 20px;
-  top: -0.6rem;
-} */
 /* 768px = 48em */
 @media (min-width: 48em) {
+  .filters-menu-shadow {
+    margin-left: calc((100vw - 44.874rem) / (-2));
+  }
   .filters-btn {
     &::before,
     &::after {
@@ -387,6 +572,9 @@ input[type="number"] {
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
+  .filters-menu-shadow {
+    margin-left: calc((100vw - 44.75rem) / (-2));
+  }
   .filters-btn {
     &::before,
     &::after {
@@ -404,6 +592,9 @@ input[type="number"] {
       font-size: 0.938rem;
     }
   }
+  .filters-menu-shadow {
+    margin-left: calc((100vw - 71.875rem) / (-2));
+  }
   .filters-btn {
     &::before,
     &::after {
@@ -414,6 +605,9 @@ input[type="number"] {
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
+  .filters-menu-shadow {
+    display: none;
+  }
   .filters-btn {
     &::before,
     &::after {
