@@ -21,12 +21,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-/* .products-list {
-  display: flex;
-  column-gap: 0.938rem;
-  row-gap: 3.125rem;
-  flex-flow: row wrap;
-} */
 .products-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

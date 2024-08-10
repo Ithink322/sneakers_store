@@ -23,7 +23,139 @@
     </svg>
     Показать фильтры
   </button>
-  <button class="reset-all-btn">
+  <div class="filters">
+    <div class="filters__container">
+      <div class="dropdown">
+        <button class="dropdown__button dropdown__button-sizes">
+          <span>Размер (EU)</span>
+          <svg
+            width="8"
+            height="5"
+            viewBox="0 0 8 5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+              fill="#000000"
+            />
+          </svg>
+        </button>
+        <ul class="dropdown__list">
+          <li
+            class="dropdown__list-item"
+            v-for="size in sizes"
+            :key="size"
+            :value="size"
+          >
+            {{ size }}
+          </li>
+        </ul>
+      </div>
+      <div class="slider-range">
+        Цена:
+        <div class="slider-range__range" id="range-slider--from1440px"></div>
+        <div class="slider-range__range-body">
+          <div class="slider-range__range-content">
+            <input
+              type="number"
+              min="6329"
+              max="16790"
+              placeholder="6 329"
+              class="slider-range__input"
+              id="input-0--from1440px"
+              ref="minPrice"
+            />
+            <span class="slider-range__sign">₽</span>
+          </div>
+          <div class="slider-range__border"></div>
+          <div class="slider-range__range-content">
+            <input
+              type="number"
+              min="6329"
+              max="16790"
+              placeholder="16 790"
+              class="slider-range__input"
+              id="input-1--from1440px"
+              ref="maxPrice"
+            />
+            <span class="slider-range__sign">₽</span>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown__button dropdown__button-color">
+          <span>Цвет</span>
+          <svg
+            width="8"
+            height="5"
+            viewBox="0 0 8 5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+              fill="#000000"
+            />
+          </svg>
+        </button>
+        <ul class="dropdown__list">
+          <li
+            class="dropdown__list-item"
+            v-for="color in colors"
+            :key="color"
+            :value="color"
+          >
+            {{ color }}
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown__button dropdown__button-material">
+          <span>Материал</span>
+          <svg
+            width="8"
+            height="5"
+            viewBox="0 0 8 5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+              fill="#000000"
+            />
+          </svg>
+        </button>
+        <ul class="dropdown__list">
+          <li
+            class="dropdown__list-item"
+            v-for="material in materials"
+            :key="material"
+            :value="material"
+          >
+            {{ material }}
+          </li>
+        </ul>
+      </div>
+      <button class="filters__reset-all-btn">
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.7"
+            d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+            fill="#6C757D"
+          />
+        </svg>
+        СБРОСИТЬ ВСЁ
+      </button>
+    </div>
+  </div>
+  <!-- <button class="reset-all-btn">
     <svg
       width="10"
       height="10"
@@ -38,7 +170,7 @@
       />
     </svg>
     СБРОСИТЬ ВСЁ
-  </button>
+  </button> -->
   <div v-if="isFiltersOpened" class="filters-menu-shadow">
     <button @click="closeFiltersMenu" class="filters-menu-shadow__close-btn">
       <img src="/imgs/cross.svg" alt="cross" />
@@ -47,7 +179,7 @@
       <div>
         <span class="filters-menu__title">ЦЕНА:</span>
         <div class="slider-range">
-          <div class="slider-range__range" id="range-slider"></div>
+          <div class="slider-range__range" id="range-slider--from320px"></div>
           <div class="slider-range__range-body">
             <div class="slider-range__range-content">
               <input
@@ -56,7 +188,7 @@
                 max="16790"
                 placeholder="6 329"
                 class="slider-range__input"
-                id="input-0"
+                id="input-0--from320px"
                 ref="minPrice"
               />
               <span class="slider-range__sign">₽</span>
@@ -69,7 +201,7 @@
                 max="16790"
                 placeholder="16 790"
                 class="slider-range__input"
-                id="input-1"
+                id="input-1--from320px"
                 ref="maxPrice"
               />
               <span class="slider-range__sign">₽</span>
@@ -208,9 +340,9 @@ const conjugateTovar = (count: number): string => {
   }
 };
 
-const setupSlider = () => {
+const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
   /* prices range slider starts */
-  const rangeSlider = document.getElementById("range-slider")! as target;
+  const rangeSlider = document.getElementById(sliderId)! as target;
   if (rangeSlider) {
     noUiSlider.create(rangeSlider, {
       start: [6329, 16790],
@@ -222,8 +354,8 @@ const setupSlider = () => {
       },
     });
 
-    const input0 = document.getElementById("input-0")! as HTMLInputElement,
-      input1 = document.getElementById("input-1")! as HTMLInputElement;
+    const input0 = document.getElementById(input0Id)! as HTMLInputElement,
+      input1 = document.getElementById(input1Id)! as HTMLInputElement;
     const inputs = [input0, input1];
 
     rangeSlider.noUiSlider!.on(
@@ -248,8 +380,30 @@ const setupSlider = () => {
   /* prices range slider ends */
 };
 
+const initializeSliders = () => {
+  const mediaQuery = window.matchMedia("(max-width: 1439px)");
+
+  if (mediaQuery.matches) {
+    setupSlider(
+      "range-slider--from320px",
+      "input-0--from320px",
+      "input-1--from320px"
+    );
+  } else {
+    setupSlider(
+      "range-slider--from1440px",
+      "input-0--from1440px",
+      "input-1--from1440px"
+    );
+  }
+};
+
 onMounted(() => {
   checkPageValidity();
+  initializeSliders();
+
+  const mediaQuery = window.matchMedia("(max-width: 1439px)");
+  mediaQuery.addEventListener("change", initializeSliders);
 });
 
 const isFiltersOpened = ref(false);
@@ -258,7 +412,7 @@ const openFiltersMenu = () => {
   window.scrollTo(0, 0);
   document.body.style.overflow = "hidden";
   nextTick(() => {
-    setupSlider();
+    initializeSliders();
   });
 };
 const closeFiltersMenu = () => {
@@ -275,7 +429,6 @@ const toggleActiveSize = (size: number) => {
   } else {
     activeSizes.value.push(size);
   }
-  console.log("activeSizes.value:", activeSizes.value);
 };
 const toggleActiveColor = (colorHex: string) => {
   const index = activeColors.value.indexOf(colorHex);
@@ -334,12 +487,15 @@ const isColorActive = (colorHex: string) => {
     transform: translateY(50%);
   }
 }
-.reset-all-btn {
+.filters {
+  display: none;
+}
+/* .reset-all-btn {
   @include btn;
   gap: 0.688rem;
   font-family: "Pragmatica Medium";
   font-size: 0.75rem;
-}
+} */
 .filters-menu-shadow {
   position: absolute;
   background: rgba(0, 0, 0, 0.54);
@@ -393,8 +549,7 @@ const isColorActive = (colorHex: string) => {
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
 
-    &.active,
-    &:hover {
+    &.active {
       background-color: $Light-Black;
       color: #ffffff;
     }
@@ -605,14 +760,98 @@ input[type="number"] {
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
-  .filters-menu-shadow {
+  .filters-menu-shadow,
+  .filters-btn {
     display: none;
   }
-  .filters-btn {
-    &::before,
-    &::after {
-      margin-left: calc((100vw - 85rem) / (-2));
-      margin-right: calc((100vw - 85rem) / (-2));
+  .filters {
+    display: block;
+    height: 70px;
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+    margin-left: calc((100vw - 85rem) / (-2));
+    margin-right: calc((100vw - 85rem) / (-2));
+
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: 3.125rem;
+      height: 100%;
+      margin-left: calc((100vw - 85rem) / 2);
+      margin-right: calc((100vw - 85rem) / 2);
+    }
+    &__reset-all-btn {
+      @include btn;
+      gap: 0.688rem;
+      background-color: #fbfbfb;
+      height: 100%;
+      padding: 0 2.813rem;
+      white-space: nowrap;
+      border-left: 1px solid #dfdfdf;
+      border-right: 1px solid #dfdfdf;
+      font-family: "Pragmatica Book";
+      font-size: 0.75rem;
+    }
+  }
+  .dropdown {
+    &__button {
+      @include btn;
+      gap: 0.688rem;
+      height: 100%;
+      width: 100%;
+      padding: 1.594rem 2.813rem;
+      font-family: "Pragmatica Book";
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    &__button img {
+      pointer-events: none;
+    }
+    &__button:focus {
+      outline: none;
+    }
+    &__button-sizes {
+      border-right: 1px solid #dfdfdf;
+      padding: 1.594rem 2.813rem 1.594rem 0;
+    }
+    &__button-color {
+      border-left: 1px solid #dfdfdf;
+      border-right: 1px solid #dfdfdf;
+    }
+    &__button-material {
+      padding: 0;
+    }
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      border-radius: 0 0 8px 8px;
+      border: 1px solid #dfdfdf;
+      padding: 1.25re;
+      list-style-type: none;
+    }
+    &__list {
+      display: none;
+    }
+    &__list-item {
+      display: block;
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #6c7275;
+      padding: 0.5rem;
+    }
+  }
+  .slider-range {
+    display: flex;
+    align-items: center;
+    gap: 1.875rem;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+
+    &__range {
+      width: 175px;
+      margin: 1.875rem 0;
     }
   }
 }
