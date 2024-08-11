@@ -22,13 +22,13 @@
     </button>
     <ul class="dropdown__list" :class="{ active: isDropdownOpen }">
       <li
+        @click="selectCategory(option.value)"
         v-for="(option, index) in options"
         :key="index"
         class="dropdown__list-item"
         :class="{
           active: selectedValue === option.value,
         }"
-        @click="selectCategory(option.value)"
       >
         <span>{{ option.value }}</span>
         <div class="dropdown__counter-border">

@@ -25,8 +25,11 @@
   </button>
   <div class="filters">
     <div class="filters__container">
-      <div class="dropdown">
-        <button class="dropdown__button dropdown__button-sizes">
+      <div class="filters__dropdown">
+        <button
+          class="filters__dropdown-button filters__dropdown-button-sizes"
+          @click="toggleDropdown('sizes')"
+        >
           <span>Размер (EU)</span>
           <svg
             width="8"
@@ -41,16 +44,20 @@
             />
           </svg>
         </button>
-        <ul class="dropdown__list">
-          <li
-            class="dropdown__list-item"
+        <div
+          v-if="openedDropdown === 'sizes'"
+          class="filters__dropdown-list filters__dropdown-list-sizes"
+        >
+          <button
+            @click="toggleActiveSize(size)"
+            class="filters__dropdown-list-item filters__dropdown-size-btn"
             v-for="size in sizes"
             :key="size"
-            :value="size"
+            :class="{ active: isSizeActive(size) }"
           >
             {{ size }}
-          </li>
-        </ul>
+          </button>
+        </div>
       </div>
       <div class="slider-range">
         Цена:
@@ -83,76 +90,134 @@
           </div>
         </div>
       </div>
-      <div class="dropdown">
-        <button class="dropdown__button dropdown__button-color">
-          <span>Цвет</span>
+      <div class="filters__content">
+        <div class="filters__dropdown">
+          <button
+            class="filters__dropdown-button filters__dropdown-button-color"
+            @click="toggleDropdown('colors')"
+          >
+            <span>Цвет</span>
+            <svg
+              width="8"
+              height="5"
+              viewBox="0 0 8 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+                fill="#000000"
+              />
+            </svg>
+          </button>
+          <div
+            v-if="openedDropdown === 'colors'"
+            class="filters__dropdown-list filters__dropdown-list-colors"
+          >
+            <button
+              @click="toggleActiveColor(hex)"
+              class="filters__dropdown-list-item filters__dropdown-color-btn"
+              v-for="(name, hex) in colors"
+              :key="hex"
+            >
+              <div
+                class="filters__dropdown-color-circle"
+                :class="{ active: isColorActive(hex) }"
+              >
+                <div
+                  class="filters__dropdown-color-circle-fill"
+                  :style="{ backgroundColor: hex }"
+                ></div>
+              </div>
+              {{ name }}
+            </button>
+          </div>
+        </div>
+        <div class="filters__dropdown">
+          <button
+            class="filters__dropdown-button filters__dropdown-button-material"
+            @click="toggleDropdown('materials')"
+          >
+            <span>Материал</span>
+            <svg
+              width="8"
+              height="5"
+              viewBox="0 0 8 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+                fill="#000000"
+              />
+            </svg>
+          </button>
+          <div
+            v-if="openedDropdown === 'materials'"
+            class="filters__dropdown-list filters__dropdown-list-materials"
+          >
+            <div
+              class="filters__dropdown-list-item"
+              v-for="(material, index) in materials"
+              :key="material"
+            >
+              <input
+                type="checkbox"
+                class="filters-menu__material-checkbox"
+                :value="material"
+                v-model="selectedMaterials"
+                :id="'filters__material-checkbox-' + index"
+                @change="toggleMaterialFilter"
+              />
+              <label :for="'filters__material-checkbox-' + index">{{
+                material
+              }}</label>
+            </div>
+          </div>
+        </div>
+        <button class="filters__reset-all-btn">
           <svg
-            width="8"
-            height="5"
-            viewBox="0 0 8 5"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
-              fill="#000000"
+              opacity="0.7"
+              d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+              fill="#6C757D"
             />
           </svg>
+          СБРОСИТЬ ВСЁ
         </button>
-        <ul class="dropdown__list">
-          <li
-            class="dropdown__list-item"
-            v-for="color in colors"
-            :key="color"
-            :value="color"
-          >
-            {{ color }}
-          </li>
-        </ul>
       </div>
-      <div class="dropdown">
-        <button class="dropdown__button dropdown__button-material">
-          <span>Материал</span>
+    </div>
+  </div>
+  <div class="picked-filters">
+    <div class="picked-filters__body">
+      <div
+        class="picked-filters__content"
+        v-for="filter in pickedCategoryFilters"
+        :key="filter"
+      >
+        {{ filter }}
+        <button class="picked-filters__reset-filter-btn">
           <svg
-            width="8"
-            height="5"
-            viewBox="0 0 8 5"
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+              opacity="0.7"
+              d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
               fill="#000000"
             />
           </svg>
         </button>
-        <ul class="dropdown__list">
-          <li
-            class="dropdown__list-item"
-            v-for="material in materials"
-            :key="material"
-            :value="material"
-          >
-            {{ material }}
-          </li>
-        </ul>
       </div>
-      <button class="filters__reset-all-btn">
-        <svg
-          width="10"
-          height="10"
-          viewBox="0 0 10 10"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            opacity="0.7"
-            d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
-            fill="#6C757D"
-          />
-        </svg>
-        СБРОСИТЬ ВСЁ
-      </button>
     </div>
   </div>
   <!-- <button class="reset-all-btn">
@@ -248,11 +313,22 @@
         <span class="filters-menu__title">МАТЕРИАЛ:</span>
         <div
           class="filters-menu__material"
-          v-for="material in materials"
+          v-for="(material, index) in materials"
           :key="material"
         >
-          <input type="checkbox" class="filters-menu__material-checkbox" />
-          <label class="filters-menu__material-text">{{ material }}</label>
+          <input
+            type="checkbox"
+            class="filters-menu__material-checkbox"
+            :value="material"
+            v-model="selectedMaterials"
+            :id="'material-checkbox-' + index"
+            @change="toggleMaterialFilter"
+          />
+          <label
+            class="filters-menu__material-text"
+            :for="'material-checkbox-' + index"
+            >{{ material }}</label
+          >
         </div>
       </div>
       <button class="filters-menu__reset-all-btn">
@@ -271,6 +347,64 @@
         </svg>
         СБРОСИТЬ ВСЁ
       </button>
+    </div>
+  </div>
+  <div class="sorting">
+    <span class="sorting__text"
+      >Показано {{ productsPerPage }} из {{ totalProducts }} товаров</span
+    >
+    <div class="sorting__container">
+      <div class="sorting__content">
+        Показывать по:
+        <div class="sorting__btns">
+          <button
+            class="sorting__btn"
+            v-for="num in numberOfProducts"
+            :key="num"
+            :class="{ active: pickedNumber === num }"
+            @click="showProducts(num)"
+          >
+            {{ num }}
+          </button>
+        </div>
+      </div>
+      <div class="sorting__body">
+        Сортировать по:
+        <div class="sorting__dropdown">
+          <button
+            @click="toggleSortingDropdown('sorting')"
+            class="sorting__dropdown-btn"
+          >
+            {{ selectedOption.toUpperCase() }}
+            <svg
+              width="8"
+              height="5"
+              viewBox="0 0 8 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.64645 4.32328C3.84171 4.51854 4.15829 4.51854 4.35355 4.32328L7.53553 1.1413C7.7308 0.946037 7.7308 0.629455 7.53553 0.434193C7.34027 0.238931 7.02369 0.238931 6.82843 0.434193L4 3.26262L1.17157 0.434193C0.976311 0.23893 0.659728 0.23893 0.464466 0.434193C0.269204 0.629455 0.269204 0.946037 0.464466 1.1413L3.64645 4.32328ZM3.5 2.96973L3.5 3.96973L4.5 3.96973L4.5 2.96973L3.5 2.96973Z"
+                fill="#000000"
+              />
+            </svg>
+          </button>
+          <ul v-if="openedDropdown === 'sorting'" class="sorting__list">
+            <li
+              @click="sortProducts(option.value)"
+              class="sorting__list-item"
+              v-for="option in options"
+              :key="option.value"
+              :value="option.value"
+              :class="{
+                active: selectedOption === option.value,
+              }"
+            >
+              {{ option.value }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <UIProductList></UIProductList>
@@ -344,6 +478,10 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
   /* prices range slider starts */
   const rangeSlider = document.getElementById(sliderId)! as target;
   if (rangeSlider) {
+    if (rangeSlider.noUiSlider) {
+      rangeSlider.noUiSlider.destroy();
+    }
+
     noUiSlider.create(rangeSlider, {
       start: [6329, 16790],
       connect: true,
@@ -358,10 +496,26 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
       input1 = document.getElementById(input1Id)! as HTMLInputElement;
     const inputs = [input0, input1];
 
+    const defaultMin = 6329;
+    const defaultMax = 16790;
     rangeSlider.noUiSlider!.on(
       "update",
       (values: (number | string)[], handle: number) => {
         inputs[handle].value = Math.round(Number(values[handle])).toString();
+
+        const currentMin = parseInt(inputs[0].value);
+        const currentMax = parseInt(inputs[1].value);
+
+        if (currentMin !== defaultMin || currentMax !== defaultMax) {
+          if (!pickedCategoryFilters.value.includes("Цена")) {
+            pickedCategoryFilters.value.push("Цена");
+          }
+        } else {
+          const index = pickedCategoryFilters.value.indexOf("Цена");
+          if (index > -1) {
+            pickedCategoryFilters.value.splice(index, 1);
+          }
+        }
       }
     );
 
@@ -428,6 +582,15 @@ const toggleActiveSize = (size: number) => {
     activeSizes.value.splice(index, 1);
   } else {
     activeSizes.value.push(size);
+    if (!pickedCategoryFilters.value.includes("Размер")) {
+      pickedCategoryFilters.value.push("Размер");
+    }
+  }
+  if (activeSizes.value.length === 0) {
+    const index = pickedCategoryFilters.value.indexOf("Размер");
+    if (index > -1) {
+      pickedCategoryFilters.value.splice(index, 1);
+    }
   }
 };
 const toggleActiveColor = (colorHex: string) => {
@@ -436,6 +599,15 @@ const toggleActiveColor = (colorHex: string) => {
     activeColors.value.splice(index, 1);
   } else {
     activeColors.value.push(colorHex);
+    if (!pickedCategoryFilters.value.includes("Цвет")) {
+      pickedCategoryFilters.value.push("Цвет");
+    }
+  }
+  if (activeColors.value.length === 0) {
+    const index = pickedCategoryFilters.value.indexOf("Цвет");
+    if (index > -1) {
+      pickedCategoryFilters.value.splice(index, 1);
+    }
   }
 };
 const isSizeActive = (size: number) => {
@@ -443,6 +615,58 @@ const isSizeActive = (size: number) => {
 };
 const isColorActive = (colorHex: string) => {
   return activeColors.value.includes(colorHex);
+};
+
+const selectedMaterials = ref([]);
+const openedDropdown = ref("");
+const toggleDropdown = (dropdown: string) => {
+  openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
+};
+
+const productsPerPage = computed(() => store.productsPerPage);
+
+const numberOfProducts = [9, 12, 18, 24];
+const pickedNumber = ref(18);
+const showProducts = (num: number) => {
+  pickedNumber.value = num;
+  store.productsPerPage = num;
+  store.currentPage = 1;
+};
+
+const toggleSortingDropdown = (dropdown: string) => {
+  openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
+};
+const options = [
+  { value: "возрастанию цены" },
+  { value: "убыванию цены" },
+  { value: "возрастанию рейтинга" },
+  { value: "убыванию рейтинга" },
+];
+const selectedOption = ref("возрастанию цены");
+const sortProducts = (option: string) => {
+  selectedOption.value = option;
+};
+
+const pickedCategoryFilters = ref<string[]>([]);
+const toggleMaterialFilter = () => {
+  const checkboxes = document.querySelectorAll(
+    ".filters-menu__material-checkbox"
+  ) as NodeListOf<HTMLInputElement>;
+
+  const anyChecked = Array.from(checkboxes).some(
+    (checkbox) => checkbox.checked
+  );
+
+  if (anyChecked) {
+    if (!pickedCategoryFilters.value.includes("Материал")) {
+      pickedCategoryFilters.value.push("Материал");
+    }
+  } else {
+    const index = pickedCategoryFilters.value.indexOf("Материал");
+    if (index > -1) {
+      pickedCategoryFilters.value.splice(index, 1);
+    }
+  }
 };
 </script>
 
@@ -710,6 +934,41 @@ input[type="number"] {
 .noUi-handle-upper {
   transform: translateX(-4px);
 }
+.sorting {
+  display: none;
+}
+.picked-filters {
+  overflow: hidden;
+  padding: 0.75rem 0;
+
+  &__body {
+    display: flex;
+    gap: 0.625rem;
+    width: fit-content;
+  }
+  &__content {
+    background-color: $Dark-Black;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.313rem 0.5rem;
+    font-family: "Pragmatica Medium";
+    font-size: 0.875rem;
+    color: #fff;
+  }
+  &__reset-filter-btn {
+    @include btn;
+    padding: 0.313rem;
+    border-radius: 50%;
+    background-color: #fff;
+
+    & svg {
+      width: 6px;
+      height: 6px;
+    }
+  }
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .filters-menu-shadow {
@@ -723,6 +982,9 @@ input[type="number"] {
       left: 0;
       right: 0;
     }
+  }
+  .picked-filters {
+    padding: 1.125rem 0;
   }
 }
 /* 1024px = 64em */
@@ -792,9 +1054,12 @@ input[type="number"] {
       font-family: "Pragmatica Book";
       font-size: 0.75rem;
     }
-  }
-  .dropdown {
-    &__button {
+    &__content {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    &__dropdown-button {
       @include btn;
       gap: 0.688rem;
       height: 100%;
@@ -804,42 +1069,112 @@ input[type="number"] {
       font-size: 1rem;
       white-space: nowrap;
     }
-    &__button img {
+    &__dropdown-button img {
       pointer-events: none;
     }
-    &__button:focus {
+    &__dropdown-button:focus {
       outline: none;
     }
-    &__button-sizes {
+    &__dropdown-button-sizes {
       border-right: 1px solid #dfdfdf;
       padding: 1.594rem 2.813rem 1.594rem 0;
     }
-    &__button-color {
+    &__dropdown-button-color {
       border-left: 1px solid #dfdfdf;
       border-right: 1px solid #dfdfdf;
     }
-    &__button-material {
-      padding: 0;
+    &__dropdown-button-material {
+      padding: 1.594rem 2.813rem;
     }
-    &__list {
+    &__dropdown-list {
+      position: absolute;
       display: flex;
       flex-direction: column;
       gap: 0.625rem;
       border-radius: 0 0 8px 8px;
+      background-color: #fff;
       border: 1px solid #dfdfdf;
-      padding: 1.25re;
+      border-top: none;
+      padding: 1.25rem;
+      margin: 0;
       list-style-type: none;
+      z-index: 2;
     }
-    &__list {
-      display: none;
+    &__dropdown-list-sizes {
+      flex-flow: row wrap;
+      width: 492px;
     }
-    &__list-item {
-      display: block;
-      font-family: "Inter", sans-serif;
+    &__dropdown-list-colors {
+      gap: 1.125rem;
+    }
+    &__dropdown-list-materials {
+      gap: 0.75rem;
+      margin-left: -0.063rem;
+    }
+    &__dropdown-list-item {
+      @include btn;
+      gap: 0.625rem;
+      font-family: "Pragmatica Book";
       font-size: 1rem;
-      font-weight: 400;
-      color: #6c7275;
-      padding: 0.5rem;
+      color: #414141;
+    }
+    &__dropdown-size-btn {
+      width: 82px;
+      height: 45px;
+      border: 1px solid #dfdfdf;
+      border-radius: 4px;
+
+      &.active {
+        background-color: $Light-Black;
+        color: #ffffff;
+      }
+    }
+    &__dropdown-color-btn {
+      display: flex;
+      gap: 0.625rem;
+    }
+    &__dropdown-color-circle {
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      padding: 5px;
+      outline: 1px solid #a1a1a1;
+
+      &.active {
+        outline: 1px solid $Dark-Black;
+      }
+    }
+    &__dropdown-color-circle-fill {
+      border-radius: 50%;
+      width: 15px;
+      height: 15px;
+    }
+    &__dropdown-material-checkbox[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 1px solid #d6d6d6;
+      margin: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &__dropdown-material-checkbox[type="checkbox"]:checked {
+      border: none;
+    }
+    &__dropdown-material-checkbox[type="checkbox"]:checked:before {
+      content: "";
+      background: url("/imgs/tick.svg") no-repeat center center / 14px 10px;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      background-color: $Dark-Black;
+      font-size: 14px;
+      text-align: center;
     }
   }
   .slider-range {
@@ -852,6 +1187,88 @@ input[type="number"] {
     &__range {
       width: 175px;
       margin: 1.875rem 0;
+    }
+  }
+  .sorting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 46px;
+    margin: 2.5rem 0;
+
+    &__text {
+      font-family: "Pragmatica Book";
+      font-size: 0.938rem;
+      color: #b5b5b5;
+    }
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: 4.375rem;
+      font-family: "Pragmatica Book";
+      font-size: 0.938rem;
+    }
+    &__content {
+      display: flex;
+      align-items: center;
+      gap: 1.563rem;
+    }
+    &__btns {
+      display: flex;
+      gap: 0.625rem;
+    }
+    &__btn {
+      @include btn;
+      width: 50px;
+      height: 45px;
+      border: 1px solid #eeeeee;
+      font-family: "Pragmatica Book";
+      font-size: 0.938rem;
+      color: #414141;
+
+      &.active {
+        background-color: $Light-Black;
+        color: #ffffff;
+      }
+    }
+    &__body {
+      display: flex;
+      align-items: center;
+      gap: 2.75rem;
+    }
+    &__dropdown-btn {
+      @include btn;
+      justify-content: space-between;
+      width: 272px;
+      height: 46px;
+      padding: 1.125rem 1.25rem;
+      border: 1px solid #eeeeee;
+      font-family: "Pragmatica Medium";
+      font-size: 0.938rem;
+      white-space: nowrap;
+    }
+    &__list {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 272px;
+      list-style-type: none;
+      background-color: #fff;
+      border: 1px solid #eeeeee;
+      border-top: none;
+      margin: 0;
+      padding: 1.25rem;
+      z-index: 2;
+    }
+    &__list-item {
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        font-family: "Pragmatica Bold";
+        color: $Dark-Black;
+      }
     }
   }
 }

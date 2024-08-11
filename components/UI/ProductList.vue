@@ -34,9 +34,6 @@ onMounted(() => {
     gap: 1.25rem;
   }
 }
-/* 1024px = 64em */
-@media (min-width: 64em) {
-}
 /* 1200px = 75em */
 @media (min-width: 75em) {
   .products-list {
