@@ -25,7 +25,7 @@
   </button>
   <div class="filters">
     <div class="filters__container">
-      <div class="filters__dropdown">
+      <div class="filters__dropdown filters-dropdown">
         <button
           class="filters__dropdown-button filters__dropdown-button-sizes"
           @click="toggleDropdown('sizes')"
@@ -91,7 +91,7 @@
         </div>
       </div>
       <div class="filters__content">
-        <div class="filters__dropdown">
+        <div class="filters__dropdown filters-dropdown">
           <button
             class="filters__dropdown-button filters__dropdown-button-color"
             @click="toggleDropdown('colors')"
@@ -133,7 +133,7 @@
             </button>
           </div>
         </div>
-        <div class="filters__dropdown">
+        <div class="filters__dropdown filters-dropdown">
           <button
             class="filters__dropdown-button filters__dropdown-button-material"
             @click="toggleDropdown('materials')"
@@ -194,15 +194,18 @@
       </div>
     </div>
   </div>
-  <div class="picked-filters">
-    <div class="picked-filters__body">
+  <div class="picked-filters" ref="container">
+    <div class="picked-filters__body" ref="wrapper">
       <div
         class="picked-filters__content"
         v-for="filter in pickedCategoryFilters"
         :key="filter"
       >
         {{ filter }}
-        <button class="picked-filters__reset-filter-btn">
+        <button
+          @click="removeCategoryFilter(filter)"
+          class="picked-filters__reset-filter-btn"
+        >
           <svg
             width="10"
             height="10"
@@ -370,7 +373,7 @@
       </div>
       <div class="sorting__body">
         Сортировать по:
-        <div class="sorting__dropdown">
+        <div class="sorting__dropdown filters-dropdown">
           <button
             @click="toggleSortingDropdown('sorting')"
             class="sorting__dropdown-btn"
@@ -439,7 +442,6 @@ store.setAllProducts(products);
 store.filterProducts(products);
 
 const route = useRoute();
-
 watch(
   () => route.query.page,
   (newPage) => store.setPage(Number(newPage) || 1),
@@ -623,14 +625,39 @@ const toggleDropdown = (dropdown: string) => {
   openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
 };
 
-const productsPerPage = computed(() => store.productsPerPage);
+const handleClickOutside = (event: MouseEvent) => {
+  const dropdowns = document.querySelectorAll(".filters-dropdown");
+  let clickedInside = false;
 
+  dropdowns.forEach((dropdown) => {
+    if (dropdown.contains(event.target as Node)) {
+      clickedInside = true;
+    }
+  });
+  if (!clickedInside) {
+    openedDropdown.value = "";
+  }
+};
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
+
+const productsPerPage = computed(() => store.productsPerPage);
+const router = useRouter();
 const numberOfProducts = [9, 12, 18, 24];
 const pickedNumber = ref(18);
 const showProducts = (num: number) => {
   pickedNumber.value = num;
   store.productsPerPage = num;
   store.currentPage = 1;
+  store.resetTranslateValue();
+  router.replace({
+    path: "/catalog",
+    query: { page: 1 },
+  });
 };
 
 const toggleSortingDropdown = (dropdown: string) => {
@@ -668,6 +695,54 @@ const toggleMaterialFilter = () => {
     }
   }
 };
+
+const removeCategoryFilter = (filterToRemove: string) => {
+  pickedCategoryFilters.value = pickedCategoryFilters.value.filter(
+    (filter) => filter !== filterToRemove
+  );
+};
+
+const container = ref<HTMLElement | null>(null);
+const wrapper = ref<HTMLElement | null>(null);
+let currentTranslate = 0;
+
+const handleTouchMove = (event: TouchEvent) => {
+  if (
+    wrapper.value &&
+    window.innerWidth < 420 &&
+    wrapper.value!.children.length > 2
+  ) {
+    const lastElement = wrapper.value.lastElementChild as HTMLElement;
+    const lastElementWidth = lastElement ? lastElement.offsetWidth : 0;
+
+    if (currentTranslate < 0) {
+      currentTranslate = 0;
+    } else {
+      currentTranslate = -wrapper.value!.scrollWidth + lastElementWidth;
+    }
+
+    wrapper.value.style.transform = `translateX(${currentTranslate}px)`;
+  }
+};
+const handleSliderResize = () => {
+  if (wrapper.value && window.innerWidth >= 420) {
+    wrapper.value.style.transform = `translateX(0px)`;
+    currentTranslate = 0;
+  }
+};
+onMounted(() => {
+  nextTick(() => {
+    container.value!.addEventListener("touchmove", handleTouchMove, {
+      passive: true,
+    });
+  });
+
+  window.addEventListener("resize", handleSliderResize);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleSliderResize);
+  container.value!.removeEventListener("touchmove", handleTouchMove);
+});
 </script>
 
 <style lang="scss">
@@ -945,6 +1020,7 @@ input[type="number"] {
     display: flex;
     gap: 0.625rem;
     width: fit-content;
+    transition: transform 0.3s ease;
   }
   &__content {
     background-color: $Dark-Black;

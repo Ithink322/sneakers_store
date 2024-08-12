@@ -514,15 +514,14 @@ const showSection = (section: string, event: Event) => {
   if (wrapper.value && window.innerWidth < 768) {
     const button = event.currentTarget as HTMLElement;
     const buttons = Array.from(wrapper.value.children) as HTMLElement[];
+    const gap = parseInt(
+      window.getComputedStyle(wrapper.value).getPropertyValue("gap")
+    );
 
     const buttonIndex = buttons.indexOf(button);
     let totalWidth = 0;
     for (let i = 0; i < buttonIndex; i++) {
-      totalWidth += buttons[i].offsetWidth;
-      const gap = parseInt(
-        window.getComputedStyle(wrapper.value).getPropertyValue("gap")
-      );
-      totalWidth += gap;
+      totalWidth += buttons[i].offsetWidth + gap;
     }
 
     const translateX = totalWidth;
