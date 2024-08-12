@@ -66,8 +66,8 @@
           <div class="slider-range__range-content">
             <input
               type="number"
-              min="6329"
-              max="16790"
+              :min="minimumPrice"
+              :max="maximumPrice"
               placeholder="6 329"
               class="slider-range__input"
               id="input-0--from1440px"
@@ -79,8 +79,8 @@
           <div class="slider-range__range-content">
             <input
               type="number"
-              min="6329"
-              max="16790"
+              :min="minimumPrice"
+              :max="maximumPrice"
               placeholder="16 790"
               class="slider-range__input"
               id="input-1--from1440px"
@@ -115,7 +115,7 @@
             class="filters__dropdown-list filters__dropdown-list-colors"
           >
             <button
-              @click="toggleActiveColor(hex)"
+              @click="toggleActiveColor(hex, name)"
               class="filters__dropdown-list-item filters__dropdown-color-btn"
               v-for="(name, hex) in colors"
               :key="hex"
@@ -163,15 +163,13 @@
             >
               <input
                 type="checkbox"
-                class="filters-menu__material-checkbox"
+                class="material-checkbox"
                 :value="material"
                 v-model="selectedMaterials"
-                :id="'filters__material-checkbox-' + index"
+                :id="'material-checkbox-' + index"
                 @change="toggleMaterialFilter"
               />
-              <label :for="'filters__material-checkbox-' + index">{{
-                material
-              }}</label>
+              <label :for="'material-checkbox-' + index">{{ material }}</label>
             </div>
           </div>
         </div>
@@ -252,8 +250,8 @@
             <div class="slider-range__range-content">
               <input
                 type="number"
-                min="6329"
-                max="16790"
+                :min="minimumPrice"
+                :max="maximumPrice"
                 placeholder="6 329"
                 class="slider-range__input"
                 id="input-0--from320px"
@@ -265,8 +263,8 @@
             <div class="slider-range__range-content">
               <input
                 type="number"
-                min="6329"
-                max="16790"
+                :min="minimumPrice"
+                :max="maximumPrice"
                 placeholder="16 790"
                 class="slider-range__input"
                 id="input-1--from320px"
@@ -298,7 +296,10 @@
           v-for="(name, hex) in colors"
           :key="hex"
         >
-          <div class="filters-menu__color-btn" @click="toggleActiveColor(hex)">
+          <div
+            class="filters-menu__color-btn"
+            @click="toggleActiveColor(hex, name)"
+          >
             <div
               class="filters-menu__color-circle"
               :class="{ active: isColorActive(hex) }"
@@ -321,7 +322,7 @@
         >
           <input
             type="checkbox"
-            class="filters-menu__material-checkbox"
+            class="material-checkbox"
             :value="material"
             v-model="selectedMaterials"
             :id="'material-checkbox-' + index"
@@ -420,6 +421,7 @@ import { useProductsStore } from "@/store/Products";
 import noUiSlider from "nouislider";
 import type { target } from "nouislider";
 import { sizes, colors, materials } from "@/data/filters";
+import { useFiltersStore } from "@/store/Filters";
 
 useHead({
   title: "Sneakers Store - Каталог товаров | Огромный выбор моделей",
@@ -476,6 +478,9 @@ const conjugateTovar = (count: number): string => {
   }
 };
 
+const filtersStore = useFiltersStore();
+const minimumPrice = ref<number>(filtersStore.minPrice!);
+const maximumPrice = ref<number>(filtersStore.maxPrice!);
 const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
   /* prices range slider starts */
   const rangeSlider = document.getElementById(sliderId)! as target;
@@ -512,12 +517,17 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
           if (!pickedCategoryFilters.value.includes("Цена")) {
             pickedCategoryFilters.value.push("Цена");
           }
+
+          filtersStore.setMinPrice(currentMin);
+          filtersStore.setMaxPrice(currentMax);
         } else {
           const index = pickedCategoryFilters.value.indexOf("Цена");
           if (index > -1) {
             pickedCategoryFilters.value.splice(index, 1);
           }
         }
+
+        filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
       }
     );
 
@@ -576,8 +586,10 @@ const closeFiltersMenu = () => {
   document.body.style.overflow = "";
 };
 
-const activeSizes = ref<number[]>([]);
-const activeColors = ref<string[]>([]);
+const activeSizes = ref<number[]>(filtersStore.sizes!);
+const activeColors = ref<string[]>(filtersStore.colors!);
+const selectedMaterials = ref<string[]>(filtersStore.materials!);
+
 const toggleActiveSize = (size: number) => {
   const index = activeSizes.value.indexOf(size);
   if (index > -1) {
@@ -594,8 +606,11 @@ const toggleActiveSize = (size: number) => {
       pickedCategoryFilters.value.splice(index, 1);
     }
   }
+
+  filtersStore.setSizes(activeSizes.value);
+  filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
 };
-const toggleActiveColor = (colorHex: string) => {
+const toggleActiveColor = (colorHex: string, name: string) => {
   const index = activeColors.value.indexOf(colorHex);
   if (index > -1) {
     activeColors.value.splice(index, 1);
@@ -611,6 +626,9 @@ const toggleActiveColor = (colorHex: string) => {
       pickedCategoryFilters.value.splice(index, 1);
     }
   }
+
+  filtersStore.setColors(activeColors.value);
+  filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
 };
 const isSizeActive = (size: number) => {
   return activeSizes.value.includes(size);
@@ -619,7 +637,39 @@ const isColorActive = (colorHex: string) => {
   return activeColors.value.includes(colorHex);
 };
 
-const selectedMaterials = ref([]);
+const pickedCategoryFilters = ref<string[]>(
+  filtersStore.pickedCategoryFilters!
+);
+const toggleMaterialFilter = () => {
+  const checkboxes = document.querySelectorAll(
+    ".material-checkbox"
+  ) as NodeListOf<HTMLInputElement>;
+
+  const selectedMaterials = Array.from(checkboxes)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.value);
+
+  if (selectedMaterials.length > 0) {
+    if (!pickedCategoryFilters.value.includes("Материал")) {
+      pickedCategoryFilters.value.push("Материал");
+    }
+  } else {
+    const index = pickedCategoryFilters.value.indexOf("Материал");
+    if (index > -1) {
+      pickedCategoryFilters.value.splice(index, 1);
+    }
+  }
+
+  filtersStore.setMaterials(selectedMaterials);
+  filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
+};
+
+const removeCategoryFilter = (filterToRemove: string) => {
+  pickedCategoryFilters.value = pickedCategoryFilters.value.filter(
+    (filter) => filter !== filterToRemove
+  );
+};
+
 const openedDropdown = ref("");
 const toggleDropdown = (dropdown: string) => {
   openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
@@ -674,34 +724,6 @@ const sortProducts = (option: string) => {
   selectedOption.value = option;
 };
 
-const pickedCategoryFilters = ref<string[]>([]);
-const toggleMaterialFilter = () => {
-  const checkboxes = document.querySelectorAll(
-    ".filters-menu__material-checkbox"
-  ) as NodeListOf<HTMLInputElement>;
-
-  const anyChecked = Array.from(checkboxes).some(
-    (checkbox) => checkbox.checked
-  );
-
-  if (anyChecked) {
-    if (!pickedCategoryFilters.value.includes("Материал")) {
-      pickedCategoryFilters.value.push("Материал");
-    }
-  } else {
-    const index = pickedCategoryFilters.value.indexOf("Материал");
-    if (index > -1) {
-      pickedCategoryFilters.value.splice(index, 1);
-    }
-  }
-};
-
-const removeCategoryFilter = (filterToRemove: string) => {
-  pickedCategoryFilters.value = pickedCategoryFilters.value.filter(
-    (filter) => filter !== filterToRemove
-  );
-};
-
 const container = ref<HTMLElement | null>(null);
 const wrapper = ref<HTMLElement | null>(null);
 let currentTranslate = 0;
@@ -718,7 +740,7 @@ const handleTouchMove = (event: TouchEvent) => {
     if (currentTranslate < 0) {
       currentTranslate = 0;
     } else {
-      currentTranslate = -wrapper.value!.scrollWidth + lastElementWidth;
+      currentTranslate = -wrapper.value!.offsetWidth + lastElementWidth;
     }
 
     wrapper.value.style.transform = `translateX(${currentTranslate}px)`;
@@ -885,33 +907,6 @@ onBeforeUnmount(() => {
     font-family: "Pragmatica Book";
     font-size: 1rem;
   }
-  &__material-checkbox[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 22px;
-    height: 22px;
-    border: 1px solid #d6d6d6;
-    margin: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  &__material-checkbox[type="checkbox"]:checked {
-    border: none;
-  }
-  &__material-checkbox[type="checkbox"]:checked:before {
-    content: "";
-    background: url("/imgs/tick.svg") no-repeat center center / 14px 10px;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    background-color: $Dark-Black;
-    font-size: 14px;
-    text-align: center;
-  }
   &__reset-all-btn {
     @include btn;
     position: fixed;
@@ -928,6 +923,34 @@ onBeforeUnmount(() => {
     font-size: 0.75rem;
   }
 }
+.material-checkbox[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #d6d6d6;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.material-checkbox[type="checkbox"]:checked {
+  border: none;
+}
+.material-checkbox[type="checkbox"]:checked:before {
+  content: "";
+  background: url("/imgs/tick.svg") no-repeat center center / 14px 10px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background-color: $Dark-Black;
+  font-size: 14px;
+  text-align: center;
+}
+
 /* hide input number arrows for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -1224,33 +1247,6 @@ input[type="number"] {
       border-radius: 50%;
       width: 15px;
       height: 15px;
-    }
-    &__dropdown-material-checkbox[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      width: 22px;
-      height: 22px;
-      border: 1px solid #d6d6d6;
-      margin: 0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    &__dropdown-material-checkbox[type="checkbox"]:checked {
-      border: none;
-    }
-    &__dropdown-material-checkbox[type="checkbox"]:checked:before {
-      content: "";
-      background: url("/imgs/tick.svg") no-repeat center center / 14px 10px;
-      display: flex;
-      width: 100%;
-      height: 100%;
-      color: #fff;
-      background-color: $Dark-Black;
-      font-size: 14px;
-      text-align: center;
     }
   }
   .slider-range {
