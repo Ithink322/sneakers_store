@@ -1,8 +1,8 @@
-export const sizes: number[] = [
+export const sizesArr: number[] = [
   36, 36.5, 37, 37.5, 38, 38.5, 39, 40, 40.5, 41, 41.5, 42, 42.5, 43, 44,
 ];
 
-export const colors = {
+export const colorsObj = {
   "#A8B7BF": "Серо-голубой",
   "#2A2C2D": "Угольно-черный",
   "#F81D2A": "Красный",
@@ -13,4 +13,9 @@ export const colors = {
   "#D81F64": "Цериз",
 };
 
-export const materials: string[] = ["Кожа", "Текстиль", "Замша", "Синтетика"];
+export const materialsArr: string[] = [
+  "Кожа",
+  "Текстиль",
+  "Замша",
+  "Синтетика",
+];

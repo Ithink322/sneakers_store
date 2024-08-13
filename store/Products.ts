@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { Product } from "@/types/Product";
+import { useFiltersStore } from "@/store/Filters";
 
 interface ProductsState {
   allProducts: Product[];
@@ -30,16 +31,39 @@ export const useProductsStore = defineStore("productsStore", {
   actions: {
     setAllProducts(products: Product[]) {
       this.allProducts = products;
-    },
-    filterProducts(products: Product[] /* category: string */) {
-      /* if (category === "ВСЕ ПУБЛИКАЦИИ") {
-        this.filteredPosts = this.allPosts;
-      } else {
-        this.filteredPosts = this.allPosts.filter(
-          (post) => post.category.toLowerCase() === category.toLowerCase()
-        );
-      } */
       this.filteredProducts = products;
+    },
+    filterProducts() {
+      const filtersStore = useFiltersStore();
+
+      this.filteredProducts = this.allProducts.filter((product) => {
+        const productPrice = parseFloat(
+          product.currentPrice.replace(/[^0-9.-]+/g, "").replace(/\s+/g, "")
+        );
+        const priceMatch =
+          productPrice >= filtersStore.minPrice! &&
+          productPrice <= filtersStore.maxPrice!;
+
+        const sizeMatch =
+          filtersStore.sizes!.length === 0 ||
+          product.sizes.some((size) => filtersStore.sizes!.includes(size));
+
+        const colorMatch =
+          filtersStore.colors!.length === 0 ||
+          product.colors.some((color) => filtersStore.colors!.includes(color));
+
+        const materialMatch =
+          filtersStore.materials!.length === 0 ||
+          filtersStore.materials!.some((material) =>
+            product.specs.composition
+              .toLowerCase()
+              .includes(material.toLowerCase())
+          );
+        return priceMatch && sizeMatch && colorMatch && materialMatch;
+      });
+
+      this.currentPage = 1;
+      this.resetTranslateValue();
     },
     setPage(page: number) {
       this.currentPage = page;
@@ -54,6 +78,6 @@ export const useProductsStore = defineStore("productsStore", {
   persist: {
     key: "catalog-store",
     storage: typeof window !== "undefined" ? localStorage : undefined,
-    paths: ["currentPage"],
+    paths: ["currentPage", "productsPerPage"],
   },
 });

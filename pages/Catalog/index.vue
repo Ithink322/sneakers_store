@@ -68,7 +68,7 @@
               type="number"
               :min="minimumPrice"
               :max="maximumPrice"
-              placeholder="6 329"
+              placeholder="5 999"
               class="slider-range__input"
               id="input-0--from1440px"
               ref="minPrice"
@@ -115,7 +115,7 @@
             class="filters__dropdown-list filters__dropdown-list-colors"
           >
             <button
-              @click="toggleActiveColor(hex, name)"
+              @click="toggleActiveColor(hex)"
               class="filters__dropdown-list-item filters__dropdown-color-btn"
               v-for="(name, hex) in colors"
               :key="hex"
@@ -252,7 +252,7 @@
                 type="number"
                 :min="minimumPrice"
                 :max="maximumPrice"
-                placeholder="6 329"
+                placeholder="5 999"
                 class="slider-range__input"
                 id="input-0--from320px"
                 ref="minPrice"
@@ -296,10 +296,7 @@
           v-for="(name, hex) in colors"
           :key="hex"
         >
-          <div
-            class="filters-menu__color-btn"
-            @click="toggleActiveColor(hex, name)"
-          >
+          <div class="filters-menu__color-btn" @click="toggleActiveColor(hex)">
             <div
               class="filters-menu__color-circle"
               :class="{ active: isColorActive(hex) }"
@@ -355,7 +352,7 @@
   </div>
   <div class="sorting">
     <span class="sorting__text"
-      >Показано {{ productsPerPage }} из {{ totalProducts }} товаров</span
+      >Показано {{ shownProducts }} из {{ allProducts }} товаров</span
     >
     <div class="sorting__container">
       <div class="sorting__content">
@@ -365,8 +362,12 @@
             class="sorting__btn"
             v-for="num in numberOfProducts"
             :key="num"
-            :class="{ active: pickedNumber === num }"
+            :class="{
+              active: pickedNumber === num,
+              disabled: allProducts < num,
+            }"
             @click="showProducts(num)"
+            :disabled="allProducts < num"
           >
             {{ num }}
           </button>
@@ -420,7 +421,7 @@ import { products } from "@/data/CatalogProducts";
 import { useProductsStore } from "@/store/Products";
 import noUiSlider from "nouislider";
 import type { target } from "nouislider";
-import { sizes, colors, materials } from "@/data/filters";
+import { sizesArr, colorsObj, materialsArr } from "@/data/filters";
 import { useFiltersStore } from "@/store/Filters";
 
 useHead({
@@ -439,9 +440,12 @@ useHead({
   ],
 });
 
+const sizes = ref(sizesArr);
+const colors = ref(colorsObj);
+const materials = ref(materialsArr);
+
 const store = useProductsStore();
 store.setAllProducts(products);
-store.filterProducts(products);
 
 const route = useRoute();
 watch(
@@ -459,8 +463,12 @@ const checkPageValidity = () => {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
 };
+onMounted(() => {
+  checkPageValidity();
+});
 
-const totalProducts = ref(store.filteredProducts.length);
+const totalProducts = ref(store.allProducts.length);
+
 const conjugateTovar = (count: number): string => {
   const lastDigit = count % 10;
   const lastTwoDigits = count % 100;
@@ -481,6 +489,8 @@ const conjugateTovar = (count: number): string => {
 const filtersStore = useFiltersStore();
 const minimumPrice = ref<number>(filtersStore.minPrice!);
 const maximumPrice = ref<number>(filtersStore.maxPrice!);
+const defaultMin = 5999;
+const defaultMax = 16790;
 const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
   /* prices range slider starts */
   const rangeSlider = document.getElementById(sliderId)! as target;
@@ -490,11 +500,11 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
     }
 
     noUiSlider.create(rangeSlider, {
-      start: [6329, 16790],
+      start: [minimumPrice.value, maximumPrice.value],
       connect: true,
       step: 10,
       range: {
-        min: [6329],
+        min: [5999],
         max: [16790],
       },
     });
@@ -503,15 +513,15 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
       input1 = document.getElementById(input1Id)! as HTMLInputElement;
     const inputs = [input0, input1];
 
-    const defaultMin = 6329;
-    const defaultMax = 16790;
     rangeSlider.noUiSlider!.on(
       "update",
       (values: (number | string)[], handle: number) => {
         inputs[handle].value = Math.round(Number(values[handle])).toString();
 
-        const currentMin = parseInt(inputs[0].value);
-        const currentMax = parseInt(inputs[1].value);
+        const currentMin = parseInt(inputs[0].value) || defaultMin;
+        const currentMax = parseInt(inputs[1].value) || defaultMax;
+        filtersStore.setMinPrice(defaultMin);
+        filtersStore.setMaxPrice(defaultMax);
 
         if (currentMin !== defaultMin || currentMax !== defaultMax) {
           if (!pickedCategoryFilters.value.includes("Цена")) {
@@ -528,6 +538,11 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
         }
 
         filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
+        store.filterProducts();
+        router.replace({
+          path: "/catalog",
+          query: { page: 1 },
+        });
       }
     );
 
@@ -565,7 +580,6 @@ const initializeSliders = () => {
 };
 
 onMounted(() => {
-  checkPageValidity();
   initializeSliders();
 
   const mediaQuery = window.matchMedia("(max-width: 1439px)");
@@ -609,8 +623,13 @@ const toggleActiveSize = (size: number) => {
 
   filtersStore.setSizes(activeSizes.value);
   filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
+  store.filterProducts();
+  router.replace({
+    path: "/catalog",
+    query: { page: 1 },
+  });
 };
-const toggleActiveColor = (colorHex: string, name: string) => {
+const toggleActiveColor = (colorHex: string) => {
   const index = activeColors.value.indexOf(colorHex);
   if (index > -1) {
     activeColors.value.splice(index, 1);
@@ -629,6 +648,11 @@ const toggleActiveColor = (colorHex: string, name: string) => {
 
   filtersStore.setColors(activeColors.value);
   filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
+  store.filterProducts();
+  router.replace({
+    path: "/catalog",
+    query: { page: 1 },
+  });
 };
 const isSizeActive = (size: number) => {
   return activeSizes.value.includes(size);
@@ -636,6 +660,30 @@ const isSizeActive = (size: number) => {
 const isColorActive = (colorHex: string) => {
   return activeColors.value.includes(colorHex);
 };
+watch(
+  () => filtersStore.sizes!,
+  (newVal) => {
+    activeSizes.value = newVal;
+    filtersStore.setSizes(newVal);
+    store.filterProducts();
+  }
+);
+watch(
+  () => filtersStore.colors!,
+  (newVal) => {
+    activeColors.value = newVal;
+    filtersStore.setColors(newVal);
+    store.filterProducts();
+  }
+);
+watch(
+  () => filtersStore.materials!,
+  (newVal) => {
+    selectedMaterials.value = newVal;
+    filtersStore.setMaterials(newVal);
+    store.filterProducts();
+  }
+);
 
 const pickedCategoryFilters = ref<string[]>(
   filtersStore.pickedCategoryFilters!
@@ -662,12 +710,37 @@ const toggleMaterialFilter = () => {
 
   filtersStore.setMaterials(selectedMaterials);
   filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
+  store.filterProducts();
+  router.replace({
+    path: "/catalog",
+    query: { page: 1 },
+  });
 };
 
 const removeCategoryFilter = (filterToRemove: string) => {
   pickedCategoryFilters.value = pickedCategoryFilters.value.filter(
     (filter) => filter !== filterToRemove
   );
+  filtersStore.pickedCategoryFilters = pickedCategoryFilters.value;
+
+  switch (filterToRemove) {
+    case "Цена":
+      filtersStore.setMinPrice(defaultMin);
+      filtersStore.setMaxPrice(defaultMax);
+      minimumPrice.value = defaultMin;
+      maximumPrice.value = defaultMax;
+      initializeSliders();
+      break;
+    case "Размер":
+      filtersStore.sizes = [];
+      break;
+    case "Цвет":
+      filtersStore.colors = [];
+      break;
+    case "Материал":
+      filtersStore.materials = [];
+      break;
+  }
 };
 
 const openedDropdown = ref("");
@@ -695,20 +768,39 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
+const allProducts = computed(() => store.filteredProducts.length);
+const paginatedProducts = computed(() => store.paginatedProducts);
 const productsPerPage = computed(() => store.productsPerPage);
+const shownProducts = computed(() =>
+  productsPerPage.value <= paginatedProducts.value.length
+    ? productsPerPage.value
+    : paginatedProducts.value.length
+);
+
 const router = useRouter();
 const numberOfProducts = [9, 12, 18, 24];
-const pickedNumber = ref(18);
+let pickedNumber = ref(18);
 const showProducts = (num: number) => {
-  pickedNumber.value = num;
-  store.productsPerPage = num;
-  store.currentPage = 1;
-  store.resetTranslateValue();
-  router.replace({
-    path: "/catalog",
-    query: { page: 1 },
-  });
+  if (allProducts.value >= num) {
+    pickedNumber.value = num;
+    store.productsPerPage = num;
+    store.currentPage = 1;
+    store.resetTranslateValue();
+    router.replace({
+      path: "/catalog",
+      query: { page: 1 },
+    });
+  }
 };
+onMounted(() => {
+  pickedNumber.value = store.productsPerPage;
+});
+/* watch(
+  () => store.productsPerPage,
+  (newVal) => {
+    pickedNumber.value = newVal;
+  }
+); */
 
 const toggleSortingDropdown = (dropdown: string) => {
   openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
@@ -1301,6 +1393,12 @@ input[type="number"] {
       &.active {
         background-color: $Light-Black;
         color: #ffffff;
+      }
+      &.disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+        cursor: not-allowed;
+        border: 1px solid #d3d9dd;
       }
     }
     &__body {

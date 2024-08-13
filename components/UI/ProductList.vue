@@ -9,14 +9,13 @@
 </template>
 
 <script setup lang="ts">
-import { products } from "@/data/CatalogProducts";
 import { useProductsStore } from "@/store/Products";
 
 const store = useProductsStore();
 const paginatedProducts = computed(() => store.paginatedProducts);
 
 onMounted(() => {
-  store.filterProducts(products);
+  store.filterProducts();
 });
 </script>
 

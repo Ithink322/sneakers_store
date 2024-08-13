@@ -11,7 +11,7 @@ interface FiltersState {
 
 export const useFiltersStore = defineStore("filtersStore", {
   state: (): FiltersState => ({
-    minPrice: 6329,
+    minPrice: 5999,
     maxPrice: 16790,
     sizes: [],
     colors: [],
