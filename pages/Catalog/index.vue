@@ -173,7 +173,7 @@
             </div>
           </div>
         </div>
-        <button class="filters__reset-all-btn">
+        <button @click="resetFilters" class="filters__reset-all-btn">
           <svg
             width="10"
             height="10"
@@ -221,22 +221,6 @@
       </div>
     </div>
   </div>
-  <!-- <button class="reset-all-btn">
-    <svg
-      width="10"
-      height="10"
-      viewBox="0 0 10 10"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        opacity="0.7"
-        d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
-        fill="#6C757D"
-      />
-    </svg>
-    СБРОСИТЬ ВСЁ
-  </button> -->
   <div v-if="isFiltersOpened" class="filters-menu-shadow">
     <button @click="closeFiltersMenu" class="filters-menu-shadow__close-btn">
       <img src="/imgs/cross.svg" alt="cross" />
@@ -332,7 +316,7 @@
           >
         </div>
       </div>
-      <button class="filters-menu__reset-all-btn">
+      <button @click="resetFilters" class="filters-menu__reset-all-btn">
         <svg
           width="10"
           height="10"
@@ -412,8 +396,12 @@
       </div>
     </div>
   </div>
-  <UIProductList></UIProductList>
-  <UIPagination></UIPagination>
+  <UIUndefinedMessage
+    v-if="paginatedProducts.length === 0"
+    :text="'С выбранными фильтрами ничего не найдено.'"
+  ></UIUndefinedMessage>
+  <UIProductList v-if="paginatedProducts.length > 0"></UIProductList>
+  <UIPagination v-if="paginatedProducts.length > 0"></UIPagination>
 </template>
 
 <script setup lang="ts">
@@ -457,7 +445,10 @@ watch(
 const totalPages = computed(() => store.totalPages);
 const pageNum = parseInt(route.query.page as string);
 const checkPageValidity = () => {
-  if (route.query.page && pageNum <= totalPages.value && pageNum > 0) {
+  if (
+    (pageNum && pageNum <= totalPages.value && pageNum > 0) ||
+    allProducts.value === 0
+  ) {
     store.currentPage = pageNum;
   } else {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
@@ -465,6 +456,7 @@ const checkPageValidity = () => {
 };
 onMounted(() => {
   checkPageValidity();
+  store.filterProducts();
 });
 
 const totalProducts = ref(store.allProducts.length);
@@ -520,8 +512,12 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
 
         const currentMin = parseInt(inputs[0].value) || defaultMin;
         const currentMax = parseInt(inputs[1].value) || defaultMax;
-        filtersStore.setMinPrice(defaultMin);
-        filtersStore.setMaxPrice(defaultMax);
+        if (currentMin !== filtersStore.minPrice) {
+          filtersStore.setMinPrice(currentMin);
+        }
+        if (currentMax !== filtersStore.maxPrice) {
+          filtersStore.setMaxPrice(currentMax);
+        }
 
         if (currentMin !== defaultMin || currentMax !== defaultMax) {
           if (!pickedCategoryFilters.value.includes("Цена")) {
@@ -538,11 +534,6 @@ const setupSlider = (sliderId: string, input0Id: string, input1Id: string) => {
         }
 
         filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
-        store.filterProducts();
-        router.replace({
-          path: "/catalog",
-          query: { page: 1 },
-        });
       }
     );
 
@@ -623,11 +614,6 @@ const toggleActiveSize = (size: number) => {
 
   filtersStore.setSizes(activeSizes.value);
   filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
-  store.filterProducts();
-  router.replace({
-    path: "/catalog",
-    query: { page: 1 },
-  });
 };
 const toggleActiveColor = (colorHex: string) => {
   const index = activeColors.value.indexOf(colorHex);
@@ -648,11 +634,6 @@ const toggleActiveColor = (colorHex: string) => {
 
   filtersStore.setColors(activeColors.value);
   filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
-  store.filterProducts();
-  router.replace({
-    path: "/catalog",
-    query: { page: 1 },
-  });
 };
 const isSizeActive = (size: number) => {
   return activeSizes.value.includes(size);
@@ -666,7 +647,14 @@ watch(
     activeSizes.value = newVal;
     filtersStore.setSizes(newVal);
     store.filterProducts();
-  }
+    store.currentPage = 1;
+    router.replace({
+      path: "/catalog",
+      query: { page: 1 },
+    });
+    store.resetTranslateValue();
+  },
+  { deep: true }
 );
 watch(
   () => filtersStore.colors!,
@@ -674,7 +662,14 @@ watch(
     activeColors.value = newVal;
     filtersStore.setColors(newVal);
     store.filterProducts();
-  }
+    store.currentPage = 1;
+    router.replace({
+      path: "/catalog",
+      query: { page: 1 },
+    });
+    store.resetTranslateValue();
+  },
+  { deep: true }
 );
 watch(
   () => filtersStore.materials!,
@@ -682,6 +677,41 @@ watch(
     selectedMaterials.value = newVal;
     filtersStore.setMaterials(newVal);
     store.filterProducts();
+    store.currentPage = 1;
+    router.replace({
+      path: "/catalog",
+      query: { page: 1 },
+    });
+    store.resetTranslateValue();
+  },
+  { deep: true }
+);
+watch(
+  () => filtersStore.minPrice!,
+  (newMin) => {
+    minimumPrice.value = newMin;
+    filtersStore.setMinPrice(newMin);
+    store.filterProducts();
+    store.currentPage = 1;
+    router.replace({
+      path: "/catalog",
+      query: { page: 1 },
+    });
+    store.resetTranslateValue();
+  }
+);
+watch(
+  () => filtersStore.maxPrice!,
+  (newMax) => {
+    maximumPrice.value = newMax;
+    filtersStore.setMaxPrice(newMax);
+    store.filterProducts();
+    store.currentPage = 1;
+    router.replace({
+      path: "/catalog",
+      query: { page: 1 },
+    });
+    store.resetTranslateValue();
   }
 );
 
@@ -710,11 +740,6 @@ const toggleMaterialFilter = () => {
 
   filtersStore.setMaterials(selectedMaterials);
   filtersStore.setPickedCategoryFilters(pickedCategoryFilters.value);
-  store.filterProducts();
-  router.replace({
-    path: "/catalog",
-    query: { page: 1 },
-  });
 };
 
 const removeCategoryFilter = (filterToRemove: string) => {
@@ -795,12 +820,12 @@ const showProducts = (num: number) => {
 onMounted(() => {
   pickedNumber.value = store.productsPerPage;
 });
-/* watch(
+watch(
   () => store.productsPerPage,
   (newVal) => {
     pickedNumber.value = newVal;
   }
-); */
+);
 
 const toggleSortingDropdown = (dropdown: string) => {
   openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
@@ -857,6 +882,14 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", handleSliderResize);
   container.value!.removeEventListener("touchmove", handleTouchMove);
 });
+
+const resetFilters = () => {
+  filtersStore.resetFilters();
+  minimumPrice.value = defaultMin;
+  maximumPrice.value = defaultMax;
+  pickedCategoryFilters.value = [];
+  initializeSliders();
+};
 </script>
 
 <style lang="scss">
@@ -903,12 +936,6 @@ onBeforeUnmount(() => {
 .filters {
   display: none;
 }
-/* .reset-all-btn {
-  @include btn;
-  gap: 0.688rem;
-  font-family: "Pragmatica Medium";
-  font-size: 0.75rem;
-} */
 .filters-menu-shadow {
   position: absolute;
   background: rgba(0, 0, 0, 0.54);
@@ -956,7 +983,9 @@ onBeforeUnmount(() => {
     @include btn;
     flex-shrink: 0;
     width: 54px;
+    max-width: 64.5px;
     height: 45px;
+    flex-grow: 1;
     border: 1px solid #efefef;
     border-radius: 4px;
     font-family: "Pragmatica Book";

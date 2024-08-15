@@ -31,10 +31,12 @@ export const useProductsStore = defineStore("productsStore", {
   actions: {
     setAllProducts(products: Product[]) {
       this.allProducts = products;
-      this.filteredProducts = products;
     },
     filterProducts() {
       const filtersStore = useFiltersStore();
+      if (filtersStore.pickedCategoryFilters!.length === 0) {
+        this.filteredProducts = this.allProducts;
+      }
 
       this.filteredProducts = this.allProducts.filter((product) => {
         const productPrice = parseFloat(
@@ -61,9 +63,6 @@ export const useProductsStore = defineStore("productsStore", {
           );
         return priceMatch && sizeMatch && colorMatch && materialMatch;
       });
-
-      this.currentPage = 1;
-      this.resetTranslateValue();
     },
     setPage(page: number) {
       this.currentPage = page;

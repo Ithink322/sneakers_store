@@ -34,17 +34,15 @@ export const useFiltersStore = defineStore("filtersStore", {
     setMaterials(materials: string[]) {
       this.materials = materials;
     },
+    setPickedCategoryFilters(filters: string[]) {
+      this.pickedCategoryFilters = filters;
+    },
     resetFilters() {
-      this.minPrice = 6329;
+      this.minPrice = 5999;
       this.maxPrice = 16790;
       this.sizes = [];
       this.colors = [];
       this.materials = [];
-    },
-    setPickedCategoryFilters(filters: string[]) {
-      this.pickedCategoryFilters = filters;
-    },
-    resetPickedCategoryFilters() {
       this.pickedCategoryFilters = [];
     },
   },
