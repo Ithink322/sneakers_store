@@ -116,26 +116,24 @@
 
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
-import { useSinglePostStore } from "@/store/SinglePost";
 import type { BlogPost } from "@/types/BlogPosts";
 import { blogPosts } from "@/data/Blogposts";
-import { unslugify } from "@/utils/helpers";
+import { slugify, unslugify } from "@/utils/helpers";
 
 const store = usePostsStore();
 const title = computed(() => store.getTitle);
 
-const postStore = useSinglePostStore();
 const post = ref<BlogPost>();
+const route = useRoute();
 const fetchPost = () => {
-  post.value = blogPosts.find((post) => post.id === postStore.id);
+  post.value = blogPosts.find(
+    (post) => slugify(post.title) === (route.params.id as string)
+  );
 };
 
-const route = useRoute();
 const checkTitleValidity = () => {
   const title = blogPosts.find(
-    (post) =>
-      post.title.toLowerCase() ==
-      unslugify(route.params.id as string).toLowerCase()
+    (post) => slugify(post.title) == (route.params.id as string)
   );
   if (!title) {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
@@ -182,6 +180,7 @@ p {
 }
 .title {
   margin-top: 0.938rem;
+  line-height: 31px;
 }
 .info {
   display: flex;
@@ -324,6 +323,7 @@ p {
   }
   .title {
     margin-top: 1.563rem;
+    line-height: 48px;
   }
   .info {
     gap: 0.75rem;

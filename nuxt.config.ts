@@ -18,11 +18,7 @@ export default defineNuxtConfig({
 
   css: ["nouislider/dist/nouislider.min.css"],
 
-  modules: [
-    "@pinia/nuxt",
-    "@pinia-plugin-persistedstate/nuxt",
-    "@nuxt/content",
-  ],
+  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt", "nuxt-rating"],
 
   compatibilityDate: "2024-08-02",
 });

@@ -938,7 +938,7 @@ const resetFilters = () => {
 }
 .filters-menu-shadow {
   position: absolute;
-  background: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.747);
   width: 100%;
   height: 100vh;
   top: 0rem;
@@ -956,11 +956,10 @@ const resetFilters = () => {
   display: flex;
   flex-direction: column;
   gap: 3.75rem;
-  background: #fff;
+  background-color: #fff;
   width: 90%;
   max-width: 328px;
   height: 100vh;
-  padding: 2.188rem 1.25rem;
   padding: 2.188rem 1.25rem 8.75rem 1.25rem;
   overflow-y: scroll;
   overflow-x: hidden;

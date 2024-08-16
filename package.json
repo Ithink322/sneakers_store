@@ -10,13 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/content": "^2.12.1",
     "@nuxt/kit": "^3.11.2",
     "@nuxt/types": "^2.18.1",
     "@pinia/nuxt": "^0.5.1",
     "inputmask": "^5.0.9",
+    "lottie-web": "^5.12.2",
     "nouislider": "^15.8.1",
     "nuxt": "^3.11.0",
+    "nuxt-rating": "^0.1.5",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
