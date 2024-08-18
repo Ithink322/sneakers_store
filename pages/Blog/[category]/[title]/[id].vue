@@ -118,27 +118,45 @@
 import { usePostsStore } from "@/store/Posts";
 import type { BlogPost } from "@/types/BlogPosts";
 import { blogPosts } from "@/data/Blogposts";
-import { slugify, unslugify } from "@/utils/helpers";
+import { slugify } from "@/utils/helpers";
 
 const store = usePostsStore();
 const title = computed(() => store.getTitle);
 
 const post = ref<BlogPost>();
-const route = useRoute();
 const fetchPost = () => {
-  post.value = blogPosts.find(
-    (post) => slugify(post.title) === (route.params.id as string)
-  );
+  post.value = blogPosts.find((post) => post.id === Number(route.params.id));
 };
 
+const route = useRoute();
 const checkTitleValidity = () => {
   const title = blogPosts.find(
-    (post) => slugify(post.title) == (route.params.id as string)
+    (post) => slugify(post.title) === (route.params.title as string)
   );
   if (!title) {
     throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
   }
 };
+const routeTitle = ref(route.params.title);
+const router = useRouter();
+watch(
+  () => route.params.id,
+  () => {
+    const post = blogPosts.find((post) => post.id === Number(route.params.id));
+    if (post && routeTitle.value !== post.title) {
+      routeTitle.value = post.title;
+      router.replace({
+        name: route.name,
+        params: {
+          ...route.params,
+          title: slugify(post.title),
+        },
+        query: route.query,
+      });
+    }
+  },
+  { immediate: true }
+);
 onMounted(() => {
   fetchPost();
   checkTitleValidity();

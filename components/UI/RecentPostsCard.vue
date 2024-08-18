@@ -1,8 +1,11 @@
 <template>
   <nuxt-link
     class="card-link"
-    @click="setPost"
-    :to="`blog/` + hero.category.toLowerCase() + '/' + slugify(hero.title)"
+    :to="{
+      path: `/blog/${hero.category.toLowerCase()}/${slugify(hero.title)}/${
+        props.hero.id
+      }`,
+    }"
   >
     <div class="recent-posts-card card slide">
       <img :src="hero.hero" alt="" class="card__hero" />
@@ -25,17 +28,8 @@
 <script setup lang="ts">
 import type { Hero } from "@/types/RecentPosts";
 import { slugify } from "@/utils/helpers";
-import { usePostsStore } from "@/store/Posts";
-import { useSinglePostStore } from "@/store/SinglePost";
-const props = defineProps<{ hero: Hero }>();
 
-const store = usePostsStore();
-const postStore = useSinglePostStore();
-const setPost = () => {
-  store.ruCategory = props.hero.category;
-  store.setCategory(props.hero.category.toLowerCase(), store.ruCategory);
-  postStore.setPost(props.hero.id);
-};
+const props = defineProps<{ hero: Hero }>();
 </script>
 
 <style lang="scss" scoped>

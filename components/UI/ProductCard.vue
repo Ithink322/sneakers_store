@@ -1,9 +1,8 @@
 <template>
   <NuxtLink
-    @click="setProduct"
     class="product-link"
     :to="{
-      path: `/catalog/${slugify(props.product.title)}`,
+      path: `/catalog/${slugify(props.product.title)}/${props.product.id}`,
     }"
   >
     <div class="card">
@@ -108,14 +107,8 @@
 <script setup lang="ts">
 import { slugify } from "@/utils/helpers";
 import type { Product } from "@/types/Product";
-import { useSingleProductStore } from "@/store/SingleProduct";
 
 const props = defineProps<{ product: Product }>();
-
-const productStore = useSingleProductStore();
-const setProduct = () => {
-  productStore.setProduct(props.product.id);
-};
 
 let windowWidth = 0;
 let isPageScrolling = false;

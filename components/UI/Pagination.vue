@@ -60,21 +60,29 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 import { useProductsStore } from "@/store/Products";
+import { useReviewsStore } from "@/store/Reviews";
+
+const props = defineProps<{
+  container?: HTMLElement | null;
+}>();
 
 const router = useRouter();
 const route = useRoute();
 
 type StoreType =
   | ReturnType<typeof usePostsStore>
-  | ReturnType<typeof useProductsStore>;
+  | ReturnType<typeof useProductsStore>
+  | ReturnType<typeof useReviewsStore>;
 let store = ref<StoreType | null>(null);
 
 const setStore = () => {
   const normalizedPath = route.path.toLowerCase();
-  if (normalizedPath.startsWith("/blog")) {
-    store.value = usePostsStore();
+  if (normalizedPath.startsWith("/catalog/") && route.params.id) {
+    store.value = useReviewsStore();
   } else if (normalizedPath.startsWith("/catalog")) {
     store.value = useProductsStore();
+  } else if (normalizedPath.startsWith("/blog")) {
+    store.value = usePostsStore();
   }
 };
 watch(
@@ -85,8 +93,9 @@ watch(
   { immediate: true }
 );
 
-const totalPages = computed(() => store.value?.totalPages ?? 10);
+const totalPages = computed(() => store.value?.totalPages);
 
+/* const container = ref<HTMLElement | null>(null); */
 const prevPage = () => {
   if (store.value) {
     if (store.value.currentPage > 1) {
@@ -95,11 +104,18 @@ const prevPage = () => {
         query: { ...route.query, page: store.value.currentPage },
       });
     } else {
-      store.value.setPage(totalPages.value);
+      store.value.setPage(totalPages.value!);
       router.replace({ query: { ...route.query, page: totalPages.value } });
     }
     updateTranslate();
-    window.scrollTo(0, 0);
+    if (
+      store.value.$id === "postsStore" ||
+      store.value.$id === "productsStore"
+    ) {
+      window.scrollTo(0, 0);
+    } else if (store.value.$id === "reviewsStore") {
+      props.container!.scrollIntoView({ behavior: "smooth" });
+    }
   }
 };
 
@@ -115,7 +131,14 @@ const nextPage = () => {
       router.replace({ query: { ...route.query, page: 1 } });
     }
     updateTranslate();
-    window.scrollTo(0, 0);
+    if (
+      store.value.$id === "postsStore" ||
+      store.value.$id === "productsStore"
+    ) {
+      window.scrollTo(0, 0);
+    } else if (store.value.$id === "reviewsStore") {
+      props.container!.scrollIntoView({ behavior: "smooth" });
+    }
   }
 };
 
@@ -124,7 +147,14 @@ const changePage = (pageNum: number) => {
     store.value.setPage(pageNum);
     router.replace({ query: { ...route.query, page: pageNum } });
     updateTranslate();
-    window.scrollTo(0, 0);
+    if (
+      store.value.$id === "postsStore" ||
+      store.value.$id === "productsStore"
+    ) {
+      window.scrollTo(0, 0);
+    } else if (store.value.$id === "reviewsStore") {
+      props.container!.scrollIntoView({ behavior: "smooth" });
+    }
   }
 };
 

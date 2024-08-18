@@ -1,9 +1,8 @@
 <template>
   <NuxtLink
-    @click="setProduct"
     class="product-link"
     :to="{
-      path: `/catalog/${slugify(product.title)}`,
+      path: `/catalog/${slugify(product.title)}/${props.product.id}`,
     }"
   >
     <div class="with-discount__card card">
@@ -70,14 +69,8 @@
 
 <script setup lang="ts">
 import type { Product } from "@/types/Product";
-import { useSingleProductStore } from "@/store/SingleProduct";
 
 const props = defineProps<{ product: Product }>();
-
-const productStore = useSingleProductStore();
-const setProduct = () => {
-  productStore.setProduct(props.product.id);
-};
 </script>
 
 <style lang="scss" scoped>
