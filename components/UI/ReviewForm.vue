@@ -1,7 +1,11 @@
 <template>
   <div v-if="isContainerVisible" class="leave-review-shadow">
     <div class="leave-review">
-      <div v-if="isLeaveReviewShown" class="leave-review__container">
+      <form
+        @submit.prevent="handleLeaveReview"
+        v-if="isLeaveReviewShown"
+        class="leave-review__container"
+      >
         <button @click="closeLeaveReview" class="leave-review__close-btn">
           <svg
             width="10"
@@ -18,6 +22,9 @@
           </svg>
         </button>
         <span class="leave-review__title">Оставить отзыв к товару</span>
+        <span v-if="isRatingNoticeVisible" class="leave-review__rating-notice"
+          >Поставьте оценку, пожалуйста</span
+        >
         <div class="leave-review__rating-body">
           <span class="leave-review__rating-text">Ваша оценка</span>
           <NuxtRating
@@ -28,11 +35,26 @@
             :inactiveColor="'#D3D3D3'"
             :ratingValue="0"
             :read-only="false"
+            @ratingSelected="handleRatingSelected"
           />
         </div>
         <div class="leave-review__field-container">
           <span class="leave-review__field-title">Текст отзыва</span>
-          <textarea class="leave-review__field" placeholder="Текст"></textarea>
+          <span
+            v-if="isTextNoticeVisible"
+            class="leave-review__field-text-notice"
+            >Напишите отзыв, пожалуйста</span
+          >
+          <span
+            v-if="isTextNotice2Visible"
+            class="leave-review__field-text-notice"
+            >Напишите отзыв без специальных символов
+          </span>
+          <textarea
+            class="leave-review__field"
+            placeholder="Текст"
+            v-model="reviewText"
+          ></textarea>
         </div>
         <div @click="triggerFileInput" class="leave-review__img-upload-area">
           <span
@@ -69,11 +91,10 @@
           />
         </div>
         <UIButton
-          @click="handleLeaveReview"
           class="leave-review__btn"
           :content="'Оставить отзыв'"
         ></UIButton>
-      </div>
+      </form>
       <div v-if="isLoading" class="leave-review__loading-container">
         <div ref="progressRing" class="leave-review__progress-ring"></div>
         <span class="leave-review__loading-text">
@@ -113,6 +134,9 @@
 
 <script setup lang="ts">
 import lottie from "lottie-web";
+import { useReviewsStore } from "@/store/Reviews";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
 
 const isLeaveReviewShown = inject("isLeaveReviewShown") as Ref<boolean>;
 const isContainerVisible = inject("isContainerVisible") as Ref<boolean>;
@@ -126,6 +150,12 @@ const closeLeaveReview = () => {
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const uploadImgs = ref<string[]>([]);
+const allowedExtensions = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 const triggerFileInput = () => {
   if (fileInput.value) {
     fileInput.value.click();
@@ -150,13 +180,66 @@ const deleteImage = (index: number, event: Event) => {
   uploadImgs.value.splice(index, 1);
 };
 
+const ratingValue = ref<number>(0);
+const reviewText = ref<string>("");
+const reviewTextPattern = /^[A-Za-zА-Яа-я0-9\s.,!?@()"'&-]+$/;
+const isRatingNoticeVisible = ref(false);
+const isTextNoticeVisible = ref(false);
+const isTextNotice2Visible = ref(false);
 const isLoading = ref(false);
 const progressRing = ref<HTMLElement | null>(null);
 const isMessageVisible = ref(false);
 const animatedTick = ref<HTMLElement | null>(null);
 const animationOfTick = ref<any>(null);
-function handleLeaveReview() {
+
+const handleRatingSelected = (value: number) => {
+  ratingValue.value = value;
+  isRatingNoticeVisible.value = false;
+};
+
+const route = useRoute();
+const reviewsStore = useReviewsStore();
+const handleLeaveReview = () => {
+  isRatingNoticeVisible.value = false;
+  isTextNoticeVisible.value = false;
+  const trimmedReviewText = reviewText.value.trim();
+
+  if (ratingValue.value === 0 && !trimmedReviewText) {
+    isRatingNoticeVisible.value = true;
+    isTextNoticeVisible.value = true;
+    isTextNotice2Visible.value = false;
+    return;
+  } else if (
+    ratingValue.value === 0 &&
+    !reviewTextPattern.test(trimmedReviewText)
+  ) {
+    isRatingNoticeVisible.value = true;
+    isTextNoticeVisible.value = false;
+    isTextNotice2Visible.value = true;
+    return;
+  } else if (ratingValue.value === 0) {
+    isRatingNoticeVisible.value = true;
+    return;
+  } else if (!trimmedReviewText) {
+    isTextNoticeVisible.value = true;
+    isTextNotice2Visible.value = false;
+    return;
+  } else if (!reviewTextPattern.test(trimmedReviewText)) {
+    isTextNoticeVisible.value = false;
+    isTextNotice2Visible.value = true;
+    return;
+  }
   isLoading.value = true;
+  const date = format(new Date(), "d MMMM yyyy", { locale: ru });
+  const review = {
+    productId: Number(route.params.id),
+    username: "Дмитрий Севрюков",
+    rating: ratingValue.value,
+    date: date,
+    text: reviewText.value,
+    imgs: uploadImgs.value,
+  };
+  reviewsStore.addReview(review);
   nextTick(() => {
     const animation = lottie.loadAnimation({
       container: progressRing.value!,
@@ -183,7 +266,7 @@ function handleLeaveReview() {
       });
     }, 2800);
   });
-}
+};
 const closeThanksMessage = () => {
   isLeaveReviewShown.value = false;
   isContainerVisible.value = false;
@@ -229,6 +312,13 @@ const closeThanksMessage = () => {
     font-size: 1.375rem;
     color: #2c2f30;
   }
+  &__rating-notice {
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    color: #ff6915;
+    margin-bottom: -1rem;
+  }
   &__rating-body {
     display: flex;
     align-items: center;
@@ -267,6 +357,11 @@ const closeThanksMessage = () => {
   }
   &__field:focus {
     border: 2px solid $Dark-Black;
+  }
+  &__field-text-notice {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    color: #ff6915;
   }
   &__img-upload-area {
     border: 2px dashed #d3d3d3;
@@ -388,6 +483,9 @@ const closeThanksMessage = () => {
 
     &__container {
       gap: 2.125rem;
+    }
+    &__rating-notice {
+      margin-bottom: -1.375rem;
     }
     &__title {
       font-size: 2.188rem;

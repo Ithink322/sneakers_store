@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
-import type { Review } from "@/types/Review";
+import type { NewReview } from "@/types/NewReview";
+import type { RetrievedReview } from "@/types/RetrievedReview";
+import axios from "axios";
 
 interface ReviewsState {
-  allReviews: Review[];
+  allReviews: RetrievedReview[];
   currentPage: number;
   reviewsPerPage: number;
   translateValue: number;
@@ -19,14 +21,40 @@ export const useReviewsStore = defineStore("reviewsStore", {
     totalPages(state): number {
       return Math.ceil(state.allReviews.length / state.reviewsPerPage);
     },
-    paginatedReviews(state): Review[] {
+    paginatedReviews(state): RetrievedReview[] {
       const start = (state.currentPage - 1) * state.reviewsPerPage;
       const end = start + state.reviewsPerPage;
       return state.allReviews.slice(start, end);
     },
   },
   actions: {
-    setAllReviews(reviews: Review[]) {
+    async fetchReviews(productId: number) {
+      try {
+        const response = await axios.get(
+          `/api/reviews/get?productId=${productId}`
+        );
+        if (response.data.status === "success") {
+          this.setAllReviews(response.data.reviews);
+        } else {
+          console.error("Failed to fetch reviews:", response.data.error);
+        }
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    },
+    async addReview(review: NewReview) {
+      try {
+        const response = await axios.post("/api/reviews/add", review);
+        if (response.data.status === "success") {
+          this.allReviews.push(response.data.review);
+        } else {
+          console.error("Failed to add review:", response.data.error);
+        }
+      } catch (error) {
+        console.error("Error adding review:", error);
+      }
+    },
+    setAllReviews(reviews: RetrievedReview[]) {
       this.allReviews = reviews;
     },
     setPage(page: number) {

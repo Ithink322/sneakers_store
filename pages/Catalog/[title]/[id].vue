@@ -300,6 +300,7 @@
         <UIReviewsList></UIReviewsList>
         <UIPagination
           v-if="paginatedReviews.length > 0"
+          class="info__pagination"
           :container="container"
         ></UIPagination>
         <button @click="openLeaveReview" class="info__leave-review-btn">
@@ -326,7 +327,6 @@ import type { Product } from "@/types/Product";
 import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 import { useReviewsStore } from "@/store/Reviews";
-import { reviews } from "@/data/Reviews";
 
 const product = ref<Product>();
 const route = useRoute();
@@ -614,7 +614,7 @@ const openLeaveReview = () => {
   document.body.style.overflow = "hidden";
 };
 
-reviewsStore.setAllReviews(reviews);
+reviewsStore.fetchReviews(Number(route.params.id));
 const paginatedReviews = computed(() => reviewsStore.paginatedReviews);
 </script>
 
@@ -925,6 +925,9 @@ td {
     width: 180px;
     flex-shrink: 0;
   }
+  &__pagination {
+    margin-top: 5.625rem;
+  }
   &__leave-review-btn {
     @include btn;
     border: 1px solid $Light-Black;
@@ -932,6 +935,11 @@ td {
     width: 100%;
     font-family: "Pragmatica Medium";
     font-size: 0.75rem;
+    transition: all 0.3s ease;
+  }
+  &__leave-review-btn:hover {
+    background-color: $Light-Black;
+    color: #fff;
   }
 }
 .products-slider {

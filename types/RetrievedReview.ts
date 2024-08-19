@@ -1,5 +1,5 @@
-export interface Review {
-  _id: number;
+export interface RetrievedReview {
+  _id: string;
   productId: number;
   username: string;
   rating: number;

@@ -376,6 +376,9 @@ const submitForm = () => {
     font-family: "Pragmatica Book";
     color: #c1c1c1;
   }
+  &__input:focus {
+    border: 1px solid $Dark-Black;
+  }
   &__notice {
     font-family: "Pragmatica Book";
     line-height: 1.688rem;
@@ -395,6 +398,9 @@ const submitForm = () => {
     font-size: 0.938rem;
     line-height: 1.5rem;
     color: #c1c1c1;
+  }
+  &__textarea:focus {
+    border: 1px solid $Dark-Black;
   }
 }
 .label {

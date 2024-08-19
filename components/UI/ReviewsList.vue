@@ -21,6 +21,5 @@ const paginatedReviews = computed(() => store.paginatedReviews);
   display: flex;
   flex-direction: column;
   gap: 3.75rem;
-  margin-bottom: 5.625rem;
 }
 </style>

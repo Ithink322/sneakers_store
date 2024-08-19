@@ -16,7 +16,7 @@
     <div class="review-list__content">
       <img
         class="review-list__img"
-        :src="`/imgs/${img}`"
+        :src="`${img}`"
         alt="review image"
         v-for="(img, index) in review.imgs"
         :key="index"
@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Review } from "@/types/Review";
+import type { RetrievedReview } from "@/types/RetrievedReview";
 const props = defineProps<{
-  review: Review;
+  review: RetrievedReview;
 }>();
 </script>
 
