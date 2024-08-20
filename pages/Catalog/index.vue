@@ -169,7 +169,11 @@
                 :id="'material-checkbox-' + index"
                 @change="toggleMaterialFilter"
               />
-              <label :for="'material-checkbox-' + index">{{ material }}</label>
+              <label
+                class="filters__material-text"
+                :for="'material-checkbox-' + index"
+                >{{ material }}</label
+              >
             </div>
           </div>
         </div>
@@ -396,10 +400,11 @@
       </div>
     </div>
   </div>
-  <UIUndefinedMessage
+  <UIMessage
     v-if="paginatedProducts.length === 0"
     :text="'С выбранными фильтрами ничего не найдено.'"
-  ></UIUndefinedMessage>
+    :fill="'#f8f8f8'"
+  ></UIMessage>
   <UIProductList v-if="paginatedProducts.length > 0"></UIProductList>
   <UIPagination v-if="paginatedProducts.length > 0"></UIPagination>
 </template>
@@ -1336,6 +1341,10 @@ input[type="number"] {
       font-family: "Pragmatica Book";
       font-size: 1rem;
       color: #414141;
+      cursor: pointer;
+    }
+    &__material-text {
+      cursor: pointer;
     }
     &__dropdown-size-btn {
       width: 82px;

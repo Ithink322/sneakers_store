@@ -518,6 +518,7 @@ const updateWidth = () => {
   windowWidth.value = window.innerWidth;
 };
 const buttonWidth = computed(() => {
+  updateWidth();
   return windowWidth.value < 1200 ? "100%" : "307px";
 });
 onMounted(() => {

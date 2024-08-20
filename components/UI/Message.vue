@@ -1,10 +1,10 @@
 <template>
-  <div class="undefined-message">
+  <div class="message" :style="{ backgroundColor: bgColor, border: border }">
     <svg
       width="32"
       height="32"
       viewBox="0 0 32 32"
-      fill="#f8f8f8"
+      :fill="fill"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -15,7 +15,7 @@
         stroke-linejoin="round"
       />
     </svg>
-    <span class="undefined-message__text">{{ props.text }}</span>
+    <span class="message__text">{{ props.text }}</span>
   </div>
 </template>
 
@@ -25,12 +25,21 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  bgColor: {
+    type: String,
+  },
+  border: {
+    type: String,
+  },
+  fill: {
+    type: String,
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
-.undefined-message {
+.message {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -49,7 +58,7 @@ const props = defineProps({
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-  .undefined-message {
+  .message {
     flex-direction: row;
 
     &__text {

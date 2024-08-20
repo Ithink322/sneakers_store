@@ -15,7 +15,10 @@
         </button>
       </form>
       <nav class="burger-menu__body">
-        <UIMyAccountBtn style="margin-left: 0.938rem"></UIMyAccountBtn>
+        <UIMyAccountBtn
+          @click="closeBurgerMenu"
+          style="margin-left: 0.938rem"
+        ></UIMyAccountBtn>
         <div class="burger-menu__content">
           <button class="burger-menu__wishlist-btn">
             <img src="/imgs/wishlist-icon.svg" alt="" />

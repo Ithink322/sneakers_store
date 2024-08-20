@@ -8,23 +8,56 @@
           >Email или логин
           <span class="container__input-title--red">*</span></span
         >
+        <span
+          v-if="isLoginEmpty"
+          class="container__notice container__empty-notice"
+          >Важно заполнить это поле.</span
+        >
+        <span
+          v-if="!isLoginValid"
+          class="container__notice container__valid-notice"
+          >Введите корректный email или login.</span
+        >
         <input
+          v-model="login"
+          @input="loginOnInput"
           class="container__input"
           type="text"
           placeholder="Введите данные для авторизации"
+          :class="{
+            'login--empty': isLoginEmpty,
+            'invalid-login': !isLoginValid,
+          }"
         />
       </div>
       <div class="container__input-body">
         <span class="container__input-title"
           >Пароль <span class="container__input-title--red">*</span></span
         >
+        <span
+          v-if="isPassEmpty"
+          class="container__notice container__empty-notice"
+          >Важно заполнить это поле.</span
+        >
+        <span
+          v-if="!isPassValid"
+          class="container__notice container__valid-notice"
+          >Введите корректный пароль.</span
+        >
         <div class="container__input-container">
           <input
+            v-model="pass"
+            @input="passOnInput"
             class="container__input"
-            type="text"
+            :type="isPasswordVisible ? 'text' : 'password'"
             placeholder="Введите пароль от аккаунта"
+            :class="{
+              'pass--empty': isPassEmpty,
+              'invalid-pass': !isPassValid,
+            }"
           />
           <button
+            type="button"
             @click="togglePassword"
             class="container__toggle-password-btn"
           >
@@ -33,15 +66,27 @@
           </button>
         </div>
       </div>
-      <button class="container__recover-password-btn">
-        <span class="container__recover-password-text">
-          Восстановить пароль</span
-        >
-      </button>
-      <UIButton :content="'Войти в кабинет'" :width="'100%'"></UIButton>
+      <NuxtLink :to="'/PasswordRecovery'">
+        <button type="button" class="container__recover-password-btn">
+          <span class="container__recover-password-text">
+            Восстановить пароль</span
+          >
+        </button>
+      </NuxtLink>
+      <UIButton
+        type="submit"
+        :content="'Войти в кабинет'"
+        :width="'100%'"
+      ></UIButton>
       <div class="container__checkbox-content">
-        <input type="checkbox" class="container__checkbox" />
-        <label for="" class="container__checkbox-label">Запомнить меня</label>
+        <input
+          type="checkbox"
+          class="container__checkbox"
+          :id="'container__checkbox'"
+        />
+        <label class="container__checkbox-label" :for="'container__checkbox'"
+          >Запомнить меня</label
+        >
       </div>
     </form>
     <div class="container__content">
@@ -53,31 +98,112 @@
         <div class="container__texts">
           <p class="container__text">
             <span class="container__text--bold">Регистрация на сайте</span>
-            позволяет получить доступ к статусу и истории вашего заказа. Просто
-            заполните поля ниже, и вы получите учетную запись.
+            позволяет получить доступ к статусу<br
+              class="container__text-br--1200px"
+            />
+            и истории<br class="container__text-br--1440px" />
+            вашего заказа. Просто заполните поля ниже, и вы получите учетную<br
+              class="container__text-br--1440px"
+            />
+            запись.
           </p>
           <p class="container__text">
-            Мы запрашиваем у вас только информацию, необходимую для того, чтобы
-            сделать процесс покупки более быстрым и легким.
+            Мы запрашиваем у вас только информацию,<br
+              class="container__text-br--768px"
+            />
+            необходимую<br class="container__text-br--1200px" />
+            для того,<br class="container__text-br--1440px" />
+            чтобы сделать<br class="container__text-br--768px" />
+            процесс покупки более быстрым и легким.
           </p>
         </div>
       </div>
-      <UIButton
-        :content="'Зарегистрироваться'"
-        :bodyBgColor="'#ff6915'"
-        :arrowBgColor="'#fb5a00'"
-        :width="'100%'"
-      ></UIButton>
+      <NuxtLink :to="'/SignUp'">
+        <UIButton
+          type="button"
+          class="container__signUp-btn"
+          :content="'Зарегистрироваться'"
+          :bodyBgColor="'#ff6915'"
+          :arrowBgColor="'#fb5a00'"
+          :width="SignUpBtnWidth"
+        ></UIButton>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Inputmask from "inputmask";
+
+useHead({
+  title: "Вход в Sneakers Store - Найдите идеальные кроссовки",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Войдите в свой аккаунт Sneakers Store, чтобы просмотреть последние релизы, управлять заказами и быть в курсе самых горячих новинок.",
+    },
+    {
+      name: "keywords",
+      content:
+        "кроссовки, обувь, вход, аккаунт, sneakers store, обувь, уличная мода, кроссовки",
+    },
+  ],
+});
+
+const windowWidth = ref(0);
+const updateWidth = () => {
+  windowWidth.value = window.innerWidth;
+};
+onMounted(() => {
+  updateWidth();
+  window.addEventListener("resize", updateWidth);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateWidth);
+});
+const SignUpBtnWidth = computed(() => {
+  return windowWidth.value < 768 ? "100%" : "293px";
+});
+
 const isPasswordVisible = ref(false);
 const togglePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
-const logIn = () => {};
+
+const login = ref("");
+const pass = ref("");
+const isLoginEmpty = ref(false);
+const isPassEmpty = ref(false);
+const isLoginValid = ref(true);
+const isPassValid = ref(true);
+const loginOnInput = () => {
+  isLoginEmpty.value = login.value === "";
+  isLoginValid.value = true;
+};
+const passOnInput = () => {
+  isPassEmpty.value = pass.value === "";
+  isPassValid.value = true;
+};
+const logIn = () => {
+  if (login.value === "") {
+    isLoginEmpty.value = true;
+    isLoginValid.value = true;
+  } else {
+    isLoginEmpty.value = false;
+    const loginRegex =
+      /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    isLoginValid.value = loginRegex.test(login.value);
+  }
+  if (pass.value === "") {
+    isPassEmpty.value = true;
+    isPassValid.value = true;
+  } else {
+    isPassEmpty.value = false;
+    const passRegex = /^[A-Za-z\d]{8,20}$/;
+    isPassValid.value = passRegex.test(pass.value);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -114,6 +240,11 @@ const logIn = () => {};
   }
   &__input-title--red {
     color: #ff1515;
+  }
+  &__notice {
+    font-family: "Pragmatica Book";
+    line-height: 0.938rem;
+    color: #f81d2a;
   }
   &__input {
     padding: 1.031rem 1.25rem;
@@ -185,8 +316,10 @@ const logIn = () => {};
   &__checkbox-label {
     font-family: "Pragmatica Book";
     font-size: 0.938rem;
+    cursor: pointer;
   }
   &__content {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
@@ -228,12 +361,40 @@ const logIn = () => {};
     font-family: "Pragmatica Bold";
     font-size: 0.938rem;
   }
+  &__text-br--768px,
+  &__text-br--1200px,
+  &__text-br--1440px {
+    display: none;
+  }
+}
+.invalid-login,
+.login--empty,
+.invalid-pass,
+.pass--empty {
+  border: 1px solid #f81d2a;
+}
+.invalid-login::placeholder,
+.login--empty::placeholder,
+.invalid-pass::placeholder,
+.pass--empty::placeholder {
+  color: #f81d2a;
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
+  .title {
+    margin-bottom: 1.125rem;
+  }
   .container {
     flex-direction: row;
+    gap: 1.25rem;
 
+    &__form {
+      flex-shrink: 0;
+      width: 324px;
+    }
+    &__content {
+      align-items: center;
+    }
     &__headline {
       flex-direction: row;
       align-items: center;
@@ -243,18 +404,69 @@ const logIn = () => {};
     &__icon {
       margin: 0;
     }
+    &__texts {
+      gap: 0.563rem;
+    }
+    &__signUp-btn {
+      margin: 0 auto;
+    }
+    &__text-br--768px {
+      display: block;
+    }
   }
-}
-/* 1024px = 64em */
-@media (min-width: 64em) {
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
+  .title {
+    margin-bottom: 3.313rem;
+  }
+  .container {
+    align-items: center;
+    gap: 15.688rem;
+    padding: 2.5rem;
+
+    &__content {
+      align-items: stretch;
+    }
+    &__content::before {
+      position: absolute;
+      content: "";
+      height: 100%;
+      border: 1px solid #eaeaea;
+      margin-left: -7.375rem;
+    }
+    &__body {
+      gap: 2rem;
+    }
+    &__headline {
+      margin-left: -4.25rem;
+    }
+    &__text {
+      text-align: left;
+    }
+    &__text-br--768px {
+      display: none;
+    }
+    &__text-br--1200px {
+      display: block;
+    }
+    &__signUp-btn {
+      margin-left: 0;
+    }
+  }
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
-}
-/* 1920px = 120em */
-@media (min-width: 120em) {
+  .container {
+    &__form {
+      width: 464px;
+    }
+    &__text-br--1200px {
+      display: none;
+    }
+    &__text-br--1440px {
+      display: block;
+    }
+  }
 }
 </style>

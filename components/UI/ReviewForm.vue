@@ -91,6 +91,7 @@
           />
         </div>
         <UIButton
+          type="submit"
           class="leave-review__btn"
           :content="'Оставить отзыв'"
         ></UIButton>
@@ -150,12 +151,6 @@ const closeLeaveReview = () => {
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const uploadImgs = ref<string[]>([]);
-const allowedExtensions = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
 const triggerFileInput = () => {
   if (fileInput.value) {
     fileInput.value.click();
