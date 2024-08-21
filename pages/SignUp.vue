@@ -2,25 +2,59 @@
   <UIBreadcrumb :breadcrumbTitle="'Регистрация'"></UIBreadcrumb>
   <h1 class="title">Регистрация</h1>
   <div class="container">
-    <form @submit.prevent="logIn" class="container__form">
+    <form @submit.prevent="signUp" class="container__form">
       <div class="container__input-body">
         <span class="container__input-title"
-          >Email <span class="container__input-title--red">*</span></span
+          >Email или логин<span class="container__input-title--red"
+            >*</span
+          ></span
+        >
+        <span
+          v-if="isLoginEmpty"
+          class="container__notice container__empty-notice"
+          >Важно заполнить это поле.</span
+        >
+        <span
+          v-if="!isLoginValid"
+          class="container__notice container__valid-notice"
+          >Введите корректный email или login.</span
         >
         <input
-          class="container__input container__input-email"
+          v-model="login"
+          @input="loginOnInput"
+          class="container__input"
           type="text"
-          placeholder="Введите email адрес"
+          placeholder="Введите email адрес или логин"
+          :class="{
+            'login--empty': isLoginEmpty,
+            'invalid-login': !isLoginValid,
+          }"
         />
       </div>
       <div class="container__input-body">
         <span class="container__input-title"
           >ФИО <span class="container__input-title--red">*</span></span
         >
+        <span
+          v-if="isFioEmpty"
+          class="container__notice container__empty-notice"
+          >Важно заполнить это поле.</span
+        >
+        <span
+          v-if="!isFioValid"
+          class="container__notice container__valid-notice"
+          >Введите корректное ФИО.</span
+        >
         <input
-          class="container__input container__input-fio"
+          v-model="fio"
+          @input="fioOnInput"
+          class="container__input"
           type="text"
           placeholder="Ваше полное имя"
+          :class="{
+            'fio--empty': isFioEmpty,
+            'invalid-fio': !isFioValid,
+          }"
         />
       </div>
       <div class="container__input-body">
@@ -28,22 +62,45 @@
           >Номер телефона
           <span class="container__input-title--red">*</span></span
         >
+        <span
+          v-if="isNumberEmpty"
+          class="container__notice container__empty-notice"
+          >Важно заполнить это поле.</span
+        >
         <input
-          class="container__input container__input-number"
-          id="telephone"
+          v-model="number"
+          @input="numberOnInput"
+          class="container__input"
+          id="number"
           type="text"
           placeholder="+7 (___) ___ - ___ - ___"
+          :class="{
+            'number--empty': isNumberEmpty,
+          }"
         />
       </div>
       <div class="container__input-body">
         <span class="container__input-title"
           >Пароль <span class="container__input-title--red">*</span></span
         >
+        <span
+          v-if="activePass1Notice"
+          class="container__notice container__valid-notice"
+          >{{ activePass1Notice }}</span
+        >
         <div class="container__input-container">
           <input
-            class="container__input container__input-password-1"
+            v-model="pass1"
+            @input="pass1OnInput"
+            class="container__input"
             :type="isPasswordVisible1 ? 'text' : 'password'"
             placeholder="Придумайте пароль"
+            :class="{
+              'pass-1--empty': isPass1Empty,
+              'invalid-pass-1': !isPass1Valid,
+              'equal-passes': !arePassesEqual,
+              'pass-1-length': !isPass1LengthValid,
+            }"
           />
           <button
             type="button"
@@ -60,11 +117,24 @@
           >Повторите пароль
           <span class="container__input-title--red">*</span></span
         >
+        <span
+          v-if="activePass2Notice"
+          class="container__notice container__valid-notice"
+          >{{ activePass2Notice }}</span
+        >
         <div class="container__input-container">
           <input
-            class="container__input container__input-password-2"
+            v-model="pass2"
+            @input="pass2OnInput"
+            class="container__input"
             :type="isPasswordVisible2 ? 'text' : 'password'"
             placeholder="Придумайте пароль"
+            :class="{
+              'pass-2--empty': isPass2Empty,
+              'invalid-pass-2': !isPass2Valid,
+              'equal-passes': !arePassesEqual,
+              'pass-2-length': !isPass2LengthValid,
+            }"
           />
           <button
             type="button"
@@ -76,13 +146,14 @@
           </button>
         </div>
       </div>
-      <UIButton
-        class="container__create-an-acc-btn"
-        :content="'Создать аккаунт'"
-        :width="'100%'"
-      ></UIButton>
+      <span
+        v-if="!isPolicyAccepted"
+        class="container__notice container__valid-notice"
+        >Пожалуйста подтвердите обработку персональных данных.</span
+      >
       <div class="container__checkbox-content">
         <input
+          v-model="isPolicyAccepted"
           type="checkbox"
           class="container__checkbox"
           :id="'container__checkbox'"
@@ -96,6 +167,11 @@
           ></label
         >
       </div>
+      <UIButton
+        class="container__create-an-acc-btn"
+        :content="'Создать аккаунт'"
+        :width="'100%'"
+      ></UIButton>
     </form>
     <div class="container__content">
       <div class="container__body">
@@ -109,21 +185,22 @@
           есть зарегистрированный аккаунт.
         </p>
       </div>
-      <NuxtLink :to="'/logIn'">
-        <UIButton
-          type="button"
-          class="container__logIn-btn"
-          :content="'Авторизоваться'"
-          :bodyBgColor="'#ff6915'"
-          :arrowBgColor="'#fb5a00'"
-          :width="btnWidth"
-        ></UIButton>
-      </NuxtLink>
+      <UIButton
+        type="button"
+        class="container__logIn-btn"
+        :link="'/logIn'"
+        :content="'Авторизоваться'"
+        :bodyBgColor="'#ff6915'"
+        :arrowBgColor="'#fb5a00'"
+        :width="btnWidth"
+      ></UIButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Inputmask from "inputmask";
+
 useHead({
   title: "Присоединяйтесь к Sneakers Store - Откройте для себя мир кроссовок",
   meta: [
@@ -163,14 +240,164 @@ const togglePassword1 = () => {
 const togglePassword2 = () => {
   isPasswordVisible2.value = !isPasswordVisible2.value;
 };
-const logIn = () => {};
 
-/* onMounted(() => {
-  const telephoneInput = document.getElementById(
-    "telephone"
-  )! as HTMLInputElement;
-  Inputmask("+7 (999) 999-99-99").mask(telephoneInput);
-}); */
+onMounted(() => {
+  const numberInput = document.getElementById("number")! as HTMLInputElement;
+  Inputmask("+7 (999) 999-99-99").mask(numberInput);
+});
+
+const login = ref("");
+const fio = ref("");
+const number = ref("");
+const pass1 = ref("");
+const pass2 = ref("");
+const isLoginEmpty = ref(false);
+const isFioEmpty = ref(false);
+const isNumberEmpty = ref(false);
+const activePass1Notice = ref<string | null>(null);
+const activePass2Notice = ref<string | null>(null);
+const isPass1Empty = ref(false);
+const isPass2Empty = ref(false);
+const isLoginValid = ref(true);
+const isFioValid = ref(true);
+const isPass1Valid = ref(true);
+const isPass2Valid = ref(true);
+const isPass1LengthValid = ref(true);
+const isPass2LengthValid = ref(true);
+const arePassesEqual = ref(true);
+const loginOnInput = () => {
+  isLoginEmpty.value = login.value === "";
+  isLoginValid.value = true;
+};
+const fioOnInput = () => {
+  isFioEmpty.value = fio.value === "";
+  isFioValid.value = true;
+};
+const numberOnInput = () => {
+  isNumberEmpty.value = number.value === "";
+};
+const pass1OnInput = () => {
+  isPass1Empty.value = pass1.value === "";
+  isPass1Valid.value = true;
+
+  if (pass1.value.length >= 8 && pass1.value.length <= 20) {
+    activePass1Notice.value = "";
+    isPass1LengthValid.value = true;
+  }
+  if (pass1.value === pass2.value) {
+    arePassesEqual.value = true;
+    activePass1Notice.value = "";
+  }
+};
+const pass2OnInput = () => {
+  isPass2Empty.value = pass2.value === "";
+  isPass2Valid.value = true;
+
+  if (pass2.value.length >= 8 && pass2.value.length <= 20) {
+    activePass2Notice.value = "";
+    isPass2LengthValid.value = true;
+  }
+  if (pass1.value === pass2.value) {
+    arePassesEqual.value = true;
+    activePass1Notice.value = "";
+  }
+};
+
+const router = useRouter();
+const isPolicyAccepted = ref(true);
+const signUp = () => {
+  if (login.value === "") {
+    isLoginEmpty.value = true;
+    isLoginValid.value = true;
+  } else {
+    isLoginEmpty.value = false;
+    const loginRegex =
+      /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    isLoginValid.value = loginRegex.test(login.value);
+  }
+
+  if (fio.value === "") {
+    isFioEmpty.value = true;
+    isFioValid.value = true;
+  } else {
+    isFioEmpty.value = false;
+    const fioRegex =
+      /^(?:[А-ЯЁа-яёA-Za-z]+\s[А-ЯЁа-яёA-Za-z]+)(?:\s[А-ЯЁа-яёA-Za-z]+)?$/;
+    isFioValid.value = fioRegex.test(fio.value.trim());
+  }
+
+  const numberDigits = number.value.replace(/\D/g, "");
+  if (number.value === "") {
+    isNumberEmpty.value = true;
+  } else {
+    isNumberEmpty.value = false;
+  }
+
+  if (
+    numberDigits.length === 11 &&
+    numberDigits.match(/^7\d{3}\d{3}\d{2}\d{2}$/)
+  ) {
+    isNumberEmpty.value = false;
+  } else {
+    isNumberEmpty.value = true;
+  }
+
+  const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
+  if (pass1.value === "") {
+    isPass1Empty.value = true;
+    isPass1Valid.value = true;
+  } else {
+    isPass1Empty.value = false;
+    isPass1Valid.value = passRegex.test(pass1.value);
+  }
+  if (pass2.value === "") {
+    isPass2Empty.value = true;
+    isPass2Valid.value = true;
+  } else {
+    isPass2Empty.value = false;
+    isPass2Valid.value = passRegex.test(pass2.value);
+  }
+  arePassesEqual.value = pass1.value === pass2.value;
+
+  activePass1Notice.value = null;
+  activePass2Notice.value = null;
+  if (isPass1Empty.value) {
+    activePass1Notice.value = "Важно заполнить это поле.";
+  } else if (!(pass1.value.length >= 8 && pass1.value.length <= 20)) {
+    activePass1Notice.value = "Пароль должен содержать от 8 до 20 символов.";
+  } else if (!passRegex.test(pass1.value)) {
+    activePass1Notice.value =
+      "Пароль не должен содержать специальных символов.";
+  } else if (pass1.value !== pass2.value) {
+    activePass1Notice.value = "Пароли не совпадают.";
+  }
+  if (isPass2Empty.value) {
+    activePass2Notice.value = "Важно заполнить это поле.";
+  } else if (!(pass2.value.length >= 8 && pass2.value.length <= 20)) {
+    activePass2Notice.value = "Пароль должен содержать от 8 до 20 символов.";
+  } else if (!passRegex.test(pass2.value)) {
+    activePass2Notice.value =
+      "Пароль не должен содержать специальных символов.";
+  }
+
+  if (
+    isLoginValid.value &&
+    isFioValid.value &&
+    numberDigits.length === 11 &&
+    numberDigits.match(/^7\d{3}\d{3}\d{2}\d{2}$/) &&
+    isPass1Valid.value &&
+    isPass2Valid.value &&
+    arePassesEqual.value &&
+    login.value !== "" &&
+    fio.value !== "" &&
+    number.value !== "" &&
+    pass1.value !== "" &&
+    pass2.value !== "" &&
+    isPolicyAccepted.value
+  ) {
+    router.push("/catalog?page=1");
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -207,6 +434,11 @@ const logIn = () => {};
   }
   &__input-title--red {
     color: #ff1515;
+  }
+  &__notice {
+    font-family: "Pragmatica Book";
+    line-height: 0.938rem;
+    color: #f81d2a;
   }
   &__input {
     padding: 1.031rem 1.25rem;
@@ -322,6 +554,31 @@ const logIn = () => {};
     font-size: 0.938rem;
   }
 }
+.invalid-login,
+.login--empty,
+.invalid-fio,
+.fio--empty,
+.number--empty,
+.invalid-pass-1,
+.pass-1--empty,
+.invalid-pass-2,
+.pass-2--empty,
+.equal-passes {
+  border: 1px solid #f81d2a;
+  color: #f81d2a;
+}
+.invalid-login::placeholder,
+.login--empty::placeholder,
+.invalid-fio::placeholder,
+.fio--empty::placeholder,
+.number--empty::placeholder,
+.invalid-pass-1::placeholder,
+.pass-1--empty::placeholder,
+.invalid-pass-2::placeholder,
+.pass-2--empty::placeholder,
+.equal-passes::placeholder {
+  color: #f81d2a;
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .title {
@@ -334,12 +591,6 @@ const logIn = () => {};
     &__form {
       flex-shrink: 0;
       width: 324px;
-    }
-    &__create-an-acc-btn {
-      order: 1;
-    }
-    &__checkbox-content {
-      order: 0;
     }
     &__content {
       align-items: center;

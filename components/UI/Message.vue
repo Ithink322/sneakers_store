@@ -1,5 +1,8 @@
 <template>
-  <div class="message" :style="{ backgroundColor: bgColor, border: border }">
+  <div
+    class="message"
+    :style="{ backgroundColor: bgColor, border: border, width: width }"
+  >
     <svg
       width="32"
       height="32"
@@ -31,6 +34,9 @@ const props = defineProps({
   border: {
     type: String,
   },
+  width: {
+    type: String,
+  },
   fill: {
     type: String,
   },
@@ -47,7 +53,11 @@ const props = defineProps({
   justify-content: center;
   background-color: #f8f8f8;
   padding: 2.188rem;
+  margin: 0 auto;
 
+  & svg {
+    flex-shrink: 0;
+  }
   &__text {
     text-align: center;
     font-family: "Pragmatica Book";

@@ -23,7 +23,7 @@
           @input="loginOnInput"
           class="container__input"
           type="text"
-          placeholder="Введите данные для авторизации"
+          placeholder="Введите email адрес или логин"
           :class="{
             'login--empty': isLoginEmpty,
             'invalid-login': !isLoginValid,
@@ -35,14 +35,9 @@
           >Пароль <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="isPassEmpty"
-          class="container__notice container__empty-notice"
-          >Важно заполнить это поле.</span
-        >
-        <span
-          v-if="!isPassValid"
+          v-if="activePassNotice"
           class="container__notice container__valid-notice"
-          >Введите корректный пароль.</span
+          >{{ activePassNotice }}</span
         >
         <div class="container__input-container">
           <input
@@ -54,6 +49,7 @@
             :class="{
               'pass--empty': isPassEmpty,
               'invalid-pass': !isPassValid,
+              'pass-1-length': !isPassLengthValid,
             }"
           />
           <button
@@ -118,23 +114,20 @@
           </p>
         </div>
       </div>
-      <NuxtLink :to="'/SignUp'">
-        <UIButton
-          type="button"
-          class="container__signUp-btn"
-          :content="'Зарегистрироваться'"
-          :bodyBgColor="'#ff6915'"
-          :arrowBgColor="'#fb5a00'"
-          :width="SignUpBtnWidth"
-        ></UIButton>
-      </NuxtLink>
+      <UIButton
+        type="button"
+        class="container__signUp-btn"
+        :link="'/SignUp'"
+        :content="'Зарегистрироваться'"
+        :bodyBgColor="'#ff6915'"
+        :arrowBgColor="'#fb5a00'"
+        :width="SignUpBtnWidth"
+      ></UIButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Inputmask from "inputmask";
-
 useHead({
   title: "Вход в Sneakers Store - Найдите идеальные кроссовки",
   meta: [
@@ -177,6 +170,8 @@ const isLoginEmpty = ref(false);
 const isPassEmpty = ref(false);
 const isLoginValid = ref(true);
 const isPassValid = ref(true);
+const isPassLengthValid = ref(true);
+const activePassNotice = ref<string | null>(null);
 const loginOnInput = () => {
   isLoginEmpty.value = login.value === "";
   isLoginValid.value = true;
@@ -184,7 +179,14 @@ const loginOnInput = () => {
 const passOnInput = () => {
   isPassEmpty.value = pass.value === "";
   isPassValid.value = true;
+
+  if (pass.value.length >= 8 && pass.value.length <= 20) {
+    activePassNotice.value = "";
+    isPassLengthValid.value = true;
+  }
 };
+
+const router = useRouter();
 const logIn = () => {
   if (login.value === "") {
     isLoginEmpty.value = true;
@@ -195,13 +197,32 @@ const logIn = () => {
       /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
     isLoginValid.value = loginRegex.test(login.value);
   }
+
+  const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
   if (pass.value === "") {
     isPassEmpty.value = true;
     isPassValid.value = true;
   } else {
     isPassEmpty.value = false;
-    const passRegex = /^[A-Za-z\d]{8,20}$/;
     isPassValid.value = passRegex.test(pass.value);
+  }
+
+  activePassNotice.value = null;
+  if (isPassEmpty.value) {
+    activePassNotice.value = "Важно заполнить это поле.";
+  } else if (!(pass.value.length >= 8 && pass.value.length <= 20)) {
+    activePassNotice.value = "Пароль должен содержать от 8 до 20 символов.";
+  } else if (!passRegex.test(pass.value)) {
+    activePassNotice.value = "Пароль не должен содержать специальных символов.";
+  }
+
+  if (
+    isLoginValid.value &&
+    isPassValid.value &&
+    login.value !== "" &&
+    pass.value !== ""
+  ) {
+    router.push("/catalog?page=1");
   }
 };
 </script>
@@ -372,6 +393,7 @@ const logIn = () => {
 .invalid-pass,
 .pass--empty {
   border: 1px solid #f81d2a;
+  color: #f81d2a;
 }
 .invalid-login::placeholder,
 .login--empty::placeholder,

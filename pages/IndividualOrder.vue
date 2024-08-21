@@ -435,6 +435,12 @@ const submitForm = () => {
     }
   }
 }
+.invalid-name,
+.invalid-email,
+.invalid-phone {
+  border: 1px solid #f81d2a;
+  color: #f81d2a;
+}
 .invalid-name::placeholder,
 .invalid-email,
 .invalid-email::placeholder,
