@@ -14,8 +14,6 @@ Frontend:
 - Pinia
 
 backend:
-- Node JS
-- Express 
 - mongodb
 - mongoose
 - JWT
