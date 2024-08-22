@@ -1,4 +1,4 @@
-import ReviewModel from "@/models/Review";
+import ReviewModel from "@/server/models/Review";
 import { defineEventHandler, getQuery } from "h3";
 import connectToDB from "@/utils/connectToDB";
 

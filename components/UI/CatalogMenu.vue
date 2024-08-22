@@ -146,10 +146,13 @@ const currentCatalogPage = computed(() => catalogStore.currentPage);
     &__column-list li {
       font-family: "Pragmatica Book";
       font-size: 0.875rem;
-    }
-    &__column-list li:hover {
-      color: $Blue;
       cursor: pointer;
+    }
+    &__column-list li a {
+      transition: color 0.3s ease;
+    }
+    &__column-list li:hover a {
+      color: $Dark-Orange;
     }
   }
   .menu__hero-card {

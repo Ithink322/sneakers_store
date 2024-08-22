@@ -138,6 +138,7 @@ import lottie from "lottie-web";
 import { useReviewsStore } from "@/store/Reviews";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
+import { useAuthStore } from "@/store/Auth";
 
 const isLeaveReviewShown = inject("isLeaveReviewShown") as Ref<boolean>;
 const isContainerVisible = inject("isContainerVisible") as Ref<boolean>;
@@ -194,6 +195,8 @@ const handleRatingSelected = (value: number) => {
 
 const route = useRoute();
 const reviewsStore = useReviewsStore();
+const authStore = useAuthStore();
+const fio = computed(() => authStore.fio);
 const handleLeaveReview = () => {
   isRatingNoticeVisible.value = false;
   isTextNoticeVisible.value = false;
@@ -228,7 +231,7 @@ const handleLeaveReview = () => {
   const date = format(new Date(), "d MMMM yyyy", { locale: ru });
   const review = {
     productId: Number(route.params.id),
-    username: "Дмитрий Севрюков",
+    username: fio.value,
     rating: ratingValue.value,
     date: date,
     text: reviewText.value,

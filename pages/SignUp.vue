@@ -19,6 +19,11 @@
           class="container__notice container__valid-notice"
           >Введите корректный email или login.</span
         >
+        <span
+          v-if="!isLoginUnique"
+          class="container__notice container__valid-notice"
+          >Email или login уже существует.</span
+        >
         <input
           v-model="login"
           @input="loginOnInput"
@@ -128,7 +133,7 @@
             @input="pass2OnInput"
             class="container__input"
             :type="isPasswordVisible2 ? 'text' : 'password'"
-            placeholder="Придумайте пароль"
+            placeholder="Повторите пароль"
             :class="{
               'pass-2--empty': isPass2Empty,
               'invalid-pass-2': !isPass2Valid,
@@ -200,6 +205,7 @@
 
 <script setup lang="ts">
 import Inputmask from "inputmask";
+import axios from "axios";
 
 useHead({
   title: "Присоединяйтесь к Sneakers Store - Откройте для себя мир кроссовок",
@@ -265,9 +271,11 @@ const isPass2Valid = ref(true);
 const isPass1LengthValid = ref(true);
 const isPass2LengthValid = ref(true);
 const arePassesEqual = ref(true);
+const isLoginUnique = ref(true);
 const loginOnInput = () => {
   isLoginEmpty.value = login.value === "";
   isLoginValid.value = true;
+  isLoginUnique.value = true;
 };
 const fioOnInput = () => {
   isFioEmpty.value = fio.value === "";
@@ -303,9 +311,7 @@ const pass2OnInput = () => {
   }
 };
 
-const router = useRouter();
-const isPolicyAccepted = ref(true);
-const signUp = () => {
+const validateLogin = () => {
   if (login.value === "") {
     isLoginEmpty.value = true;
     isLoginValid.value = true;
@@ -315,7 +321,8 @@ const signUp = () => {
       /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
     isLoginValid.value = loginRegex.test(login.value);
   }
-
+};
+const validateFio = () => {
   if (fio.value === "") {
     isFioEmpty.value = true;
     isFioValid.value = true;
@@ -325,7 +332,9 @@ const signUp = () => {
       /^(?:[А-ЯЁа-яёA-Za-z]+\s[А-ЯЁа-яёA-Za-z]+)(?:\s[А-ЯЁа-яёA-Za-z]+)?$/;
     isFioValid.value = fioRegex.test(fio.value.trim());
   }
-
+};
+/* const numberDigits = number.value.replace(/\D/g, ""); */
+const validateNumber = () => {
   const numberDigits = number.value.replace(/\D/g, "");
   if (number.value === "") {
     isNumberEmpty.value = true;
@@ -341,7 +350,8 @@ const signUp = () => {
   } else {
     isNumberEmpty.value = true;
   }
-
+};
+const validatePasses = () => {
   const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
   if (pass1.value === "") {
     isPass1Empty.value = true;
@@ -379,7 +389,17 @@ const signUp = () => {
     activePass2Notice.value =
       "Пароль не должен содержать специальных символов.";
   }
+};
 
+const router = useRouter();
+const isPolicyAccepted = ref(true);
+const signUp = async () => {
+  validateLogin();
+  validateFio();
+  validateNumber();
+  validatePasses();
+
+  const numberDigits = number.value.replace(/\D/g, "");
   if (
     isLoginValid.value &&
     isFioValid.value &&
@@ -395,7 +415,22 @@ const signUp = () => {
     pass2.value !== "" &&
     isPolicyAccepted.value
   ) {
-    router.push("/catalog?page=1");
+    try {
+      const response = await axios.post("/api/signUp", {
+        login: login.value,
+        fio: fio.value,
+        number: number.value,
+        password: pass1.value,
+      });
+
+      if (response.data.success) {
+        router.push("/logIn");
+      } else {
+        console.error("Sign-up failed:", response.data.message);
+      }
+    } catch (error) {
+      isLoginUnique.value = false;
+    }
   }
 };
 </script>

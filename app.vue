@@ -8,6 +8,15 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import { useAuthStore } from "@/store/Auth";
+
+const authStore = useAuthStore();
+onMounted(() => {
+  authStore.initializeAuth();
+});
+</script>
+
 <style lang="scss">
 html {
   box-sizing: border-box;

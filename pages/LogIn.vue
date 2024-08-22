@@ -3,6 +3,11 @@
   <h1 class="title">Авторизация</h1>
   <div class="container">
     <form @submit.prevent="logIn" class="container__form">
+      <span
+        v-if="!isDataCorrect"
+        class="container__notice container__empty-notice"
+        >Неверный логин или пароль.</span
+      >
       <div class="container__input-body">
         <span class="container__input-title"
           >Email или логин
@@ -128,6 +133,9 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from "@/store/Auth";
+import axios from "axios";
+
 useHead({
   title: "Вход в Sneakers Store - Найдите идеальные кроссовки",
   meta: [
@@ -172,13 +180,16 @@ const isLoginValid = ref(true);
 const isPassValid = ref(true);
 const isPassLengthValid = ref(true);
 const activePassNotice = ref<string | null>(null);
+const isDataCorrect = ref(true);
 const loginOnInput = () => {
   isLoginEmpty.value = login.value === "";
   isLoginValid.value = true;
+  isDataCorrect.value = true;
 };
 const passOnInput = () => {
   isPassEmpty.value = pass.value === "";
   isPassValid.value = true;
+  isDataCorrect.value = true;
 
   if (pass.value.length >= 8 && pass.value.length <= 20) {
     activePassNotice.value = "";
@@ -186,8 +197,7 @@ const passOnInput = () => {
   }
 };
 
-const router = useRouter();
-const logIn = () => {
+const validateLogin = () => {
   if (login.value === "") {
     isLoginEmpty.value = true;
     isLoginValid.value = true;
@@ -197,7 +207,8 @@ const logIn = () => {
       /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
     isLoginValid.value = loginRegex.test(login.value);
   }
-
+};
+const validatePass = () => {
   const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
   if (pass.value === "") {
     isPassEmpty.value = true;
@@ -215,6 +226,13 @@ const logIn = () => {
   } else if (!passRegex.test(pass.value)) {
     activePassNotice.value = "Пароль не должен содержать специальных символов.";
   }
+};
+
+const authStore = useAuthStore();
+const router = useRouter();
+const logIn = async () => {
+  validateLogin();
+  validatePass();
 
   if (
     isLoginValid.value &&
@@ -222,7 +240,22 @@ const logIn = () => {
     login.value !== "" &&
     pass.value !== ""
   ) {
-    router.push("/catalog?page=1");
+    try {
+      const response = await axios.post("/api/logIn", {
+        login: login.value,
+        password: pass.value,
+      });
+
+      if (response.data.success) {
+        authStore.getAuthData(response.data.fio, response.data.token);
+        router.push("/catalog?page=1");
+      } else {
+        console.error("Login failed:", response.data.message);
+        isDataCorrect.value = false;
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+    }
   }
 };
 </script>

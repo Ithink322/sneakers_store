@@ -299,11 +299,15 @@
       <div class="info__reviews" v-if="activeSection === 'reviews'">
         <UIReviewsList></UIReviewsList>
         <UIPagination
-          v-if="paginatedReviews.length > 0"
+          v-if="allReviews.length > 4"
           class="info__pagination"
           :container="container"
         ></UIPagination>
-        <button @click="openLeaveReview" class="info__leave-review-btn">
+        <button
+          @click="openLeaveReview"
+          class="info__leave-review-btn"
+          :style="{ 'margin-top': marginTop }"
+        >
           ОСТАВИТЬ ОТЗЫВ
         </button>
       </div>
@@ -616,7 +620,14 @@ const openLeaveReview = () => {
 };
 
 reviewsStore.fetchReviews(Number(route.params.id));
-const paginatedReviews = computed(() => reviewsStore.paginatedReviews);
+
+const allReviews = computed(() => reviewsStore.allReviews);
+const marginTop = ref("5.625rem");
+if (allReviews.value.length <= 4 && allReviews.value.length > 0) {
+  marginTop.value = "5.625rem";
+} else if (allReviews.value.length > 4 || allReviews.value.length === 0) {
+  marginTop.value = "0rem";
+}
 </script>
 
 <style lang="scss" scoped>
