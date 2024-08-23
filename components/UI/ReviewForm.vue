@@ -40,17 +40,16 @@
         </div>
         <div class="leave-review__field-container">
           <span class="leave-review__field-title">Текст отзыва</span>
-          <span
-            v-if="isTextNoticeVisible"
-            class="leave-review__field-text-notice"
+          <span v-if="isReviewTextEmpty" class="leave-review__field-text-notice"
             >Напишите отзыв, пожалуйста</span
           >
           <span
-            v-if="isTextNotice2Visible"
+            v-if="!isTextNoticeValid"
             class="leave-review__field-text-notice"
             >Напишите отзыв без специальных символов
           </span>
           <textarea
+            @input="reviewTextOnInput"
             class="leave-review__field"
             placeholder="Текст"
             v-model="reviewText"
@@ -73,6 +72,7 @@
               class="leave-review__img-container"
             >
               <button
+                type="button"
                 @click="deleteImage(index, $event)"
                 class="leave-review__delete-btn"
               >
@@ -180,8 +180,8 @@ const ratingValue = ref<number>(0);
 const reviewText = ref<string>("");
 const reviewTextPattern = /^[A-Za-zА-Яа-я0-9\s.,!?@()"'&-]+$/;
 const isRatingNoticeVisible = ref(false);
-const isTextNoticeVisible = ref(false);
-const isTextNotice2Visible = ref(false);
+const isReviewTextEmpty = ref(false);
+const isTextNoticeValid = ref(true);
 const isLoading = ref(false);
 const progressRing = ref<HTMLElement | null>(null);
 const isMessageVisible = ref(false);
@@ -193,40 +193,47 @@ const handleRatingSelected = (value: number) => {
   isRatingNoticeVisible.value = false;
 };
 
+const reviewTextOnInput = () => {
+  isReviewTextEmpty.value = reviewText.value === "";
+  isTextNoticeValid.value = true;
+};
+
 const route = useRoute();
 const reviewsStore = useReviewsStore();
 const authStore = useAuthStore();
 const fio = computed(() => authStore.fio);
 const handleLeaveReview = () => {
   isRatingNoticeVisible.value = false;
-  isTextNoticeVisible.value = false;
+  isReviewTextEmpty.value = false;
   const trimmedReviewText = reviewText.value.trim();
+  isTextNoticeValid.value = reviewTextPattern.test(trimmedReviewText);
 
   if (ratingValue.value === 0 && !trimmedReviewText) {
     isRatingNoticeVisible.value = true;
-    isTextNoticeVisible.value = true;
-    isTextNotice2Visible.value = false;
+    isReviewTextEmpty.value = true;
+    isTextNoticeValid.value = false;
     return;
   } else if (
     ratingValue.value === 0 &&
     !reviewTextPattern.test(trimmedReviewText)
   ) {
     isRatingNoticeVisible.value = true;
-    isTextNoticeVisible.value = false;
-    isTextNotice2Visible.value = true;
+    isReviewTextEmpty.value = false;
+    isTextNoticeValid.value = true;
     return;
   } else if (ratingValue.value === 0) {
     isRatingNoticeVisible.value = true;
     return;
   } else if (!trimmedReviewText) {
-    isTextNoticeVisible.value = true;
-    isTextNotice2Visible.value = false;
+    isReviewTextEmpty.value = true;
+    isTextNoticeValid.value = false;
     return;
   } else if (!reviewTextPattern.test(trimmedReviewText)) {
-    isTextNoticeVisible.value = false;
-    isTextNotice2Visible.value = true;
+    isReviewTextEmpty.value = false;
+    isTextNoticeValid.value = true;
     return;
   }
+
   isLoading.value = true;
   const date = format(new Date(), "d MMMM yyyy", { locale: ru });
   const review = {
@@ -250,6 +257,7 @@ const handleLeaveReview = () => {
       isLoading.value = false;
       animation.destroy();
       isLeaveReviewShown.value = false;
+      reviewText.value = "";
       isMessageVisible.value = true;
       nextTick(() => {
         if (animatedTick.value) {
@@ -271,6 +279,7 @@ const closeThanksMessage = () => {
   isMessageVisible.value = false;
   animationOfTick.value!.destroy();
   document.body.style.overflow = "";
+  reviewText.value = "";
   uploadImgs.value = [];
 };
 </script>

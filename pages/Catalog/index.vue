@@ -340,7 +340,8 @@
   </div>
   <div class="sorting">
     <span class="sorting__text"
-      >Показано {{ shownProducts }} из {{ allProducts }} товаров</span
+      >Показано {{ shownProducts }} из
+      {{ filteredProductsLength }} товаров</span
     >
     <div class="sorting__container">
       <div class="sorting__content">
@@ -352,10 +353,10 @@
             :key="num"
             :class="{
               active: pickedNumber === num,
-              disabled: allProducts < num,
+              disabled: filteredProductsLength < num,
             }"
             @click="showProducts(num)"
-            :disabled="allProducts < num"
+            :disabled="filteredProductsLength < num"
           >
             {{ num }}
           </button>
@@ -416,6 +417,7 @@ import noUiSlider from "nouislider";
 import type { target } from "nouislider";
 import { sizesArr, colorsObj, materialsArr } from "@/data/filters";
 import { useFiltersStore } from "@/store/Filters";
+import { useReviewsStore } from "@/store/Reviews";
 
 useHead({
   title: "Sneakers Store - Каталог товаров | Огромный выбор моделей",
@@ -431,6 +433,10 @@ useHead({
         "Nike, кроссовки Nike, купить Nike, интернет-магазин, Sneakers Store, мужские кроссовки Nike, женские кроссовки Nike, спортивная обувь Nike, доставка, цены, купить кроссовки, купить обувь, каталог кроссовок, купить спортивную обувь",
     },
   ],
+});
+
+onMounted(() => {
+  document.body.style.overflow = "";
 });
 
 const sizes = ref(sizesArr);
@@ -452,7 +458,7 @@ const pageNum = parseInt(route.query.page as string);
 const checkPageValidity = () => {
   if (
     (pageNum && pageNum <= totalPages.value && pageNum > 0) ||
-    allProducts.value === 0
+    filteredProductsLength.value === 0
   ) {
     store.currentPage = pageNum;
   } else {
@@ -798,7 +804,7 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-const allProducts = computed(() => store.filteredProducts.length);
+const filteredProductsLength = computed(() => store.filteredProducts.length);
 const paginatedProducts = computed(() => store.paginatedProducts);
 const productsPerPage = computed(() => store.productsPerPage);
 const shownProducts = computed(() =>
@@ -811,7 +817,7 @@ const router = useRouter();
 const numberOfProducts = [9, 12, 18, 24];
 let pickedNumber = ref(18);
 const showProducts = (num: number) => {
-  if (allProducts.value >= num) {
+  if (filteredProductsLength.value >= num) {
     pickedNumber.value = num;
     store.productsPerPage = num;
     store.currentPage = 1;
@@ -831,20 +837,6 @@ watch(
     pickedNumber.value = newVal;
   }
 );
-
-const toggleSortingDropdown = (dropdown: string) => {
-  openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
-};
-const options = [
-  { value: "возрастанию цены" },
-  { value: "убыванию цены" },
-  { value: "возрастанию рейтинга" },
-  { value: "убыванию рейтинга" },
-];
-const selectedOption = ref("возрастанию цены");
-const sortProducts = (option: string) => {
-  selectedOption.value = option;
-};
 
 const container = ref<HTMLElement | null>(null);
 const wrapper = ref<HTMLElement | null>(null);
@@ -894,6 +886,65 @@ const resetFilters = () => {
   maximumPrice.value = defaultMax;
   pickedCategoryFilters.value = [];
   initializeSliders();
+};
+
+const toggleSortingDropdown = (dropdown: string) => {
+  openedDropdown.value = openedDropdown.value === dropdown ? "" : dropdown;
+};
+const options = [
+  { value: "возрастанию цены" },
+  { value: "убыванию цены" },
+  { value: "возрастанию рейтинга" },
+  { value: "убыванию рейтинга" },
+];
+
+const parsePrice = (price: string) => {
+  return parseFloat(price.replace(/\s+|₽/g, ""));
+};
+
+const reviewsStore = useReviewsStore();
+const updateProductRatings = async () => {
+  await Promise.all(
+    store.filteredProducts.map(async (product) => {
+      if (product.averageRating === undefined) {
+        await reviewsStore.fetchReviews(product.id);
+
+        const averageRating = reviewsStore.averageRating();
+        product.averageRating = averageRating;
+      }
+    })
+  );
+};
+onMounted(async () => {
+  await nextTick();
+  await updateProductRatings();
+});
+
+const selectedOption = ref("возрастанию цены");
+const sortProducts = async (option: string) => {
+  selectedOption.value = option;
+
+  await updateProductRatings();
+
+  store.filteredProducts = [...products];
+  if (option === "возрастанию цены") {
+    store.filteredProducts.sort(
+      (a, b) => parsePrice(a.currentPrice) - parsePrice(b.currentPrice)
+    );
+  } else if (option === "убыванию цены") {
+    store.filteredProducts.sort(
+      (a, b) => parsePrice(b.currentPrice) - parsePrice(a.currentPrice)
+    );
+  } else if (option.includes("рейтинга")) {
+    store.filteredProducts.sort((a, b) => {
+      if (option === "возрастанию рейтинга") {
+        return (a.averageRating || 0) - (b.averageRating || 0);
+      } else if (option === "убыванию рейтинга") {
+        return (b.averageRating || 0) - (a.averageRating || 0);
+      }
+      return 0;
+    });
+  }
 };
 </script>
 

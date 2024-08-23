@@ -299,7 +299,7 @@
       <div class="info__reviews" v-if="activeSection === 'reviews'">
         <UIReviewsList></UIReviewsList>
         <UIPagination
-          v-if="allReviews.length > 4"
+          v-if="allReviews.length > 5"
           class="info__pagination"
           :container="container"
         ></UIPagination>
@@ -555,25 +555,6 @@ const showSection = (section: string, event: Event) => {
   }
 };
 
-/* const startX = ref(0);
-const endX = ref(0);
-const handleTouchStart = (event: TouchEvent) => {
-  startX.value = event.touches[0].clientX;
-};
-const handleTouchMove = (event: TouchEvent) => {
-  endX.value = event.touches[0].clientX;
-};
-const handleTouchEnd = () => {
-  const direction = startX.value - endX.value;
-
-  if (window.innerWidth < 768) {
-    if (direction > 0) {
-      wrapper.value!.style.transform = `translateX(-100%)`;
-    } else {
-      wrapper.value!.style.transform = `translateX(0px)`;
-    }
-  }
-}; */
 const handleTouchMove = (event: TouchEvent) => {
   if (window.innerWidth < 768) {
     wrapper.value!.style.transform = `translateX(0px)`;
@@ -582,15 +563,6 @@ const handleTouchMove = (event: TouchEvent) => {
 const container = ref<HTMLElement | null>(null);
 onMounted(() => {
   nextTick(() => {
-    /* container.value!.addEventListener("touchstart", handleTouchStart, {
-      passive: true,
-    });
-    container.value!.addEventListener("touchmove", handleTouchMove, {
-      passive: true,
-    });
-    container.value!.addEventListener("touchend", handleTouchEnd, {
-      passive: true,
-    }); */
     container.value!.addEventListener("touchmove", handleTouchMove, {
       passive: true,
     });
@@ -623,11 +595,18 @@ reviewsStore.fetchReviews(Number(route.params.id));
 
 const allReviews = computed(() => reviewsStore.allReviews);
 const marginTop = ref("5.625rem");
-if (allReviews.value.length <= 4 && allReviews.value.length > 0) {
-  marginTop.value = "5.625rem";
-} else if (allReviews.value.length > 4 || allReviews.value.length === 0) {
-  marginTop.value = "0rem";
-}
+watch(
+  allReviews,
+  (newReviews) => {
+    const reviewsLength = newReviews.length;
+    if (reviewsLength <= 5 && reviewsLength > 0) {
+      marginTop.value = "5.625rem";
+    } else if (reviewsLength > 5 || reviewsLength === 0) {
+      marginTop.value = "0rem";
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <style lang="scss" scoped>

@@ -20,4 +20,5 @@ export interface Product {
   previousPrice: string;
   categoryBackgroundColor?: string;
   category?: string;
+  averageRating?: number;
 }

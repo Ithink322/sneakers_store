@@ -34,12 +34,14 @@ export const useReviewsStore = defineStore("reviewsStore", {
           `/api/reviews/get?productId=${productId}`
         );
         if (response.data.status === "success") {
-          this.setAllReviews(response.data.reviews);
+          this.setAllReviews(response.data.reviews || []);
         } else {
           console.error("Failed to fetch reviews:", response.data.error);
+          this.setAllReviews([]);
         }
       } catch (error) {
         console.error("Error fetching reviews:", error);
+        this.setAllReviews([]);
       }
     },
     async addReview(review: NewReview) {
@@ -53,6 +55,17 @@ export const useReviewsStore = defineStore("reviewsStore", {
       } catch (error) {
         console.error("Error adding review:", error);
       }
+    },
+    averageRating(): number {
+      if (this.allReviews.length === 0) {
+        return 0;
+      }
+
+      const totalRating = this.allReviews.reduce(
+        (acc, review) => acc + review.rating,
+        0
+      );
+      return totalRating / this.allReviews.length;
     },
     setAllReviews(reviews: RetrievedReview[]) {
       this.allReviews = reviews;

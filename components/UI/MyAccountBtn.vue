@@ -2,7 +2,9 @@
   <NuxtLink class="my-account-btn-link" :to="'/login'">
     <button class="my-account-btn">
       <img src="/imgs/my-account-icon.svg" alt="" />
-      <span>{{ isUserLoggedIn ? fio : "Вход \\ Регистрация" }}</span>
+      <span :class="{ wrap: isUserLoggedIn }">{{
+        isUserLoggedIn ? fio : "Вход \\ Регистрация"
+      }}</span>
     </button>
   </NuxtLink>
 </template>
@@ -24,18 +26,22 @@ const isUserLoggedIn = computed(() => authStore.isLoggedIn);
 .my-account-btn {
   @include btn;
   gap: 0.438rem;
-  overflow-wrap: break-word;
 }
 .my-account-btn span {
   font-family: "Pragmatica Book";
   font-size: 0.813rem;
   text-align: left;
   width: 128px;
+  white-space: nowrap;
+}
+.my-account-btn span.wrap {
+  overflow-wrap: break-word;
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
-}
-.my-account-btn span {
-  font-size: 0.875rem;
+  .my-account-btn span {
+    font-size: 0.875rem;
+    width: fit-content;
+  }
 }
 </style>
