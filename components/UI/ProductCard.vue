@@ -47,12 +47,12 @@
       >
         <span class="category__text">{{ product.category }}</span>
       </div>
-      <button class="card__wishlist-btn">
+      <button @click.prevent="toggleFavorite" class="card__wishlist-btn">
         <svg
           width="21"
           height="18"
           viewBox="0 0 21 18"
-          fill="none"
+          :fill="isFavorite ? '#000' : 'none'"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -82,7 +82,7 @@
             product.previousPrice
           }}</span>
         </div>
-        <button class="desc__add-to-cart-btn">
+        <button @click.prevent class="desc__add-to-cart-btn">
           <svg
             width="22"
             height="24"
@@ -107,6 +107,7 @@
 <script setup lang="ts">
 import { slugify } from "@/utils/helpers";
 import type { Product } from "@/types/Product";
+import { useFavoritesStore } from "@/store/Favorites";
 
 const props = defineProps<{ product: Product }>();
 
@@ -223,6 +224,30 @@ const showFirstImage = () => {
   activeIndex.value = 0;
 };
 /* slider for heroes in product card from 1440px ends */
+
+const favoritesStore = useFavoritesStore();
+const isFavorite = ref<boolean>(false);
+const updateFavoriteStatus = () => {
+  isFavorite.value = favoritesStore.isFavorite(props.product.id);
+};
+watch(
+  () => favoritesStore.favorites,
+  () => {
+    updateFavoriteStatus();
+  },
+  { deep: true }
+);
+const toggleFavorite = () => {
+  if (isFavorite.value) {
+    favoritesStore.removeFavorite(props.product.id);
+  } else {
+    favoritesStore.addToFavorites(props.product);
+  }
+  updateFavoriteStatus();
+};
+onMounted(() => {
+  updateFavoriteStatus();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -263,12 +288,6 @@ const showFirstImage = () => {
     @include btn;
     margin-top: 0.625rem;
     right: 0.625rem;
-  }
-  &__wishlist-btn svg path {
-    transition: stroke 0.3s ease;
-  }
-  &__wishlist-btn:hover svg path {
-    stroke: $Dark-Orange;
   }
   &__slider-indicators {
     margin-top: -1rem;

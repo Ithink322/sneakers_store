@@ -407,7 +407,7 @@
     :fill="'#f8f8f8'"
   ></UIMessage>
   <UIProductList v-if="paginatedProducts.length > 0"></UIProductList>
-  <UIPagination v-if="paginatedProducts.length > 0"></UIPagination>
+  <UIPagination v-if="paginatedProducts.length > 9"></UIPagination>
 </template>
 
 <script setup lang="ts">
@@ -911,6 +911,8 @@ onMounted(async () => {
 const selectedOption = ref("возрастанию цены");
 const sortProducts = async (option: string) => {
   selectedOption.value = option;
+
+  toggleSortingDropdown("");
 
   await reviewsStore.updateProductRatings(store.filteredProducts);
 
@@ -1517,8 +1519,5 @@ input[type="number"] {
       }
     }
   }
-}
-/* 1920px = 120em */
-@media (min-width: 120em) {
 }
 </style>

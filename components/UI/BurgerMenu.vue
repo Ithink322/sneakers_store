@@ -20,10 +20,12 @@
           style="margin-left: 0.938rem"
         ></UIMyAccountBtn>
         <div class="burger-menu__content">
-          <button class="burger-menu__wishlist-btn">
-            <img src="/imgs/wishlist-icon.svg" alt="" />
-            <UIWishlistCounterCircle></UIWishlistCounterCircle>
-          </button>
+          <NuxtLink :to="'/Favorites'" @click="closeBurgerMenu">
+            <button class="burger-menu__wishlist-btn">
+              <img src="/imgs/wishlist-icon.svg" alt="" />
+              <UIWishlistCounterCircle></UIWishlistCounterCircle>
+            </button>
+          </NuxtLink>
           <button class="burger-menu__cart-btn">
             <img src="/imgs/cart-icon.svg" alt="" />
             <UICartCounterCircle></UICartCounterCircle>

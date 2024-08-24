@@ -61,6 +61,7 @@
 import { usePostsStore } from "@/store/Posts";
 import { useProductsStore } from "@/store/Products";
 import { useReviewsStore } from "@/store/Reviews";
+import { useFavoritesStore } from "@/store/Favorites";
 
 const props = defineProps<{
   container?: HTMLElement | null;
@@ -72,7 +73,8 @@ const route = useRoute();
 type StoreType =
   | ReturnType<typeof usePostsStore>
   | ReturnType<typeof useProductsStore>
-  | ReturnType<typeof useReviewsStore>;
+  | ReturnType<typeof useReviewsStore>
+  | ReturnType<typeof useFavoritesStore>;
 let store = ref<StoreType | null>(null);
 
 const setStore = () => {
@@ -83,8 +85,12 @@ const setStore = () => {
     store.value = useProductsStore();
   } else if (normalizedPath.startsWith("/blog")) {
     store.value = usePostsStore();
+  } else if (normalizedPath.startsWith("/favorites")) {
+    store.value = useFavoritesStore();
+    console.log("favorites");
   }
 };
+console.log("store.value:", store.value);
 watch(
   () => route.path,
   () => {
@@ -95,7 +101,6 @@ watch(
 
 const totalPages = computed(() => store.value?.totalPages);
 
-/* const container = ref<HTMLElement | null>(null); */
 const prevPage = () => {
   if (store.value) {
     if (store.value.currentPage > 1) {
@@ -110,7 +115,8 @@ const prevPage = () => {
     updateTranslate();
     if (
       store.value.$id === "postsStore" ||
-      store.value.$id === "productsStore"
+      store.value.$id === "productsStore" ||
+      store.value.$id === "favoritesStore"
     ) {
       window.scrollTo(0, 0);
     } else if (store.value.$id === "reviewsStore") {
@@ -133,7 +139,8 @@ const nextPage = () => {
     updateTranslate();
     if (
       store.value.$id === "postsStore" ||
-      store.value.$id === "productsStore"
+      store.value.$id === "productsStore" ||
+      store.value.$id === "favoritesStore"
     ) {
       window.scrollTo(0, 0);
     } else if (store.value.$id === "reviewsStore") {
@@ -149,7 +156,8 @@ const changePage = (pageNum: number) => {
     updateTranslate();
     if (
       store.value.$id === "postsStore" ||
-      store.value.$id === "productsStore"
+      store.value.$id === "productsStore" ||
+      store.value.$id === "favoritesStore"
     ) {
       window.scrollTo(0, 0);
     } else if (store.value.$id === "reviewsStore") {

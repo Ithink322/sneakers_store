@@ -199,7 +199,7 @@
               />
             </svg>
           </button>
-          <NuxtLink to="">
+          <NuxtLink to="/Favorites">
             <button
               class="header-mid__wishlist-btn header-mid__btn"
               :class="{ active: activeButton === 'wishlist' }"
@@ -381,13 +381,6 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
     @include btn;
   }
 }
-.header-mid__btn.active,
-.header-mid__search-btn.active {
-  background-color: $Dark-Black;
-}
-.active svg path {
-  stroke: white;
-}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .header {
@@ -458,6 +451,13 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       height: 70px;
       border-right: 1px solid #eaeaea;
     }
+  }
+  .header-mid__btn.active,
+  .header-mid__search-btn.active {
+    background-color: $Dark-Black;
+  }
+  .active svg path {
+    stroke: white;
   }
 }
 /* 1024px = 64em */

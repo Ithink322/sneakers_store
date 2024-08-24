@@ -9,10 +9,13 @@
         >
           {{ product.discount ? product.discount : product.category }}
         </div>
-        <button class="heroes-body__wishlist-btn">
+        <button
+          @click.prevent="toggleFavorite"
+          class="heroes-body__wishlist-btn"
+        >
           <svg
             viewBox="0 0 23 20"
-            fill="none"
+            :fill="isFavorite ? '#000' : 'none'"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -331,6 +334,7 @@ import type { Product } from "@/types/Product";
 import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 import { useReviewsStore } from "@/store/Reviews";
+import { useFavoritesStore } from "@/store/Favorites";
 
 const product = ref<Product>();
 const route = useRoute();
@@ -505,6 +509,30 @@ const activeSizeIndex = ref(0);
 const setActiveSize = (index: number) => {
   activeSizeIndex.value = index;
 };
+
+const favoritesStore = useFavoritesStore();
+const isFavorite = ref<boolean>(false);
+const updateFavoriteStatus = () => {
+  isFavorite.value = favoritesStore.isFavorite(product.value!.id);
+};
+watch(
+  () => favoritesStore.favorites,
+  () => {
+    updateFavoriteStatus();
+  },
+  { deep: true }
+);
+const toggleFavorite = () => {
+  if (isFavorite.value) {
+    favoritesStore.removeFavorite(product.value!.id);
+  } else {
+    favoritesStore.addToFavorites(product.value!);
+  }
+  updateFavoriteStatus();
+};
+onMounted(() => {
+  updateFavoriteStatus();
+});
 
 const isSizesChartOpened = ref(false);
 const openSizesChart = () => {
