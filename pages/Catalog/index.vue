@@ -903,28 +903,16 @@ const parsePrice = (price: string) => {
 };
 
 const reviewsStore = useReviewsStore();
-const updateProductRatings = async () => {
-  await Promise.all(
-    store.filteredProducts.map(async (product) => {
-      if (product.averageRating === undefined) {
-        await reviewsStore.fetchReviews(product.id);
-
-        const averageRating = reviewsStore.averageRating();
-        product.averageRating = averageRating;
-      }
-    })
-  );
-};
 onMounted(async () => {
   await nextTick();
-  await updateProductRatings();
+  await reviewsStore.updateProductRatings(store.filteredProducts);
 });
 
 const selectedOption = ref("возрастанию цены");
 const sortProducts = async (option: string) => {
   selectedOption.value = option;
 
-  await updateProductRatings();
+  await reviewsStore.updateProductRatings(store.filteredProducts);
 
   store.filteredProducts = [...products];
   if (option === "возрастанию цены") {

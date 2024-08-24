@@ -139,6 +139,7 @@ import { useReviewsStore } from "@/store/Reviews";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { useAuthStore } from "@/store/Auth";
+import { useProductsStore } from "@/store/Products";
 
 const isLeaveReviewShown = inject("isLeaveReviewShown") as Ref<boolean>;
 const isContainerVisible = inject("isContainerVisible") as Ref<boolean>;
@@ -200,9 +201,10 @@ const reviewTextOnInput = () => {
 
 const route = useRoute();
 const reviewsStore = useReviewsStore();
+const store = useProductsStore();
 const authStore = useAuthStore();
 const fio = computed(() => authStore.fio);
-const handleLeaveReview = () => {
+const handleLeaveReview = async () => {
   isRatingNoticeVisible.value = false;
   isReviewTextEmpty.value = false;
   const trimmedReviewText = reviewText.value.trim();
@@ -245,6 +247,10 @@ const handleLeaveReview = () => {
     imgs: uploadImgs.value,
   };
   reviewsStore.addReview(review);
+  await reviewsStore.updateProductRatings(
+    store.filteredProducts,
+    Number(route.params.id)
+  );
   nextTick(() => {
     const animation = lottie.loadAnimation({
       container: progressRing.value!,

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import type { NewReview } from "@/types/NewReview";
 import type { RetrievedReview } from "@/types/RetrievedReview";
 import axios from "axios";
+import type { Product } from "@/types/Product";
 
 interface ReviewsState {
   allReviews: RetrievedReview[];
@@ -40,7 +41,7 @@ export const useReviewsStore = defineStore("reviewsStore", {
           this.setAllReviews([]);
         }
       } catch (error) {
-        console.error("Error fetching reviews:", error);
+        /* console.error("Error fetching reviews:", error); */
         this.setAllReviews([]);
       }
     },
@@ -66,6 +67,26 @@ export const useReviewsStore = defineStore("reviewsStore", {
         0
       );
       return totalRating / this.allReviews.length;
+    },
+    async updateProductRatings(products: Product[], productId?: number) {
+      if (productId) {
+        await this.fetchReviews(productId);
+        const averageRating = this.averageRating();
+        const product = products.find((p) => p.id === productId);
+        if (product) {
+          product.averageRating = averageRating;
+        }
+      } else {
+        await Promise.all(
+          products.map(async (product) => {
+            if (product.averageRating === undefined) {
+              await this.fetchReviews(product.id);
+              const averageRating = this.averageRating();
+              product.averageRating = averageRating;
+            }
+          })
+        );
+      }
     },
     setAllReviews(reviews: RetrievedReview[]) {
       this.allReviews = reviews;

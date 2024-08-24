@@ -15,10 +15,6 @@ export default defineEventHandler(async (event) => {
 
     const reviews = await ReviewModel.find({ productId });
 
-    if (!reviews) {
-      throw new Error(`No reviews found for product ID: ${productId}`);
-    }
-
     return { status: "success", reviews };
   } catch (error) {
     console.error("Error fetching reviews:", error);
