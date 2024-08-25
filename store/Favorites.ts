@@ -37,6 +37,12 @@ export const useFavoritesStore = defineStore("favoritesStore", {
     async addToFavorites(product: Product) {
       const userId = localStorage.getItem("userId") as string;
 
+      const router = useRouter();
+      if (!userId) {
+        router.push("/logIn");
+        return;
+      }
+
       const favorite: Favorite = {
         userId: userId!,
         productId: product.id,

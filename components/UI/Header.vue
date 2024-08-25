@@ -321,10 +321,6 @@ const handleLeave = (event: MouseEvent) => {
   }
 };
 
-/* const activeButton = ref<string | null>(null);
-const setActiveButton = (button: string) => {
-  activeButton.value = button;
-}; */
 const activeButton = ref<string | null>(null);
 const setActiveButton = (button: string) => {
   activeButton.value = button;
@@ -340,10 +336,10 @@ watch(
     } else if (newPath === "/my-account") {
       setActiveButton("MyAccount");
     } else {
-      activeButton.value = null; // Clear active button if the route doesn't match
+      activeButton.value = null;
     }
   },
-  { immediate: true } // Set activeButton when the component is mounted
+  { immediate: true }
 );
 
 const searchIsActive = ref(false);
