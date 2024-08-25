@@ -159,7 +159,6 @@
             <button
               class="header-mid__btn header-mid__my-account-btn--from768px"
               :class="{ active: activeButton === 'myAccount' }"
-              @click="setActiveButton('myAccount')"
             >
               <svg
                 width="15"
@@ -199,11 +198,15 @@
               />
             </svg>
           </button>
-          <NuxtLink to="/Favorites">
+          <NuxtLink
+            :to="{
+              path: '/Favorites',
+              query: { page: favoritesCurrentPage },
+            }"
+          >
             <button
               class="header-mid__wishlist-btn header-mid__btn"
               :class="{ active: activeButton === 'wishlist' }"
-              @click="setActiveButton('wishlist')"
             >
               <svg
                 width="21"
@@ -227,7 +230,6 @@
             <button
               class="header-mid__cart-btn header-mid__btn"
               :class="{ active: activeButton === 'cart' }"
-              @click="setActiveButton('cart')"
             >
               <svg
                 width="17"
@@ -266,9 +268,14 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 import { useCatalogMenu } from "@/store/CatalogMenu";
+import { useFavoritesStore } from "@/store/Favorites";
+
 const store = usePostsStore();
 const routeCategory = computed(() => store.routeCategory);
 const currentPage = computed(() => store.currentPage);
+
+const favoritesStore = useFavoritesStore();
+const favoritesCurrentPage = computed(() => favoritesStore.currentPage);
 
 const route = useRoute();
 const isActive = (path: string) => {
@@ -314,10 +321,30 @@ const handleLeave = (event: MouseEvent) => {
   }
 };
 
+/* const activeButton = ref<string | null>(null);
+const setActiveButton = (button: string) => {
+  activeButton.value = button;
+}; */
 const activeButton = ref<string | null>(null);
 const setActiveButton = (button: string) => {
   activeButton.value = button;
 };
+
+watch(
+  () => route.path,
+  (newPath) => {
+    if (newPath === "/Favorites") {
+      setActiveButton("wishlist");
+    } else if (newPath === "/cart") {
+      setActiveButton("Cart");
+    } else if (newPath === "/my-account") {
+      setActiveButton("MyAccount");
+    } else {
+      activeButton.value = null; // Clear active button if the route doesn't match
+    }
+  },
+  { immediate: true } // Set activeButton when the component is mounted
+);
 
 const searchIsActive = ref(false);
 const toggleSearch = (event: MouseEvent | TouchEvent) => {

@@ -2,18 +2,24 @@
   <UIBreadcrumb :breadcrumbTitle="'Избранные товары'"></UIBreadcrumb>
   <div class="titles-container">
     <h1 class="titles-container__title">Избранное</h1>
-    <span class="titles-container__text"
+    <span v-if="totalProducts > 0" class="titles-container__text"
       >{{ totalProducts }} {{ conjugateTovar(totalProducts) }}</span
     >
   </div>
-  <div class="products-list">
+  <div v-if="totalProducts > 0" class="products-list">
     <UIProductCard
       v-for="product in paginatedProducts"
-      :key="product.id"
+      :key="product.productId"
       :product="product"
     />
   </div>
-  <UIPagination if="paginatedProducts.length > 18"></UIPagination>
+  <UIPagination v-if="totalProducts > 18"></UIPagination>
+  <UIEmpty
+    v-if="totalProducts === 0"
+    :hero="'/imgs/empty-favorites-icon.jpg'"
+    :title="'Ваш список желаний пуст'"
+    :text="`У вас пока нет товаров в списке желаний.<br/> На странице <strong>&quot;Каталог&quot;</strong> вы найдете много интересных товаров.`"
+  ></UIEmpty>
 </template>
 
 <script setup lang="ts">
@@ -22,7 +28,13 @@ import { useFavoritesStore } from "@/store/Favorites";
 const favoritesStore = useFavoritesStore();
 const paginatedProducts = computed(() => favoritesStore.paginatedProducts);
 
-const totalProducts = ref(favoritesStore.favorites.length);
+onMounted(async () => {
+  await favoritesStore.fetchFavorites(
+    localStorage.getItem("userId")! as string
+  );
+});
+
+const totalProducts = computed(() => favoritesStore.favorites.length);
 
 const conjugateTovar = (count: number): string => {
   const lastDigit = count % 10;
@@ -41,14 +53,21 @@ const conjugateTovar = (count: number): string => {
   }
 };
 
+const route = useRoute();
+watch(
+  () => route.query.page,
+  (newPage) => favoritesStore.setPage(Number(newPage) || 1),
+  { immediate: true }
+);
 const router = useRouter();
-onMounted(() => {
+if (totalProducts.value < 19) {
+  favoritesStore.setPage(1);
   favoritesStore.currentPage = 1;
   router.replace({
-    path: "/Favorites",
+    path: "/favorites",
     query: { page: 1 },
   });
-});
+}
 </script>
 
 <style lang="scss" scoped>

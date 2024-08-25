@@ -20,7 +20,13 @@
           style="margin-left: 0.938rem"
         ></UIMyAccountBtn>
         <div class="burger-menu__content">
-          <NuxtLink :to="'/Favorites'" @click="closeBurgerMenu">
+          <NuxtLink
+            :to="{
+              path: '/Favorites',
+              query: { page: favoritesCurrentPage },
+            }"
+            @click="closeBurgerMenu"
+          >
             <button class="burger-menu__wishlist-btn">
               <img src="/imgs/wishlist-icon.svg" alt="" />
               <UIWishlistCounterCircle></UIWishlistCounterCircle>
@@ -256,8 +262,13 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 import { useProductsStore } from "@/store/Products";
+import { useFavoritesStore } from "@/store/Favorites";
+
 const store = usePostsStore();
 const currentPage = computed(() => store.currentPage);
+
+const favoritesStore = useFavoritesStore();
+const favoritesCurrentPage = computed(() => favoritesStore.currentPage);
 
 const route = useRoute();
 const isActive = (path: string) => {

@@ -333,7 +333,6 @@ const validateFio = () => {
     isFioValid.value = fioRegex.test(fio.value.trim());
   }
 };
-/* const numberDigits = number.value.replace(/\D/g, ""); */
 const validateNumber = () => {
   const numberDigits = number.value.replace(/\D/g, "");
   if (number.value === "") {

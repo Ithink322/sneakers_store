@@ -45,6 +45,7 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
       message: "Login successful!",
+      userId: user._id,
       token,
       fio: user.fio,
     };

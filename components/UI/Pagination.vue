@@ -90,7 +90,6 @@ const setStore = () => {
     console.log("favorites");
   }
 };
-console.log("store.value:", store.value);
 watch(
   () => route.path,
   () => {

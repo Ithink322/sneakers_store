@@ -2,7 +2,9 @@
   <NuxtLink
     class="product-link"
     :to="{
-      path: `/catalog/${slugify(props.product.title)}/${props.product.id}`,
+      path: `/catalog/${slugify(props.product.title)}/${getProductId(
+        props.product
+      )}`,
     }"
   >
     <div class="card">
@@ -107,9 +109,10 @@
 <script setup lang="ts">
 import { slugify } from "@/utils/helpers";
 import type { Product } from "@/types/Product";
+import type { Favorite } from "@/types/Favorite";
 import { useFavoritesStore } from "@/store/Favorites";
 
-const props = defineProps<{ product: Product }>();
+const props = defineProps<{ product: Product | Favorite }>();
 
 let windowWidth = 0;
 let isPageScrolling = false;
@@ -225,7 +228,7 @@ const showFirstImage = () => {
 };
 /* slider for heroes in product card from 1440px ends */
 
-const favoritesStore = useFavoritesStore();
+/* const favoritesStore = useFavoritesStore();
 const isFavorite = ref<boolean>(false);
 const updateFavoriteStatus = () => {
   isFavorite.value = favoritesStore.isFavorite(props.product.id);
@@ -242,6 +245,35 @@ const toggleFavorite = () => {
     favoritesStore.removeFavorite(props.product.id);
   } else {
     favoritesStore.addToFavorites(props.product);
+  }
+  updateFavoriteStatus();
+};
+onMounted(() => {
+  updateFavoriteStatus();
+}); */
+
+const favoritesStore = useFavoritesStore();
+const isFavorite = ref<boolean>(false);
+const getProductId = (product: Product | Favorite) => {
+  return "id" in product ? product.id : product.productId;
+};
+const updateFavoriteStatus = () => {
+  isFavorite.value = favoritesStore.isFavorite(getProductId(props.product));
+};
+watch(
+  () => favoritesStore.favorites,
+  () => {
+    updateFavoriteStatus();
+  },
+  { deep: true }
+);
+const toggleFavorite = () => {
+  if (isFavorite.value) {
+    favoritesStore.removeFavorite(getProductId(props.product));
+  } else {
+    if ("id" in props.product) {
+      favoritesStore.addToFavorites(props.product!);
+    }
   }
   updateFavoriteStatus();
 };
