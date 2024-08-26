@@ -135,6 +135,7 @@
 <script setup lang="ts">
 import { useAuthStore } from "@/store/Auth";
 import { useFavoritesStore } from "@/store/Favorites";
+import { useCartStore } from "@/store/Cart";
 import axios from "axios";
 
 useHead({
@@ -232,6 +233,7 @@ const validatePass = () => {
 const authStore = useAuthStore();
 const router = useRouter();
 const favoritesStore = useFavoritesStore();
+const cartStore = useCartStore();
 const logIn = async () => {
   validateLogin();
   validatePass();
@@ -255,6 +257,7 @@ const logIn = async () => {
           response.data.token
         );
         await favoritesStore.fetchFavorites(response.data.userId);
+        await cartStore.fetchCart(response.data.userId);
         router.push("/catalog?page=1");
       } else {
         console.error("Login failed:", response.data.message);

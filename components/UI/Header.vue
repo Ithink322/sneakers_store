@@ -331,8 +331,8 @@ watch(
   (newPath) => {
     if (newPath === "/Favorites") {
       setActiveButton("wishlist");
-    } else if (newPath === "/cart") {
-      setActiveButton("Cart");
+    } else if (newPath === "/Cart") {
+      setActiveButton("cart");
     } else if (newPath === "/my-account") {
       setActiveButton("MyAccount");
     } else {

@@ -1,5 +1,5 @@
 <template>
-  <div class="header__counter-circle">
+  <div v-if="totalProducts > 0" class="header__counter-circle">
     <span class="header__counter-circle-text">{{ totalProducts }}</span>
   </div>
 </template>
