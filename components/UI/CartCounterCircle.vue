@@ -1,10 +1,15 @@
 <template>
   <div class="header__counter-circle">
-    <span class="header__counter-circle-text">0</span>
+    <span class="header__counter-circle-text">{{ totalProducts }}</span>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useCartStore } from "@/store/Cart";
+
+const cartStore = useCartStore();
+const totalProducts = computed(() => cartStore.cart.length);
+</script>
 
 <style lang="scss" scoped>
 .header__counter-circle {

@@ -1,6 +1,6 @@
 <template>
   <div class="empty">
-    <img :src="hero" alt="" class="empty__hero" />
+    <img :src="hero" alt="" class="empty__hero" :style="{ width: iconWidth }" />
     <h2 class="empty__title">{{ title }}</h2>
     <span class="empty__text" v-html="text"></span>
     <UIButton
@@ -31,13 +31,17 @@ defineProps({
     type: String,
     required: true,
   },
+  iconWidth: {
+    type: String,
+    required: true,
+  },
 });
 
 const catalogStore = useProductsStore();
 const currentCatalogPage = computed(() => catalogStore.currentPage);
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/App.scss";
 .empty {
   display: flex;
@@ -45,10 +49,10 @@ const currentCatalogPage = computed(() => catalogStore.currentPage);
   align-items: center;
 
   &__hero {
-    width: 98px;
     height: 86px;
   }
   &__title {
+    text-align: center;
     font-family: "Pragmatica Medium";
     font-size: 1.188rem;
     color: $Light-Black;
@@ -61,6 +65,9 @@ const currentCatalogPage = computed(() => catalogStore.currentPage);
     line-height: 22px;
     color: #383838;
     margin-bottom: 1.5rem;
+  }
+  &__text-cart-br--from1200px {
+    display: none;
   }
 }
 /* 768px = 48em */
@@ -83,6 +90,9 @@ const currentCatalogPage = computed(() => catalogStore.currentPage);
     &__text {
       font-size: 0.938rem;
       margin-bottom: 1.875rem;
+    }
+    &__text-cart-br--from1200px {
+      display: block;
     }
   }
 }

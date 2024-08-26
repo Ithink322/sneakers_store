@@ -19,11 +19,13 @@
     :hero="'/imgs/empty-favorites-icon.jpg'"
     :title="'Ваш список желаний пуст'"
     :text="`У вас пока нет товаров в списке желаний.<br/> На странице <strong>&quot;Каталог&quot;</strong> вы найдете много интересных товаров.`"
+    :iconWidth="'98px'"
   ></UIEmpty>
 </template>
 
 <script setup lang="ts">
 import { useFavoritesStore } from "@/store/Favorites";
+import { conjugateTovar } from "@/utils/helpers";
 
 const favoritesStore = useFavoritesStore();
 const paginatedProducts = computed(() => favoritesStore.paginatedProducts);
@@ -35,23 +37,7 @@ onMounted(async () => {
 });
 
 const totalProducts = computed(() => favoritesStore.favorites.length);
-
-const conjugateTovar = (count: number): string => {
-  const lastDigit = count % 10;
-  const lastTwoDigits = count % 100;
-
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-    return "товаров";
-  }
-
-  if (lastDigit === 1) {
-    return "товар";
-  } else if (lastDigit >= 2 && lastDigit <= 4) {
-    return "товара";
-  } else {
-    return "товаров";
-  }
-};
+conjugateTovar(totalProducts.value);
 
 const route = useRoute();
 watch(

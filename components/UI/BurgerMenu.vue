@@ -29,13 +29,15 @@
           >
             <button class="burger-menu__wishlist-btn">
               <img src="/imgs/wishlist-icon.svg" alt="" />
-              <UIWishlistCounterCircle></UIWishlistCounterCircle>
+              <UIFavoritesCounterCircle></UIFavoritesCounterCircle>
             </button>
           </NuxtLink>
-          <button class="burger-menu__cart-btn">
-            <img src="/imgs/cart-icon.svg" alt="" />
-            <UICartCounterCircle></UICartCounterCircle>
-          </button>
+          <NuxtLink to="/Cart" @click="closeBurgerMenu">
+            <button class="burger-menu__cart-btn">
+              <img src="/imgs/cart-icon.svg" alt="" />
+              <UICartCounterCircle></UICartCounterCircle>
+            </button>
+          </NuxtLink>
         </div>
       </nav>
       <div class="burger-menu__container">

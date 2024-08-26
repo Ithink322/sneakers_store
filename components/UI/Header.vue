@@ -223,10 +223,10 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              <UIWishlistCounterCircle></UIWishlistCounterCircle>
+              <UIFavoritesCounterCircle></UIFavoritesCounterCircle>
             </button>
           </NuxtLink>
-          <NuxtLink to="">
+          <NuxtLink to="/Cart">
             <button
               class="header-mid__cart-btn header-mid__btn"
               :class="{ active: activeButton === 'cart' }"

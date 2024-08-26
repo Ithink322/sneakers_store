@@ -418,6 +418,7 @@ import type { target } from "nouislider";
 import { sizesArr, colorsObj, materialsArr } from "@/data/filters";
 import { useFiltersStore } from "@/store/Filters";
 import { useReviewsStore } from "@/store/Reviews";
+import { conjugateTovar } from "@/utils/helpers";
 
 useHead({
   title: "Sneakers Store - Каталог товаров | Огромный выбор моделей",
@@ -471,23 +472,7 @@ onMounted(() => {
 });
 
 const totalProducts = ref(store.allProducts.length);
-
-const conjugateTovar = (count: number): string => {
-  const lastDigit = count % 10;
-  const lastTwoDigits = count % 100;
-
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-    return "товаров";
-  }
-
-  if (lastDigit === 1) {
-    return "товар";
-  } else if (lastDigit >= 2 && lastDigit <= 4) {
-    return "товара";
-  } else {
-    return "товаров";
-  }
-};
+conjugateTovar(totalProducts.value);
 
 const filtersStore = useFiltersStore();
 const minimumPrice = ref<number>(filtersStore.minPrice!);

@@ -84,7 +84,7 @@
             product.previousPrice
           }}</span>
         </div>
-        <button @click.prevent class="desc__add-to-cart-btn">
+        <button @click.prevent="addCartProduct" class="desc__add-to-cart-btn">
           <svg
             width="22"
             height="24"
@@ -110,9 +110,11 @@
 import { slugify } from "@/utils/helpers";
 import type { Product } from "@/types/Product";
 import type { Favorite } from "@/types/Favorite";
+import type { CartProduct } from "@/types/CartProduct";
 import { useFavoritesStore } from "@/store/Favorites";
+import { useCartStore } from "@/store/Cart";
 
-const props = defineProps<{ product: Product | Favorite }>();
+const props = defineProps<{ product: Product | Favorite | CartProduct }>();
 
 let windowWidth = 0;
 let isPageScrolling = false;
@@ -228,33 +230,9 @@ const showFirstImage = () => {
 };
 /* slider for heroes in product card from 1440px ends */
 
-/* const favoritesStore = useFavoritesStore();
-const isFavorite = ref<boolean>(false);
-const updateFavoriteStatus = () => {
-  isFavorite.value = favoritesStore.isFavorite(props.product.id);
-};
-watch(
-  () => favoritesStore.favorites,
-  () => {
-    updateFavoriteStatus();
-  },
-  { deep: true }
-);
-const toggleFavorite = () => {
-  if (isFavorite.value) {
-    favoritesStore.removeFavorite(props.product.id);
-  } else {
-    favoritesStore.addToFavorites(props.product);
-  }
-  updateFavoriteStatus();
-};
-onMounted(() => {
-  updateFavoriteStatus();
-}); */
-
 const favoritesStore = useFavoritesStore();
 const isFavorite = ref<boolean>(false);
-const getProductId = (product: Product | Favorite) => {
+const getProductId = (product: Product | Favorite | CartProduct) => {
   return "id" in product ? product.id : product.productId;
 };
 const updateFavoriteStatus = () => {
@@ -280,6 +258,17 @@ const toggleFavorite = () => {
 onMounted(() => {
   updateFavoriteStatus();
 });
+
+const cartStore = useCartStore();
+const addCartProduct = () => {
+  if ("id" in props.product) {
+    cartStore.addToCart(
+      props.product!,
+      props.product.colors[0],
+      props.product.sizes[0]
+    );
+  }
+};
 </script>
 
 <style lang="scss" scoped>

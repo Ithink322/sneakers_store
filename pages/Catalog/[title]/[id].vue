@@ -77,7 +77,7 @@
         </div>
         <div class="details__sizes-body">
           <button
-            @click="setActiveSize(index)"
+            @click="setActiveSize(index, size)"
             class="details__size-btn"
             v-for="(size, index) in product.sizes"
             :key="size"
@@ -106,6 +106,7 @@
           </div>
         </div>
         <UIButton
+          @click="addCartProduct"
           class="details__add-to-cart-btn"
           :content="'Добавить в корзину'"
           :icon="'/imgs/add-to-cart-icon.svg'"
@@ -335,6 +336,7 @@ import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 import { useReviewsStore } from "@/store/Reviews";
 import { useFavoritesStore } from "@/store/Favorites";
+import { useCartStore } from "@/store/Cart";
 
 const product = ref<Product>();
 const route = useRoute();
@@ -497,17 +499,21 @@ const colorNames = {
   "#D81F64": "Цериз",
 };
 const activeColor = ref(product.value?.colors[0]);
+const activeHexColor = ref(product.value?.colors[0]);
 const setActiveColor = (index: number, color: string) => {
   activeColorIndex.value = index;
   activeColor.value = colorNames[color as keyof typeof colorNames];
+  activeHexColor.value = color;
 };
 onMounted(() => {
   setActiveColor(0, product.value!.colors[0]);
 });
 
 const activeSizeIndex = ref(0);
-const setActiveSize = (index: number) => {
+const activeSize = ref(product.value?.sizes[0]);
+const setActiveSize = (index: number, size: number) => {
   activeSizeIndex.value = index;
+  activeSize.value = size;
 };
 
 const favoritesStore = useFavoritesStore();
@@ -635,6 +641,15 @@ watch(
   },
   { immediate: true }
 );
+
+const cartStore = useCartStore();
+const addCartProduct = () => {
+  cartStore.addToCart(
+    product.value!,
+    activeHexColor.value!,
+    activeSize.value! || product.value!.sizes[0]
+  );
+};
 </script>
 
 <style lang="scss" scoped>
