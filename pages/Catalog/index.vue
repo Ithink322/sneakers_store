@@ -1377,7 +1377,9 @@ input[type="number"] {
       height: 45px;
       border: 1px solid #dfdfdf;
       border-radius: 4px;
+      transition: all 0.3s ease;
 
+      &:hover,
       &.active {
         background-color: $Light-Black;
         color: #ffffff;
@@ -1452,7 +1454,9 @@ input[type="number"] {
       font-family: "Pragmatica Book";
       font-size: 0.938rem;
       color: #414141;
+      transition: all 0.3s ease;
 
+      &:hover,
       &.active {
         background-color: $Light-Black;
         color: #ffffff;

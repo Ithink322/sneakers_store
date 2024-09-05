@@ -24,4 +24,5 @@ export interface CartProduct {
   averageRating?: number;
   chosenColor: string;
   chosenSize: number;
+  qty: number;
 }

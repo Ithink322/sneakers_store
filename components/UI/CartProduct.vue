@@ -1,76 +1,72 @@
 <template>
-  <NuxtLink
-    class="product-link"
-    :to="{
-      path: `/catalog/${slugify(product.title)}/${product.productId}`,
-    }"
-  >
-    <div class="cart-product">
-      <div class="cart-product__details">
-        <img :src="props.product.heroes[0]" alt="" class="cart-product__hero" />
-        <div class="cart-product__content">
-          <span class="cart-product__title">{{ props.product.title }}</span>
-          <div class="cart-product__container">
-            <div class="cart-product__color">
-              Цвет:
-              <button class="cart-product__color-circle">
-                <div
-                  class="cart-product__color-circle-fill"
-                  :style="{ backgroundColor: props.product.chosenColor }"
-                ></div>
-              </button>
-            </div>
-            <span class="cart-product__size"
-              >Размер: {{ props.product.chosenSize }}</span
-            >
+  <div class="cart-product">
+    <NuxtLink
+      class="cart-product__details"
+      :to="{
+        path: `/catalog/${slugify(product.title)}/${product.productId}`,
+      }"
+    >
+      <img :src="props.product.heroes[0]" alt="" class="cart-product__hero" />
+      <div class="cart-product__content">
+        <span class="cart-product__title">{{ props.product.title }}</span>
+        <div class="cart-product__container">
+          <div class="cart-product__color">
+            Цвет:
+            <button class="cart-product__color-circle">
+              <div
+                class="cart-product__color-circle-fill"
+                :style="{ backgroundColor: props.product.chosenColor }"
+              ></div>
+            </button>
           </div>
+          <span class="cart-product__size"
+            >Размер: {{ props.product.chosenSize }}</span
+          >
         </div>
       </div>
-      <div class="cart-product__body">
-        <div class="cart-product__counter">
-          <button
-            @click.prevent
-            class="cart-product__counter-btn cart-product__decrease-btn"
-          >
-            -
-          </button>
-          <span class="cart-product__counter-text">1</span>
-          <button
-            @click.prevent
-            class="cart-product__counter-btn cart-product__increase-btn"
-          >
-            +
-          </button>
-        </div>
-        <span class="cart-product__price cart-product__current-price">{{
-          props.product.currentPrice
-        }}</span>
-        <span class="cart-product__price cart-product__sum-price"
-          >calculte sum</span
+    </NuxtLink>
+    <div class="cart-product__body">
+      <div class="cart-product__counter">
+        <button
+          @click.prevent="decreaseCounter"
+          class="cart-product__counter-btn cart-product__decrease-btn"
         >
+          -
+        </button>
+        <span class="cart-product__counter-text">{{ productCount }}</span>
+        <button
+          @click.prevent="increaseCounter"
+          class="cart-product__counter-btn cart-product__increase-btn"
+        >
+          +
+        </button>
       </div>
-      <button
-        @click.prevent="removeCartProduct"
-        class="cart-product__remove-cart-product"
-      >
-        <svg
-          width="18"
-          height="20"
-          viewBox="0 0 18 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1 5H17M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5M7 10L11 14M11 10L7 14"
-            stroke="#ADADAD"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
+      <span class="cart-product__price cart-product__current-price">{{
+        props.product.currentPrice
+      }}</span>
+      <span class="cart-product__price cart-product__sum-price">{{ sum }}</span>
     </div>
-  </NuxtLink>
+    <button
+      @click.prevent="removeCartProduct"
+      class="cart-product__remove-cart-product"
+    >
+      <svg
+        width="18"
+        height="20"
+        viewBox="0 0 18 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 5H17M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5M7 10L11 14M11 10L7 14"
+          stroke="#ADADAD"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -80,6 +76,39 @@ import { useCartStore } from "@/store/Cart";
 const props = defineProps<{ product: CartProduct }>();
 
 const cartStore = useCartStore();
+const productCount = computed(() =>
+  cartStore.getCount(
+    props.product.productId,
+    props.product.chosenColor,
+    props.product.chosenSize
+  )
+);
+const increaseCounter = () => {
+  cartStore.increaseCount(
+    props.product.productId,
+    props.product.chosenColor,
+    props.product.chosenSize
+  );
+};
+const decreaseCounter = () => {
+  if (productCount.value > 1) {
+    cartStore.decreaseCount(
+      props.product.productId,
+      props.product.chosenColor,
+      props.product.chosenSize
+    );
+  }
+};
+const sum = computed(
+  () =>
+    (
+      productCount.value *
+      parseFloat(props.product.currentPrice.replace(/\s|₽/g, ""))
+    )
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"
+);
+
 const removeCartProduct = () => {
   cartStore.removeCartProduct(
     props.product.productId,
@@ -230,6 +259,7 @@ const removeCartProduct = () => {
     &__sum-price {
       display: block;
       order: 2;
+      white-space: nowrap;
     }
     &__price {
       width: 70px;
@@ -239,7 +269,17 @@ const removeCartProduct = () => {
     }
   }
 }
-/* 1200px = 75em */
-@media (min-width: 75em) {
+/* 1440px = 90em */
+@media (min-width: 90em) {
+  .cart-product {
+    gap: 4.375rem;
+
+    &__details {
+      width: 331px;
+    }
+    &__body {
+      gap: 8.063rem;
+    }
+  }
 }
 </style>

@@ -96,11 +96,17 @@
             }}</span>
           </div>
           <div class="details__counter">
-            <button class="details__counter-btn details__decrease-btn">
+            <button
+              @click="decreaseCounter"
+              class="details__counter-btn details__decrease-btn"
+            >
               -
             </button>
-            <span class="details__counter-text">1</span>
-            <button class="details__counter-btn details__increase-btn">
+            <span class="details__counter-text">{{ count }}</span>
+            <button
+              @click="increaseCounter"
+              class="details__counter-btn details__increase-btn"
+            >
               +
             </button>
           </div>
@@ -642,12 +648,23 @@ watch(
   { immediate: true }
 );
 
+const count = ref<number>(1);
+const increaseCounter = () => {
+  count.value++;
+};
+const decreaseCounter = () => {
+  if (count.value > 1) {
+    count.value--;
+  }
+};
+
 const cartStore = useCartStore();
 const addCartProduct = () => {
   cartStore.addToCart(
     product.value!,
     activeHexColor.value!,
-    activeSize.value! || product.value!.sizes[0]
+    activeSize.value! || product.value!.sizes[0],
+    count.value
   );
 };
 </script>

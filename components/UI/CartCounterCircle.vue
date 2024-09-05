@@ -8,7 +8,16 @@
 import { useCartStore } from "@/store/Cart";
 
 const cartStore = useCartStore();
-const totalProducts = computed(() => cartStore.cart.length);
+const totalProducts = computed(() => {
+  return cartStore.cart.reduce((total, product) => {
+    const key = cartStore.getKey(
+      product.productId,
+      product.chosenColor,
+      product.chosenSize
+    );
+    return total + (cartStore.productCounts[key] || product.qty);
+  }, 0);
+});
 </script>
 
 <style lang="scss" scoped>
