@@ -1,6 +1,10 @@
 <template>
   <NuxtLink :to="link">
-    <button class="btn" :style="{ backgroundColor: bodyBgColor, width: width }">
+    <button
+      :type="btnType"
+      class="btn"
+      :style="{ backgroundColor: bodyBgColor, width: width }"
+    >
       <div class="btn__content">
         <span class="btn__text">{{ content }}</span>
       </div>
@@ -19,6 +23,7 @@ const props = defineProps<{
   content?: string;
   icon?: string;
   width?: string;
+  btnType?: "button" | "submit" | "reset";
 }>();
 
 const defaultBtnBgColor = "#1e1e1e";

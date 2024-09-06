@@ -53,7 +53,11 @@
           />
           <button class="summary__promo-btn">ПРИМЕНИТЬ ПРОМОКОД</button>
         </form>
-        <UIButton :content="'Оформить заказ'" width="100%"></UIButton>
+        <UIButton
+          :link="'/Checkout'"
+          :content="'Оформить заказ'"
+          :width="'100%'"
+        ></UIButton>
       </div>
     </div>
     <UIProductsSlider

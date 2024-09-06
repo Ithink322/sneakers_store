@@ -45,6 +45,9 @@ export const useCartStore = defineStore("cartProductsStore", {
         return total + itemTotal;
       }, 0);
     },
+    validPromoCodes(): PromoCode[] {
+      return validPromoCodes;
+    },
   },
   actions: {
     async fetchCart(userId: string) {
@@ -180,14 +183,6 @@ export const useCartStore = defineStore("cartProductsStore", {
 
       this.calculateDiscount();
     },
-    /* getCount(
-      productId: number,
-      chosenColor: string,
-      chosenSize: number
-    ): number {
-      const key = this.getKey(productId, chosenColor, chosenSize);
-      return this.productCounts[key] || 1;
-    }, */
     getKey(productId: number, chosenColor: string, chosenSize: number): string {
       return `${productId}-${chosenColor}-${chosenSize}`;
     },
