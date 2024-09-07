@@ -6,7 +6,7 @@ interface OrderState {
   selectedDelivery: string | null;
   selectedPayment: string | null;
   orderDate: string | null;
-  orderNumber: number;
+  orderNumber: string;
 }
 
 export const useOrderStore = defineStore("orderStore", {
@@ -14,7 +14,7 @@ export const useOrderStore = defineStore("orderStore", {
     selectedDelivery: null,
     selectedPayment: null,
     orderDate: null,
-    orderNumber: 0,
+    orderNumber: "#1",
   }),
   getters: {
     formattedOrderDate(): string {
@@ -30,8 +30,10 @@ export const useOrderStore = defineStore("orderStore", {
       this.selectedPayment = payment;
       this.orderDate = new Date().toLocaleString();
 
-      this.orderNumber += 1;
-      localStorage.setItem("orderNumber", this.orderNumber.toString());
+      const currentNumber = parseInt(this.orderNumber.replace("#", "")) || 0;
+      const newOrderNumber = currentNumber + 1;
+      this.orderNumber = `#${newOrderNumber}`;
+      localStorage.setItem("orderNumber", this.orderNumber);
     },
   },
   persist: {

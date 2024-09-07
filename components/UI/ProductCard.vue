@@ -260,10 +260,15 @@ onMounted(() => {
 });
 
 const cartStore = useCartStore();
+const isProduct = (
+  product: Product | Favorite | CartProduct
+): product is Product => {
+  return (product as Product).id !== undefined;
+};
 const addCartProduct = () => {
-  if ("id" in props.product) {
+  if (isProduct(props.product)) {
     cartStore.addToCart(
-      props.product!,
+      props.product,
       props.product.colors[0],
       props.product.sizes[0]
     );

@@ -234,7 +234,7 @@
                 type="radio"
                 class="option__radio-btn"
                 id="option__radio-7"
-                value="cНаличными при получении"
+                value="Наличными при получении"
                 v-model="selectedPayment"
               />
               <label class="option__label" :for="'option__radio-7'"
