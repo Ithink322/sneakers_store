@@ -689,7 +689,7 @@ watch(selectedPayment, (newValue) => {
 }
 .error-message {
   font-family: "Pragmatica Book";
-  line-height: 0.938rem;
+  line-height: 27px;
   color: #f81d2a;
 }
 .invalid-field {

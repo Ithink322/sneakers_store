@@ -1,5 +1,8 @@
 <template>
-  <NuxtLink class="my-account-btn-link" :to="'/login'">
+  <NuxtLink
+    class="my-account-btn-link"
+    :to="isUserLoggedIn ? '/PrivateCabinet' : '/Login'"
+  >
     <button class="my-account-btn">
       <img src="/imgs/my-account-icon.svg" alt="" />
       <span :class="{ wrap: isUserLoggedIn }">{{

@@ -155,10 +155,10 @@
           <img src="/imgs/logo.svg" alt=""
         /></NuxtLink>
         <div class="header-mid__btns-container">
-          <NuxtLink to="" class="header-mid__my-account-link">
+          <NuxtLink to="/PrivateCabinet" class="header-mid__my-account-link">
             <button
               class="header-mid__btn header-mid__my-account-btn--from768px"
-              :class="{ active: activeButton === 'myAccount' }"
+              :class="{ active: activeButton === 'PrivateCabinet' }"
             >
               <svg
                 width="15"
@@ -269,6 +269,7 @@
 import { usePostsStore } from "@/store/Posts";
 import { useCatalogMenu } from "@/store/CatalogMenu";
 import { useFavoritesStore } from "@/store/Favorites";
+import { useAuthStore } from "@/store/Auth";
 
 const store = usePostsStore();
 const routeCategory = computed(() => store.routeCategory);
@@ -326,15 +327,20 @@ const setActiveButton = (button: string) => {
   activeButton.value = button;
 };
 
+const authStore = useAuthStore();
+const isUserLoggedIn = computed(() => authStore.isLoggedIn);
 watch(
   () => route.path,
   (newPath) => {
+    console.log("isUserLoggedIn:", isUserLoggedIn.value);
     if (newPath === "/Favorites") {
       setActiveButton("wishlist");
     } else if (newPath === "/Cart") {
       setActiveButton("cart");
-    } else if (newPath === "/my-account") {
-      setActiveButton("MyAccount");
+    } else if (
+      newPath === (isUserLoggedIn.value ? "/PrivateCabinet" : "/Login")
+    ) {
+      setActiveButton("PrivateCabinet");
     } else {
       activeButton.value = null;
     }

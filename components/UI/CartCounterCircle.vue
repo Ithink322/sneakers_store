@@ -26,7 +26,7 @@ const totalProducts = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ff6915;
+  background-color: #ff6915;
   width: 15px;
   height: 15px;
   border-radius: 50%;

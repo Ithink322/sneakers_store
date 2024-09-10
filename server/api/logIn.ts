@@ -48,6 +48,7 @@ export default defineEventHandler(async (event) => {
       userId: user._id,
       token,
       fio: user.fio,
+      number: user.number,
     };
   } catch (error) {
     console.error("Error during login:", error);

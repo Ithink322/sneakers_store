@@ -254,6 +254,7 @@ const logIn = async () => {
         authStore.getAuthData(
           response.data.userId,
           response.data.fio,
+          response.data.number,
           response.data.token
         );
         await favoritesStore.fetchFavorites(response.data.userId);
