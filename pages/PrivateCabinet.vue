@@ -214,6 +214,29 @@
   <div class="container">
     <nav class="nav">
       <button
+        @click="privateCabinetStore.setActiveBtn(1)"
+        class="nav__btn nav__btn--1200px"
+        :class="{ active: privateCabinetStore.activeBtn === 1 }"
+      >
+        <svg
+          width="20"
+          height="21"
+          viewBox="0 0 20 21"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.9"
+            d="M4.168 17.349C4.41551 16.5252 4.92197 15.8032 5.61225 15.29C6.30252 14.7768 7.13985 14.4997 8 14.5H12C12.8613 14.4997 13.6996 14.7774 14.3904 15.2918C15.0812 15.8062 15.5875 16.5298 15.834 17.355M1 10.5C1 11.6819 1.23279 12.8522 1.68508 13.9442C2.13738 15.0361 2.80031 16.0282 3.63604 16.864C4.47177 17.6997 5.46392 18.3626 6.55585 18.8149C7.64778 19.2672 8.8181 19.5 10 19.5C11.1819 19.5 12.3522 19.2672 13.4442 18.8149C14.5361 18.3626 15.5282 17.6997 16.364 16.864C17.1997 16.0282 17.8626 15.0361 18.3149 13.9442C18.7672 12.8522 19 11.6819 19 10.5C19 9.3181 18.7672 8.14778 18.3149 7.05585C17.8626 5.96392 17.1997 4.97177 16.364 4.13604C15.5282 3.30031 14.5361 2.63738 13.4442 2.18508C12.3522 1.73279 11.1819 1.5 10 1.5C8.8181 1.5 7.64778 1.73279 6.55585 2.18508C5.46392 2.63738 4.47177 3.30031 3.63604 4.13604C2.80031 4.97177 2.13738 5.96392 1.68508 7.05585C1.23279 8.14778 1 9.3181 1 10.5ZM7 8.5C7 9.29565 7.31607 10.0587 7.87868 10.6213C8.44129 11.1839 9.20435 11.5 10 11.5C10.7956 11.5 11.5587 11.1839 12.1213 10.6213C12.6839 10.0587 13 9.29565 13 8.5C13 7.70435 12.6839 6.94129 12.1213 6.37868C11.5587 5.81607 10.7956 5.5 10 5.5C9.20435 5.5 8.44129 5.81607 7.87868 6.37868C7.31607 6.94129 7 7.70435 7 8.5Z"
+            stroke="#C7C7C7"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        МОЙ АККАУНТ
+      </button>
+      <button
         @click="privateCabinetStore.setActiveBtn(2)"
         class="nav__btn"
         :class="{ active: privateCabinetStore.activeBtn === 2 }"
@@ -362,6 +385,51 @@
         ВЫЙТИ ИЗ АККАУНТА
       </button>
     </nav>
+    <div v-if="isEditProfileVisible" class="edit-profile">
+      <h2 class="subtitle">Редактировать профиль</h2>
+      <form @submit.prevent="editProfile" class="edit-profile__form">
+        <div class="edit-profile__content">
+          <span class="edit-profile__title"
+            >Email <span class="edit-profile__title--red">*</span></span
+          >
+          <input
+            v-model="email"
+            placeholder="Введите email адрес"
+            type="text"
+            class="edit-profile__field"
+          />
+        </div>
+        <div class="edit-profile__content">
+          <span class="edit-profile__title"
+            >ФИО <span class="edit-profile__title--red">*</span></span
+          >
+          <input
+            v-model="fioProfile"
+            placeholder="Введите ФИО"
+            type="text"
+            class="edit-profile__field"
+          />
+        </div>
+        <div class="edit-profile__content">
+          <span class="edit-profile__title"
+            >Номер телефона
+            <span class="edit-profile__title--red">*</span></span
+          >
+          <input
+            v-model="number"
+            id="number"
+            placeholder="+7 (___) ___ - ___ - ___"
+            type="text"
+            class="edit-profile__field"
+          />
+        </div>
+        <UIButton
+          class="edit-profile__btn"
+          :content="'Сохранить'"
+          :width="'100%'"
+        ></UIButton>
+      </form>
+    </div>
     <div v-if="isAddressVisible" class="body">
       <h2 class="subtitle">Мой адрес</h2>
       <div class="address">
@@ -406,7 +474,7 @@
         </div>
         <div
           v-if="!privateCabinetStore.addressData"
-          @click="openAddressForm"
+          @click="openEditAddress"
           class="address__add-btn"
         >
           <div class="address__circle">
@@ -429,7 +497,10 @@
           Добавить адрес
         </div>
         <div v-if="privateCabinetStore.addressData" class="address__btns">
-          <button class="address__btn address__edit-btn">
+          <button
+            @click="openEditAddress"
+            class="address__btn address__edit-btn"
+          >
             <svg
               width="19"
               height="19"
@@ -447,7 +518,10 @@
             </svg>
             РЕДАКТИРОВАТЬ
           </button>
-          <button class="address__btn address__delete-btn">
+          <button
+            @click="removeAddress"
+            class="address__btn address__delete-btn"
+          >
             <svg
               width="18"
               height="19"
@@ -470,7 +544,7 @@
     </div>
     <div v-if="isEditAddressVisible" class="body">
       <h2 class="subtitle">Редактирование адреса</h2>
-      <form @submit.prevent="addAddress" class="edit-address-form">
+      <form @submit.prevent="addressSubmit" class="edit-address-form">
         <div class="edit-address-form__body">
           <span class="edit-address-form__title"
             >ФИО <span class="edit-address-form__title--red">*</span></span
@@ -602,12 +676,83 @@
         ></UIButton>
       </form>
     </div>
+    <div v-if="isEditPass" class="edit-pass">
+      <h2 class="subtitle">Сменить пароль</h2>
+      <form @submit.prevent="editPass" class="edit-pass__form">
+        <div class="edit-pass__content">
+          <span class="edit-pass__title"
+            >Текущий пароль <span class="edit-pass__title--red">*</span></span
+          >
+          <div class="edit-pass__field-body">
+            <input
+              placeholder="Введите текущий пароль"
+              class="edit-pass__field"
+              :type="isPassVisible1 ? 'text' : 'password'"
+            />
+            <button
+              type="button"
+              @click="togglePass1"
+              class="edit-pass__toggle-password-btn"
+            >
+              <img v-if="isPassVisible1" src="/imgs/opened-eye.png" alt="" />
+              <img v-if="!isPassVisible1" src="/imgs/closed-eye.png" alt="" />
+            </button>
+          </div>
+        </div>
+        <div class="edit-pass__content">
+          <span class="edit-pass__title"
+            >Новый пароль <span class="edit-pass__title--red">*</span></span
+          >
+          <div class="edit-pass__field-body">
+            <input
+              placeholder="Придумайте пароль"
+              class="edit-pass__field"
+              :type="isPassVisible2 ? 'text' : 'password'"
+            />
+            <button
+              type="button"
+              @click="togglePass2"
+              class="edit-pass__toggle-password-btn"
+            >
+              <img v-if="isPassVisible2" src="/imgs/opened-eye.png" alt="" />
+              <img v-if="!isPassVisible2" src="/imgs/closed-eye.png" alt="" />
+            </button>
+          </div>
+        </div>
+        <div class="edit-pass__content">
+          <span class="edit-pass__title"
+            >Повторите пароль <span class="edit-pass__title--red">*</span></span
+          >
+          <div class="edit-pass__field-body">
+            <input
+              placeholder="Повторите новый пароль"
+              class="edit-pass__field"
+              :type="isPassVisible3 ? 'text' : 'password'"
+            />
+            <button
+              type="button"
+              @click="togglePass3"
+              class="edit-pass__toggle-password-btn"
+            >
+              <img v-if="isPassVisible3" src="/imgs/opened-eye.png" alt="" />
+              <img v-if="!isPassVisible3" src="/imgs/closed-eye.png" alt="" />
+            </button>
+          </div>
+        </div>
+        <UIButton
+          class="edit-pass__btn"
+          :content="'Сменить пароль'"
+          :width="'100%'"
+        ></UIButton>
+      </form>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useFavoritesStore } from "@/store/Favorites";
 import { usePrivateCabinetStore } from "@/store/PrivateCabinet";
+import Inputmask from "inputmask";
 
 const isMenuVisible = ref(false);
 const openMenu = () => {
@@ -625,10 +770,33 @@ const privateCabinetStore = usePrivateCabinetStore();
 const favoritesStore = useFavoritesStore();
 const totalProducts = computed(() => favoritesStore.favorites.length);
 
-const isAddressVisible = ref(true);
+const isEditProfileVisible = ref(true);
+const email = ref<string>("");
+const fioProfile = ref<string>("");
+const number = ref<string>("");
+onMounted(() => {
+  const numberInput = document.getElementById("number")! as HTMLInputElement;
+  Inputmask("+7 (999) 999-99-99").mask(numberInput);
+});
+const editProfile = async () => {
+  const userId = localStorage.getItem("userId") as string;
+  const updatedData: Record<string, string> = {};
+  if (email.value) updatedData.email = email.value;
+  if (fioProfile.value) updatedData.fio = fioProfile.value;
+  if (number.value) updatedData.number = number.value;
+
+  const profileData = { userId, ...updatedData };
+  if (Object.keys(updatedData).length > 0) {
+    privateCabinetStore.editProfile(profileData);
+  } else {
+    console.log("No data to update");
+  }
+};
+
+const isAddressVisible = ref(false);
 const isEditAddressVisible = ref(false);
 
-const openAddressForm = () => {
+const openEditAddress = () => {
   isAddressVisible.value = false;
   isEditAddressVisible.value = true;
 };
@@ -705,8 +873,7 @@ const validateForm = () => {
     houseNumIsEmpty.value = false;
   }
 };
-const addAddress = () => {
-  validateForm();
+const addressSubmit = async () => {
   if (
     fio.value !== "" &&
     region.value !== "" &&
@@ -715,26 +882,74 @@ const addAddress = () => {
     index.value !== "" &&
     houseNum.value !== ""
   ) {
-    privateCabinetStore.addAddress({
-      fio: fio.value,
-      companyName: companyName.value,
-      region: region.value,
-      city: city.value,
-      street: street.value,
-      index: index.value,
-      houseNum: houseNum.value,
-    });
-    fio.value = "";
-    companyName.value = "";
-    region.value = "";
-    city.value = "";
-    street.value = "";
-    index.value = "";
-    houseNum.value = "";
-    isEditAddressVisible.value = false;
-    privateCabinetStore.fetchAddress();
+    if (!privateCabinetStore.addressData) {
+      validateForm();
+      await privateCabinetStore.addAddress({
+        fio: fio.value,
+        companyName: companyName.value,
+        region: region.value,
+        city: city.value,
+        street: street.value,
+        index: index.value,
+        houseNum: houseNum.value,
+      });
+    }
   }
+  if (privateCabinetStore.addressData) {
+    if (
+      fio.value !== "" ||
+      region.value !== "" ||
+      city.value !== "" ||
+      street.value !== "" ||
+      index.value !== "" ||
+      houseNum.value !== ""
+    ) {
+      const userId = localStorage.getItem("userId") as string;
+      await privateCabinetStore.editAddress({
+        userId: userId,
+        fio: fio.value,
+        companyName: companyName.value,
+        region: region.value,
+        city: city.value,
+        street: street.value,
+        index: index.value,
+        houseNum: houseNum.value,
+        number: privateCabinetStore.addressData.number,
+      });
+    }
+  }
+  fio.value = "";
+  companyName.value = "";
+  region.value = "";
+  city.value = "";
+  street.value = "";
+  index.value = "";
+  houseNum.value = "";
+
+  isEditAddressVisible.value = false;
+  isAddressVisible.value = true;
+  await privateCabinetStore.fetchAddress();
+  window.scrollTo(0, 0);
 };
+
+const removeAddress = () => {
+  privateCabinetStore.removeAddress();
+};
+
+const isEditPass = ref(false);
+const isPassVisible1 = ref(false);
+const isPassVisible2 = ref(false);
+const isPassVisible3 = ref(false);
+const togglePass1 = () => {
+  isPassVisible1.value = !isPassVisible1.value;
+};
+const togglePass2 = () => {
+  isPassVisible2.value = !isPassVisible2.value;
+};
+const togglePass3 = () => {
+  isPassVisible3.value = !isPassVisible3.value;
+};
+const editPass = () => {};
 </script>
 
 <style lang="scss" scoped>
@@ -832,6 +1047,47 @@ const addAddress = () => {
   line-height: 32px;
   color: #1d1d27;
   margin: 0.938rem 0;
+}
+.edit-profile {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+    padding: 0.938rem;
+    border: 1px solid #eaeaea;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.313rem;
+  }
+  &__title {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 27px;
+  }
+  &__title--red {
+    color: #ff1515;
+  }
+  &__field {
+    padding: 1.031rem 1.25rem;
+    border: 1px solid #d6d6d6;
+    outline: none;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #000;
+  }
+  &__field::placeholder {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #c1c1c1;
+  }
+  &__field:focus {
+    border: 1px solid #000;
+  }
+  &__btn {
+    margin-top: 0.938rem;
+  }
 }
 .address {
   border: 1px solid #eaeaea;
@@ -1013,6 +1269,62 @@ const addAddress = () => {
 .invalid-field::placeholder {
   color: #f81d2a;
 }
+.edit-pass {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+    padding: 0.938rem;
+    border: 1px solid #eaeaea;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.313rem;
+  }
+  &__title {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 27px;
+  }
+  &__title--red {
+    color: #ff1515;
+  }
+  &__field-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  &__field {
+    padding: 1.031rem 1.25rem;
+    border: 1px solid #d6d6d6;
+    outline: none;
+    width: 100%;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #000;
+  }
+  &__field::placeholder {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #c1c1c1;
+  }
+  &__field:focus {
+    border: 1px solid #000;
+  }
+  &__toggle-password-btn {
+    position: absolute;
+    @include btn;
+    right: 1.5rem;
+  }
+  &__toggle-password-btn img {
+    width: 22px;
+    height: 22px;
+  }
+  &__btn {
+    margin-top: 0.938rem;
+  }
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .title {
@@ -1055,6 +1367,9 @@ const addAddress = () => {
     }
     &__btn-hiddenBorder:after {
       border-right: none;
+    }
+    &__btn--1200px {
+      display: none;
     }
     &__favorites-count-circle {
       position: absolute;
@@ -1150,6 +1465,9 @@ const addAddress = () => {
     &__btn-hiddenBorder:after {
       height: 0px;
     }
+    &__btn--1200px {
+      display: flex;
+    }
     &__favorites-count-circle {
       position: static;
       margin: 0;
@@ -1161,11 +1479,24 @@ const addAddress = () => {
     color: #1d1d27;
     margin: 0 0 1.563rem 0;
   }
+  .edit-profile {
+    &__form {
+      width: 555px;
+    }
+  }
   .address {
     width: 805px;
 
     &__add-btn {
       margin: 0 0 0 1.875rem;
+    }
+    &__info {
+      gap: 10.188rem;
+    }
+  }
+  .edit-pass {
+    &__form {
+      width: 555px;
     }
   }
   .edit-address-form {
