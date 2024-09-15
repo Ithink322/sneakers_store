@@ -29,8 +29,13 @@
             v-for="(image, index) in props.product.heroes"
             :key="index"
             :class="{ active: index === activeIndex }"
+            :style="{ width: cardWidth, height: cardHeight }"
           >
-            <img :src="image" alt="Product Image" />
+            <img
+              :src="image"
+              alt="Product Image"
+              :style="{ width: cardWidth, height: cardHeight }"
+            />
           </div>
         </div>
         <div class="card__slider-indicators slider-indicators">
@@ -114,7 +119,11 @@ import type { CartProduct } from "@/types/CartProduct";
 import { useFavoritesStore } from "@/store/Favorites";
 import { useCartStore } from "@/store/Cart";
 
-const props = defineProps<{ product: Product | Favorite | CartProduct }>();
+const props = defineProps<{
+  product: Product | Favorite | CartProduct;
+  cardWidth?: string;
+  cardHeight?: string;
+}>();
 
 let windowWidth = 0;
 let isPageScrolling = false;
@@ -465,7 +474,7 @@ const addCartProduct = () => {
     }
     &__hero,
     &__hero img {
-      min-width: 440px;
+      width: 440px;
       height: 445px;
     }
   }
@@ -479,6 +488,15 @@ const addCartProduct = () => {
     position: absolute;
     display: flex;
     gap: 0.563rem;
+  }
+}
+/* 1920px = 120em */
+@media (min-width: 120em) {
+  .card {
+    &__hero,
+    &__hero img {
+      width: 433px;
+    }
   }
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
   <UIBreadcrumb :breadcrumbTitle="'Личный кабинет'"></UIBreadcrumb>
   <h1 class="title">Личный кабинет</h1>
+  <span v-if="isMyAccVisible" class="solutation"
+    >Добро Пожаловать, {{ myAccFio }}!</span
+  >
   <div @click="openMenu" class="menu-btn">
     <svg
       width="15"
@@ -187,7 +190,12 @@
         СМЕНИТЬ ПАРОЛЬ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(7)"
+        @click="
+          () => {
+            privateCabinetStore.setActiveBtn(7);
+            logOut();
+          }
+        "
         class="menu__btn menu__btn-hiddenBorder"
         :class="{ active: privateCabinetStore.activeBtn === 7 }"
       >
@@ -362,7 +370,12 @@
         СМЕНИТЬ ПАРОЛЬ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(7)"
+        @click="
+          () => {
+            privateCabinetStore.setActiveBtn(7);
+            logOut();
+          }
+        "
         class="nav__btn nav__btn-hiddenBorder"
         :class="{ active: privateCabinetStore.activeBtn === 7 }"
       >
@@ -388,46 +401,88 @@
     <div v-if="isEditProfileVisible" class="edit-profile">
       <h2 class="subtitle">Редактировать профиль</h2>
       <form @submit.prevent="editProfile" class="edit-profile__form">
-        <div class="edit-profile__content">
-          <span class="edit-profile__title"
-            >Email <span class="edit-profile__title--red">*</span></span
-          >
-          <input
-            v-model="email"
-            placeholder="Введите email адрес"
-            type="text"
-            class="edit-profile__field"
-          />
+        <div class="edit-profile__container" v-if="!isProfileMessageVisible">
+          <div class="edit-profile__content">
+            <span class="edit-profile__title"
+              >Email <span class="edit-profile__title--red">*</span></span
+            >
+            <input
+              v-model="email"
+              @input="emailOnInput"
+              placeholder="Введите email адрес"
+              type="text"
+              class="edit-profile__field"
+              :class="{
+                'invalid-email': !emailIsValid,
+              }"
+            />
+            <span v-if="!emailIsValid" class="error-message"
+              >Введите корректный адрес электронной почты.</span
+            >
+          </div>
+          <div class="edit-profile__content">
+            <span class="edit-profile__title"
+              >ФИО <span class="edit-profile__title--red">*</span></span
+            >
+            <input
+              v-model="fioProfile"
+              placeholder="Введите ФИО"
+              type="text"
+              class="edit-profile__field"
+            />
+          </div>
+          <div class="edit-profile__content">
+            <span class="edit-profile__title"
+              >Номер телефона
+              <span class="edit-profile__title--red">*</span></span
+            >
+            <input
+              v-model="number"
+              id="number"
+              placeholder="+7 (___) ___ - ___ - ___"
+              type="text"
+              class="edit-profile__field"
+            />
+          </div>
+          <UIButton
+            class="edit-profile__btn"
+            :content="'Сохранить'"
+            :width="'100%'"
+          ></UIButton>
         </div>
-        <div class="edit-profile__content">
-          <span class="edit-profile__title"
-            >ФИО <span class="edit-profile__title--red">*</span></span
-          >
-          <input
-            v-model="fioProfile"
-            placeholder="Введите ФИО"
-            type="text"
-            class="edit-profile__field"
-          />
+        <div v-if="isLoading" class="loading-container">
+          <div
+            ref="progressRing"
+            class="loading-container__progress-ring"
+          ></div>
+          <span class="loading-container__text">
+            Подождите, сохраняются<br />
+            изменения профиля
+          </span>
         </div>
-        <div class="edit-profile__content">
-          <span class="edit-profile__title"
-            >Номер телефона
-            <span class="edit-profile__title--red">*</span></span
+        <div v-if="isProfileMessageVisible" class="thanks-message">
+          <button
+            @click="closeProfileThanksMessage"
+            class="thanks-message__close-btn"
           >
-          <input
-            v-model="number"
-            id="number"
-            placeholder="+7 (___) ___ - ___ - ___"
-            type="text"
-            class="edit-profile__field"
-          />
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.7"
+                d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+                fill="#454A4C"
+              />
+            </svg>
+          </button>
+          <div ref="animatedTick" class="thanks-message__tick"></div>
+          <span class="thanks-message__title"> Профиль отредактирован </span>
+          <span class="thanks-message__text">Ваш профиль успешно изменён.</span>
         </div>
-        <UIButton
-          class="edit-profile__btn"
-          :content="'Сохранить'"
-          :width="'100%'"
-        ></UIButton>
       </form>
     </div>
     <div v-if="isAddressVisible" class="body">
@@ -676,74 +731,170 @@
         ></UIButton>
       </form>
     </div>
+    <div v-if="isFavoritesVisible">
+      <h2 class="subtitle">Избранные товары</h2>
+      <div v-if="totalProducts > 0" class="products-list">
+        <UIProductCard
+          v-for="product in paginatedProducts"
+          :cardWidth="cardWidth"
+          :cardHeight="cardHeight"
+          :key="product.productId"
+          :product="product"
+        />
+      </div>
+      <UIEmpty
+        v-if="totalProducts === 0"
+        :hero="'/imgs/empty-favorites-icon.jpg'"
+        :title="'Ваш список желаний пуст'"
+        :text="`У вас пока нет товаров в списке желаний. На странице <strong>&quot;Каталог&quot;</strong> вы найдете много интересных товаров.`"
+        :iconWidth="'98px'"
+      ></UIEmpty>
+    </div>
     <div v-if="isEditPass" class="edit-pass">
       <h2 class="subtitle">Сменить пароль</h2>
       <form @submit.prevent="editPass" class="edit-pass__form">
-        <div class="edit-pass__content">
-          <span class="edit-pass__title"
-            >Текущий пароль <span class="edit-pass__title--red">*</span></span
-          >
-          <div class="edit-pass__field-body">
-            <input
-              placeholder="Введите текущий пароль"
-              class="edit-pass__field"
-              :type="isPassVisible1 ? 'text' : 'password'"
-            />
-            <button
-              type="button"
-              @click="togglePass1"
-              class="edit-pass__toggle-password-btn"
+        <div class="edit-pass__container" v-if="!isPassMessageVisible">
+          <div class="edit-pass__content">
+            <span class="edit-pass__title"
+              >Текущий пароль <span class="edit-pass__title--red">*</span></span
             >
-              <img v-if="isPassVisible1" src="/imgs/opened-eye.png" alt="" />
-              <img v-if="!isPassVisible1" src="/imgs/closed-eye.png" alt="" />
-            </button>
+            <div class="edit-pass__field-body">
+              <input
+                v-model="currentPass"
+                @input="currentPassOnInput"
+                placeholder="Введите текущий пароль"
+                class="edit-pass__field"
+                :type="isCurrentPassVisible ? 'text' : 'password'"
+                :class="{
+                  'pass--empty': isCurrentPassEmpty,
+                }"
+              />
+              <button
+                type="button"
+                @click="toggleCurrentPass"
+                class="edit-pass__toggle-password-btn"
+              >
+                <img
+                  v-if="isCurrentPassVisible"
+                  src="/imgs/opened-eye.png"
+                  alt=""
+                />
+                <img
+                  v-if="!isCurrentPassVisible"
+                  src="/imgs/closed-eye.png"
+                  alt=""
+                />
+              </button>
+            </div>
+            <span v-if="!activeCurrentPassNotice" class="edit-pass__notice">{{
+              activeCurrentPassNotice
+            }}</span>
+            <span v-if="activeCurrentPassNotice" class="error-message">{{
+              activeCurrentPassNotice
+            }}</span>
           </div>
-        </div>
-        <div class="edit-pass__content">
-          <span class="edit-pass__title"
-            >Новый пароль <span class="edit-pass__title--red">*</span></span
-          >
-          <div class="edit-pass__field-body">
-            <input
-              placeholder="Придумайте пароль"
-              class="edit-pass__field"
-              :type="isPassVisible2 ? 'text' : 'password'"
-            />
-            <button
-              type="button"
-              @click="togglePass2"
-              class="edit-pass__toggle-password-btn"
+          <div class="edit-pass__content">
+            <span class="edit-pass__title"
+              >Новый пароль <span class="edit-pass__title--red">*</span></span
             >
-              <img v-if="isPassVisible2" src="/imgs/opened-eye.png" alt="" />
-              <img v-if="!isPassVisible2" src="/imgs/closed-eye.png" alt="" />
-            </button>
+            <div class="edit-pass__field-body">
+              <input
+                v-model="pass1"
+                @input="pass1OnInput"
+                placeholder="Придумайте пароль"
+                class="edit-pass__field"
+                :type="isPassVisible1 ? 'text' : 'password'"
+                :class="{
+                  'pass--empty': isPass1Empty,
+                  'invalid-pass': !isPass1Valid,
+                  'equal-passes': !arePassesEqual,
+                  'pass-length': !isPass1LengthValid,
+                }"
+              />
+              <button
+                type="button"
+                @click="togglePass1"
+                class="edit-pass__toggle-password-btn"
+              >
+                <img v-if="isPassVisible1" src="/imgs/opened-eye.png" alt="" />
+                <img v-if="!isPassVisible1" src="/imgs/closed-eye.png" alt="" />
+              </button>
+            </div>
+            <span v-if="activePass1Notice" class="edit-pass__notice">{{
+              activePass1Notice
+            }}</span>
           </div>
-        </div>
-        <div class="edit-pass__content">
-          <span class="edit-pass__title"
-            >Повторите пароль <span class="edit-pass__title--red">*</span></span
-          >
-          <div class="edit-pass__field-body">
-            <input
-              placeholder="Повторите новый пароль"
-              class="edit-pass__field"
-              :type="isPassVisible3 ? 'text' : 'password'"
-            />
-            <button
-              type="button"
-              @click="togglePass3"
-              class="edit-pass__toggle-password-btn"
+          <div class="edit-pass__content">
+            <span class="edit-pass__title"
+              >Повторите пароль
+              <span class="edit-pass__title--red">*</span></span
             >
-              <img v-if="isPassVisible3" src="/imgs/opened-eye.png" alt="" />
-              <img v-if="!isPassVisible3" src="/imgs/closed-eye.png" alt="" />
-            </button>
+            <div class="edit-pass__field-body">
+              <input
+                v-model="pass2"
+                @input="pass2OnInput"
+                placeholder="Повторите новый пароль"
+                class="edit-pass__field"
+                :type="isPassVisible2 ? 'text' : 'password'"
+                :class="{
+                  'pass--empty': isPass2Empty,
+                  'invalid-pass': !isPass2Valid,
+                  'equal-passes': !arePassesEqual,
+                  'pass-length': !isPass2LengthValid,
+                }"
+              />
+              <button
+                type="button"
+                @click="togglePass2"
+                class="edit-pass__toggle-password-btn"
+              >
+                <img v-if="isPassVisible2" src="/imgs/opened-eye.png" alt="" />
+                <img v-if="!isPassVisible2" src="/imgs/closed-eye.png" alt="" />
+              </button>
+            </div>
+            <span v-if="activePass2Notice" class="edit-pass__notice">{{
+              activePass2Notice
+            }}</span>
           </div>
+          <UIButton
+            class="edit-pass__btn"
+            :content="'Сменить пароль'"
+            :width="cardWidth"
+          ></UIButton>
         </div>
-        <UIButton
-          class="edit-pass__btn"
-          :content="'Сменить пароль'"
-          :width="'100%'"
-        ></UIButton>
+        <div v-if="isLoading" class="loading-container">
+          <div
+            ref="progressRing"
+            class="loading-container__progress-ring"
+          ></div>
+          <span class="loading-container__text">
+            Подождите, сохраняется<br />
+            новый пароль
+          </span>
+        </div>
+        <div v-if="isPassMessageVisible" class="thanks-message">
+          <button
+            @click="closePassThanksMessage"
+            class="thanks-message__close-btn"
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.7"
+                d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+                fill="#454A4C"
+              />
+            </svg>
+          </button>
+          <div ref="animatedTick" class="thanks-message__tick"></div>
+          <span class="thanks-message__title"> Пароль изменён </span>
+          <span class="thanks-message__text">Вы успешно изменили пароль.</span>
+        </div>
       </form>
     </div>
   </div>
@@ -753,6 +904,17 @@
 import { useFavoritesStore } from "@/store/Favorites";
 import { usePrivateCabinetStore } from "@/store/PrivateCabinet";
 import Inputmask from "inputmask";
+import lottie from "lottie-web";
+import { nextTick } from "vue";
+import { useAuthStore } from "@/store/Auth";
+import { useRouter } from "vue-router";
+import { onMounted, onBeforeUnmount } from "vue";
+
+const isMyAccVisible = ref(true);
+const myAccFio = ref("");
+onMounted(() => {
+  myAccFio.value = localStorage.getItem("fio")!;
+});
 
 const isMenuVisible = ref(false);
 const openMenu = () => {
@@ -770,15 +932,40 @@ const privateCabinetStore = usePrivateCabinetStore();
 const favoritesStore = useFavoritesStore();
 const totalProducts = computed(() => favoritesStore.favorites.length);
 
-const isEditProfileVisible = ref(true);
+const isEditProfileVisible = ref(false);
 const email = ref<string>("");
+const emailIsEmpty = ref(false);
+const emailIsValid = ref(true);
 const fioProfile = ref<string>("");
 const number = ref<string>("");
+const emailOnInput = () => {
+  emailIsEmpty.value = email.value === "";
+  emailIsValid.value = true;
+};
 onMounted(() => {
   const numberInput = document.getElementById("number")! as HTMLInputElement;
-  Inputmask("+7 (999) 999-99-99").mask(numberInput);
+  if (numberInput) {
+    Inputmask("+7 (999) 999-99-99").mask(numberInput);
+  }
 });
+const validateEmail = () => {
+  if (email.value === "") {
+    emailIsEmpty.value = true;
+    emailIsValid.value = true;
+  } else {
+    emailIsEmpty.value = false;
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/;
+    emailIsValid.value = emailRegex.test(email.value);
+  }
+};
+const isLoading = ref(false);
+const progressRing = ref<HTMLElement | null>(null);
+const isProfileMessageVisible = ref(false);
+const animatedTick = ref<HTMLElement | null>(null);
+const animationOfTick = ref<any>(null);
 const editProfile = async () => {
+  validateEmail();
   const userId = localStorage.getItem("userId") as string;
   const updatedData: Record<string, string> = {};
   if (email.value) updatedData.email = email.value;
@@ -791,6 +978,42 @@ const editProfile = async () => {
   } else {
     console.log("No data to update");
   }
+  if (
+    (!emailIsEmpty.value && emailIsValid.value) ||
+    fioProfile.value !== "" ||
+    number.value !== ""
+  ) {
+    isLoading.value = true;
+    nextTick(() => {
+      const animation = lottie.loadAnimation({
+        container: progressRing.value!,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/animations/progress-ring.json",
+      });
+      setTimeout(() => {
+        isLoading.value = false;
+        animation.destroy();
+        isProfileMessageVisible.value = true;
+        nextTick(() => {
+          if (animatedTick.value) {
+            animationOfTick.value = lottie.loadAnimation({
+              container: animatedTick.value!,
+              renderer: "svg",
+              loop: false,
+              autoplay: true,
+              path: "/animations/tick.json",
+            });
+          }
+        });
+      }, 2800);
+    });
+  }
+};
+const closeProfileThanksMessage = () => {
+  isProfileMessageVisible.value = false;
+  animationOfTick.value!.destroy();
 };
 
 const isAddressVisible = ref(false);
@@ -836,7 +1059,7 @@ const indexOnInput = () => {
 const houseNumOnInput = () => {
   houseNumIsEmpty.value = houseNum.value === "";
 };
-const validateForm = () => {
+const validateAddress = () => {
   if (fio.value === "") {
     fioIsEmpty.value = true;
   } else {
@@ -883,7 +1106,7 @@ const addressSubmit = async () => {
     houseNum.value !== ""
   ) {
     if (!privateCabinetStore.addressData) {
-      validateForm();
+      validateAddress();
       await privateCabinetStore.addAddress({
         fio: fio.value,
         companyName: companyName.value,
@@ -936,26 +1159,228 @@ const removeAddress = () => {
   privateCabinetStore.removeAddress();
 };
 
+const isFavoritesVisible = ref(false);
+const paginatedProducts = computed(() => favoritesStore.paginatedProducts);
+const windowWidth = ref(0);
+const updateWidth = () => {
+  windowWidth.value = window.innerWidth;
+};
+const cardWidth = computed(() => {
+  updateWidth();
+  return windowWidth.value < 1024 ? "100%" : "319px";
+});
+const cardHeight = computed(() => {
+  updateWidth();
+  return windowWidth.value < 1024 ? "100%" : "340px";
+});
+onMounted(() => {
+  window.addEventListener("resize", updateWidth);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateWidth);
+});
+
 const isEditPass = ref(false);
+const currentPass = ref("");
+const pass1 = ref("");
+const pass2 = ref("");
+const isPass1LengthValid = ref(true);
+const isPass2LengthValid = ref(true);
+const arePassesEqual = ref(true);
+const activeCurrentPassNotice = ref<string | null>(null);
+const activePass1Notice = ref<string | null>(null);
+const activePass2Notice = ref<string | null>(null);
+const isCurrentPassVisible = ref(false);
 const isPassVisible1 = ref(false);
 const isPassVisible2 = ref(false);
-const isPassVisible3 = ref(false);
+const isCurrentPassEmpty = ref(false);
+const isCurrentPassValid = ref(true);
+const isPass1Empty = ref(false);
+const isPass2Empty = ref(false);
+const isPass1Valid = ref(true);
+const isPass2Valid = ref(true);
+const toggleCurrentPass = () => {
+  isCurrentPassVisible.value = !isCurrentPassVisible.value;
+};
 const togglePass1 = () => {
   isPassVisible1.value = !isPassVisible1.value;
 };
 const togglePass2 = () => {
   isPassVisible2.value = !isPassVisible2.value;
 };
-const togglePass3 = () => {
-  isPassVisible3.value = !isPassVisible3.value;
+const currentPassOnInput = () => {
+  isCurrentPassEmpty.value = currentPass.value === "";
+  isCurrentPassValid.value = true;
+  activeCurrentPassNotice.value = "";
 };
-const editPass = () => {};
+const pass1OnInput = () => {
+  isPass1Empty.value = pass1.value === "";
+  isPass1Valid.value = true;
+
+  if (pass1.value.length >= 8 && pass1.value.length <= 20) {
+    activePass1Notice.value = "";
+    isPass1LengthValid.value = true;
+  }
+  if (pass1.value === pass2.value) {
+    arePassesEqual.value = true;
+    activePass1Notice.value = "";
+  }
+};
+const pass2OnInput = () => {
+  isPass2Empty.value = pass2.value === "";
+  isPass2Valid.value = true;
+
+  if (pass2.value.length >= 8 && pass2.value.length <= 20) {
+    activePass2Notice.value = "";
+    isPass2LengthValid.value = true;
+  }
+  if (pass1.value === pass2.value) {
+    arePassesEqual.value = true;
+    activePass1Notice.value = "";
+  }
+};
+const validatePasses = async () => {
+  const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
+  if (currentPass.value === "") {
+    isCurrentPassEmpty.value = true;
+  } else {
+    isCurrentPassEmpty.value = false;
+  }
+  if (pass1.value === "") {
+    isPass1Empty.value = true;
+    isPass1Valid.value = true;
+  } else {
+    isPass1Empty.value = false;
+    isPass1Valid.value = passRegex.test(pass1.value);
+  }
+  if (pass2.value === "") {
+    isPass2Empty.value = true;
+    isPass2Valid.value = true;
+  } else {
+    isPass2Empty.value = false;
+    isPass2Valid.value = passRegex.test(pass2.value);
+  }
+  arePassesEqual.value = pass1.value === pass2.value;
+
+  activeCurrentPassNotice.value = null;
+  activePass1Notice.value = null;
+  activePass2Notice.value = null;
+  const userId = localStorage.getItem("userId") as string;
+  const response = await privateCabinetStore.editPass(
+    userId,
+    currentPass.value,
+    pass1.value
+  );
+  if (isCurrentPassEmpty.value) {
+    activeCurrentPassNotice.value = "Важно заполнить это поле.";
+  } else if (response.message === "Current password is incorrect") {
+    activeCurrentPassNotice.value = "Текущий пароль не совпадает.";
+  }
+  if (isPass1Empty.value) {
+    activePass1Notice.value = "Важно заполнить это поле.";
+  } else if (!(pass1.value.length >= 8 && pass1.value.length <= 20)) {
+    activePass1Notice.value = "Пароль должен содержать от 8 до 20 символов.";
+  } else if (!passRegex.test(pass1.value)) {
+    activePass1Notice.value =
+      "Пароль не должен содержать специальных символов.";
+  } else if (pass1.value !== pass2.value) {
+    activePass1Notice.value = "Пароли не совпадают.";
+  }
+  if (isPass2Empty.value) {
+    activePass2Notice.value = "Важно заполнить это поле.";
+  } else if (!(pass2.value.length >= 8 && pass2.value.length <= 20)) {
+    activePass2Notice.value = "Пароль должен содержать от 8 до 20 символов.";
+  } else if (!passRegex.test(pass2.value)) {
+    activePass2Notice.value =
+      "Пароль не должен содержать специальных символов.";
+  }
+};
+const isPassMessageVisible = ref(false);
+const editPass = async () => {
+  validatePasses();
+  if (
+    !isCurrentPassEmpty.value &&
+    isCurrentPassValid &&
+    !isPass1Empty.value &&
+    isPass1Valid.value &&
+    !isPass2Empty.value &&
+    isPass2Valid.value &&
+    isPass1LengthValid.value &&
+    isPass2LengthValid.value &&
+    arePassesEqual.value
+  ) {
+    const userId = localStorage.getItem("userId") as string;
+    const response = await privateCabinetStore.editPass(
+      userId,
+      currentPass.value,
+      pass1.value
+    );
+
+    if (response.message === "Current password is incorrect") {
+      isCurrentPassValid.value = false;
+      return;
+    } else {
+      console.log("Password updated successfully");
+
+      isLoading.value = true;
+      nextTick(() => {
+        const animation = lottie.loadAnimation({
+          container: progressRing.value!,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          path: "/animations/progress-ring.json",
+        });
+
+        setTimeout(() => {
+          isLoading.value = false;
+          animation.destroy();
+          isPassMessageVisible.value = true;
+
+          nextTick(() => {
+            if (animatedTick.value) {
+              animationOfTick.value = lottie.loadAnimation({
+                container: animatedTick.value!,
+                renderer: "svg",
+                loop: false,
+                autoplay: true,
+                path: "/animations/tick.json",
+              });
+            }
+          });
+        }, 2800);
+      });
+    }
+  }
+};
+const closePassThanksMessage = () => {
+  isPassMessageVisible.value = false;
+  animationOfTick.value!.destroy();
+};
+
+const router = useRouter();
+const authStore = useAuthStore();
+const logOut = () => {
+  if (authStore.isLoggedIn) {
+    authStore.removeAuthData();
+    router.push("/LogIn");
+    privateCabinetStore.setActiveBtn(1);
+    privateCabinetStore.addressData = null;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/App.scss";
 .title {
   margin: 0.938rem 0;
+}
+.solutation {
+  display: block;
+  font-family: "Pragmatica Medium";
+  font-size: 1.25rem;
+  color: #1e1e1e;
+  margin-bottom: 0.938rem;
 }
 .menu-btn {
   @include btn;
@@ -1050,11 +1475,17 @@ const editPass = () => {};
 }
 .edit-profile {
   &__form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0.938rem;
+    border: 1px solid #eaeaea;
+  }
+  &__container {
     display: flex;
     flex-direction: column;
     gap: 0.938rem;
-    padding: 0.938rem;
-    border: 1px solid #eaeaea;
+    width: 100%;
   }
   &__content {
     display: flex;
@@ -1087,6 +1518,63 @@ const editPass = () => {};
   }
   &__btn {
     margin-top: 0.938rem;
+  }
+}
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex-centered;
+  flex-direction: column;
+  gap: 1.563rem;
+  background-color: #fff;
+  opacity: 90%;
+
+  &__progress-ring {
+    width: 74px;
+    height: 74px;
+  }
+  &__text {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #4d4d4d;
+  }
+}
+.thanks-message {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #fff;
+  margin: 1.25rem 0;
+
+  &__close-btn {
+    position: absolute;
+    @include btn;
+    top: 0.625rem;
+    right: 0.625rem;
+  }
+  &__tick {
+    width: 195px;
+    height: 195px;
+    margin: 0 auto;
+  }
+  &__title {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1.375rem;
+    color: #2c2f30;
+    margin-top: -3.75rem;
+  }
+  &__text {
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 1.5rem;
+    color: #545454;
+    margin-top: -0.938rem;
   }
 }
 .address {
@@ -1257,25 +1745,24 @@ const editPass = () => {};
     margin-top: 0.313rem;
   }
 }
-.error-message {
-  font-family: "Pragmatica Book";
-  line-height: 27px;
-  color: #f81d2a;
-}
-.invalid-field {
-  border: 1px solid #f81d2a;
-  color: #f81d2a;
-}
-.invalid-field::placeholder {
-  color: #f81d2a;
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.938rem;
 }
 .edit-pass {
   &__form {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.938rem;
     padding: 0.938rem;
     border: 1px solid #eaeaea;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
   }
   &__content {
     display: flex;
@@ -1321,9 +1808,38 @@ const editPass = () => {};
     width: 22px;
     height: 22px;
   }
+  &__notice {
+    font-family: "Pragmatica Book";
+    line-height: 0.938rem;
+    color: #f81d2a;
+  }
   &__btn {
     margin-top: 0.938rem;
   }
+}
+.error-message {
+  font-family: "Pragmatica Book";
+  line-height: 27px;
+  color: #f81d2a;
+}
+.invalid-field,
+.invalid-email,
+.invalid-pass,
+.pass--empty,
+.pass-length,
+.equal-passes {
+  border: 1px solid #f81d2a;
+  color: #f81d2a;
+}
+.invalid-field::placeholder {
+  color: #f81d2a;
+}
+.invalid-email::placeholder,
+.invalid-pass::placeholder,
+.pass--empty::placeholder,
+.pass-length::placeholder,
+.equal-passes::placeholder {
+  color: #f81d2a;
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
@@ -1365,7 +1881,7 @@ const editPass = () => {};
         height: 23px;
       }
     }
-    &__btn-hiddenBorder:after {
+    &__btn-hiddenBorder {
       border-right: none;
     }
     &__btn--1200px {
@@ -1387,7 +1903,7 @@ const editPass = () => {};
     }
   }
   .subtitle {
-    margin: 1.125rem 0 2.688rem 0;
+    margin: 1.125rem 0;
   }
   .address {
     position: relative;
@@ -1428,11 +1944,21 @@ const editPass = () => {};
       width: 100%;
     }
   }
+  .products-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
 }
 /* 1200px = 75em */
 @media (min-width: 75em) {
   .title {
     margin: 1.563rem 0 3.125rem 0;
+  }
+  .solutation {
+    position: absolute;
+    font-size: 1.438rem;
+    margin-bottom: 1.563rem;
+    margin-left: 21.563rem;
   }
   .container {
     display: flex;
@@ -1494,6 +2020,9 @@ const editPass = () => {};
       gap: 10.188rem;
     }
   }
+  .products-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .edit-pass {
     &__form {
       width: 555px;
@@ -1508,6 +2037,9 @@ const editPass = () => {};
   .address,
   .edit-address-form {
     width: 1016px;
+  }
+  .products-list {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 /* 1920px = 120em */

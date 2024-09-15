@@ -137,6 +137,7 @@ import { useAuthStore } from "@/store/Auth";
 import { useFavoritesStore } from "@/store/Favorites";
 import { useCartStore } from "@/store/Cart";
 import axios from "axios";
+import { usePrivateCabinetStore } from "@/store/PrivateCabinet";
 
 useHead({
   title: "Вход в Sneakers Store - Найдите идеальные кроссовки",
@@ -234,6 +235,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 const favoritesStore = useFavoritesStore();
 const cartStore = useCartStore();
+const privateCabinetStore = usePrivateCabinetStore();
 const logIn = async () => {
   validateLogin();
   validatePass();
@@ -254,12 +256,14 @@ const logIn = async () => {
         authStore.getAuthData(
           response.data.userId,
           response.data.fio,
+          response.data.login,
           response.data.number,
           response.data.token
         );
         await favoritesStore.fetchFavorites(response.data.userId);
         await cartStore.fetchCart(response.data.userId);
         router.push("/catalog?page=1");
+        /* privateCabinetStore.fetchAddress(); */
       } else {
         console.error("Login failed:", response.data.message);
         isDataCorrect.value = false;

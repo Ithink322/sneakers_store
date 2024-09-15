@@ -437,7 +437,8 @@ const submitForm = () => {
 }
 .invalid-name,
 .invalid-email,
-.invalid-phone {
+.invalid-phone,
+.invalid-email--empty {
   border: 1px solid #f81d2a;
   color: #f81d2a;
 }

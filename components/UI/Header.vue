@@ -155,8 +155,12 @@
           <img src="/imgs/logo.svg" alt=""
         /></NuxtLink>
         <div class="header-mid__btns-container">
-          <NuxtLink to="/PrivateCabinet" class="header-mid__my-account-link">
+          <NuxtLink
+            :to="isUserLoggedIn ? '/PrivateCabinet' : '/Login'"
+            class="header-mid__my-account-link"
+          >
             <button
+              @click="handlePrivateCabinetClick"
               class="header-mid__btn header-mid__my-account-btn--from768px"
               :class="{ active: activeButton === 'PrivateCabinet' }"
             >
@@ -337,9 +341,7 @@ watch(
       setActiveButton("wishlist");
     } else if (newPath === "/Cart") {
       setActiveButton("cart");
-    } else if (
-      newPath === (isUserLoggedIn.value ? "/PrivateCabinet" : "/Login")
-    ) {
+    } else if (newPath === "/PrivateCabinet") {
       setActiveButton("PrivateCabinet");
     } else {
       activeButton.value = null;
@@ -347,6 +349,14 @@ watch(
   },
   { immediate: true }
 );
+const router = useRouter();
+const handlePrivateCabinetClick = () => {
+  if (authStore.isLoggedIn) {
+    router.push("/PrivateCabinet");
+  } else {
+    router.push("/LogIn");
+  }
+};
 
 const searchIsActive = ref(false);
 const toggleSearch = (event: MouseEvent | TouchEvent) => {

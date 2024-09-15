@@ -180,6 +180,7 @@ const orderNumber = orderStore.orderNumber;
     font-family: "Pragmatica Book";
     font-size: 1rem;
     text-align: right;
+    white-space: nowrap;
   }
   &__info-title--bold {
     font-family: "Pragmatica Medium";

@@ -80,15 +80,15 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
       number?: string;
     }) {
       try {
-        /* console.log("Editing profile with userId:", profile.userId); */
         const response = await axios.put("/api/profile/edit", profile);
-        if (response.data.message === "Profile updated successfully") {
+        if (response.data.message === "Profile edited successfully") {
           this.profileData = response.data.updatedProfile;
+          console.log("Password updated successfully");
         } else {
-          console.error("Failed to update profile:", response.data.message);
+          console.error("Failed to edit profile:", response.data.message);
         }
       } catch (error) {
-        console.error("Failed to update profile:", error);
+        console.error("Failed to edit profile:", error);
       }
     },
     async fetchProfile() {
@@ -98,6 +98,19 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
         this.profileData = response.data.profile;
       } catch (error) {
         console.error("Failed to fetch profile:", error);
+      }
+    },
+    async editPass(userId: string, currentPass: string, newPass: string) {
+      try {
+        const response = await axios.put("/api/pass/edit", {
+          userId,
+          currentPass,
+          newPass,
+        });
+        return response.data;
+      } catch (error) {
+        console.error("Error updating password:", error);
+        return { success: false, message: "Internal Server Error" };
       }
     },
   },

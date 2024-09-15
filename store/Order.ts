@@ -20,15 +20,21 @@ export const useOrderStore = defineStore("orderStore", {
     formattedOrderDate(): string {
       if (!this.orderDate) return "";
 
-      const date = new Date(this.orderDate);
-      return format(date, "d MMMM yyyy", { locale: ru });
+      try {
+        const date = new Date(this.orderDate);
+        if (isNaN(date.getTime())) throw new Error("Invalid date");
+        return format(date, "d MMMM yyyy", { locale: ru });
+      } catch (error) {
+        console.error("Error formatting order date:", error);
+        return "Invalid date";
+      }
     },
   },
   actions: {
     submitOrder(delivery: string, payment: string) {
       this.selectedDelivery = delivery;
       this.selectedPayment = payment;
-      this.orderDate = new Date().toLocaleString();
+      this.orderDate = new Date().toISOString();
 
       const currentNumber = parseInt(this.orderNumber.replace("#", "")) || 0;
       const newOrderNumber = currentNumber + 1;
