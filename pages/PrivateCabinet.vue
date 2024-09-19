@@ -398,6 +398,69 @@
         ВЫЙТИ ИЗ АККАУНТА
       </button>
     </nav>
+    <div v-if="isMyAccVisible" class="my-orders my-acc">
+      <h2 class="subtitle">Текущие заказы</h2>
+      <div v-if="orderStore.orders.length > 0">
+        <div class="my-orders__header">
+          <span class="my-orders__header-title my-orders__header-title-num"
+            >Номер</span
+          >
+          <span class="my-orders__header-title my-orders__header-title-date"
+            >Дата</span
+          >
+          <span class="my-orders__header-title my-orders__header-title-state"
+            >Статус</span
+          >
+          <span class="my-orders__header-title">Итого</span>
+        </div>
+        <div class="my-orders__orders-list">
+          <div
+            v-for="order in orderStore.orders"
+            :key="order.orderNum"
+            class="my-orders__body"
+          >
+            <div class="my-orders__content">
+              <span class="my-orders__title">Номер</span>
+              <span class="my-orders__text">{{ order.orderNum }}</span>
+            </div>
+            <div class="my-orders__content">
+              <span class="my-orders__title">Дата</span>
+              <span class="my-orders__text">{{ formattedDate }}</span>
+            </div>
+            <div class="my-orders__content">
+              <span class="my-orders__title">Статус</span>
+              <button class="my-orders__state-btn">
+                <div class="my-orders__state-circle"></div>
+                {{ order.orderState }}
+              </button>
+            </div>
+            <div class="my-orders__content">
+              <span class="my-orders__title">Итог</span>
+              <span class="my-orders__text my-orders__text--big">{{
+                order.discountedSum
+              }}</span>
+            </div>
+            <button class="my-orders__view-order-btn">
+              <span class="my-orders__view-order-btn-text">
+                ПРОСМОТР ЗАКАЗА
+              </span>
+              <svg
+                width="5"
+                height="8"
+                viewBox="0 0 5 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4.85355 4.35355C5.04882 4.15829 5.04882 3.84171 4.85355 3.64645L1.67157 0.464466C1.47631 0.269204 1.15973 0.269204 0.964466 0.464466C0.769204 0.659728 0.769204 0.976311 0.964466 1.17157L3.79289 4L0.964466 6.82843C0.769204 7.02369 0.769204 7.34027 0.964466 7.53553C1.15973 7.7308 1.47631 7.7308 1.67157 7.53553L4.85355 4.35355ZM3.5 4.5H4.5V3.5H3.5V4.5Z"
+                  fill="#606060"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-if="isEditProfileVisible" class="edit-profile">
       <h2 class="subtitle">Редактировать профиль</h2>
       <form @submit.prevent="editProfile" class="edit-profile__form">
@@ -484,6 +547,215 @@
           <span class="thanks-message__text">Ваш профиль успешно изменён.</span>
         </div>
       </form>
+    </div>
+    <div v-if="areMyOrdersVisivle" class="my-orders">
+      <h2 class="subtitle">История заказов</h2>
+      <div v-if="isOrderListVisible">
+        <div v-if="orderStore.orders.length > 0">
+          <div class="my-orders__header">
+            <span class="my-orders__header-title my-orders__header-title-num"
+              >Номер</span
+            >
+            <span class="my-orders__header-title my-orders__header-title-date"
+              >Дата</span
+            >
+            <span class="my-orders__header-title my-orders__header-title-state"
+              >Статус</span
+            >
+            <span class="my-orders__header-title">Итого</span>
+          </div>
+          <div class="my-orders__orders-list">
+            <div
+              @click="viewOrderDetails(order)"
+              v-for="order in orderStore.orders"
+              :key="order.orderNum"
+              class="my-orders__body"
+            >
+              <div class="my-orders__content">
+                <span class="my-orders__title">Номер</span>
+                <span class="my-orders__text">{{ order.orderNum }}</span>
+              </div>
+              <div class="my-orders__content">
+                <span class="my-orders__title">Дата</span>
+                <span class="my-orders__text">{{ formattedDate }}</span>
+              </div>
+              <div class="my-orders__content">
+                <span class="my-orders__title">Статус</span>
+                <button class="my-orders__state-btn">
+                  <div class="my-orders__state-circle"></div>
+                  {{ order.orderState }}
+                </button>
+              </div>
+              <div class="my-orders__content">
+                <span class="my-orders__title">Итог</span>
+                <span class="my-orders__text my-orders__text--big">{{
+                  order.discountedSum
+                }}</span>
+              </div>
+              <button class="my-orders__view-order-btn">
+                <span class="my-orders__view-order-btn-text">
+                  ПРОСМОТР ЗАКАЗА
+                </span>
+                <svg
+                  width="5"
+                  height="8"
+                  viewBox="0 0 5 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.85355 4.35355C5.04882 4.15829 5.04882 3.84171 4.85355 3.64645L1.67157 0.464466C1.47631 0.269204 1.15973 0.269204 0.964466 0.464466C0.769204 0.659728 0.769204 0.976311 0.964466 1.17157L3.79289 4L0.964466 6.82843C0.769204 7.02369 0.769204 7.34027 0.964466 7.53553C1.15973 7.7308 1.47631 7.7308 1.67157 7.53553L4.85355 4.35355ZM3.5 4.5H4.5V3.5H3.5V4.5Z"
+                    fill="#606060"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <UIEmpty
+          v-if="orderStore.orders.length === 0"
+          :hero="'/imgs/empty-cart-icon.jpg'"
+          :title="'Ваша история заказов пуста'"
+          :text="`У вас пока нет заказов в списке. На странице <strong>&quot;Каталог&quot;</strong> вы найдете много интересных товаров.`"
+          :iconWidth="'86px'"
+        ></UIEmpty>
+      </div>
+      <div v-if="selectedOrder" class="order-details">
+        <div class="order-details__info">
+          <div class="order-details__body">
+            <span class="order-details__num"
+              >Заказ {{ selectedOrder.orderNum }}</span
+            >
+            <button
+              @click="goBackToOrders"
+              class="order-details__back-to-orders-btn"
+            >
+              <svg
+                width="6"
+                height="10"
+                viewBox="0 0 6 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 9L1 5L5 1"
+                  stroke="#1E1E1E"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              ВЕРНУТЬСЯ К ЗАКАЗАМ
+            </button>
+          </div>
+          <div class="order-details__container">
+            <span class="order-details__date"
+              >Был оформлен
+              <span class="order-details__date--medium">
+                {{
+                  format(
+                    new Date(selectedOrder.orderDate),
+                    "d MMMM 'в' HH:mm",
+                    {
+                      locale: ru,
+                    }
+                  )
+                }}</span
+              ></span
+            >
+            <div class="order-details__content">
+              - статус заказа
+              <button class="order-details__state-btn">
+                <div class="order-details__state-circle"></div>
+                {{ selectedOrder.orderState }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="order-details__details details">
+          <div class="details__titles">
+            <span class="details__title">Товар</span>
+            <span class="details__title">Итого</span>
+          </div>
+          <div v-for="order in orderStore.orders" :key="order.orderNum">
+            <UIOrderProduct
+              v-for="product in order.cart"
+              :product="product"
+              :key="product.productId"
+              :orderProductCounts="new Map(Object.entries(order.productCounts))"
+            ></UIOrderProduct>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Сумма:</span>
+            <span class="details__info-content">{{
+              selectedOrder.discountedSum
+            }}</span>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Доставка:</span>
+            <span class="details__info-content">0 ₽</span>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Способ доставки:</span>
+            <span class="details__info-content">{{
+              selectedOrder.delivery
+            }}</span>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Способ оплаты:</span>
+            <span class="details__info-content">{{
+              selectedOrder.payment
+            }}</span>
+          </div>
+          <div class="details__info details__info--hiddenBorder">
+            <span class="details__info-title--bold">Итого:</span>
+            <span class="details__info-content--bold">{{
+              selectedOrder.discountedSum
+            }}</span>
+          </div>
+        </div>
+        <div class="order-details__address address">
+          <div class="address__content">
+            <svg
+              width="19"
+              height="21"
+              viewBox="0 0 19 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.9"
+                d="M9.0188 19.4835C8.75303 19.4863 8.48936 19.436 8.24329 19.3356C7.99721 19.2351 7.77368 19.0865 7.5858 18.8985L3.3418 14.6555C2.35116 13.6644 1.63823 12.4304 1.27438 11.0772C0.910525 9.72393 0.908519 8.29884 1.26856 6.94457C1.6286 5.59029 2.33805 4.35434 3.3259 3.36044C4.31375 2.36654 5.54535 1.64955 6.8974 1.28125C8.24945 0.912951 9.67453 0.906255 11.03 1.26184C12.3854 1.61742 13.6237 2.3228 14.6209 3.30738C15.618 4.29195 16.339 5.52118 16.7118 6.87201C17.0845 8.22285 17.0959 9.64789 16.7448 11.0045M12.9988 19.9985L17.9988 14.9985M17.9988 14.9985V19.4985M17.9988 14.9985H13.4988M5.9988 8.99851C5.9988 9.79416 6.31487 10.5572 6.87748 11.1198C7.44009 11.6824 8.20315 11.9985 8.9988 11.9985C9.79445 11.9985 10.5575 11.6824 11.1201 11.1198C11.6827 10.5572 11.9988 9.79416 11.9988 8.99851C11.9988 8.20286 11.6827 7.4398 11.1201 6.87719C10.5575 6.31458 9.79445 5.99851 8.9988 5.99851C8.20315 5.99851 7.44009 6.31458 6.87748 6.87719C6.31487 7.4398 5.9988 8.20286 5.9988 8.99851Z"
+                stroke="#FB5A00"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            АДРЕС ДОСТАВКИ
+          </div>
+          <span class="address__title">{{
+            privateCabinetStore.addressData
+              ? privateCabinetStore.addressData.fio
+              : "Адрес не добавлен"
+          }}</span>
+          <div v-if="privateCabinetStore.addressData" class="address__info">
+            <span class="address__details">
+              {{ privateCabinetStore.addressData.index }},
+              {{ privateCabinetStore.addressData.region }},
+              {{ privateCabinetStore.addressData.city }},
+              {{ privateCabinetStore.addressData.street }},
+              {{ privateCabinetStore.addressData.houseNum }}
+            </span>
+            <div class="address__body">
+              <span class="address__number">Телефон</span>
+              <span class="address__number-text">{{
+                privateCabinetStore.addressData.number
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div v-if="isAddressVisible" class="body">
       <h2 class="subtitle">Мой адрес</h2>
@@ -906,11 +1178,15 @@ import { usePrivateCabinetStore } from "@/store/PrivateCabinet";
 import Inputmask from "inputmask";
 import lottie from "lottie-web";
 import { nextTick } from "vue";
+import { useOrderStore } from "@/store/Order";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
+import type { Order } from "@/types/Order";
 import { useAuthStore } from "@/store/Auth";
 import { useRouter } from "vue-router";
 import { onMounted, onBeforeUnmount } from "vue";
 
-const isMyAccVisible = ref(true);
+const isMyAccVisible = ref(false);
 const myAccFio = ref("");
 onMounted(() => {
   myAccFio.value = localStorage.getItem("fio")!;
@@ -1016,6 +1292,23 @@ const closeProfileThanksMessage = () => {
   animationOfTick.value!.destroy();
 };
 
+const areMyOrdersVisivle = ref(true);
+const orderStore = useOrderStore();
+onMounted(() => {
+  orderStore.fetchOrders();
+});
+
+const selectedOrder = ref<Order | null>(null);
+const isOrderListVisible = ref(true);
+const viewOrderDetails = (order: Order) => {
+  selectedOrder.value = order;
+  isOrderListVisible.value = false;
+};
+const goBackToOrders = () => {
+  isOrderListVisible.value = true;
+  selectedOrder.value = null;
+};
+
 const isAddressVisible = ref(false);
 const isEditAddressVisible = ref(false);
 
@@ -1027,6 +1320,11 @@ const openEditAddress = () => {
 onMounted(() => {
   privateCabinetStore.fetchAddress();
 });
+const orderDate = new Date(orderStore.orderDate!);
+const formattedDate = ref("");
+if (!isNaN(orderDate.getTime())) {
+  formattedDate.value = format(orderDate, "d MMMM yyyy", { locale: ru });
+}
 
 const fio = ref<string>("");
 const companyName = ref<string>("");
@@ -1520,6 +1818,201 @@ const logOut = () => {
     margin-top: 0.938rem;
   }
 }
+.my-orders {
+  &__header {
+    display: none;
+  }
+  &__orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.313rem;
+    border: 1px solid #eaeaea;
+    padding: 0.938rem;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__title {
+    font-family: "Pragmatica Medium";
+    font-size: 0.75rem;
+    line-height: 30px;
+    color: #383838;
+  }
+  &__text {
+    font-family: "Pragmatica Book";
+    font-size: 0.813rem;
+    color: #1f1e31;
+  }
+  &__text--big {
+    font-size: 1rem;
+  }
+  &__state-btn {
+    @include btn;
+    gap: 0.563rem;
+    border: 1px solid $Light-Orange;
+    padding: 0.313rem 0.75rem;
+    font-family: "Pragmatica Medium";
+    font-size: 0.688rem;
+    color: $Dark-Orange;
+  }
+  &__state-circle {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: $Dark-Orange;
+  }
+  &__view-order-btn {
+    @include btn;
+    gap: 0.625rem;
+    border: 1px solid #eaeaea;
+    width: 100%;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #1d1d27;
+    }
+    &:hover svg path {
+      fill: white;
+    }
+  }
+  &__view-order-btn-text {
+    font-family: "Pragmatica Medium";
+    font-size: 0.75rem;
+    line-height: 30px;
+    color: $Light-Orange;
+  }
+}
+.order-details {
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__num {
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #1e1e1e;
+  }
+  &__back-to-orders-btn {
+    @include btn;
+    gap: 0.625rem;
+    background-color: #fbfbfb;
+    padding: 0.375rem 0.938rem;
+    font-family: "Pragmatica Medium";
+    font-size: 0.75rem;
+    color: $Light-Black;
+  }
+  &__date {
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    line-height: 30px;
+    color: #646464;
+  }
+  &__date--medium {
+    font-family: "Pragmatica Medium";
+    color: #141414;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: "Pragmatica Book";
+    font-size: 0.875rem;
+    color: #646464;
+  }
+  &__state-btn {
+    @include btn;
+    gap: 0.563rem;
+    border: 1px solid $Light-Orange;
+    padding: 0.313rem 0.75rem;
+    font-family: "Pragmatica Medium";
+    font-size: 0.688rem;
+    color: $Dark-Orange;
+  }
+  &__state-circle {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: $Dark-Orange;
+  }
+}
+.details {
+  position: relative;
+  border: 1px solid #f1f1f1;
+  padding: 1.25rem 1.25rem 0 1.25rem;
+  margin: 1.875rem 0;
+
+  &__titles {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+
+    &::after {
+      position: absolute;
+      content: "";
+      height: 1px;
+      background-color: #f1f1f1;
+      left: -1.25rem;
+      right: -1.25rem;
+      bottom: -1.25rem;
+    }
+  }
+  &__title {
+    font-family: "Pragmatica Bold";
+    font-size: 1.125rem;
+    color: #1f1e31;
+  }
+  &__info {
+    position: relative;
+    display: flex;
+    gap: 1.063rem;
+    justify-content: space-between;
+    padding: 1.375rem 0;
+  }
+  &__info::after {
+    position: absolute;
+    content: "";
+    height: 1px;
+    background-color: #f1f1f1;
+    left: -1.25rem;
+    right: -1.25rem;
+    bottom: 0;
+  }
+  &__info--hiddenBorder::after {
+    height: 0px;
+  }
+  &__info-title {
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #1f1e31;
+  }
+  &__info-content {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    text-align: right;
+  }
+  &__info-title--bold {
+    font-family: "Pragmatica Medium";
+    font-size: 1.5rem;
+    color: #1f1e31;
+  }
+  &__info-content--bold {
+    font-family: "Pragmatica Book";
+    font-size: 1.563rem;
+  }
+}
 .loading-container {
   position: absolute;
   top: 0;
@@ -1905,6 +2398,77 @@ const logOut = () => {
   .subtitle {
     margin: 1.125rem 0;
   }
+  .order-details {
+    &__back-to-orders-btn {
+      line-height: 24px;
+    }
+    &__container {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+  }
+  .my-orders {
+    &__header {
+      display: flex;
+      border: 1px solid #eaeaea;
+      border-bottom: none;
+      padding: 1.25rem 0.938rem;
+    }
+    &__header-title {
+      font-family: "Pragmatica Bold";
+      font-size: 1.125rem;
+      color: #1f1e31;
+    }
+    &__header-title-num {
+      width: 105px;
+    }
+    &__header-title-date {
+      width: 200px;
+    }
+    &__header-title-state {
+      width: 185px;
+    }
+    &__orders-list {
+      gap: 0rem;
+      border: 1px solid #eaeaea;
+      border-top: none;
+    }
+    &__body {
+      position: relative;
+      flex-direction: row;
+      gap: 0rem;
+      justify-content: space-between;
+      border: none;
+
+      &::before {
+        position: absolute;
+        content: "";
+        height: 1px;
+        width: 100%;
+        background-color: #eaeaea;
+        top: 0;
+        left: 0;
+      }
+    }
+    &__title {
+      display: none;
+    }
+    &__text {
+      font-size: 0.938rem;
+      white-space: nowrap;
+    }
+    &__text--big {
+      font-size: 1.125rem;
+    }
+    &__view-order-btn {
+      width: 50px;
+      height: 50px;
+    }
+    &__view-order-btn-text {
+      display: none;
+    }
+  }
   .address {
     position: relative;
 
@@ -2005,9 +2569,31 @@ const logOut = () => {
     color: #1d1d27;
     margin: 0 0 1.563rem 0;
   }
+  .my-acc {
+    margin-top: 3.25rem;
+  }
   .edit-profile {
     &__form {
       width: 555px;
+    }
+  }
+  .my-orders {
+    width: 100%;
+
+    &__text {
+      font-size: 1rem;
+    }
+    &__text--big {
+      font-size: 1.188rem;
+    }
+    &__header-title-num {
+      width: 125px;
+    }
+    &__header-title-date {
+      width: 224px;
+    }
+    &__header-title-state {
+      width: 206px;
     }
   }
   .address {
@@ -2034,6 +2620,17 @@ const logOut = () => {
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
+  .my-orders {
+    &__header-title-num {
+      width: 177px;
+    }
+    &__header-title-date {
+      width: 278px;
+    }
+    &__header-title-state {
+      width: 257px;
+    }
+  }
   .address,
   .edit-address-form {
     width: 1016px;
@@ -2044,6 +2641,17 @@ const logOut = () => {
 }
 /* 1920px = 120em */
 @media (min-width: 120em) {
+  .my-orders {
+    &__header-title-num {
+      width: 175px;
+    }
+    &__header-title-date {
+      width: 272px;
+    }
+    &__header-title-state {
+      width: 252px;
+    }
+  }
   .address,
   .edit-address-form {
     width: 998px;

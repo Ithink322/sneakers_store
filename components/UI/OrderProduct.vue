@@ -14,16 +14,30 @@ import { useCartStore } from "@/store/Cart";
 
 const props = defineProps<{
   product: CartProduct;
+  orderProductCounts?: Map<string, number>;
 }>();
 
 const cartStore = useCartStore();
-const productCount = computed(() =>
+/* const productCount = computed(() =>
   cartStore.getCount(
     props.product.productId,
     props.product.chosenColor,
     props.product.chosenSize
   )
-);
+); */
+const productKey = computed(() => {
+  return `${props.product.productId}-${props.product.chosenColor}-${props.product.chosenSize}`;
+});
+const productCount = computed(() => {
+  if (props.orderProductCounts) {
+    return props.orderProductCounts.get(productKey.value) || 0;
+  }
+  return cartStore.getCount(
+    props.product.productId,
+    props.product.chosenColor,
+    props.product.chosenSize
+  );
+});
 
 const sum = computed(
   () =>

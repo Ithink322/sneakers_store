@@ -186,6 +186,15 @@ export const useCartStore = defineStore("cartProductsStore", {
     getKey(productId: number, chosenColor: string, chosenSize: number): string {
       return `${productId}-${chosenColor}-${chosenSize}`;
     },
+    resetCart() {
+      this.cart = [];
+      this.productCounts = {};
+      this.promoCode = "";
+      this.discountSubTotal = 0;
+      localStorage.removeItem("cart-store");
+      const userId = localStorage.getItem("userId") as string;
+      axios.post("/api/cart/reset", { userId });
+    },
   },
   persist: {
     key: "cart-store",

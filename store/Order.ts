@@ -1,12 +1,17 @@
 import { defineStore } from "pinia";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
+import type { Order } from "@/types/Order";
+import type { Address } from "@/types/Address";
+import { useCartStore } from "@/store/Cart";
+import axios from "axios";
 
 interface OrderState {
   selectedDelivery: string | null;
   selectedPayment: string | null;
   orderDate: string | null;
   orderNumber: string;
+  orders: Order[];
 }
 
 export const useOrderStore = defineStore("orderStore", {
@@ -15,6 +20,7 @@ export const useOrderStore = defineStore("orderStore", {
     selectedPayment: null,
     orderDate: null,
     orderNumber: "#1",
+    orders: [],
   }),
   getters: {
     formattedOrderDate(): string {
@@ -29,9 +35,20 @@ export const useOrderStore = defineStore("orderStore", {
         return "Invalid date";
       }
     },
+    discountedTotalSum(): number {
+      const cartStore = useCartStore();
+      return cartStore.totalSum - cartStore.discountSubTotal;
+    },
+    discountedSum(): string {
+      return (
+        this.discountedTotalSum
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"
+      );
+    },
   },
   actions: {
-    submitOrder(delivery: string, payment: string) {
+    async submitOrder(delivery: string, payment: string, address: Address) {
       this.selectedDelivery = delivery;
       this.selectedPayment = payment;
       this.orderDate = new Date().toISOString();
@@ -40,11 +57,69 @@ export const useOrderStore = defineStore("orderStore", {
       const newOrderNumber = currentNumber + 1;
       this.orderNumber = `#${newOrderNumber}`;
       localStorage.setItem("orderNumber", this.orderNumber);
+
+      const userId = localStorage.getItem("userId");
+      const cartStore = useCartStore();
+      const cart = JSON.parse(JSON.stringify(cartStore.cart));
+      const productCounts = JSON.parse(JSON.stringify(cartStore.productCounts));
+      const orderData = {
+        userId: userId,
+        orderNum: this.orderNumber,
+        orderDate: this.orderDate,
+        orderState: "ОБРАБОТКА",
+        cart: cart,
+        productCounts: productCounts,
+        discountedSum: this.discountedSum,
+        delivery: this.selectedDelivery,
+        payment: this.selectedPayment,
+        address: {
+          userId: address.userId,
+          fio: address.fio,
+          companyName: address.companyName,
+          region: address.region,
+          city: address.city,
+          street: address.street,
+          index: address.index,
+          houseNum: address.houseNum,
+          number: address.number,
+        },
+      };
+
+      try {
+        const response = await axios.post("/api/orders/add", orderData);
+
+        if (response.data.success === "success") {
+          console.log("Order saved successfully:", response.data.order);
+        } else {
+          console.error("Order saving failed:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error submitting order:", error);
+      }
+    },
+    async fetchOrders() {
+      try {
+        const userId = localStorage.getItem("userId");
+        const response = await axios.get(`/api/orders/get?userId=${userId}`);
+        if (response.data.status === "success") {
+          this.orders = response.data.orders;
+        } else {
+          console.error("Failed to fetch orders:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
     },
   },
   persist: {
     key: "order-store",
     storage: typeof window !== "undefined" ? localStorage : undefined,
-    paths: ["selectedDelivery", "selectedPayment", "orderDate", "orderNumber"],
+    paths: [
+      "selectedDelivery",
+      "selectedPayment",
+      "orderDate",
+      "orderNumber",
+      "orders",
+    ],
   },
 });

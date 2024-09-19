@@ -21,38 +21,7 @@
         <span class="info__content">{{ payment }}</span>
       </div>
     </div>
-    <h2 class="details-title">Детали заказа:</h2>
-    <div class="details">
-      <div class="details__titles">
-        <span class="details__title">Товар</span>
-        <span class="details__title">Итого</span>
-      </div>
-      <UIOrderProduct
-        v-for="product in cartProducts"
-        :product="product"
-        :key="product.productId"
-      ></UIOrderProduct>
-      <div class="details__info">
-        <span class="details__info-title">Сумма:</span>
-        <span class="details__info-content">{{ discountedSum }}</span>
-      </div>
-      <div class="details__info">
-        <span class="details__info-title">Доставка:</span>
-        <span class="details__info-content">0 ₽</span>
-      </div>
-      <div class="details__info">
-        <span class="details__info-title">Способ доставки:</span>
-        <span class="details__info-content">{{ delivery }}</span>
-      </div>
-      <div class="details__info">
-        <span class="details__info-title">Способ оплаты:</span>
-        <span class="details__info-content">{{ payment }}</span>
-      </div>
-      <div class="details__info details__info--hiddenBorder">
-        <span class="details__info-title--bold">Итого:</span>
-        <span class="details__info-content--bold">{{ discountedSum }}</span>
-      </div>
-    </div>
+    <UIOrderDetails></UIOrderDetails>
   </div>
 </template>
 
@@ -61,7 +30,6 @@ import { useCartStore } from "@/store/Cart";
 import { useOrderStore } from "@/store/Order";
 
 const cartStore = useCartStore();
-const cartProducts = computed(() => cartStore.cart);
 
 const discountedTotalSum = computed(() => {
   return cartStore.totalSum - discountSubTotal.value;
@@ -72,10 +40,13 @@ const discountedSum =
   " ₽";
 
 const orderStore = useOrderStore();
-const delivery = orderStore.selectedDelivery;
 const payment = orderStore.selectedPayment;
 const orderDate = orderStore.formattedOrderDate;
 const orderNumber = orderStore.orderNumber;
+
+onBeforeUnmount(() => {
+  cartStore.resetCart();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -180,7 +151,6 @@ const orderNumber = orderStore.orderNumber;
     font-family: "Pragmatica Book";
     font-size: 1rem;
     text-align: right;
-    white-space: nowrap;
   }
   &__info-title--bold {
     font-family: "Pragmatica Medium";

@@ -13,6 +13,7 @@
         <div class="form__body">
           <span class="form__title">Название компании</span>
           <input
+            v-model="companyName"
             placeholder="Название компании"
             type="text"
             class="form__field"
@@ -285,6 +286,7 @@
 <script setup lang="ts">
 import { useCartStore } from "@/store/Cart";
 import { useOrderStore } from "@/store/Order";
+import { usePrivateCabinetStore } from "@/store/PrivateCabinet";
 
 const cartStore = useCartStore();
 onMounted(async () => {
@@ -292,6 +294,7 @@ onMounted(async () => {
 });
 const cartProducts = computed(() => cartStore.cart);
 
+const orderStore = useOrderStore();
 const discountedTotalSum = computed(() => {
   return cartStore.totalSum - discountSubTotal.value;
 });
@@ -325,6 +328,7 @@ const applyPromoCode = () => {
   }
 };
 
+const companyName = ref<string>("");
 const region = ref<string>("");
 const city = ref<string>("");
 const street = ref<string>("");
@@ -395,9 +399,9 @@ const validateForm = () => {
     showPaymentMessage.value = false;
   }
 };
-const orderStore = useOrderStore();
+const privateCabinetStore = usePrivateCabinetStore();
 const router = useRouter();
-const order = () => {
+const order = async () => {
   validateForm();
 
   if (
@@ -410,8 +414,35 @@ const order = () => {
     selectedPayment.value !== null &&
     isAgreementChecked.value
   ) {
-    orderStore.submitOrder(selectedDelivery.value, selectedPayment.value!);
-    router.push("/Order");
+    await privateCabinetStore.fetchAddress();
+    const currentAddress = privateCabinetStore.addressData;
+
+    const userId = localStorage.getItem("userId")!;
+    const fio = localStorage.getItem("fio")!;
+    const number = localStorage.getItem("number")!;
+    const newAddress = {
+      userId: userId,
+      fio: fio,
+      companyName: companyName.value,
+      region: region.value,
+      city: city.value,
+      street: street.value,
+      index: index.value,
+      houseNum: houseNum.value,
+      number: number,
+    };
+
+    if (currentAddress) {
+      await privateCabinetStore.editAddress(newAddress);
+    } else {
+      await privateCabinetStore.addAddress(newAddress);
+    }
+    await orderStore.submitOrder(
+      selectedDelivery.value,
+      selectedPayment.value!,
+      newAddress
+    );
+    await router.push("/Order");
   }
 };
 watch(selectedDelivery, (newValue) => {

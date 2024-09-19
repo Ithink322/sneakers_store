@@ -336,7 +336,6 @@ const isUserLoggedIn = computed(() => authStore.isLoggedIn);
 watch(
   () => route.path,
   (newPath) => {
-    console.log("isUserLoggedIn:", isUserLoggedIn.value);
     if (newPath === "/Favorites") {
       setActiveButton("wishlist");
     } else if (newPath === "/Cart") {

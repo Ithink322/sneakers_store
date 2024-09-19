@@ -5,7 +5,7 @@ export interface Address {
   region: string;
   city: string;
   street: string;
-  index: number;
+  index: string;
   houseNum: string;
   number: string;
 }
