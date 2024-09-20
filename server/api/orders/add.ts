@@ -8,9 +8,7 @@ export default defineEventHandler(async (event) => {
   console.log("Order body:", body);
 
   try {
-    const productCounts = Object.fromEntries(
-      Object.entries(body.productCounts)
-    );
+    const productCounts = { ...body.productCounts };
     const newOrder = new Order({
       userId: body.userId,
       orderNum: body.orderNum,

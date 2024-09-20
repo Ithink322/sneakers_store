@@ -1,7 +1,7 @@
 <template>
   <UIBreadcrumb :breadcrumbTitle="'Личный кабинет'"></UIBreadcrumb>
   <h1 class="title">Личный кабинет</h1>
-  <span v-if="isMyAccVisible" class="solutation"
+  <span v-if="activeSection === 1" class="solutation"
     >Добро Пожаловать, {{ myAccFio }}!</span
   >
   <div @click="openMenu" class="menu-btn">
@@ -222,9 +222,9 @@
   <div class="container">
     <nav class="nav">
       <button
-        @click="privateCabinetStore.setActiveBtn(1)"
-        class="nav__btn nav__btn--1200px"
-        :class="{ active: privateCabinetStore.activeBtn === 1 }"
+        @click="setActiveSection(1)"
+        class="nav__btn"
+        :class="{ active: activeSection === 1 }"
       >
         <svg
           width="20"
@@ -245,9 +245,9 @@
         МОЙ АККАУНТ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(2)"
+        @click="setActiveSection(2)"
         class="nav__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 2 }"
+        :class="{ active: activeSection === 2 }"
       >
         <svg
           width="23"
@@ -275,9 +275,9 @@
         РЕДАКТИРОВАТЬ ПРОФИЛЬ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(3)"
+        @click="setActiveSection(3)"
         class="nav__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 3 }"
+        :class="{ active: activeSection === 3 }"
       >
         <svg
           width="23"
@@ -298,9 +298,9 @@
         МОИ ЗАКАЗЫ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(4)"
+        @click="setActiveSection(4)"
         class="nav__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 4 }"
+        :class="{ active: activeSection === 4 }"
       >
         <svg
           width="23"
@@ -321,9 +321,9 @@
         МОЙ АДРЕС
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(5)"
+        @click="setActiveSection(5)"
         class="nav__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 5 }"
+        :class="{ active: activeSection === 5 }"
       >
         <svg
           width="23"
@@ -347,9 +347,9 @@
         </div>
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(6)"
+        @click="setActiveSection(6)"
         class="nav__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 6 }"
+        :class="{ active: activeSection === 6 }"
       >
         <svg
           width="23"
@@ -370,14 +370,9 @@
         СМЕНИТЬ ПАРОЛЬ
       </button>
       <button
-        @click="
-          () => {
-            privateCabinetStore.setActiveBtn(7);
-            logOut();
-          }
-        "
+        @click="logOut()"
         class="nav__btn nav__btn-hiddenBorder"
-        :class="{ active: privateCabinetStore.activeBtn === 7 }"
+        :class="{ active: activeSection === 7 }"
       >
         <svg
           width="23"
@@ -398,70 +393,226 @@
         ВЫЙТИ ИЗ АККАУНТА
       </button>
     </nav>
-    <div v-if="isMyAccVisible" class="my-orders my-acc">
+    <div v-if="activeSection === 1" class="my-orders my-acc">
       <h2 class="subtitle">Текущие заказы</h2>
-      <div v-if="orderStore.orders.length > 0">
-        <div class="my-orders__header">
-          <span class="my-orders__header-title my-orders__header-title-num"
-            >Номер</span
-          >
-          <span class="my-orders__header-title my-orders__header-title-date"
-            >Дата</span
-          >
-          <span class="my-orders__header-title my-orders__header-title-state"
-            >Статус</span
-          >
-          <span class="my-orders__header-title">Итого</span>
-        </div>
-        <div class="my-orders__orders-list">
-          <div
-            v-for="order in orderStore.orders"
-            :key="order.orderNum"
-            class="my-orders__body"
-          >
-            <div class="my-orders__content">
-              <span class="my-orders__title">Номер</span>
-              <span class="my-orders__text">{{ order.orderNum }}</span>
-            </div>
-            <div class="my-orders__content">
-              <span class="my-orders__title">Дата</span>
-              <span class="my-orders__text">{{ formattedDate }}</span>
-            </div>
-            <div class="my-orders__content">
-              <span class="my-orders__title">Статус</span>
-              <button class="my-orders__state-btn">
-                <div class="my-orders__state-circle"></div>
-                {{ order.orderState }}
+      <div v-if="isOrderListVisible">
+        <div v-if="orderStore.orders.length > 0">
+          <div class="my-orders__header">
+            <span class="my-orders__header-title my-orders__header-title-num"
+              >Номер</span
+            >
+            <span class="my-orders__header-title my-orders__header-title-date"
+              >Дата</span
+            >
+            <span class="my-orders__header-title my-orders__header-title-state"
+              >Статус</span
+            >
+            <span class="my-orders__header-title">Итого</span>
+          </div>
+          <div class="my-orders__orders-list">
+            <div
+              v-for="order in orderStore.orders"
+              :key="order.orderNum"
+              class="my-orders__body"
+            >
+              <div class="my-orders__content">
+                <span class="my-orders__title">Номер</span>
+                <span class="my-orders__text">{{ order.orderNum }}</span>
+              </div>
+              <div class="my-orders__content">
+                <span class="my-orders__title">Дата</span>
+                <span class="my-orders__text">{{
+                  formatOrderDate(order.orderDate)
+                }}</span>
+              </div>
+              <div class="my-orders__content">
+                <span class="my-orders__title">Статус</span>
+                <button class="my-orders__state-btn">
+                  <div class="my-orders__state-circle"></div>
+                  {{ order.orderState }}
+                </button>
+              </div>
+              <div class="my-orders__content">
+                <span class="my-orders__title">Итог</span>
+                <span class="my-orders__text my-orders__text--big">{{
+                  order.discountedSum
+                }}</span>
+              </div>
+              <button
+                @click="viewOrderDetails(order)"
+                class="my-orders__view-order-btn"
+              >
+                <span class="my-orders__view-order-btn-text">
+                  ПРОСМОТР ЗАКАЗА
+                </span>
+                <svg
+                  width="5"
+                  height="8"
+                  viewBox="0 0 5 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.85355 4.35355C5.04882 4.15829 5.04882 3.84171 4.85355 3.64645L1.67157 0.464466C1.47631 0.269204 1.15973 0.269204 0.964466 0.464466C0.769204 0.659728 0.769204 0.976311 0.964466 1.17157L3.79289 4L0.964466 6.82843C0.769204 7.02369 0.769204 7.34027 0.964466 7.53553C1.15973 7.7308 1.47631 7.7308 1.67157 7.53553L4.85355 4.35355ZM3.5 4.5H4.5V3.5H3.5V4.5Z"
+                    fill="#606060"
+                  />
+                </svg>
               </button>
             </div>
-            <div class="my-orders__content">
-              <span class="my-orders__title">Итог</span>
-              <span class="my-orders__text my-orders__text--big">{{
-                order.discountedSum
-              }}</span>
-            </div>
-            <button class="my-orders__view-order-btn">
-              <span class="my-orders__view-order-btn-text">
-                ПРОСМОТР ЗАКАЗА
-              </span>
+          </div>
+        </div>
+        <UIEmpty
+          v-if="orderStore.orders.length === 0"
+          :hero="'/imgs/empty-cart-icon.jpg'"
+          :title="'Ваша история заказов пуста'"
+          :text="`У вас пока нет заказов в списке. На странице <strong>&quot;Каталог&quot;</strong> вы найдете много интересных товаров.`"
+          :iconWidth="'86px'"
+        ></UIEmpty>
+      </div>
+      <div v-if="selectedOrder" class="order-details">
+        <div class="order-details__info">
+          <div class="order-details__body">
+            <span class="order-details__num"
+              >Заказ {{ selectedOrder.orderNum }}</span
+            >
+            <button
+              @click="goBackToOrders"
+              class="order-details__back-to-orders-btn"
+            >
               <svg
-                width="5"
-                height="8"
-                viewBox="0 0 5 8"
+                width="6"
+                height="10"
+                viewBox="0 0 6 10"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M4.85355 4.35355C5.04882 4.15829 5.04882 3.84171 4.85355 3.64645L1.67157 0.464466C1.47631 0.269204 1.15973 0.269204 0.964466 0.464466C0.769204 0.659728 0.769204 0.976311 0.964466 1.17157L3.79289 4L0.964466 6.82843C0.769204 7.02369 0.769204 7.34027 0.964466 7.53553C1.15973 7.7308 1.47631 7.7308 1.67157 7.53553L4.85355 4.35355ZM3.5 4.5H4.5V3.5H3.5V4.5Z"
-                  fill="#606060"
+                  d="M5 9L1 5L5 1"
+                  stroke="#1E1E1E"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
               </svg>
+              ВЕРНУТЬСЯ К ЗАКАЗАМ
             </button>
+          </div>
+          <div class="order-details__container">
+            <span class="order-details__date"
+              >Был оформлен
+              <span class="order-details__date--medium">
+                {{
+                  format(
+                    new Date(selectedOrder.orderDate),
+                    "d MMMM 'в' HH:mm",
+                    {
+                      locale: ru,
+                    }
+                  )
+                }}</span
+              ></span
+            >
+            <div class="order-details__content">
+              - статус заказа
+              <button class="order-details__state-btn">
+                <div class="order-details__state-circle"></div>
+                {{ selectedOrder.orderState }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="order-details__details details">
+          <div class="details__titles">
+            <span class="details__title">Товар</span>
+            <span class="details__title">Итого</span>
+          </div>
+          <UIOrderProduct
+            v-for="product in orderStore.getCart(selectedOrder.orderNum)"
+            :product="product"
+            :key="`${product.productId}-${selectedOrder.orderNum}`"
+            :orderNum="selectedOrder.orderNum"
+            :orderProductCounts="
+              orderStore.getCount(
+                selectedOrder.orderNum,
+                product.productId,
+                product.chosenColor,
+                product.chosenSize
+              )
+            "
+          ></UIOrderProduct>
+          <div class="details__info">
+            <span class="details__info-title">Сумма:</span>
+            <span class="details__info-content">{{
+              selectedOrder.discountedSum
+            }}</span>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Доставка:</span>
+            <span class="details__info-content">0 ₽</span>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Способ доставки:</span>
+            <span class="details__info-content">{{
+              selectedOrder.delivery
+            }}</span>
+          </div>
+          <div class="details__info">
+            <span class="details__info-title">Способ оплаты:</span>
+            <span class="details__info-content">{{
+              selectedOrder.payment
+            }}</span>
+          </div>
+          <div class="details__info details__info--hiddenBorder">
+            <span class="details__info-title--bold">Итого:</span>
+            <span class="details__info-content--bold">{{
+              selectedOrder.discountedSum
+            }}</span>
+          </div>
+        </div>
+        <div class="order-details__address address">
+          <div class="address__content">
+            <svg
+              width="19"
+              height="21"
+              viewBox="0 0 19 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                opacity="0.9"
+                d="M9.0188 19.4835C8.75303 19.4863 8.48936 19.436 8.24329 19.3356C7.99721 19.2351 7.77368 19.0865 7.5858 18.8985L3.3418 14.6555C2.35116 13.6644 1.63823 12.4304 1.27438 11.0772C0.910525 9.72393 0.908519 8.29884 1.26856 6.94457C1.6286 5.59029 2.33805 4.35434 3.3259 3.36044C4.31375 2.36654 5.54535 1.64955 6.8974 1.28125C8.24945 0.912951 9.67453 0.906255 11.03 1.26184C12.3854 1.61742 13.6237 2.3228 14.6209 3.30738C15.618 4.29195 16.339 5.52118 16.7118 6.87201C17.0845 8.22285 17.0959 9.64789 16.7448 11.0045M12.9988 19.9985L17.9988 14.9985M17.9988 14.9985V19.4985M17.9988 14.9985H13.4988M5.9988 8.99851C5.9988 9.79416 6.31487 10.5572 6.87748 11.1198C7.44009 11.6824 8.20315 11.9985 8.9988 11.9985C9.79445 11.9985 10.5575 11.6824 11.1201 11.1198C11.6827 10.5572 11.9988 9.79416 11.9988 8.99851C11.9988 8.20286 11.6827 7.4398 11.1201 6.87719C10.5575 6.31458 9.79445 5.99851 8.9988 5.99851C8.20315 5.99851 7.44009 6.31458 6.87748 6.87719C6.31487 7.4398 5.9988 8.20286 5.9988 8.99851Z"
+                stroke="#FB5A00"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            АДРЕС ДОСТАВКИ
+          </div>
+          <span class="address__title">{{
+            selectedOrder.address
+              ? selectedOrder.address.fio
+              : "Адрес не добавлен"
+          }}</span>
+          <div v-if="privateCabinetStore.addressData" class="address__info">
+            <span class="address__details">
+              {{ selectedOrder.address.index }},
+              {{ selectedOrder.address.region }},
+              {{ selectedOrder.address.city }},
+              {{ selectedOrder.address.street }},
+              {{ selectedOrder.address.houseNum }}
+            </span>
+            <div class="address__body">
+              <span class="address__number">Телефон</span>
+              <span class="address__number-text">{{
+                selectedOrder.address.number
+              }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="isEditProfileVisible" class="edit-profile">
+    <div v-if="activeSection === 2" class="edit-profile">
       <h2 class="subtitle">Редактировать профиль</h2>
       <form @submit.prevent="editProfile" class="edit-profile__form">
         <div class="edit-profile__container" v-if="!isProfileMessageVisible">
@@ -548,7 +699,7 @@
         </div>
       </form>
     </div>
-    <div v-if="areMyOrdersVisivle" class="my-orders">
+    <div v-if="activeSection === 3" class="my-orders">
       <h2 class="subtitle">История заказов</h2>
       <div v-if="isOrderListVisible">
         <div v-if="orderStore.orders.length > 0">
@@ -566,7 +717,6 @@
           </div>
           <div class="my-orders__orders-list">
             <div
-              @click="viewOrderDetails(order)"
               v-for="order in orderStore.orders"
               :key="order.orderNum"
               class="my-orders__body"
@@ -577,7 +727,9 @@
               </div>
               <div class="my-orders__content">
                 <span class="my-orders__title">Дата</span>
-                <span class="my-orders__text">{{ formattedDate }}</span>
+                <span class="my-orders__text">{{
+                  formatOrderDate(order.orderDate)
+                }}</span>
               </div>
               <div class="my-orders__content">
                 <span class="my-orders__title">Статус</span>
@@ -592,7 +744,10 @@
                   order.discountedSum
                 }}</span>
               </div>
-              <button class="my-orders__view-order-btn">
+              <button
+                @click="viewOrderDetails(order)"
+                class="my-orders__view-order-btn"
+              >
                 <span class="my-orders__view-order-btn-text">
                   ПРОСМОТР ЗАКАЗА
                 </span>
@@ -677,14 +832,20 @@
             <span class="details__title">Товар</span>
             <span class="details__title">Итого</span>
           </div>
-          <div v-for="order in orderStore.orders" :key="order.orderNum">
-            <UIOrderProduct
-              v-for="product in order.cart"
-              :product="product"
-              :key="product.productId"
-              :orderProductCounts="new Map(Object.entries(order.productCounts))"
-            ></UIOrderProduct>
-          </div>
+          <UIOrderProduct
+            v-for="product in orderStore.getCart(selectedOrder.orderNum)"
+            :product="product"
+            :key="`${product.productId}-${selectedOrder.orderNum}`"
+            :orderNum="selectedOrder.orderNum"
+            :orderProductCounts="
+              orderStore.getCount(
+                selectedOrder.orderNum,
+                product.productId,
+                product.chosenColor,
+                product.chosenSize
+              )
+            "
+          ></UIOrderProduct>
           <div class="details__info">
             <span class="details__info-title">Сумма:</span>
             <span class="details__info-content">{{
@@ -735,22 +896,22 @@
             АДРЕС ДОСТАВКИ
           </div>
           <span class="address__title">{{
-            privateCabinetStore.addressData
-              ? privateCabinetStore.addressData.fio
+            selectedOrder.address
+              ? selectedOrder.address.fio
               : "Адрес не добавлен"
           }}</span>
           <div v-if="privateCabinetStore.addressData" class="address__info">
             <span class="address__details">
-              {{ privateCabinetStore.addressData.index }},
-              {{ privateCabinetStore.addressData.region }},
-              {{ privateCabinetStore.addressData.city }},
-              {{ privateCabinetStore.addressData.street }},
-              {{ privateCabinetStore.addressData.houseNum }}
+              {{ selectedOrder.address.index }},
+              {{ selectedOrder.address.region }},
+              {{ selectedOrder.address.city }},
+              {{ selectedOrder.address.street }},
+              {{ selectedOrder.address.houseNum }}
             </span>
             <div class="address__body">
               <span class="address__number">Телефон</span>
               <span class="address__number-text">{{
-                privateCabinetStore.addressData.number
+                selectedOrder.address.number
               }}</span>
             </div>
           </div>
@@ -1003,7 +1164,7 @@
         ></UIButton>
       </form>
     </div>
-    <div v-if="isFavoritesVisible">
+    <div v-if="activeSection === 5">
       <h2 class="subtitle">Избранные товары</h2>
       <div v-if="totalProducts > 0" class="products-list">
         <UIProductCard
@@ -1022,7 +1183,7 @@
         :iconWidth="'98px'"
       ></UIEmpty>
     </div>
-    <div v-if="isEditPass" class="edit-pass">
+    <div v-if="activeSection === 6" class="edit-pass">
       <h2 class="subtitle">Сменить пароль</h2>
       <form @submit.prevent="editPass" class="edit-pass__form">
         <div class="edit-pass__container" v-if="!isPassMessageVisible">
@@ -1186,7 +1347,17 @@ import { useAuthStore } from "@/store/Auth";
 import { useRouter } from "vue-router";
 import { onMounted, onBeforeUnmount } from "vue";
 
-const isMyAccVisible = ref(false);
+const activeSection = ref(1);
+const setActiveSection = (section: number) => {
+  activeSection.value = section;
+  if (activeSection.value !== 4) {
+    isAddressVisible.value = false;
+    isEditAddressVisible.value = false;
+  } else {
+    isAddressVisible.value = true;
+  }
+};
+
 const myAccFio = ref("");
 onMounted(() => {
   myAccFio.value = localStorage.getItem("fio")!;
@@ -1208,7 +1379,6 @@ const privateCabinetStore = usePrivateCabinetStore();
 const favoritesStore = useFavoritesStore();
 const totalProducts = computed(() => favoritesStore.favorites.length);
 
-const isEditProfileVisible = ref(false);
 const email = ref<string>("");
 const emailIsEmpty = ref(false);
 const emailIsValid = ref(true);
@@ -1292,7 +1462,6 @@ const closeProfileThanksMessage = () => {
   animationOfTick.value!.destroy();
 };
 
-const areMyOrdersVisivle = ref(true);
 const orderStore = useOrderStore();
 onMounted(() => {
   orderStore.fetchOrders();
@@ -1320,11 +1489,14 @@ const openEditAddress = () => {
 onMounted(() => {
   privateCabinetStore.fetchAddress();
 });
-const orderDate = new Date(orderStore.orderDate!);
-const formattedDate = ref("");
-if (!isNaN(orderDate.getTime())) {
-  formattedDate.value = format(orderDate, "d MMMM yyyy", { locale: ru });
-}
+
+const formatOrderDate = (orderDate: string) => {
+  const date = new Date(orderDate);
+  if (!isNaN(date.getTime())) {
+    return format(date, "d MMMM yyyy", { locale: ru });
+  }
+  return "";
+};
 
 const fio = ref<string>("");
 const companyName = ref<string>("");
@@ -1455,9 +1627,9 @@ const addressSubmit = async () => {
 
 const removeAddress = () => {
   privateCabinetStore.removeAddress();
+  isEditAddressVisible.value = false;
 };
 
-const isFavoritesVisible = ref(false);
 const paginatedProducts = computed(() => favoritesStore.paginatedProducts);
 const windowWidth = ref(0);
 const updateWidth = () => {
@@ -1478,7 +1650,6 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", updateWidth);
 });
 
-const isEditPass = ref(false);
 const currentPass = ref("");
 const pass1 = ref("");
 const pass2 = ref("");
@@ -1858,6 +2029,7 @@ const logOut = () => {
     gap: 0.563rem;
     border: 1px solid $Light-Orange;
     padding: 0.313rem 0.75rem;
+    cursor: default;
     font-family: "Pragmatica Medium";
     font-size: 0.688rem;
     color: $Dark-Orange;

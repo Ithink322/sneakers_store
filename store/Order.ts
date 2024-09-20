@@ -23,6 +23,24 @@ export const useOrderStore = defineStore("orderStore", {
     orders: [],
   }),
   getters: {
+    getCart: (state) => (orderNum: string) => {
+      const order = state.orders.find((order) => order.orderNum === orderNum);
+      return order ? order.cart : [];
+    },
+    getCount: (state) => {
+      return (
+        orderNum: string,
+        productId: number,
+        chosenColor: string,
+        chosenSize: number
+      ) => {
+        const order = state.orders.find((order) => order.orderNum === orderNum);
+        if (!order) return 0;
+
+        const key = `${productId}-${chosenColor}-${chosenSize}`;
+        return order.productCounts[key] || 0;
+      };
+    },
     formattedOrderDate(): string {
       if (!this.orderDate) return "";
 
@@ -61,7 +79,7 @@ export const useOrderStore = defineStore("orderStore", {
       const userId = localStorage.getItem("userId");
       const cartStore = useCartStore();
       const cart = JSON.parse(JSON.stringify(cartStore.cart));
-      const productCounts = JSON.parse(JSON.stringify(cartStore.productCounts));
+      const productCounts = { ...cartStore.productCounts };
       const orderData = {
         userId: userId,
         orderNum: this.orderNumber,
@@ -91,7 +109,7 @@ export const useOrderStore = defineStore("orderStore", {
         if (response.data.success === "success") {
           console.log("Order saved successfully:", response.data.order);
         } else {
-          console.error("Order saving failed:", response.data.message);
+          /* console.error("Order saving failed:", response.data.message); */
         }
       } catch (error) {
         console.error("Error submitting order:", error);

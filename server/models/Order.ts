@@ -7,7 +7,7 @@ const OrderSchema = new Schema<Order>({
   orderDate: { type: String, required: true },
   orderState: { type: String, required: true },
   cart: { type: [Object], required: true },
-  productCounts: { type: Map, of: Number, required: true },
+  productCounts: { type: Object, required: true },
   discountedSum: { type: String, required: true },
   delivery: { type: String, required: true },
   payment: { type: String, required: true },

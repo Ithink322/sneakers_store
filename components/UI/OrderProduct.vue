@@ -11,26 +11,24 @@
 <script setup lang="ts">
 import type { CartProduct } from "@/types/CartProduct";
 import { useCartStore } from "@/store/Cart";
+import { useOrderStore } from "@/store/Order";
 
 const props = defineProps<{
   product: CartProduct;
-  orderProductCounts?: Map<string, number>;
+  orderNum?: string;
+  orderProductCounts?: number;
 }>();
 
 const cartStore = useCartStore();
-/* const productCount = computed(() =>
-  cartStore.getCount(
-    props.product.productId,
-    props.product.chosenColor,
-    props.product.chosenSize
-  )
-); */
-const productKey = computed(() => {
-  return `${props.product.productId}-${props.product.chosenColor}-${props.product.chosenSize}`;
-});
+const orderStore = useOrderStore();
 const productCount = computed(() => {
   if (props.orderProductCounts) {
-    return props.orderProductCounts.get(productKey.value) || 0;
+    return orderStore.getCount(
+      props.orderNum!,
+      props.product.productId,
+      props.product.chosenColor,
+      props.product.chosenSize
+    );
   }
   return cartStore.getCount(
     props.product.productId,
