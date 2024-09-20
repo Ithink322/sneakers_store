@@ -1292,7 +1292,7 @@
           <UIButton
             class="edit-pass__btn"
             :content="'Сменить пароль'"
-            :width="cardWidth"
+            :width="'100%'"
           ></UIButton>
         </div>
         <div v-if="isLoading" class="loading-container">

@@ -174,29 +174,67 @@
               >
             </button>
             <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to="">
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-air-force-1/1?page=1"
+              >
                 Nike Air Force 1</NuxtLink
               >
             </button>
             <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to="">
-                Nike SB Dunk Low</NuxtLink
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-air-max-90/2?page=1"
               >
-            </button>
-            <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to="">
                 Nike Air Max 90</NuxtLink
               >
             </button>
             <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to=""> Nike Shox</NuxtLink>
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-dunk-low/3?page=1"
+              >
+                Nike Dunk Low</NuxtLink
+              >
             </button>
             <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to=""> Nike Blazer</NuxtLink>
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-react-infinity-run-flyknit/4?page=1"
+              >
+                Nike React Infinity Run Flyknit</NuxtLink
+              >
             </button>
             <button class="dropdown__subtitle-btn">
-              <NuxtLink @click="closeBurgerMenu" to="">
-                Nike Air Max Plus</NuxtLink
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-vapormax-flyknit-2/5?page=1"
+              >
+                Nike VaporMax Flyknit 2</NuxtLink
+              >
+            </button>
+            <button class="dropdown__subtitle-btn">
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-air-zoom-pegasus-39/6?page=1"
+              >
+                Nike Air Zoom Pegasus 39</NuxtLink
+              >
+            </button>
+            <button class="dropdown__subtitle-btn">
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/nike-air-max-1-animal-pack/8?page=1"
+              >
+                Nike Air Max 1 "Animal Pack"</NuxtLink
+              >
+            </button>
+            <button class="dropdown__subtitle-btn">
+              <NuxtLink
+                @click="closeBurgerMenu"
+                to="/catalog/sacai-x-nike-vaporwaffle/9?page=1"
+              >
+                Sacai x Nike VaporWaffle</NuxtLink
               >
             </button>
           </div>

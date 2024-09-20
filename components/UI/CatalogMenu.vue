@@ -48,12 +48,69 @@
                   >Все модели</nuxt-link
                 >
               </li>
-              <li><nuxt-link to="">Nike Air Force 1</nuxt-link></li>
-              <li><nuxt-link to="">Nike SB Dunk Low</nuxt-link></li>
-              <li><nuxt-link to="">Nike Air Max 90</nuxt-link></li>
-              <li><nuxt-link to="">NIke Shox</nuxt-link></li>
-              <li><nuxt-link to="">Nike Blazer</nuxt-link></li>
-              <li><nuxt-link to="">Nike Air Max Plus</nuxt-link></li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-air-force-1/1?page=1"
+                  >Nike Air Force 1</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-air-max-90/2?page=1"
+                  >Nike Air Max 90</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-dunk-low/3?page=1"
+                  >Nike Dunk Low</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-react-infinity-run-flyknit/4?page=1"
+                  >Nike React Infinity Run Flyknit</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-vapormax-flyknit-2/5?page=1"
+                  >Nike VaporMax Flyknit 2</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-air-zoom-pegasus-39/6?page=1"
+                  >Nike Air Zoom Pegasus 39</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-air-jordan-1-retro-high-og-lost-found/7?page=1"
+                  >Nike Air Jordan 1 Retro High OG "Lost & Found"</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/nike-air-max-1-animal-pack/8?page=1"
+                  >Nike Air Max 1 "Animal Pack"</nuxt-link
+                >
+              </li>
+              <li>
+                <nuxt-link
+                  @click="closeCatalogMenu"
+                  to="/catalog/sacai-x-nike-vaporwaffle/9?page=1"
+                  >Sacai x Nike VaporWaffle</nuxt-link
+                >
+              </li>
             </ul>
           </div>
         </div>
