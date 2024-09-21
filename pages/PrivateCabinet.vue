@@ -42,9 +42,9 @@
     </button>
     <nav class="menu">
       <button
-        @click="privateCabinetStore.setActiveBtn(1)"
+        @click="setActiveSection(1)"
         class="menu__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 1 }"
+        :class="{ active: activeSection === 1 }"
       >
         <svg
           width="20"
@@ -65,9 +65,9 @@
         МОЙ АККАУНТ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(2)"
+        @click="setActiveSection(2)"
         class="menu__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 2 }"
+        :class="{ active: activeSection === 2 }"
       >
         <svg
           width="23"
@@ -95,9 +95,9 @@
         РЕДАКТИРОВАТЬ ПРОФИЛЬ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(3)"
+        @click="setActiveSection(3)"
         class="menu__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 3 }"
+        :class="{ active: activeSection === 3 }"
       >
         <svg
           width="23"
@@ -118,9 +118,9 @@
         МОИ ЗАКАЗЫ
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(4)"
+        @click="setActiveSection(4)"
         class="menu__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 4 }"
+        :class="{ active: activeSection === 4 }"
       >
         <svg
           width="23"
@@ -141,9 +141,9 @@
         МОЙ АДРЕС
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(5)"
+        @click="setActiveSection(5)"
         class="menu__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 5 }"
+        :class="{ active: activeSection === 5 }"
       >
         <svg
           width="23"
@@ -167,9 +167,9 @@
         </div>
       </button>
       <button
-        @click="privateCabinetStore.setActiveBtn(6)"
+        @click="setActiveSection(6)"
         class="menu__btn"
-        :class="{ active: privateCabinetStore.activeBtn === 6 }"
+        :class="{ active: activeSection === 6 }"
       >
         <svg
           width="23"
@@ -190,14 +190,9 @@
         СМЕНИТЬ ПАРОЛЬ
       </button>
       <button
-        @click="
-          () => {
-            privateCabinetStore.setActiveBtn(7);
-            logOut();
-          }
-        "
+        @click="logOut()"
         class="menu__btn menu__btn-hiddenBorder"
-        :class="{ active: privateCabinetStore.activeBtn === 7 }"
+        :class="{ active: activeSection === 7 }"
       >
         <svg
           width="23"
@@ -594,7 +589,7 @@
               ? selectedOrder.address.fio
               : "Адрес не добавлен"
           }}</span>
-          <div v-if="privateCabinetStore.addressData" class="address__info">
+          <div v-if="selectedOrder.address" class="address__info">
             <span class="address__details">
               {{ selectedOrder.address.index }},
               {{ selectedOrder.address.region }},
@@ -900,7 +895,7 @@
               ? selectedOrder.address.fio
               : "Адрес не добавлен"
           }}</span>
-          <div v-if="privateCabinetStore.addressData" class="address__info">
+          <div v-if="selectedOrder.address" class="address__info">
             <span class="address__details">
               {{ selectedOrder.address.index }},
               {{ selectedOrder.address.region }},
@@ -1348,8 +1343,10 @@ import { useRouter } from "vue-router";
 import { onMounted, onBeforeUnmount } from "vue";
 
 const activeSection = ref(1);
+const privateCabinetStore = usePrivateCabinetStore();
 const setActiveSection = (section: number) => {
   activeSection.value = section;
+  privateCabinetStore.setActiveBtn(section);
   if (activeSection.value !== 4) {
     isAddressVisible.value = false;
     isEditAddressVisible.value = false;
@@ -1357,6 +1354,10 @@ const setActiveSection = (section: number) => {
     isAddressVisible.value = true;
   }
 };
+onMounted(() => {
+  activeSection.value = privateCabinetStore.activeBtn;
+  setActiveSection(activeSection.value);
+});
 
 const myAccFio = ref("");
 onMounted(() => {
@@ -1373,8 +1374,6 @@ const closeMenu = () => {
   isMenuVisible.value = false;
   document.body.style.overflow = "";
 };
-
-const privateCabinetStore = usePrivateCabinetStore();
 
 const favoritesStore = useFavoritesStore();
 const totalProducts = computed(() => favoritesStore.favorites.length);

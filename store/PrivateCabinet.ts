@@ -91,15 +91,6 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
         console.error("Failed to edit profile:", error);
       }
     },
-    async fetchProfile() {
-      const userId = localStorage.getItem("userId") as string;
-      try {
-        const response = await axios.get(`/api/profile/${userId}`);
-        this.profileData = response.data.profile;
-      } catch (error) {
-        console.error("Failed to fetch profile:", error);
-      }
-    },
     async editPass(userId: string, currentPass: string, newPass: string) {
       try {
         const response = await axios.put("/api/pass/edit", {

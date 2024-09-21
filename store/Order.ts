@@ -71,45 +71,50 @@ export const useOrderStore = defineStore("orderStore", {
       this.selectedPayment = payment;
       this.orderDate = new Date().toISOString();
 
-      const currentNumber = parseInt(this.orderNumber.replace("#", "")) || 0;
-      const newOrderNumber = currentNumber + 1;
-      this.orderNumber = `#${newOrderNumber}`;
-      localStorage.setItem("orderNumber", this.orderNumber);
-
-      const userId = localStorage.getItem("userId");
-      const cartStore = useCartStore();
-      const cart = JSON.parse(JSON.stringify(cartStore.cart));
-      const productCounts = { ...cartStore.productCounts };
-      const orderData = {
-        userId: userId,
-        orderNum: this.orderNumber,
-        orderDate: this.orderDate,
-        orderState: "ОБРАБОТКА",
-        cart: cart,
-        productCounts: productCounts,
-        discountedSum: this.discountedSum,
-        delivery: this.selectedDelivery,
-        payment: this.selectedPayment,
-        address: {
-          userId: address.userId,
-          fio: address.fio,
-          companyName: address.companyName,
-          region: address.region,
-          city: address.city,
-          street: address.street,
-          index: address.index,
-          houseNum: address.houseNum,
-          number: address.number,
-        },
-      };
-
       try {
-        const response = await axios.post("/api/orders/add", orderData);
+        const { data: lastOrderData } = await axios.get(
+          "/api/orders/getOrderNum"
+        );
 
+        const lastOrderNum = lastOrderData.lastOrderNum || "#0";
+        console.log("lastOrderNum:", lastOrderNum);
+        const newOrderNumber = parseInt(lastOrderNum.replace("#", "")) + 1;
+        this.orderNumber = `#${newOrderNumber}`;
+        localStorage.setItem("orderNumber", this.orderNumber);
+
+        const userId = localStorage.getItem("userId");
+        const cartStore = useCartStore();
+        const cart = JSON.parse(JSON.stringify(cartStore.cart));
+        const productCounts = { ...cartStore.productCounts };
+
+        const orderData = {
+          userId: userId,
+          orderNum: this.orderNumber,
+          orderDate: this.orderDate,
+          orderState: "ОБРАБОТКА",
+          cart: cart,
+          productCounts: productCounts,
+          discountedSum: this.discountedSum,
+          delivery: this.selectedDelivery,
+          payment: this.selectedPayment,
+          address: {
+            userId: address.userId,
+            fio: address.fio,
+            companyName: address.companyName,
+            region: address.region,
+            city: address.city,
+            street: address.street,
+            index: address.index,
+            houseNum: address.houseNum,
+            number: address.number,
+          },
+        };
+
+        const response = await axios.post("/api/orders/add", orderData);
         if (response.data.success === "success") {
           console.log("Order saved successfully:", response.data.order);
         } else {
-          /* console.error("Order saving failed:", response.data.message); */
+          /* ы */
         }
       } catch (error) {
         console.error("Error submitting order:", error);

@@ -5,7 +5,6 @@ import connectToDB from "@/utils/connectToDB";
 export default defineEventHandler(async (event) => {
   await connectToDB();
   const body = await readBody(event);
-  console.log("Order body:", body);
 
   try {
     const productCounts = { ...body.productCounts };
