@@ -41,7 +41,7 @@
         <UIMyAccountBtn></UIMyAccountBtn>
       </div>
       <div class="header-mid">
-        <div class="header-mid__titles-container">
+        <div v-if="!searchIsActive" class="header-mid__titles-container">
           <button @click="toggleBurgerMenu" class="header-mid__burger-btn">
             <svg
               width="36"
@@ -151,6 +151,19 @@
             <li><NuxtLink to="">Распродажа</NuxtLink></li>
           </ul>
         </div>
+        <form
+          @submit.prevent
+          v-if="searchIsActive"
+          ref="searchForm"
+          class="header-mid__search-form"
+        >
+          <input
+            ref="searchInput"
+            placeholder="Поиск по каталогу товаров..."
+            type="text"
+            class="header-mid__field"
+          />
+        </form>
         <NuxtLink to="/" class="header-mid__logo">
           <img src="/imgs/logo.svg" alt=""
         /></NuxtLink>
@@ -358,14 +371,29 @@ const handlePrivateCabinetClick = () => {
 };
 
 const searchIsActive = ref(false);
+const searchInput = ref<HTMLInputElement | null>(null);
+const searchForm = ref<HTMLElement | null>(null);
 const toggleSearch = (event: MouseEvent | TouchEvent) => {
+  event.stopPropagation();
   searchIsActive.value = true;
-
-  /* if (!(event.target as HTMLElement).closest(".header-mid__search-btn")) {
-    searchIsActive.value = false;
-    console.log("outside");
-  } */
 };
+watch(searchIsActive, async (newVal) => {
+  await nextTick();
+  if (newVal && searchInput.value) {
+    searchInput.value.focus();
+  }
+});
+const handleClickOutside = (event: MouseEvent) => {
+  if (searchForm.value && !searchForm.value.contains(event.target as Node)) {
+    searchIsActive.value = false;
+  }
+};
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -455,6 +483,21 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       display: flex;
       order: 2;
       margin-right: auto;
+    }
+    &__search-form {
+      order: 2;
+      width: 100%;
+    }
+    &__field {
+      padding: 1.25rem 1.875rem;
+      border: none;
+      width: 100%;
+      outline: none;
+      font-family: "Pragmatica Medium";
+      font-size: 1.125rem;
+    }
+    &__field::placeholder {
+      color: #cecece;
     }
     &__logo {
       display: flex;
@@ -585,6 +628,9 @@ const toggleSearch = (event: MouseEvent | TouchEvent) => {
       align-items: center;
       gap: 3.563rem;
       margin-left: 2rem;
+    }
+    &__field {
+      font-size: 1.375rem;
     }
     &__titles-list {
       @include ul;

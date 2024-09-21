@@ -7,9 +7,16 @@ export const useAuthStore = defineStore("auth", {
     number: "",
     token: "",
     isLoggedIn: false,
+    rememberMe: false,
   }),
   actions: {
-    getAuthData(userId: string, fio: string, number: string, token: string) {
+    getAuthData(
+      userId: string,
+      fio: string,
+      number: string,
+      token: string,
+      rememberMe: boolean
+    ) {
       this.userId = userId;
       this.fio = fio;
       this.number = number;
@@ -19,7 +26,12 @@ export const useAuthStore = defineStore("auth", {
       localStorage.setItem("userId", userId);
       localStorage.setItem("fio", fio);
       localStorage.setItem("number", number);
-      localStorage.setItem("authToken", token);
+
+      if (rememberMe) {
+        localStorage.setItem("authToken", token);
+      } else {
+        sessionStorage.setItem("authToken", token);
+      }
     },
     removeAuthData() {
       this.userId = "";
@@ -32,12 +44,15 @@ export const useAuthStore = defineStore("auth", {
       localStorage.removeItem("fio");
       localStorage.removeItem("number");
       localStorage.removeItem("authToken");
+      sessionStorage.removeItem("authToken");
     },
     initializeAuth() {
       const storedUserId = localStorage.getItem("userId");
       const storedFio = localStorage.getItem("fio");
       const storedNumber = localStorage.getItem("number");
-      const storedToken = localStorage.getItem("authToken");
+      const storedToken =
+        localStorage.getItem("authToken") ||
+        sessionStorage.getItem("authToken");
 
       if (storedUserId && storedFio && storedNumber && storedToken) {
         this.userId = storedUserId;

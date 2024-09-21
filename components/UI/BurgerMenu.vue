@@ -4,7 +4,7 @@
       <img src="/imgs/cross.svg" alt="cross" />
     </button>
     <nav class="burger-menu">
-      <form class="burger-menu__search-form search-form">
+      <form @submit.prevent class="burger-menu__search-form search-form">
         <input
           placeholder="Поиск по каталогу товаров..."
           type="text"

@@ -114,7 +114,7 @@ export const useOrderStore = defineStore("orderStore", {
         if (response.data.success === "success") {
           console.log("Order saved successfully:", response.data.order);
         } else {
-          /* ы */
+          /* console.error("Order saving failed:", response.data.message); */
         }
       } catch (error) {
         console.error("Error submitting order:", error);

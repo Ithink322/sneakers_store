@@ -415,7 +415,7 @@ const signUp = async () => {
     isPolicyAccepted.value
   ) {
     try {
-      const response = await axios.post("/api/signUp", {
+      const response = await axios.post("/api/auth/signUp", {
         login: login.value,
         fio: fio.value,
         number: number.value,

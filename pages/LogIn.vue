@@ -81,6 +81,7 @@
       ></UIButton>
       <div class="container__checkbox-content">
         <input
+          v-model="rememberMe"
           type="checkbox"
           class="container__checkbox"
           :id="'container__checkbox'"
@@ -234,6 +235,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 const favoritesStore = useFavoritesStore();
 const cartStore = useCartStore();
+const rememberMe = ref(false);
 const logIn = async () => {
   validateLogin();
   validatePass();
@@ -245,7 +247,7 @@ const logIn = async () => {
     pass.value !== ""
   ) {
     try {
-      const response = await axios.post("/api/logIn", {
+      const response = await axios.post("/api/auth/logIn", {
         login: login.value,
         password: pass.value,
       });
@@ -255,7 +257,8 @@ const logIn = async () => {
           response.data.userId,
           response.data.fio,
           response.data.number,
-          response.data.token
+          response.data.token,
+          rememberMe.value
         );
         await favoritesStore.fetchFavorites(response.data.userId);
         await cartStore.fetchCart(response.data.userId);
