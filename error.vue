@@ -30,29 +30,6 @@
         />
         воспользоваться поиском.
       </p>
-      <form class="search-form">
-        <input
-          placeholder="Поиск по каталогу..."
-          type="text"
-          class="search-form__input"
-        />
-        <svg
-          class="search-form__icon"
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M15 15L11.6167 11.6166M13.4444 7.22226C13.4444 10.6587 10.6586 13.4445 7.22221 13.4445C3.78578 13.4445 1 10.6587 1 7.22226C1 3.7858 3.78578 1 7.22221 1C10.6586 1 13.4444 3.7858 13.4444 7.22226Z"
-            stroke="black"
-            stroke-width="1.3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </form>
       <UIButton
         @click="handleError"
         :to="'/'"
@@ -116,31 +93,7 @@ const handleError = () => clearError({ redirect: "/" });
   }
   &__btn {
     width: fit-content;
-    margin: 0 auto;
-  }
-}
-.search-form {
-  position: relative;
-  margin: 1.563rem 0 1.875rem 0;
-
-  &__input {
-    @include input;
-    outline: none;
-    border: 1px solid #c1c1c1;
-    padding: 1.25rem 3rem 1.25rem 1.25rem;
-    width: 100%;
-    font-family: "Pragmatica Medium";
-    font-size: 1rem;
-  }
-  &__input::placeholder {
-    font-family: "Pragmatica Book";
-    font-size: 1rem;
-    color: #c8c8c8;
-  }
-  &__icon {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
+    margin: 1.875rem auto 0 auto;
   }
 }
 
@@ -167,10 +120,9 @@ const handleError = () => clearError({ redirect: "/" });
     &__hero--from768px {
       display: block;
     }
-  }
-  .search-form {
-    margin: 1.563rem auto;
-    width: 627px;
+    &__btn {
+      margin: 1.563rem auto 0 auto;
+    }
   }
 }
 /* 1024px = 64em */
@@ -205,14 +157,9 @@ const handleError = () => clearError({ redirect: "/" });
       text-align: left;
     }
     &__btn {
-      margin: 0;
+      margin: 1.563rem 0 0 0;
       order: 3;
     }
-  }
-  .search-form {
-    margin: 0.938rem 0 2.5rem 0;
-    width: 532px;
-    order: 2;
   }
 }
 /* 1440px = 90em */
@@ -230,8 +177,7 @@ const handleError = () => clearError({ redirect: "/" });
     &__hero {
       width: 875px;
       height: 565px;
-      margin-top: -31.75rem;
-      margin-bottom: 3.438rem;
+      margin-top: -29.75rem;
       margin-right: -1rem;
       order: 4;
     }
@@ -239,9 +185,6 @@ const handleError = () => clearError({ redirect: "/" });
       margin-top: 0;
       order: 1;
     }
-  }
-  .search-form {
-    order: 2;
   }
 }
 /* 1920px = 120em */

@@ -1,10 +1,21 @@
 <template>
   <UIBreadcrumb :breadcrumbTitle="'Каталог товаров'"></UIBreadcrumb>
   <div class="titles-container">
-    <h1 class="titles-container__title">Все модели</h1>
-    <span class="titles-container__text"
-      >{{ totalProducts }} {{ conjugateTovar(totalProducts) }}</span
-    >
+    <h1 class="titles-container__title">
+      {{
+        route.query.search
+          ? `Результаты поиска “${route.query.search}”`
+          : "Все модели"
+      }}
+    </h1>
+    <span class="titles-container__text">
+      {{ route.query.search ? store.filteredProducts.length : totalProducts }}
+      {{
+        conjugateTovar(
+          route.query.search ? store.filteredProducts.length : totalProducts
+        )
+      }}
+    </span>
   </div>
   <button @click="openFiltersMenu" class="filters-btn">
     <svg
@@ -402,12 +413,35 @@
     </div>
   </div>
   <UIMessage
-    v-if="paginatedProducts.length === 0"
+    v-if="
+      paginatedProducts.length === 0 &&
+      (filtersStore.pickedCategoryFilters?.length || 0) > 0 &&
+      !route.query.search
+    "
     :text="'С выбранными фильтрами ничего не найдено.'"
     :fill="'#f8f8f8'"
   ></UIMessage>
+  <div
+    v-if="paginatedProducts.length === 0 && !!route.query.search"
+    class="body"
+  >
+    <UIMessage
+      :text="'По вашему запросу ничего не найдено. Проверьте правильность ввода или попробуйте уточнить поиск'"
+      :fill="'#f8f8f8'"
+    ></UIMessage>
+    <UIButton
+      class="catalog-btn"
+      :link="`/catalog?page=${store.currentPage}`"
+      :content="'Показать все продукты'"
+      :bodyBgColor="'#ff6915'"
+      :arrowBgColor="'#fb5a00'"
+      :width="catalogBtnWidth"
+    ></UIButton>
+  </div>
   <UIProductList v-if="paginatedProducts.length > 0"></UIProductList>
-  <UIPagination v-if="paginatedProducts.length > 9"></UIPagination>
+  <UIPagination
+    v-if="filteredProductsLength > store.productsPerPage"
+  ></UIPagination>
 </template>
 
 <script setup lang="ts">
@@ -434,6 +468,21 @@ useHead({
         "Nike, кроссовки Nike, купить Nike, интернет-магазин, Sneakers Store, мужские кроссовки Nike, женские кроссовки Nike, спортивная обувь Nike, доставка, цены, купить кроссовки, купить обувь, каталог кроссовок, купить спортивную обувь",
     },
   ],
+});
+
+const windowWidth = ref(0);
+const updateWidth = () => {
+  windowWidth.value = window.innerWidth;
+};
+const catalogBtnWidth = computed(() => {
+  updateWidth();
+  return windowWidth.value < 768 ? "100%" : "300px";
+});
+onMounted(() => {
+  window.addEventListener("resize", updateWidth);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateWidth);
 });
 
 onMounted(() => {
@@ -646,7 +695,10 @@ watch(
     store.currentPage = 1;
     router.replace({
       path: "/catalog",
-      query: { page: 1 },
+      query: {
+        ...route.query,
+        page: 1,
+      },
     });
     store.resetTranslateValue();
   },
@@ -661,7 +713,10 @@ watch(
     store.currentPage = 1;
     router.replace({
       path: "/catalog",
-      query: { page: 1 },
+      query: {
+        ...route.query,
+        page: 1,
+      },
     });
     store.resetTranslateValue();
   },
@@ -676,7 +731,10 @@ watch(
     store.currentPage = 1;
     router.replace({
       path: "/catalog",
-      query: { page: 1 },
+      query: {
+        ...route.query,
+        page: 1,
+      },
     });
     store.resetTranslateValue();
   },
@@ -691,7 +749,10 @@ watch(
     store.currentPage = 1;
     router.replace({
       path: "/catalog",
-      query: { page: 1 },
+      query: {
+        ...route.query,
+        page: 1,
+      },
     });
     store.resetTranslateValue();
   }
@@ -705,7 +766,10 @@ watch(
     store.currentPage = 1;
     router.replace({
       path: "/catalog",
-      query: { page: 1 },
+      query: {
+        ...route.query,
+        page: 1,
+      },
     });
     store.resetTranslateValue();
   }
@@ -809,7 +873,10 @@ const showProducts = (num: number) => {
     store.resetTranslateValue();
     router.replace({
       path: "/catalog",
-      query: { page: 1 },
+      query: {
+        ...route.query,
+        page: 1,
+      },
     });
   }
 };
@@ -921,6 +988,16 @@ const sortProducts = async (option: string) => {
     });
   }
 };
+
+onMounted(() => {
+  store.filterProducts();
+});
+watch(
+  () => route.query.search,
+  () => {
+    store.filterProducts();
+  }
+);
 </script>
 
 <style lang="scss">
@@ -1219,6 +1296,16 @@ input[type="number"] {
     }
   }
 }
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  justify-content: center;
+}
+.catalog-btn {
+  margin: 0rem auto;
+  width: 100%;
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .filters-menu-shadow {
@@ -1235,6 +1322,12 @@ input[type="number"] {
   }
   .picked-filters {
     padding: 1.125rem 0;
+  }
+  .body {
+    gap: 1.25rem;
+  }
+  .catalog-btn {
+    width: 300px;
   }
 }
 /* 1024px = 64em */

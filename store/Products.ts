@@ -34,11 +34,20 @@ export const useProductsStore = defineStore("productsStore", {
     },
     filterProducts() {
       const filtersStore = useFiltersStore();
+      const route = useRoute();
+      const searchQuery = route.query.search?.toString() || "";
+      const productsToFilter = searchQuery
+        ? this.allProducts.filter((product) =>
+            product.title.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : [...this.allProducts];
+
       if (filtersStore.pickedCategoryFilters!.length === 0) {
-        this.filteredProducts = this.allProducts;
+        this.filteredProducts = productsToFilter;
+        return;
       }
 
-      this.filteredProducts = this.allProducts.filter((product) => {
+      this.filteredProducts = productsToFilter.filter((product) => {
         const productPrice = parseFloat(
           product.currentPrice.replace(/[^0-9.-]+/g, "").replace(/\s+/g, "")
         );

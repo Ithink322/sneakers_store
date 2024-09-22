@@ -22,7 +22,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">9900 ₽</span></span
               >
-              <UIButton class="slide__more-btn" :link="''"></UIButton>
+              <UIButton
+                class="slide__more-btn"
+                :link="`/catalog?page=${catalogStore.currentPage}`"
+              ></UIButton>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -44,7 +47,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">8800 ₽</span></span
               >
-              <UIButton class="slide__more-btn" :link="''"></UIButton>
+              <UIButton
+                class="slide__more-btn"
+                :link="`/catalog?page=${catalogStore.currentPage}`"
+              ></UIButton>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -66,7 +72,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">7700 ₽</span></span
               >
-              <UIButton class="slide__more-btn" :link="''"></UIButton>
+              <UIButton
+                class="slide__more-btn"
+                :link="`/catalog?page=${catalogStore.currentPage}`"
+              ></UIButton>
             </div>
           </div>
           <div class="overflow__slide slide">
@@ -88,7 +97,10 @@
               <span class="slide__text-price"
                 >от <span class="slide__price">6600 ₽</span></span
               >
-              <UIButton class="slide__more-btn" :link="''"></UIButton>
+              <UIButton
+                class="slide__more-btn"
+                :link="`/catalog?page=${catalogStore.currentPage}`"
+              ></UIButton>
             </div>
           </div>
         </div>

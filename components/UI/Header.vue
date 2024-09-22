@@ -152,13 +152,17 @@
           </ul>
         </div>
         <form
-          @submit.prevent="searchCatalog(searchQuery)"
+          @submit.prevent="
+            {
+              searchCatalog(), search(searchQuery);
+            }
+          "
           v-if="searchIsActive"
           ref="searchForm"
           class="header-mid__search-form search-form"
         >
           <input
-            @input="handleSearchInput"
+            @input="handleSearchInput(searchQuery)"
             ref="searchInput"
             v-model="searchQuery"
             placeholder="Поиск по каталогу товаров..."
@@ -441,25 +445,30 @@ onBeforeUnmount(() => {
 });
 const searchQuery = ref("");
 const searchResults = ref<Product[]>([]);
-const handleSearchInput = async () => {
+const handleSearchInput = async (query: string) => {
   if (searchQuery.value.trim()) {
-    searchResults.value = await searchCatalog(searchQuery.value);
+    searchResults.value = await search(searchQuery.value);
   } else {
     searchResults.value = [];
   }
 };
-const searchCatalog = async (query: string): Promise<Product[]> => {
+const search = async (query: string): Promise<Product[]> => {
   try {
     const response = await axios.post("/api/catalog/search", {
       query,
     });
-
-    console.log("Search Results:", response.data.results);
     return response.data.results;
   } catch (error) {
     console.error("Error fetching search results:", error);
     return [];
   }
+};
+const searchCatalog = () => {
+  hideSearchResults();
+  router.push({
+    path: "/catalog",
+    query: { page: 1, search: searchQuery.value },
+  });
 };
 const hideSearchResults = () => {
   searchIsActive.value = false;
