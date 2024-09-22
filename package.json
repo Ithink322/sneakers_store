@@ -25,6 +25,7 @@
     "nuxt-rating": "^0.1.5",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
+    "vue-highlight-words": "^3.0.1",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

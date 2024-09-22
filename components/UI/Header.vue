@@ -152,17 +152,51 @@
           </ul>
         </div>
         <form
-          @submit.prevent
+          @submit.prevent="searchCatalog(searchQuery)"
           v-if="searchIsActive"
           ref="searchForm"
-          class="header-mid__search-form"
+          class="header-mid__search-form search-form"
         >
           <input
+            @input="handleSearchInput"
             ref="searchInput"
+            v-model="searchQuery"
             placeholder="Поиск по каталогу товаров..."
             type="text"
-            class="header-mid__field"
+            class="search-form__field"
           />
+          <div
+            v-if="searchResults.length > 0"
+            class="search-form__search-results"
+          >
+            <NuxtLink
+              @click="hideSearchResults"
+              :to="`/catalog/${slugify(product.title)}/${product.id}?page=1`"
+              v-for="product in searchResults"
+              :key="product.id"
+              class="search-form__search-result-item"
+            >
+              <div class="search-form__product-hero-body">
+                <img
+                  :src="product.heroes[0]"
+                  alt="Product Image"
+                  class="search-form__product-hero"
+                />
+              </div>
+              <div class="search-form__product-info">
+                <Highlighter
+                  class="search-form__product-title"
+                  highlightClassName="highlight"
+                  :searchWords="[searchQuery]"
+                  :autoEscape="true"
+                  :textToHighlight="product.title"
+                />
+                <span class="search-form__product-price">
+                  {{ product.currentPrice }}</span
+                >
+              </div>
+            </NuxtLink>
+          </div>
         </form>
         <NuxtLink to="/" class="header-mid__logo">
           <img src="/imgs/logo.svg" alt=""
@@ -287,6 +321,10 @@ import { usePostsStore } from "@/store/Posts";
 import { useCatalogMenu } from "@/store/CatalogMenu";
 import { useFavoritesStore } from "@/store/Favorites";
 import { useAuthStore } from "@/store/Auth";
+import type { Product } from "@/types/Product";
+import axios from "axios";
+import Highlighter from "vue-highlight-words";
+import { slugify } from "@/utils/helpers";
 
 const store = usePostsStore();
 const routeCategory = computed(() => store.routeCategory);
@@ -383,6 +421,11 @@ watch(searchIsActive, async (newVal) => {
     searchInput.value.focus();
   }
 });
+const handleResize = () => {
+  if (window.innerWidth < 768) {
+    searchIsActive.value = false;
+  }
+};
 const handleClickOutside = (event: MouseEvent) => {
   if (searchForm.value && !searchForm.value.contains(event.target as Node)) {
     searchIsActive.value = false;
@@ -390,10 +433,37 @@ const handleClickOutside = (event: MouseEvent) => {
 };
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
+  window.addEventListener("resize", handleResize);
 });
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
+  window.removeEventListener("resize", handleResize);
 });
+const searchQuery = ref("");
+const searchResults = ref<Product[]>([]);
+const handleSearchInput = async () => {
+  if (searchQuery.value.trim()) {
+    searchResults.value = await searchCatalog(searchQuery.value);
+  } else {
+    searchResults.value = [];
+  }
+};
+const searchCatalog = async (query: string): Promise<Product[]> => {
+  try {
+    const response = await axios.post("/api/catalog/search", {
+      query,
+    });
+
+    console.log("Search Results:", response.data.results);
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    return [];
+  }
+};
+const hideSearchResults = () => {
+  searchIsActive.value = false;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -447,6 +517,9 @@ onBeforeUnmount(() => {
     @include btn;
   }
 }
+.search-form {
+  display: none;
+}
 /* 768px = 48em */
 @media (min-width: 48em) {
   .header {
@@ -483,21 +556,6 @@ onBeforeUnmount(() => {
       display: flex;
       order: 2;
       margin-right: auto;
-    }
-    &__search-form {
-      order: 2;
-      width: 100%;
-    }
-    &__field {
-      padding: 1.25rem 1.875rem;
-      border: none;
-      width: 100%;
-      outline: none;
-      font-family: "Pragmatica Medium";
-      font-size: 1.125rem;
-    }
-    &__field::placeholder {
-      color: #cecece;
     }
     &__logo {
       display: flex;
@@ -540,11 +598,83 @@ onBeforeUnmount(() => {
   .active svg path {
     stroke: white;
   }
+  .search-form {
+    display: block;
+    order: 2;
+    width: 100%;
+    &__field {
+      padding: 1.25rem 1.875rem;
+      border: none;
+      width: 100%;
+      height: 70px;
+      outline: none;
+      font-family: "Pragmatica Medium";
+      font-size: 1.125rem;
+    }
+    &__field::placeholder {
+      color: #cecece;
+    }
+    &__search-results {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      position: absolute;
+      z-index: 2;
+      background-color: $Dark-Black;
+      padding: 0.75rem 0.875rem;
+      height: 300px;
+      border-radius: 8px;
+      left: 0;
+      right: 0;
+      margin: 0.75rem calc((100vw - 44.874rem) / 2);
+      overflow-y: scroll;
+    }
+    &__search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      cursor: pointer;
+    }
+    &__product-hero-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border: 1px solid #eaeaea;
+      border-radius: 8px;
+    }
+    &__product-hero {
+      width: 38px;
+      height: 38px;
+    }
+    &__product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    &__product-title {
+      font-family: "Pragmatica Medium";
+      font-size: 1rem;
+      color: #fff;
+    }
+    &__product-price {
+      font-family: "Pragmatica Book";
+      font-size: 1rem;
+      color: #fff;
+    }
+  }
 }
 /* 1024px = 64em */
 @media (min-width: 64em) {
   .header {
     padding: 0rem calc((100vw - 44.75rem) / 2);
+  }
+  .search-form {
+    &__search-results {
+      margin: 0.75rem calc((100vw - 44.75rem) / 2);
+    }
   }
 }
 /* 1200px = 75em */
@@ -664,6 +794,11 @@ onBeforeUnmount(() => {
       margin-top: -3.9rem;
     }
   }
+  .search-form {
+    &__search-results {
+      margin: 0.75rem calc((100vw - 71.875rem) / 2);
+    }
+  }
 }
 /* 1440px = 90em */
 @media (min-width: 90em) {
@@ -672,6 +807,11 @@ onBeforeUnmount(() => {
   }
   .header-mid__titles-container {
     margin-left: 11.755rem;
+  }
+  .search-form {
+    &__search-results {
+      margin: 0.75rem calc((100vw - 85rem) / 2);
+    }
   }
 }
 </style>
