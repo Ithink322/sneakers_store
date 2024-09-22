@@ -968,17 +968,18 @@ const sortProducts = async (option: string) => {
 
   await reviewsStore.updateProductRatings(store.filteredProducts);
 
-  store.filteredProducts = [...products];
+  const productsToSort = [...store.filteredProducts];
+
   if (option === "возрастанию цены") {
-    store.filteredProducts.sort(
+    productsToSort.sort(
       (a, b) => parsePrice(a.currentPrice) - parsePrice(b.currentPrice)
     );
   } else if (option === "убыванию цены") {
-    store.filteredProducts.sort(
+    productsToSort.sort(
       (a, b) => parsePrice(b.currentPrice) - parsePrice(a.currentPrice)
     );
   } else if (option.includes("рейтинга")) {
-    store.filteredProducts.sort((a, b) => {
+    productsToSort.sort((a, b) => {
       if (option === "возрастанию рейтинга") {
         return (a.averageRating || 0) - (b.averageRating || 0);
       } else if (option === "убыванию рейтинга") {
@@ -987,6 +988,8 @@ const sortProducts = async (option: string) => {
       return 0;
     });
   }
+
+  store.filteredProducts = productsToSort;
 };
 
 onMounted(() => {

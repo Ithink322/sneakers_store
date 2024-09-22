@@ -36,42 +36,51 @@ export const useProductsStore = defineStore("productsStore", {
       const filtersStore = useFiltersStore();
       const route = useRoute();
       const searchQuery = route.query.search?.toString() || "";
-      const productsToFilter = searchQuery
-        ? this.allProducts.filter((product) =>
-            product.title.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-        : [...this.allProducts];
 
-      if (filtersStore.pickedCategoryFilters!.length === 0) {
-        this.filteredProducts = productsToFilter;
-        return;
+      // Start with all products
+      let productsToFilter = [...this.allProducts];
+
+      // Apply search filtering
+      if (searchQuery) {
+        productsToFilter = productsToFilter.filter((product) =>
+          product.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
       }
 
-      this.filteredProducts = productsToFilter.filter((product) => {
-        const productPrice = parseFloat(
-          product.currentPrice.replace(/[^0-9.-]+/g, "").replace(/\s+/g, "")
-        );
-        const priceMatch =
-          productPrice >= filtersStore.minPrice! &&
-          productPrice <= filtersStore.maxPrice!;
-
-        const sizeMatch =
-          filtersStore.sizes!.length === 0 ||
-          product.sizes.some((size) => filtersStore.sizes!.includes(size));
-
-        const colorMatch =
-          filtersStore.colors!.length === 0 ||
-          product.colors.some((color) => filtersStore.colors!.includes(color));
-
-        const materialMatch =
-          filtersStore.materials!.length === 0 ||
-          filtersStore.materials!.some((material) =>
-            product.specs.composition
-              .toLowerCase()
-              .includes(material.toLowerCase())
+      // Apply category filters
+      if (filtersStore.pickedCategoryFilters!.length > 0) {
+        productsToFilter = productsToFilter.filter((product) => {
+          const productPrice = parseFloat(
+            product.currentPrice.replace(/[^0-9.-]+/g, "").replace(/\s+/g, "")
           );
-        return priceMatch && sizeMatch && colorMatch && materialMatch;
-      });
+          const priceMatch =
+            productPrice >= filtersStore.minPrice! &&
+            productPrice <= filtersStore.maxPrice!;
+
+          const sizeMatch =
+            filtersStore.sizes!.length === 0 ||
+            product.sizes.some((size) => filtersStore.sizes!.includes(size));
+
+          const colorMatch =
+            filtersStore.colors!.length === 0 ||
+            product.colors.some((color) =>
+              filtersStore.colors!.includes(color)
+            );
+
+          const materialMatch =
+            filtersStore.materials!.length === 0 ||
+            filtersStore.materials!.some((material) =>
+              product.specs.composition
+                .toLowerCase()
+                .includes(material.toLowerCase())
+            );
+
+          return priceMatch && sizeMatch && colorMatch && materialMatch;
+        });
+      }
+
+      // Update filtered products
+      this.filteredProducts = productsToFilter;
     },
     setPage(page: number) {
       this.currentPage = page;
