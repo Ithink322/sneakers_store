@@ -37,17 +37,13 @@ export const useProductsStore = defineStore("productsStore", {
       const route = useRoute();
       const searchQuery = route.query.search?.toString() || "";
 
-      // Start with all products
       let productsToFilter = [...this.allProducts];
-
-      // Apply search filtering
       if (searchQuery) {
         productsToFilter = productsToFilter.filter((product) =>
           product.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
       }
 
-      // Apply category filters
       if (filtersStore.pickedCategoryFilters!.length > 0) {
         productsToFilter = productsToFilter.filter((product) => {
           const productPrice = parseFloat(
@@ -79,7 +75,6 @@ export const useProductsStore = defineStore("productsStore", {
         });
       }
 
-      // Update filtered products
       this.filteredProducts = productsToFilter;
     },
     setPage(page: number) {

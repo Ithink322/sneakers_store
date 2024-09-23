@@ -472,13 +472,15 @@ useHead({
 
 const windowWidth = ref(0);
 const updateWidth = () => {
-  windowWidth.value = window.innerWidth;
+  if (typeof window !== "undefined") {
+    windowWidth.value = window.innerWidth;
+  }
 };
 const catalogBtnWidth = computed(() => {
-  updateWidth();
   return windowWidth.value < 768 ? "100%" : "300px";
 });
 onMounted(() => {
+  updateWidth();
   window.addEventListener("resize", updateWidth);
 });
 onBeforeUnmount(() => {
