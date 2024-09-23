@@ -1,4 +1,4 @@
-# Online sneakers store.
+# Online sneakers store
 
 Stack:
 
