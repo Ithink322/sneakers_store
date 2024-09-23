@@ -423,7 +423,7 @@
   ></UIMessage>
   <div
     v-if="paginatedProducts.length === 0 && !!route.query.search"
-    class="body"
+    class="container-message"
   >
     <UIMessage
       :text="'По вашему запросу ничего не найдено. Проверьте правильность ввода или попробуйте уточнить поиск'"
@@ -1301,7 +1301,7 @@ input[type="number"] {
     }
   }
 }
-.body {
+.container-message {
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
@@ -1328,7 +1328,7 @@ input[type="number"] {
   .picked-filters {
     padding: 1.125rem 0;
   }
-  .body {
+  .container-message {
     gap: 1.25rem;
   }
   .catalog-btn {
