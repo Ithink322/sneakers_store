@@ -1,6 +1,4 @@
 # Sneakers store - online sneakers store.
-
-Project in development...
 <br/>
 <br/>
 Stack:
