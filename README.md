@@ -1,8 +1,8 @@
-# Sneakers store - online sneakers store.
+# Online sneakers store
 
-Project in development...
-<br/>
-<br/>
+Project link:
+<a>https://sneakers-storee.netlify.app</a>
+
 Stack:
 
 Frontend:
