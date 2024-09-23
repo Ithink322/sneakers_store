@@ -147,7 +147,7 @@ const toggleMoscowBtn = () => {
 
 const KurskInfo = ref<Contacts[]>([
   {
-    address: "Курск, улица Карла Маркса 68, 2 этаж.",
+    address: "Курск, улица Карла Маркса 6, 2 этаж.",
     phone: "+7 (918) 547-20-83",
     email: "orderskursk@store.ru",
     mapSrc:

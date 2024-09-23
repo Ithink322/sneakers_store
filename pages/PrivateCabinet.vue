@@ -646,12 +646,19 @@
               <span class="edit-profile__title--red">*</span></span
             >
             <input
-              v-model="number"
-              id="number"
-              placeholder="+7 (___) ___ - ___ - ___"
+              @input="phoneOnInput"
+              v-model="phoneNumber"
+              id="telephone"
+              placeholder="+7 (___) ___ - __ - __"
               type="text"
               class="edit-profile__field"
+              :class="{
+                'invalid-phone': !phoneIsValid,
+              }"
             />
+            <span v-if="!phoneIsValid" class="error-message"
+              >Важно заполнить это поле.</span
+            >
           </div>
           <UIButton
             class="edit-profile__btn"
@@ -1382,17 +1389,28 @@ const email = ref<string>("");
 const emailIsEmpty = ref(false);
 const emailIsValid = ref(true);
 const fioProfile = ref<string>("");
-const number = ref<string>("");
+const phoneNumber = ref<string>("");
+const phoneIsEmpty = ref(false);
+const phoneIsValid = ref(true);
 const emailOnInput = () => {
   emailIsEmpty.value = email.value === "";
   emailIsValid.value = true;
 };
+const phoneOnInput = () => {
+  phoneIsEmpty.value = phoneNumber.value === "";
+  phoneIsValid.value = true;
+};
 onMounted(() => {
-  const numberInput = document.getElementById("number")! as HTMLInputElement;
-  if (numberInput) {
-    Inputmask("+7 (999) 999-99-99").mask(numberInput);
-  }
+  nextTick(() => {
+    const numberInput = document.getElementById(
+      "telephone"
+    )! as HTMLInputElement;
+    if (numberInput) {
+      Inputmask("+7 (999) 999-99-99").mask(numberInput);
+    }
+  });
 });
+
 const validateEmail = () => {
   if (email.value === "") {
     emailIsEmpty.value = true;
@@ -1404,6 +1422,24 @@ const validateEmail = () => {
     emailIsValid.value = emailRegex.test(email.value);
   }
 };
+const phoneNumberDigits = phoneNumber.value.replace(/\D/g, "");
+const validatePhone = () => {
+  if (phoneNumber.value === "") {
+    phoneIsEmpty.value = false;
+    phoneIsValid.value = true;
+  } else {
+    if (
+      phoneNumberDigits.length === 11 &&
+      /^7\d{3}\d{3}\d{2}\d{2}$/.test(phoneNumberDigits)
+    ) {
+      phoneIsEmpty.value = false;
+      phoneIsValid.value = true;
+    } else {
+      phoneIsEmpty.value = false;
+      phoneIsValid.value = false;
+    }
+  }
+};
 const isLoading = ref(false);
 const progressRing = ref<HTMLElement | null>(null);
 const isProfileMessageVisible = ref(false);
@@ -1411,11 +1447,12 @@ const animatedTick = ref<HTMLElement | null>(null);
 const animationOfTick = ref<any>(null);
 const editProfile = async () => {
   validateEmail();
+  validatePhone();
   const userId = localStorage.getItem("userId") as string;
   const updatedData: Record<string, string> = {};
   if (email.value) updatedData.email = email.value;
   if (fioProfile.value) updatedData.fio = fioProfile.value;
-  if (number.value) updatedData.number = number.value;
+  if (phoneNumber.value) updatedData.number = phoneNumber.value;
 
   const profileData = { userId, ...updatedData };
   if (Object.keys(updatedData).length > 0) {
@@ -1425,8 +1462,7 @@ const editProfile = async () => {
   }
   if (
     (!emailIsEmpty.value && emailIsValid.value) ||
-    fioProfile.value !== "" ||
-    number.value !== ""
+    (phoneNumber.value !== "" && phoneIsValid.value)
   ) {
     isLoading.value = true;
     nextTick(() => {
@@ -2488,6 +2524,7 @@ const logOut = () => {
 }
 .invalid-field,
 .invalid-email,
+.invalid-phone,
 .invalid-pass,
 .pass--empty,
 .pass-length,
@@ -2495,12 +2532,11 @@ const logOut = () => {
   border: 1px solid #f81d2a;
   color: #f81d2a;
 }
-.invalid-field::placeholder {
-  color: #f81d2a;
-}
+.invalid-field::placeholder,
 .invalid-email::placeholder,
 .invalid-pass::placeholder,
 .pass--empty::placeholder,
+.invalid-phone::placeholder,
 .pass-length::placeholder,
 .equal-passes::placeholder {
   color: #f81d2a;

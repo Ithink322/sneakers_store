@@ -179,7 +179,7 @@ const deleteImage = (index: number, event: Event) => {
 
 const ratingValue = ref<number>(0);
 const reviewText = ref<string>("");
-const reviewTextPattern = /^[A-Za-zА-Яа-я0-9\s.,!?@()"'&-]+$/;
+const reviewTextPattern = /^[A-Za-zА-Яа-яЁё0-9\s.,;:!?@()"'&-]+$/;
 const isRatingNoticeVisible = ref(false);
 const isReviewTextEmpty = ref(false);
 const isTextNoticeValid = ref(true);
@@ -246,7 +246,8 @@ const handleLeaveReview = async () => {
     text: reviewText.value,
     imgs: uploadImgs.value,
   };
-  reviewsStore.addReview(review);
+  console.log("Prepared review for submission:", review);
+  await reviewsStore.addReview(review);
   await reviewsStore.updateProductRatings(
     store.filteredProducts,
     Number(route.params.id)

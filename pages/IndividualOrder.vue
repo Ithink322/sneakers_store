@@ -103,7 +103,7 @@
             <input
               v-model="phoneNumber"
               @input="phoneOnInput"
-              placeholder="+7 (___) ___ - ___ - ___"
+              placeholder="+7 (___) ___ - __ - __"
               type="text"
               class="contacts-body__input"
               id="telephone"
