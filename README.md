@@ -1,6 +1,5 @@
-# Sneakers store - online sneakers store.
-<br/>
-<br/>
+# Online sneakers store.
+
 Stack:
 
 Frontend:
