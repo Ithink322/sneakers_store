@@ -86,11 +86,13 @@ const productCount = computed(() =>
   )
 );
 const increaseCounter = () => {
-  cartStore.increaseCount(
-    props.product.productId,
-    props.product.chosenColor,
-    props.product.chosenSize
-  );
+  if (productCount.value < 30) {
+    cartStore.increaseCount(
+      props.product.productId,
+      props.product.chosenColor,
+      props.product.chosenSize
+    );
+  }
 };
 const decreaseCounter = () => {
   if (productCount.value > 1) {

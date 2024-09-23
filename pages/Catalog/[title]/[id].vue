@@ -650,7 +650,9 @@ watch(
 
 const count = ref<number>(1);
 const increaseCounter = () => {
-  count.value++;
+  if (count.value < 30) {
+    count.value++;
+  }
 };
 const decreaseCounter = () => {
   if (count.value > 1) {
