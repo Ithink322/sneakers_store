@@ -1,7 +1,7 @@
 # Online sneakers store
 
 Project link:
-sneakers-storee.netlify.app
+<a>https://sneakers-storee.netlify.app</a>
 
 Stack:
 
