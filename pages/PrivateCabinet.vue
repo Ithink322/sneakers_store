@@ -610,7 +610,7 @@
     <div v-if="activeSection === 2" class="edit-profile">
       <h2 class="subtitle">Редактировать профиль</h2>
       <form @submit.prevent="editProfile" class="edit-profile__form">
-        <div class="edit-profile__container" v-if="!isProfileMessageVisible">
+        <div v-if="!isProfileMessageVisible" class="edit-profile__container">
           <div class="edit-profile__content">
             <span class="edit-profile__title"
               >Email <span class="edit-profile__title--red">*</span></span
@@ -1349,6 +1349,24 @@ import { useAuthStore } from "@/store/Auth";
 import { useRouter } from "vue-router";
 import { onMounted, onBeforeUnmount } from "vue";
 
+onMounted(() => {
+  useHead({
+    title: `Личный кабинет - Sneakers Store`,
+    meta: [
+      {
+        name: "description",
+        content:
+          "Личный кабинет Sneakers Store - здесь вы можете редактировать профиль, просматривать все заказы, добавлять, изменять и удалять адреса доставки, а также менять пароль.",
+      },
+      {
+        name: "keywords",
+        content:
+          "личный кабинет, Sneakers Store, профиль, заказы, адреса доставки, изменить профиль, сменить пароль",
+      },
+    ],
+  });
+});
+
 const activeSection = ref(1);
 const privateCabinetStore = usePrivateCabinetStore();
 const setActiveSection = (section: number) => {
@@ -1475,6 +1493,7 @@ const editProfile = async () => {
       });
       setTimeout(() => {
         isLoading.value = false;
+        resetProfileForm();
         animation.destroy();
         isProfileMessageVisible.value = true;
         nextTick(() => {
@@ -1495,6 +1514,11 @@ const editProfile = async () => {
 const closeProfileThanksMessage = () => {
   isProfileMessageVisible.value = false;
   animationOfTick.value!.destroy();
+};
+const resetProfileForm = () => {
+  email.value = "";
+  fioProfile.value = "";
+  phoneNumber.value = "";
 };
 
 const orderStore = useOrderStore();
@@ -1838,6 +1862,7 @@ const editPass = async () => {
 
         setTimeout(() => {
           isLoading.value = false;
+          resetPassForm();
           animation.destroy();
           isPassMessageVisible.value = true;
 
@@ -1856,6 +1881,11 @@ const editPass = async () => {
       });
     }
   }
+};
+const resetPassForm = () => {
+  currentPass.value = "";
+  pass1.value = "";
+  pass2.value = "";
 };
 const closePassThanksMessage = () => {
   isPassMessageVisible.value = false;

@@ -117,7 +117,6 @@
 <script setup lang="ts">
 import { usePostsStore } from "@/store/Posts";
 import type { BlogPost } from "@/types/BlogPosts";
-import { blogPosts } from "@/data/Blogposts";
 import { slugify } from "@/utils/helpers";
 
 const store = usePostsStore();
@@ -125,12 +124,14 @@ const title = computed(() => store.getTitle);
 
 const post = ref<BlogPost>();
 const fetchPost = () => {
-  post.value = blogPosts.find((post) => post.id === Number(route.params.id));
+  post.value = store.allPosts.find(
+    (post) => post.id === Number(route.params.id)
+  );
 };
 
 const route = useRoute();
 const checkTitleValidity = () => {
-  const title = blogPosts.find(
+  const title = store.allPosts.find(
     (post) => slugify(post.title) === (route.params.title as string)
   );
   if (!title) {
@@ -142,7 +143,9 @@ const router = useRouter();
 watch(
   () => route.params.id,
   () => {
-    const post = blogPosts.find((post) => post.id === Number(route.params.id));
+    const post = store.allPosts.find(
+      (post) => post.id === Number(route.params.id)
+    );
     if (post && routeTitle.value !== post.title) {
       routeTitle.value = post.title;
       router.replace({

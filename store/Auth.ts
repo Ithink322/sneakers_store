@@ -6,6 +6,7 @@ export const useAuthStore = defineStore("auth", {
     fio: "",
     number: "",
     token: "",
+    isAdmin: false,
     isLoggedIn: false,
     rememberMe: false,
   }),
@@ -15,17 +16,20 @@ export const useAuthStore = defineStore("auth", {
       fio: string,
       number: string,
       token: string,
+      isAdmin: boolean,
       rememberMe: boolean
     ) {
       this.userId = userId;
       this.fio = fio;
       this.number = number;
       this.token = token;
+      this.isAdmin = isAdmin;
       this.isLoggedIn = true;
 
       localStorage.setItem("userId", userId);
       localStorage.setItem("fio", fio);
       localStorage.setItem("number", number);
+      localStorage.setItem("isAdmin", isAdmin ? "true" : "false");
 
       if (rememberMe) {
         localStorage.setItem("authToken", token);
@@ -38,11 +42,13 @@ export const useAuthStore = defineStore("auth", {
       this.fio = "";
       this.number = "";
       this.token = "";
+      this.isAdmin = false;
       this.isLoggedIn = false;
 
       localStorage.removeItem("userId");
       localStorage.removeItem("fio");
       localStorage.removeItem("number");
+      localStorage.removeItem("isAdmin");
       localStorage.removeItem("authToken");
       sessionStorage.removeItem("authToken");
     },
@@ -53,12 +59,14 @@ export const useAuthStore = defineStore("auth", {
       const storedToken =
         localStorage.getItem("authToken") ||
         sessionStorage.getItem("authToken");
+      const storedIsAdmin = localStorage.getItem("isAdmin") === "true";
 
-      if (storedUserId && storedFio && storedNumber && storedToken) {
+      if (storedUserId && storedFio && storedNumber) {
         this.userId = storedUserId;
         this.fio = storedFio;
         this.number = storedNumber;
-        this.token = storedToken;
+        this.token = storedToken!;
+        this.isAdmin = storedIsAdmin;
         this.isLoggedIn = true;
       }
     },

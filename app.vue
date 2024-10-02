@@ -10,10 +10,16 @@
 
 <script setup lang="ts">
 import { useAuthStore } from "@/store/Auth";
+import { usePostsStore } from "@/store/Posts";
+import { useProductsStore } from "@/store/Products";
 
 const authStore = useAuthStore();
-onMounted(() => {
+const blogStore = usePostsStore();
+const catalogStore = useProductsStore();
+onMounted(async () => {
   authStore.initializeAuth();
+  await blogStore.fetchPosts();
+  await catalogStore.fetchProducts();
 });
 </script>
 

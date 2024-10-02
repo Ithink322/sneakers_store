@@ -154,7 +154,7 @@
         <form
           @submit.prevent="
             {
-              searchCatalog(), search(searchQuery);
+              searchCatalog(), search();
             }
           "
           v-if="searchIsActive"
@@ -329,6 +329,7 @@ import type { Product } from "@/types/Product";
 import axios from "axios";
 import Highlighter from "vue-highlight-words";
 import { slugify } from "@/utils/helpers";
+import { useProductsStore } from "@/store/Products";
 
 const store = usePostsStore();
 const routeCategory = computed(() => store.routeCategory);
@@ -447,21 +448,14 @@ const searchQuery = ref("");
 const searchResults = ref<Product[]>([]);
 const handleSearchInput = async (query: string) => {
   if (searchQuery.value.trim()) {
-    searchResults.value = await search(searchQuery.value);
+    searchResults.value = await search();
   } else {
     searchResults.value = [];
   }
 };
-const search = async (query: string): Promise<Product[]> => {
-  try {
-    const response = await axios.post("/api/catalog/search", {
-      query,
-    });
-    return response.data.results;
-  } catch (error) {
-    console.error("Error fetching search results:", error);
-    return [];
-  }
+const catalogStore = useProductsStore();
+const search = async (): Promise<Product[]> => {
+  return catalogStore.searchProducts(searchQuery.value);
 };
 const searchCatalog = () => {
   hideSearchResults();

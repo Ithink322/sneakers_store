@@ -4,12 +4,14 @@
       v-for="product in paginatedProducts"
       :product="product"
       :key="product.id"
+      @editProduct="editProduct"
     ></UIProductCard>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useProductsStore } from "@/store/Products";
+import type { Product } from "@/types/Product";
 
 const store = useProductsStore();
 const paginatedProducts = computed(() => store.paginatedProducts);
@@ -17,6 +19,11 @@ const paginatedProducts = computed(() => store.paginatedProducts);
 onMounted(() => {
   store.filterProducts();
 });
+
+const emit = defineEmits(["editProduct"]);
+const editProduct = (product: Product) => {
+  emit("editProduct", product);
+};
 </script>
 
 <style lang="scss" scoped>

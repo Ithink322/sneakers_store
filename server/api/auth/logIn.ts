@@ -49,6 +49,7 @@ export default defineEventHandler(async (event) => {
       token,
       fio: user.fio,
       number: user.number,
+      isAdmin: user.isAdmin || false,
     };
   } catch (error) {
     console.error("Error during login:", error);

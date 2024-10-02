@@ -65,12 +65,14 @@
     </div>
     <div class="about-us-posts-flex">
       <UIAboutUs></UIAboutUs>
-      <UIRecentPostsList></UIRecentPostsList>
+      <UIRecentPostsList v-if="allPostsLength > 0"></UIRecentPostsList>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
+import { usePostsStore } from "@/store/Posts";
+
 useHead({
   title: "О нас - Sneakers Store | Ваша команда любителей Nike",
   meta: [
@@ -86,6 +88,9 @@ useHead({
     },
   ],
 });
+
+const postsStore = usePostsStore();
+const allPostsLength = computed(() => postsStore.allPosts.length);
 </script>
 
 <style lang="scss">
@@ -93,6 +98,7 @@ useHead({
 .about-container {
   &__title {
     font-size: 1.5rem;
+    line-height: 32px;
     margin-top: 0.938rem;
   }
   &__content-flex {
@@ -234,6 +240,7 @@ useHead({
     }
     &__title {
       font-size: 2.438rem;
+      line-height: 50px;
     }
   }
   .about-us-posts-flex {

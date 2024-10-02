@@ -1,6 +1,6 @@
 <template>
   <UIBreadcrumb :breadcrumbTitle="'Каталог товаров'"></UIBreadcrumb>
-  <div class="titles-container">
+  <div v-if="arePoductsAvailable" class="titles-container">
     <h1 class="titles-container__title">
       {{
         route.query.search
@@ -16,6 +16,623 @@
         )
       }}
     </span>
+  </div>
+  <UIButton
+    @click="showAddProductForm"
+    v-if="isAdmin && !isAddProductVisible && isAddProductBtnVisible"
+    class="add-product-btn"
+    :content="'Добавить новый товар'"
+    width="100%"
+  ></UIButton>
+  <div v-if="isAddProductVisible" class="add-product">
+    <div
+      v-if="!isLoading || !isAddMessageVisible"
+      class="add-product__title-body"
+    >
+      <h2 class="add-product__subtitle">Добавить новый продукт</h2>
+      <button @click="closeAddProductForm" class="add-product__close-btn">
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.7"
+            d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+    </div>
+    <form @submit.prevent="handleAddProduct" class="add-product__form">
+      <div v-if="!isAddMessageVisible" class="add-product__container">
+        <span
+          v-if="areFieldsEmpty"
+          class="add-product__notice add-product__empty-notice"
+          >Важно заполнить все поля.</span
+        >
+        <div class="add-product__content">
+          <span class="add-product__title">
+            Изображения <span class="add-product__title--red">*</span></span
+          >
+          <div @click="triggerFileInput" class="add-product__img-upload-area">
+            <span
+              v-if="!uploadImgs.length"
+              class="add-product__upload-area-text"
+            >
+              <span class="add-product__upload-area-text--medium"
+                >Нажмите для загрузки</span
+              ><br />
+              Доступные расширения фото: jpeg, jpg, png, webp, svg
+            </span>
+            <div v-else class="add-product__img-preview">
+              <div
+                v-for="(img, index) in uploadImgs"
+                :key="index"
+                class="add-product__img-container"
+              >
+                <button
+                  type="button"
+                  @click="deleteImage(index, $event)"
+                  class="add-product__delete-btn"
+                >
+                  <img src="public/imgs/cross-round-borders.png" alt="" />
+                </button>
+                <img :src="img" alt="upload-image" class="add-product__img" />
+              </div>
+            </div>
+            <input
+              type="file"
+              ref="fileInput"
+              class="add-product__input"
+              accept="image/jpeg, image/jpg, image/png, image/webp, image/svg+xml"
+              @change="handleFileChange"
+              multiple
+            />
+          </div>
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Пол <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.gender"
+              placeholder="Введите пол"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title"
+              >Название <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.title"
+              placeholder="Введите название"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <div class="add-product__content">
+          <span class="add-product__title">
+            Описание <span class="add-product__title--red">*</span></span
+          >
+          <input
+            v-model="newProduct.desc"
+            placeholder="Введите описание"
+            type="text"
+            class="add-product__field"
+          />
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Характеристики: пол
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.gender"
+              placeholder="Введите пол"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Характеристики: страна производства
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.country"
+              placeholder="Введите страну производства"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Характеристики: материал
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.composition"
+              placeholder="Введите материал"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Характеристики: коллекция
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.collection"
+              placeholder="Введите коллекцию"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Характеристики: гарантия
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.warranty"
+              placeholder="Введите гарантию"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Характеристики: год выпуска
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.yearOfRelease"
+              placeholder="Введите год выпуска"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Размеры
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              @input="handleSizeInputChange"
+              v-model="newProduct.sizes"
+              placeholder="Введите размеры"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Цвета
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              @input="handleColorInputChange"
+              v-model="newProduct.colors"
+              placeholder="Введите цвета"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Текущая цена
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.currentPrice"
+              placeholder="Введите текущую цену"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Прошлая цена
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.previousPrice"
+              placeholder="Введите прошлую цену"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <div class="add-product__body">
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Цвет категории
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.categoryBackgroundColor"
+              placeholder="Введите цвет категории"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+          <div class="add-product__content">
+            <span class="add-product__title">
+              Категория
+              <span class="add-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.category"
+              placeholder="Введите категорию"
+              type="text"
+              class="add-product__field"
+            />
+          </div>
+        </div>
+        <UIButton
+          type="submit"
+          class="add-product__add-product-btn"
+          :content="'Сохранить'"
+          :width="'100%'"
+        ></UIButton>
+      </div>
+      <div v-if="isLoading" class="loading-container">
+        <div
+          ref="addProgressRing"
+          class="loading-container__progress-ring"
+        ></div>
+        <span class="loading-container__text">
+          Подождите, сохраняется<br />
+          новый товар
+        </span>
+      </div>
+      <div v-if="isAddMessageVisible" class="thanks-message">
+        <button
+          @click="closeAddThanksMessage"
+          class="thanks-message__close-btn"
+        >
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.7"
+              d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+              fill="#454A4C"
+            />
+          </svg>
+        </button>
+        <div ref="addAnimatedTick" class="thanks-message__tick"></div>
+        <span class="thanks-message__title">Товар добавлен</span>
+        <span class="thanks-message__text"
+          >Вы успешно добавили новый товар.</span
+        >
+      </div>
+    </form>
+  </div>
+  <div v-if="isEditProductVisible" class="edit-product">
+    <div
+      v-if="!isLoading || !isEditMessageVisible"
+      class="edit-product__title-body"
+    >
+      <h2 class="edit-product__subtitle">Изменить товар</h2>
+      <button @click="closeEditProductForm" class="edit-product__close-btn">
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            opacity="0.7"
+            d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+            fill="black"
+          />
+        </svg>
+      </button>
+    </div>
+    <form @submit.prevent="handleEditProduct" class="edit-product__form">
+      <div v-if="!isEditMessageVisible" class="edit-product__container">
+        <span
+          v-if="areFieldsEmpty"
+          class="edit-product__notice edit-product__empty-notice"
+          >Важно заполнить все поля.</span
+        >
+        <div class="edit-product__content">
+          <span class="edit-product__title">
+            Изображения <span class="edit-product__title--red">*</span></span
+          >
+          <div @click="triggerFileInput" class="edit-product__img-upload-area">
+            <span
+              v-if="!uploadImgs.length"
+              class="edit-product__upload-area-text"
+            >
+              <span class="edit-product__upload-area-text--medium"
+                >Нажмите для загрузки</span
+              ><br />
+              Доступные расширения фото: jpeg, jpg, png, webp, svg
+            </span>
+            <div v-else class="edit-product__img-preview">
+              <div
+                v-for="(img, index) in uploadImgs"
+                :key="index"
+                class="edit-product__img-container"
+              >
+                <button
+                  type="button"
+                  @click="deleteImage(index, $event)"
+                  class="edit-product__delete-btn"
+                >
+                  <img src="public/imgs/cross-round-borders.png" alt="" />
+                </button>
+                <img :src="img" alt="upload-image" class="edit-product__img" />
+              </div>
+            </div>
+            <input
+              type="file"
+              ref="fileInput"
+              class="edit-product__input"
+              accept="image/jpeg, image/jpg, image/png, image/webp, image/svg+xml"
+              @change="handleFileChange"
+              multiple
+            />
+          </div>
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Пол <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.gender"
+              placeholder="Введите пол"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title"
+              >Название <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.title"
+              placeholder="Введите название"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <div class="edit-product__content">
+          <span class="edit-product__title">
+            Описание <span class="edit-product__title--red">*</span></span
+          >
+          <input
+            v-model="newProduct.desc"
+            placeholder="Введите описание"
+            type="text"
+            class="edit-product__field"
+          />
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Характеристики: пол
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.gender"
+              placeholder="Введите пол"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Характеристики: страна производства
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.country"
+              placeholder="Введите страну производства"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Характеристики: материал
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.composition"
+              placeholder="Введите материал"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Характеристики: коллекция
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.collection"
+              placeholder="Введите коллекцию"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Характеристики: гарантия
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.warranty"
+              placeholder="Введите гарантию"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Характеристики: год выпуска
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.specs.yearOfRelease"
+              placeholder="Введите год выпуска"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Размеры
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              @input="handleSizeInputChange"
+              v-model="newProduct.sizes"
+              placeholder="Введите размеры"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Цвета
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              @input="handleColorInputChange"
+              v-model="newProduct.colors"
+              placeholder="Введите цвета"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Текущая цена
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.currentPrice"
+              placeholder="Введите текущую цену"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Прошлая цена
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.previousPrice"
+              placeholder="Введите прошлую цену"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <div class="edit-product__body">
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Цвет категории
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.categoryBackgroundColor"
+              placeholder="Введите цвет категории"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+          <div class="edit-product__content">
+            <span class="edit-product__title">
+              Категория
+              <span class="edit-product__title--red">*</span></span
+            >
+            <input
+              v-model="newProduct.category"
+              placeholder="Введите категорию"
+              type="text"
+              class="edit-product__field"
+            />
+          </div>
+        </div>
+        <UIButton
+          type="submit"
+          class="edit-product__edit-product-btn"
+          :content="'Изменить'"
+          :width="'100%'"
+        ></UIButton>
+      </div>
+      <div v-if="isLoading" class="loading-container">
+        <div
+          ref="editProgressRing"
+          class="loading-container__progress-ring"
+        ></div>
+        <span class="loading-container__text">
+          Подождите, изменения<br />
+          сохраняются
+        </span>
+      </div>
+      <div v-if="isEditMessageVisible" class="thanks-message">
+        <button
+          @click="closeEditThanksMessage"
+          class="thanks-message__close-btn"
+        >
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.7"
+              d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+              fill="#454A4C"
+            />
+          </svg>
+        </button>
+        <div ref="editAnimatedTick" class="thanks-message__tick"></div>
+        <span class="thanks-message__title">Товар изменён</span>
+        <span class="thanks-message__text">Вы успешно изменили товар.</span>
+      </div>
+    </form>
   </div>
   <button @click="openFiltersMenu" class="filters-btn">
     <svg
@@ -349,7 +966,7 @@
       </button>
     </div>
   </div>
-  <div class="sorting">
+  <div v-if="arePoductsAvailable" class="sorting">
     <span class="sorting__text"
       >Показано {{ shownProducts }} из
       {{ filteredProductsLength }} товаров</span
@@ -438,14 +1055,18 @@
       :width="catalogBtnWidth"
     ></UIButton>
   </div>
-  <UIProductList v-if="paginatedProducts.length > 0"></UIProductList>
+  <UIProductList
+    v-if="paginatedProducts.length > 0"
+    @editProduct="handleEditProductVisible"
+  ></UIProductList>
   <UIPagination
     v-if="filteredProductsLength > store.productsPerPage"
   ></UIPagination>
 </template>
 
 <script setup lang="ts">
-import { products } from "@/data/CatalogProducts";
+import lottie from "lottie-web";
+import type { Product } from "@/types/Product";
 import { useProductsStore } from "@/store/Products";
 import noUiSlider from "nouislider";
 import type { target } from "nouislider";
@@ -469,6 +1090,375 @@ useHead({
     },
   ],
 });
+
+const isAdmin = ref(false);
+onMounted(() => {
+  const storedValue = localStorage.getItem("isAdmin");
+  isAdmin.value = storedValue === "true";
+});
+
+const isAddProductBtnVisible = ref(true);
+const isAddProductVisible = ref(false);
+const showAddProductForm = () => {
+  isAddProductVisible.value = true;
+};
+
+const closeAddProductForm = () => {
+  isAddProductVisible.value = false;
+  isAddProductBtnVisible.value = true;
+  areFieldsEmpty.value = false;
+};
+const closeEditProductForm = () => {
+  resetEditProductForm();
+};
+
+const fileInput = ref<HTMLInputElement | null>(null);
+const uploadImgs = ref<string[]>([]);
+const triggerFileInput = () => {
+  if (fileInput.value) {
+    fileInput.value.click();
+  }
+};
+const handleFileChange = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    for (const file of input.files) {
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target?.result) {
+          const imageDataUrl = e.target.result as string;
+          if (!newProduct.value.heroes.includes(imageDataUrl)) {
+            uploadImgs.value.push(imageDataUrl);
+            newProduct.value.heroes.push(imageDataUrl);
+          }
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+};
+const deleteImage = (index: number, event: Event) => {
+  event.stopPropagation();
+  uploadImgs.value.splice(index, 1);
+  newProduct.value.heroes = [...uploadImgs.value];
+  if (newProduct.value.heroes.length === 0) {
+    newProduct.value.heroes = [];
+  }
+};
+
+const handleSizeInputChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.value) {
+    newProduct.value.sizes = target.value
+      .split(",")
+      .map((size) => parseFloat(size.trim()))
+      .filter((size) => !isNaN(size));
+  } else {
+    newProduct.value.sizes = [];
+  }
+};
+
+const handleColorInputChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.value) {
+    newProduct.value.colors = target.value
+      .split(",")
+      .map((color) => color.trim())
+      .filter((color) => color.length > 0);
+  } else {
+    newProduct.value.colors = [];
+  }
+};
+
+const newProduct = ref<Product>({
+  id: 0,
+  heroes: [],
+  gender: "",
+  title: "",
+  desc: "",
+  specs: {
+    gender: "",
+    country: "",
+    composition: "",
+    collection: "",
+    warranty: "",
+    yearOfRelease: 2018,
+  },
+  sizes: [],
+  colors: [],
+  currentPrice: "",
+  previousPrice: "",
+  categoryBackgroundColor: "",
+  category: "",
+});
+const store = useProductsStore();
+const { allProducts } = storeToRefs(store);
+const areFieldsEmpty = ref(false);
+const isLoading = ref(false);
+const addProgressRing = ref<HTMLElement | null>(null);
+const editProgressRing = ref<HTMLElement | null>(null);
+const isAddMessageVisible = ref(false);
+const isEditMessageVisible = ref(false);
+const addAnimatedTick = ref<HTMLElement | null>(null);
+const addAnimationOfTick = ref<any>(null);
+const editAnimatedTick = ref<HTMLElement | null>(null);
+const editAnimationOfTick = ref<any>(null);
+const handleAddProduct = async () => {
+  uploadImgs.value = [];
+  const requiredFields: (keyof Product)[] = [
+    "heroes",
+    "gender",
+    "title",
+    "desc",
+    "sizes",
+    "colors",
+    "currentPrice",
+    "previousPrice",
+    "categoryBackgroundColor",
+    "category",
+  ];
+  const requiredSpecsFields: (keyof Product["specs"])[] = [
+    "gender",
+    "country",
+    "composition",
+    "collection",
+    "warranty",
+    "yearOfRelease",
+  ];
+  const invalidFields = requiredFields.filter((field) => {
+    const value = newProduct.value[field];
+    const isValid =
+      (typeof value === "string" && value.trim() !== "") ||
+      (Array.isArray(value) && value.length > 0);
+
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        console.log(`Array field "${field}" is invalid. It is empty.`);
+        return true;
+      }
+    } else if (!isValid) {
+      console.log(`Field "${field}" is invalid. Current value:`, value);
+      return true;
+    }
+
+    return false;
+  });
+  const invalidSpecsFields = requiredSpecsFields.filter((field) => {
+    const value = newProduct.value.specs[field];
+    const isValid =
+      (typeof value === "string" && value.trim() !== "") ||
+      (typeof value === "number" && value > 0);
+
+    if (!isValid) {
+      console.log(`Spec field "${field}" is invalid. Current value:`, value);
+    }
+    return !isValid;
+  });
+  if (invalidFields.length > 0 || invalidSpecsFields.length > 0) {
+    areFieldsEmpty.value = true;
+    return;
+  }
+
+  const latestProduct = allProducts.value[allProducts.value.length - 1];
+  if (latestProduct) {
+    newProduct.value.id = latestProduct.id + 1;
+  } else {
+    newProduct.value.id = 1;
+  }
+
+  if (!newProduct.value.heroes || newProduct.value.heroes.length === 0) {
+    const existingProduct = await store.getProductById(newProduct.value.id);
+    console.log("existingProduct:", existingProduct);
+    if (existingProduct) {
+      newProduct.value.heroes = existingProduct.heroes;
+    }
+  }
+
+  await store.addProduct(newProduct.value);
+  await store.filterProducts();
+  resetForm();
+  uploadImgs.value = [];
+  isLoading.value = true;
+  nextTick(() => {
+    const animation = lottie.loadAnimation({
+      container: addProgressRing.value!,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/animations/progress-ring.json",
+    });
+    setTimeout(() => {
+      isLoading.value = false;
+      animation.destroy();
+      isAddProductVisible.value = false;
+      isAddMessageVisible.value = true;
+
+      nextTick(() => {
+        if (addAnimatedTick.value) {
+          addAnimationOfTick.value = lottie.loadAnimation({
+            container: addAnimatedTick.value!,
+            renderer: "svg",
+            loop: false,
+            autoplay: true,
+            path: "/animations/tick.json",
+          });
+        }
+      });
+    }, 2800);
+  });
+};
+const closeAddThanksMessage = () => {
+  isAddProductVisible.value = false;
+  isAddMessageVisible.value = false;
+  addAnimationOfTick.value!.destroy();
+};
+const resetForm = () => {
+  newProduct.value = {
+    id: 0,
+    heroes: [],
+    gender: "",
+    title: "",
+    desc: "",
+    specs: {
+      gender: "",
+      country: "",
+      composition: "",
+      collection: "",
+      warranty: "",
+      yearOfRelease: 2018,
+    },
+    sizes: [],
+    colors: [],
+    currentPrice: "",
+    previousPrice: "",
+    categoryBackgroundColor: "",
+    category: "",
+  };
+};
+
+const isEditProductVisible = ref(false);
+const handleEditProduct = async () => {
+  const requiredFields: (keyof Product)[] = [
+    "heroes",
+    "gender",
+    "title",
+    "desc",
+    "sizes",
+    "colors",
+    "currentPrice",
+    "previousPrice",
+    "categoryBackgroundColor",
+    "category",
+  ];
+  const requiredSpecsFields: (keyof Product["specs"])[] = [
+    "gender",
+    "country",
+    "composition",
+    "collection",
+    "warranty",
+    "yearOfRelease",
+  ];
+  const invalidFields = requiredFields.filter((field) => {
+    const value = newProduct.value[field];
+    const isValid =
+      (typeof value === "string" && value.trim() !== "") ||
+      (Array.isArray(value) && value.length > 0);
+
+    if (Array.isArray(value)) {
+      if (value.length === 0) {
+        console.log(`Array field "${field}" is invalid. It is empty.`);
+        return true;
+      }
+    } else if (!isValid) {
+      console.log(`Field "${field}" is invalid. Current value:`, value);
+      return true;
+    }
+
+    return false;
+  });
+  const invalidSpecsFields = requiredSpecsFields.filter((field) => {
+    const value = newProduct.value.specs[field];
+    const isValid =
+      (typeof value === "string" && value.trim() !== "") ||
+      (typeof value === "number" && value > 0);
+
+    if (!isValid) {
+      console.log(`Spec field "${field}" is invalid. Current value:`, value);
+    }
+    return !isValid;
+  });
+  if (invalidFields.length > 0 || invalidSpecsFields.length > 0) {
+    areFieldsEmpty.value = true;
+    return;
+  }
+
+  if (newProduct.value.category && newProduct.value.title) {
+    isLoading.value = true;
+    try {
+      await store.editProduct(newProduct.value);
+      await store.filterProducts();
+      resetEditProductForm();
+
+      nextTick(() => {
+        const animation = lottie.loadAnimation({
+          container: editProgressRing.value!,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          path: "/animations/progress-ring.json",
+        });
+
+        setTimeout(() => {
+          animation.destroy();
+          isLoading.value = false;
+          isEditProductVisible.value = false;
+          isEditMessageVisible.value = true;
+
+          nextTick(() => {
+            if (editAnimatedTick.value) {
+              editAnimationOfTick.value = lottie.loadAnimation({
+                container: editAnimatedTick.value!,
+                renderer: "svg",
+                loop: false,
+                autoplay: true,
+                path: "/animations/tick.json",
+              });
+            }
+          });
+        }, 2800);
+      });
+    } catch (error) {
+      console.error("Error updating product:", error);
+      isLoading.value = false;
+    }
+  } else {
+    areFieldsEmpty.value = true;
+  }
+};
+const closeEditThanksMessage = () => {
+  isEditProductVisible.value = false;
+  isEditMessageVisible.value = false;
+  editAnimationOfTick.value!.destroy();
+};
+const handleEditProductVisible = (product: Product) => {
+  window.scrollTo(0, 0);
+  isEditProductVisible.value = true;
+  isAddProductBtnVisible.value = false;
+  newProduct.value = { ...product };
+  uploadImgs.value = [...product.heroes];
+  newProduct.value = {
+    ...product,
+    heroes: [...product.heroes],
+    sizes: product.sizes || [],
+    colors: product.colors || [],
+  };
+};
+const resetEditProductForm = () => {
+  resetForm();
+  isEditProductVisible.value = false;
+  areFieldsEmpty.value = false;
+  isAddProductBtnVisible.value = true;
+};
 
 const windowWidth = ref(0);
 const updateWidth = () => {
@@ -495,9 +1485,6 @@ const sizes = ref(sizesArr);
 const colors = ref(colorsObj);
 const materials = ref(materialsArr);
 
-const store = useProductsStore();
-store.setAllProducts(products);
-
 const route = useRoute();
 watch(
   () => route.query.page,
@@ -522,7 +1509,7 @@ onMounted(() => {
   store.filterProducts();
 });
 
-const totalProducts = ref(store.allProducts.length);
+const totalProducts = computed(() => store.allProducts.length);
 conjugateTovar(totalProducts.value);
 
 const filtersStore = useFiltersStore();
@@ -882,7 +1869,9 @@ const showProducts = (num: number) => {
     });
   }
 };
+const arePoductsAvailable = ref(false);
 onMounted(() => {
+  arePoductsAvailable.value = true;
   pickedNumber.value = store.productsPerPage;
 });
 watch(
@@ -1017,6 +2006,359 @@ watch(
     font-family: "Pragmatica Book";
     font-size: 0.813rem;
     color: #a3a3a3;
+  }
+}
+.add-product-btn {
+  margin-bottom: 1.25rem;
+}
+.add-product {
+  margin-bottom: 1.25rem;
+
+  &__title-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__subtitle {
+    font-family: "Pragmatica Medium";
+    font-size: 1.313rem;
+    line-height: 32px;
+    color: #1d1d27;
+    margin: 0.938rem 0;
+  }
+  &__close-btn {
+    @include btn;
+  }
+  &__form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0.938rem;
+    border: 1px solid #eaeaea;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+    width: 100%;
+  }
+  &__notice {
+    font-family: "Pragmatica Book";
+    line-height: 1.688rem;
+    color: #f81d2a;
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.313rem;
+  }
+  &__title {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 27px;
+  }
+  &__title--red {
+    color: #ff1515;
+  }
+  &__field {
+    padding: 1.031rem 1.25rem;
+    border: 1px solid #d6d6d6;
+    outline: none;
+    width: 100%;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #000;
+  }
+  &__field::placeholder {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #c1c1c1;
+  }
+  &__field:focus {
+    border: 1px solid #000;
+  }
+  &__add-product-btn {
+    margin-top: 0.938rem;
+  }
+  &__img-upload-area {
+    border: 2px dashed #d3d3d3;
+    padding: 1.375rem 0.625rem;
+  }
+  &__upload-area-text {
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.813rem;
+    color: #838383;
+    line-height: 18px;
+  }
+  &__upload-area-text--medium {
+    font-family: "Pragmatica Medium";
+    font-size: 0.938rem;
+  }
+  &__btn {
+    margin: 0 auto;
+  }
+  &__img-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.025rem;
+  }
+  &__delete-btn {
+    position: absolute;
+    @include btn;
+    background-color: $Light-Orange;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    padding: 2px;
+    margin-left: 5.5rem;
+    margin-top: -0.3rem;
+  }
+  &__delete-btn img {
+    width: 16px;
+    height: 16px;
+  }
+  &__img {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+  }
+  &__input {
+    display: none;
+  }
+  &__loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include flex-centered;
+    flex-direction: column;
+    gap: 1.563rem;
+    background-color: #fff;
+    opacity: 90%;
+  }
+  &__progress-ring {
+    width: 74px;
+    height: 74px;
+  }
+  &__loading-text {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #4d4d4d;
+  }
+}
+.edit-product-btn {
+  margin-top: 1.25rem;
+}
+.edit-product {
+  margin-bottom: 1.25rem;
+
+  &__title-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__subtitle {
+    font-family: "Pragmatica Medium";
+    font-size: 1.313rem;
+    line-height: 32px;
+    color: #1d1d27;
+    margin: 0.938rem 0;
+  }
+  &__close-btn {
+    @include btn;
+  }
+  &__form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0.938rem;
+    border: 1px solid #eaeaea;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+    width: 100%;
+  }
+  &__notice {
+    font-family: "Pragmatica Book";
+    line-height: 1.688rem;
+    color: #f81d2a;
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.938rem;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.313rem;
+  }
+  &__title {
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 27px;
+  }
+  &__title--red {
+    color: #ff1515;
+  }
+  &__field {
+    padding: 1.031rem 1.25rem;
+    border: 1px solid #d6d6d6;
+    outline: none;
+    width: 100%;
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #000;
+  }
+  &__field::placeholder {
+    font-family: "Pragmatica Book";
+    font-size: 1rem;
+    color: #c1c1c1;
+  }
+  &__field:focus {
+    border: 1px solid #000;
+  }
+  &__add-product-btn {
+    margin-top: 0.938rem;
+  }
+  &__img-upload-area {
+    border: 2px dashed #d3d3d3;
+    padding: 1.375rem 0.625rem;
+  }
+  &__upload-area-text {
+    display: block;
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.813rem;
+    color: #838383;
+    line-height: 18px;
+  }
+  &__upload-area-text--medium {
+    font-family: "Pragmatica Medium";
+    font-size: 0.938rem;
+  }
+  &__btn {
+    margin: 0 auto;
+  }
+  &__img-preview {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.025rem;
+  }
+  &__delete-btn {
+    position: absolute;
+    @include btn;
+    background-color: $Light-Orange;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    padding: 2px;
+    margin-left: 5.5rem;
+    margin-top: -0.3rem;
+  }
+  &__delete-btn img {
+    width: 16px;
+    height: 16px;
+  }
+  &__img {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+  }
+  &__input {
+    display: none;
+  }
+  &__loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include flex-centered;
+    flex-direction: column;
+    gap: 1.563rem;
+    background-color: #fff;
+    opacity: 90%;
+  }
+  &__progress-ring {
+    width: 74px;
+    height: 74px;
+  }
+  &__loading-text {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #4d4d4d;
+  }
+}
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex-centered;
+  flex-direction: column;
+  gap: 1.563rem;
+  background-color: #fff;
+  opacity: 90%;
+
+  &__progress-ring {
+    width: 74px;
+    height: 74px;
+  }
+  &__text {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #4d4d4d;
+  }
+}
+.thanks-message {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #fff;
+  margin: 1.25rem 0;
+
+  &__close-btn {
+    position: absolute;
+    @include btn;
+    top: 0.625rem;
+    right: 0.625rem;
+  }
+  &__tick {
+    width: 195px;
+    height: 195px;
+    margin: 0 auto;
+  }
+  &__title {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1.375rem;
+    color: #2c2f30;
+    margin-top: -3.75rem;
+  }
+  &__text {
+    text-align: center;
+    font-family: "Pragmatica Book";
+    font-size: 0.938rem;
+    line-height: 1.5rem;
+    color: #545454;
+    margin-top: -0.938rem;
   }
 }
 .filters-btn {
@@ -1313,6 +2655,18 @@ input[type="number"] {
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
+  .add-product {
+    &__close-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .edit-product {
+    &__close-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
   .filters-menu-shadow {
     margin-left: calc((100vw - 44.874rem) / (-2));
   }
@@ -1355,6 +2709,32 @@ input[type="number"] {
 
     &__text {
       font-size: 0.938rem;
+    }
+  }
+  .add-product-btn {
+    margin-bottom: 2.5rem;
+  }
+  .add-product {
+    margin-bottom: 2.5rem;
+
+    &__body {
+      flex-direction: row;
+    }
+    &__content {
+      width: 100%;
+    }
+  }
+  .edit-product-btn {
+    margin-top: 2.5rem;
+  }
+  .edit-product {
+    margin-bottom: 2.5rem;
+
+    &__body {
+      flex-direction: row;
+    }
+    &__content {
+      width: 100%;
     }
   }
   .filters-menu-shadow {

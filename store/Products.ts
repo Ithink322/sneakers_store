@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import type { Product } from "@/types/Product";
 import { useFiltersStore } from "@/store/Filters";
+import axios from "axios";
 
 interface ProductsState {
   allProducts: Product[];
@@ -8,6 +9,7 @@ interface ProductsState {
   currentPage: number;
   productsPerPage: number;
   translateValue: number;
+  product: Product | null;
 }
 
 export const useProductsStore = defineStore("productsStore", {
@@ -17,6 +19,7 @@ export const useProductsStore = defineStore("productsStore", {
     currentPage: 1,
     productsPerPage: 18,
     translateValue: 0,
+    product: null,
   }),
   getters: {
     totalPages(state): number {
@@ -77,6 +80,34 @@ export const useProductsStore = defineStore("productsStore", {
 
       this.filteredProducts = productsToFilter;
     },
+    async fetchProducts() {
+      try {
+        const { data } = await axios.get("/api/catalog/getProducts");
+        this.setAllProducts(data);
+        this.filterProducts();
+      } catch (error) {
+        console.error("Error fetching catalog products:", error);
+      }
+    },
+    async fetchProductById(id: number) {
+      if (!this.allProducts.length) {
+        await this.fetchProducts();
+      }
+      this.product = this.allProducts.find((p) => p.id === id) || null;
+      if (!this.product) {
+        console.error("Product not found");
+      }
+    },
+    async getProductById(id: number) {
+      if (!this.allProducts.length) {
+        await this.fetchProducts();
+      }
+      this.product = this.allProducts.find((p) => p.id === id) || null;
+      if (!this.product) {
+        console.error("Product not found");
+      }
+      return product;
+    },
     setPage(page: number) {
       this.currentPage = page;
     },
@@ -86,10 +117,88 @@ export const useProductsStore = defineStore("productsStore", {
     resetTranslateValue() {
       this.translateValue = 0;
     },
+    searchProducts(query: string): Product[] {
+      if (!query.trim()) {
+        return [];
+      }
+
+      const searchRegex = new RegExp(query, "i");
+      return this.allProducts.filter((product) =>
+        searchRegex.test(product.title)
+      );
+    },
+    async addProduct(productData: Product) {
+      try {
+        const response = await axios.post(
+          "/api/catalog/addProduct",
+          productData
+        );
+
+        if (response.data.success) {
+          const createdProduct = response.data.product;
+          this.allProducts.push(createdProduct);
+          console.log("Product added successfully:", createdProduct);
+        } else {
+          console.error("Failed to create product:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error creating product:", error);
+      }
+    },
+    async editProduct(updatedProduct: Product) {
+      try {
+        const response = await axios.put(
+          "/api/catalog/editProduct",
+          updatedProduct
+        );
+        if (response.data.error) {
+          throw new Error(response.data.error);
+        }
+
+        const index = this.allProducts.findIndex(
+          (product) => product.id === updatedProduct.id
+        );
+        if (index !== -1) {
+          this.allProducts[index] = { ...response.data };
+        } else {
+          console.error("Product not found in store.");
+        }
+      } catch (error) {
+        console.error("Error updating product:", error);
+        throw error;
+      }
+    },
+    async removeProduct(id: number) {
+      try {
+        const response = await axios.post("/api/catalog/removeProduct", {
+          id: Number(id),
+        });
+
+        if (response.data.success) {
+          this.allProducts = this.allProducts.filter(
+            (product) => product.id !== id
+          );
+          this.filterProducts();
+          const currentTotalPages = this.totalPages;
+          if (this.currentPage > currentTotalPages && currentTotalPages > 0) {
+            this.currentPage = currentTotalPages;
+          }
+        } else {
+          console.error(response.data.message);
+        }
+      } catch (error) {
+        console.error("Error deleting product:", error);
+      }
+    },
   },
   persist: {
     key: "catalog-store",
     storage: typeof window !== "undefined" ? localStorage : undefined,
-    paths: ["currentPage", "productsPerPage"],
+    paths: [
+      "allProducts",
+      "filteredProducts",
+      "currentPage",
+      "productsPerPage",
+    ],
   },
 });

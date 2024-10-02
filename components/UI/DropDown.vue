@@ -42,35 +42,35 @@
 </template>
 
 <script setup lang="ts">
-import { blogPosts } from "@/data/Blogposts";
 import type { BlogPost } from "@/types/BlogPosts";
 import { usePostsStore } from "@/store/Posts";
 
 const store = usePostsStore();
 
-const numOfAllPosts = ref(0);
-const numOfNews = ref(0);
-const numOfArtices = ref(0);
-const numOfAdvices = ref(0);
-const numOfOverviews = ref(0);
-
-numOfAllPosts.value = blogPosts.length;
 const countBlogPostsWithBannerText = (
   blogPosts: BlogPost[],
   category: string
 ): number => {
   return blogPosts.filter((post) => post.category === category).length;
 };
-
-numOfNews.value = countBlogPostsWithBannerText(blogPosts, "НОВОСТИ");
-numOfArtices.value = countBlogPostsWithBannerText(blogPosts, "СТАТЬИ");
-numOfAdvices.value = countBlogPostsWithBannerText(blogPosts, "СОВЕТЫ");
-numOfOverviews.value = countBlogPostsWithBannerText(blogPosts, "ОБЗОРЫ");
+const numOfAllPosts = computed(() => store.allPosts.length);
+const numOfNews = computed(() =>
+  countBlogPostsWithBannerText(store.allPosts, "НОВОСТИ")
+);
+const numOfArticles = computed(() =>
+  countBlogPostsWithBannerText(store.allPosts, "СТАТЬИ")
+);
+const numOfAdvices = computed(() =>
+  countBlogPostsWithBannerText(store.allPosts, "СОВЕТЫ")
+);
+const numOfOverviews = computed(() =>
+  countBlogPostsWithBannerText(store.allPosts, "ОБЗОРЫ")
+);
 
 const options = [
   { value: "ВСЕ ПУБЛИКАЦИИ", counter: numOfAllPosts },
   { value: "НОВОСТИ", counter: numOfNews },
-  { value: "СТАТЬИ", counter: numOfArtices },
+  { value: "СТАТЬИ", counter: numOfArticles },
   { value: "СОВЕТЫ", counter: numOfAdvices },
   { value: "ОБЗОРЫ", counter: numOfOverviews },
 ];

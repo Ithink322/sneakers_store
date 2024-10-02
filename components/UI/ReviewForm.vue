@@ -246,7 +246,6 @@ const handleLeaveReview = async () => {
     text: reviewText.value,
     imgs: uploadImgs.value,
   };
-  console.log("Prepared review for submission:", review);
   await reviewsStore.addReview(review);
   await reviewsStore.updateProductRatings(
     store.filteredProducts,

@@ -87,7 +87,6 @@ const setStore = () => {
     store.value = usePostsStore();
   } else if (normalizedPath.startsWith("/favorites")) {
     store.value = useFavoritesStore();
-    console.log("favorites");
   }
 };
 watch(

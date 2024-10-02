@@ -258,6 +258,7 @@ const logIn = async () => {
           response.data.fio,
           response.data.number,
           response.data.token,
+          response.data.isAdmin,
           rememberMe.value
         );
         await favoritesStore.fetchFavorites(response.data.userId);

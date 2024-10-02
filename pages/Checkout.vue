@@ -169,11 +169,11 @@
                 type="radio"
                 class="option__radio-btn"
                 id="option__radio-2"
-                value="Ростов-на-Дону, ул. Доватора"
+                value="Курск, ул. Карла Маркса"
                 v-model="selectedDelivery"
               />
               <label class="option__label" :for="'option__radio-2'"
-                >Ростов-на-Дону, ул. Доватора</label
+                >Курск, ул. Карла Маркса</label
               >
             </div>
             <div class="option__radio-body">

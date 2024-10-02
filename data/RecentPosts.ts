@@ -1,8 +1,10 @@
-import { blogPosts } from "@/data/Blogposts";
 import type { BlogPost } from "@/types/BlogPosts";
 import type { Hero } from "@/types/RecentPosts";
+import { usePostsStore } from "@/store/Posts";
 
-const recentPosts: BlogPost[] = blogPosts.slice(-3);
+const postsStore = usePostsStore();
+const allPosts = computed(() => postsStore.allPosts);
+const recentPosts: BlogPost[] = allPosts.value.slice(-3);
 
 export const heroes: Hero[] = recentPosts.map((post) => ({
   id: post.id,

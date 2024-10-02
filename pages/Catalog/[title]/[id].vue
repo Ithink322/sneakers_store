@@ -333,10 +333,13 @@
       :hitProducts="hitProducts"
     ></UIProductsSlider>
   </div>
+  <div v-else-if="loading">
+    <p>Loading product...</p>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { products } from "@/data/CatalogProducts";
+import { useProductsStore } from "@/store/Products";
 import type { Product } from "@/types/Product";
 import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
@@ -344,38 +347,47 @@ import { useReviewsStore } from "@/store/Reviews";
 import { useFavoritesStore } from "@/store/Favorites";
 import { useCartStore } from "@/store/Cart";
 
-const product = ref<Product>();
+const store = useProductsStore();
+const allProductsLength = computed(() => store.allProducts.length);
+const product = ref<Product | null>(null);
 const route = useRoute();
-const fetchProduct = () => {
-  product.value = products.find(
-    (product) => product.id === Number(route.params.id)
-  );
-};
+const loading = ref(true);
+onMounted(async () => {
+  const productId = Number(route.params.id);
+  await store.fetchProductById(productId);
+  product.value = store.product;
+  if (!product.value) {
+    console.error("Product not found");
+  }
+  loading.value = false;
+});
 
 const checkTitleValidity = () => {
-  const title = products.find(
-    (product) => slugify(product.title) === (route.params.title as string)
-  );
-  if (!title) {
-    throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+  if (allProductsLength.value > 0) {
+    const title = store.allProducts.find(
+      (product) => slugify(product.title) === (route.params.title as string)
+    );
+    if (!title) {
+      throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
+    }
+    return title;
   }
 };
+
 const reviewsStore = useReviewsStore();
 const router = useRouter();
 onMounted(() => {
-  fetchProduct();
-  checkTitleValidity();
+  const validProduct = checkTitleValidity();
   reviewsStore.currentPage = 1;
-  const product = products.find(
-    (product) => product.id === Number(route.params.id)
-  );
-  router.replace({
-    params: {
-      ...route.params,
-      title: slugify(product!.title),
-    },
-    query: { page: 1 },
-  });
+  if (validProduct) {
+    router.replace({
+      params: {
+        ...route.params,
+        title: slugify(validProduct.title),
+      },
+      query: { page: 1 },
+    });
+  }
 });
 
 watchEffect(() => {
@@ -433,16 +445,16 @@ const handleWindowResize = () => {
 };
 
 const initSlider = () => {
-  nextTick(() => {
-    sliderWrapper.value = document.querySelector<HTMLElement>(
-      ".heroes-slider__wrapper"
-    );
+  sliderWrapper.value = document.querySelector<HTMLElement>(
+    ".heroes-slider__wrapper"
+  );
+  if (sliderWrapper.value) {
     buttons.value = Array.from(
-      sliderWrapper.value!.querySelectorAll<HTMLElement>(
+      sliderWrapper.value.querySelectorAll<HTMLElement>(
         ".heroes-slider__small-hero"
       )
     );
-  });
+  }
 };
 
 const selectHero = (hero: string, index: number) => {
@@ -481,12 +493,17 @@ const updateTranslate = async () => {
 const showFullDescription = ref(false);
 const shortDescription = ref("");
 onMounted(() => {
-  const dashIndex = product.value!.desc.indexOf("<br/>");
-  if (dashIndex !== -1) {
-    shortDescription.value = product.value!.desc.substring(0, dashIndex);
-  } else {
-    shortDescription.value = product.value!.desc;
-  }
+  watchEffect(() => {
+    if (product.value && product.value.desc) {
+      const dashIndex = product.value.desc.indexOf("<br/>");
+
+      if (dashIndex !== -1) {
+        shortDescription.value = product.value.desc.substring(0, dashIndex);
+      } else {
+        shortDescription.value = product.value.desc;
+      }
+    }
+  });
 });
 
 const toggleDescription = () => {
@@ -512,7 +529,9 @@ const setActiveColor = (index: number, color: string) => {
   activeHexColor.value = color;
 };
 onMounted(() => {
-  setActiveColor(0, product.value!.colors[0]);
+  if (product.value && product.value.colors) {
+    setActiveColor(0, product.value.colors[0]);
+  }
 });
 
 const activeSizeIndex = ref(0);
@@ -525,7 +544,9 @@ const setActiveSize = (index: number, size: number) => {
 const favoritesStore = useFavoritesStore();
 const isFavorite = ref<boolean>(false);
 const updateFavoriteStatus = () => {
-  isFavorite.value = favoritesStore.isFavorite(product.value!.id);
+  if (product.value) {
+    isFavorite.value = favoritesStore.isFavorite(product.value.id);
+  }
 };
 watch(
   () => favoritesStore.favorites,
@@ -603,9 +624,11 @@ const handleTouchMove = (event: TouchEvent) => {
 const container = ref<HTMLElement | null>(null);
 onMounted(() => {
   nextTick(() => {
-    container.value!.addEventListener("touchmove", handleTouchMove, {
-      passive: true,
-    });
+    if (container.value) {
+      container.value.addEventListener("touchmove", handleTouchMove, {
+        passive: true,
+      });
+    }
   });
   window.addEventListener("resize", handleSLiderResize);
 });

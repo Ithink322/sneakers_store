@@ -227,6 +227,7 @@ const removeCartProduct = () => {
     position: absolute;
     @include btn;
     right: 0;
+    top: 1.5rem;
     bottom: 1.563rem;
   }
   &::after {

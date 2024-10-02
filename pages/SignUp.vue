@@ -392,6 +392,7 @@ const validatePasses = () => {
 
 const router = useRouter();
 const isPolicyAccepted = ref(true);
+const isAdmin = ref(false);
 const signUp = async () => {
   validateLogin();
   validateFio();
@@ -420,6 +421,7 @@ const signUp = async () => {
         fio: fio.value,
         number: number.value,
         password: pass1.value,
+        isAdmin: isAdmin.value,
       });
 
       if (response.data.success) {

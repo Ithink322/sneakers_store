@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   await connectToDB();
 
   const body = await readBody(event);
-  const { login, fio, number, password } = body;
+  const { login, fio, number, password, isAdmin } = body;
 
   const hashedPassword = bcrypt.hashSync(password, 7);
 
@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
     fio,
     number,
     password: hashedPassword,
+    isAdmin: isAdmin || false,
   });
 
   await newUser.save();

@@ -123,16 +123,18 @@
       </div>
     </div>
     <UIBenefits></UIBenefits>
-    <UIProductsSlider
-      class="latest-slider--margin"
-      :title="'ПОСЛЕДНИЕ<br/> ПОСТУПЛЕНИЯ'"
-      :latestProducts="latestProducts"
-    ></UIProductsSlider>
-    <UIProductsSlider
-      class="hit-slider--margin"
-      :title="'САМЫЕ<br/> ПРОДОВАЕМЫЕ'"
-      :hitProducts="hitProducts"
-    ></UIProductsSlider>
+    <div v-if="allProductsLength > 0">
+      <UIProductsSlider
+        class="latest-slider--margin"
+        :title="'ПОСЛЕДНИЕ<br/> ПОСТУПЛЕНИЯ'"
+        :latestProducts="latestProducts"
+      ></UIProductsSlider>
+      <UIProductsSlider
+        class="hit-slider--margin"
+        :title="'САМЫЕ<br/> ПРОДОВАЕМЫЕ'"
+        :hitProducts="hitProducts"
+      ></UIProductsSlider>
+    </div>
     <div class="season-hit">
       <div class="season-hit__body">
         <span class="season-hit__title">ХИТ СЕЗОНА</span>
@@ -172,7 +174,7 @@
         >
       </div>
     </div>
-    <UIRecentPostsList></UIRecentPostsList>
+    <UIRecentPostsList v-if="allPostsLength > 0"></UIRecentPostsList>
     <UIProductsWithDiscountList></UIProductsWithDiscountList>
     <div class="banners">
       <NuxtLink
@@ -224,6 +226,7 @@
 
 <script setup lang="ts">
 import { useProductsStore } from "@/store/Products";
+import { usePostsStore } from "@/store/Posts";
 import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 
@@ -245,6 +248,9 @@ useHead({
 
 const catalogStore = useProductsStore();
 const currentCatalogPage = computed(() => catalogStore.currentPage);
+const allProductsLength = computed(() => catalogStore.allProducts.length);
+const postsStore = usePostsStore();
+const allPostsLength = computed(() => postsStore.allPosts.length);
 
 onMounted(() => {
   /* autoplay carousel .overflow__container from 1440px starts */

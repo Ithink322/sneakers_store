@@ -22,17 +22,60 @@
         :key="index"
       />
     </div>
+    <button
+      v-if="isAdmin"
+      @click="removeReview"
+      class="review-list__remove-btn"
+    >
+      <svg
+        width="18"
+        height="20"
+        viewBox="0 0 18 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 5H17M2 5L3 17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H13C13.5304 19 14.0391 18.7893 14.4142 18.4142C14.7893 18.0391 15 17.5304 15 17L16 5M6 5V2C6 1.73478 6.10536 1.48043 6.29289 1.29289C6.48043 1.10536 6.73478 1 7 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V5M7 10L11 14M11 10L7 14"
+          stroke="white"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { RetrievedReview } from "@/types/RetrievedReview";
+import axios from "axios";
 const props = defineProps<{
   review: RetrievedReview;
 }>();
+
+const isAdmin = ref(localStorage.getItem("isAdmin") === "true");
+const emit = defineEmits(["reviewRemoved"]);
+const { review } = toRefs(props);
+const removeReview = async () => {
+  try {
+    const response = await axios.post("/api/reviews/remove", {
+      reviewId: props.review._id,
+    });
+
+    if (response.data.success) {
+      emit("reviewRemoved", review.value._id);
+      console.log("Review deleted successfully");
+    } else {
+      console.error("Failed to delete review:", response.data.message);
+    }
+  } catch (error) {
+    console.error("Error deleting review:", error);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/App.scss";
 .review-list {
   &__item {
     position: relative;
@@ -80,6 +123,21 @@ const props = defineProps<{
     width: 100px;
     height: 100px;
     flex-shrink: 0;
+  }
+  &__remove-btn {
+    position: absolute;
+    @include btn;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: $Dark-Black;
+    right: 0;
+  }
+  &__remove-btn svg path {
+    transition: stroke 0.3s ease;
+  }
+  &__remove-btn:hover svg path {
+    stroke: $Dark-Orange;
   }
 }
 </style>

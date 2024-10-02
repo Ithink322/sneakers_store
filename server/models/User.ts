@@ -7,7 +7,7 @@ const UserSchema = new Schema<NewUser>({
   fio: { type: String, required: true },
   number: { type: String, required: true },
   password: { type: String, required: true },
-  /* isAdmin: { type: Boolean, default: false }, */
+  isAdmin: { type: Boolean, default: false },
 });
 
 const UserModel = model<NewUser>("User", UserSchema);
