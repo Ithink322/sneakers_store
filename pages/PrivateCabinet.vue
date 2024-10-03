@@ -1418,15 +1418,18 @@ const phoneOnInput = () => {
   phoneIsEmpty.value = phoneNumber.value === "";
   phoneIsValid.value = true;
 };
-onMounted(() => {
+const applyInputMask = () => {
   nextTick(() => {
     const numberInput = document.getElementById(
       "telephone"
-    )! as HTMLInputElement;
+    ) as HTMLInputElement;
     if (numberInput) {
       Inputmask("+7 (999) 999-99-99").mask(numberInput);
     }
   });
+};
+onMounted(() => {
+  applyInputMask();
 });
 
 const validateEmail = () => {
@@ -1440,15 +1443,15 @@ const validateEmail = () => {
     emailIsValid.value = emailRegex.test(email.value);
   }
 };
-const phoneNumberDigits = phoneNumber.value.replace(/\D/g, "");
 const validatePhone = () => {
+  const phoneNumberDigits = phoneNumber.value.replace(/\D/g, "");
   if (phoneNumber.value === "") {
     phoneIsEmpty.value = false;
     phoneIsValid.value = true;
   } else {
     if (
       phoneNumberDigits.length === 11 &&
-      /^7\d{3}\d{3}\d{2}\d{2}$/.test(phoneNumberDigits)
+      phoneNumberDigits.match(/^7\d{3}\d{3}\d{2}\d{2}$/)
     ) {
       phoneIsEmpty.value = false;
       phoneIsValid.value = true;
@@ -1466,6 +1469,11 @@ const animationOfTick = ref<any>(null);
 const editProfile = async () => {
   validateEmail();
   validatePhone();
+
+  if (!emailIsValid.value || !phoneIsValid.value) {
+    return;
+  }
+
   const userId = localStorage.getItem("userId") as string;
   const updatedData: Record<string, string> = {};
   if (email.value) updatedData.email = email.value;
@@ -1475,13 +1483,7 @@ const editProfile = async () => {
   const profileData = { userId, ...updatedData };
   if (Object.keys(updatedData).length > 0) {
     privateCabinetStore.editProfile(profileData);
-  } else {
-    console.log("No data to update");
-  }
-  if (
-    (!emailIsEmpty.value && emailIsValid.value) ||
-    (phoneNumber.value !== "" && phoneIsValid.value)
-  ) {
+
     isLoading.value = true;
     nextTick(() => {
       const animation = lottie.loadAnimation({
@@ -1509,6 +1511,8 @@ const editProfile = async () => {
         });
       }, 2800);
     });
+  } else {
+    console.log("No data to update");
   }
 };
 const closeProfileThanksMessage = () => {
@@ -1519,6 +1523,7 @@ const resetProfileForm = () => {
   email.value = "";
   fioProfile.value = "";
   phoneNumber.value = "";
+  applyInputMask();
 };
 
 const orderStore = useOrderStore();

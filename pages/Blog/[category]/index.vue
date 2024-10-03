@@ -12,7 +12,7 @@
       width="100%"
     ></UIButton>
     <div v-if="isAddPostVisible" class="add-post">
-      <div v-if="!isLoading || !isMessageVisible" class="add-post__title-body">
+      <div v-if="!isLoading && !isMessageVisible" class="add-post__title-body">
         <h2 class="add-post__subtitle">Добавить новый пост</h2>
         <button @click="closeAddPostForm" class="add-post__close-btn">
           <svg
@@ -211,7 +211,10 @@
           </span>
         </div>
         <div v-if="isMessageVisible" class="thanks-message">
-          <button @click="closeThanksMessage" class="thanks-message__close-btn">
+          <button
+            @click="closeAddThanksMessage"
+            class="thanks-message__close-btn"
+          >
             <svg
               width="10"
               height="10"
@@ -235,7 +238,7 @@
       </form>
     </div>
     <div v-if="isEditPostVisible" class="edit-post">
-      <div v-if="!isLoading || !isMessageVisible" class="add-post__title-body">
+      <div v-if="!isLoading && !isMessageVisible" class="add-post__title-body">
         <h2 class="add-post__subtitle">Изменить пост</h2>
         <button @click="closeEditPostForm" class="add-post__close-btn">
           <svg
@@ -434,7 +437,10 @@
           </span>
         </div>
         <div v-if="isMessageVisible" class="thanks-message">
-          <button @click="closeThanksMessage" class="thanks-message__close-btn">
+          <button
+            @click="closeEditThanksMessage"
+            class="thanks-message__close-btn"
+          >
             <svg
               width="10"
               height="10"
@@ -504,6 +510,7 @@ onMounted(() => {
 const isAddPostBtnVisible = ref(true);
 const isAddPostVisible = ref(false);
 const showAddPostForm = () => {
+  uploadImgs.value = [];
   isAddPostVisible.value = true;
 };
 
@@ -514,6 +521,9 @@ const closeAddPostForm = () => {
 };
 const closeEditPostForm = () => {
   resetEditPostForm();
+  isEditPostVisible.value = false;
+  isAddPostBtnVisible.value = true;
+  areFieldsEmpty.value = false;
 };
 
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -566,7 +576,6 @@ const newPost = ref<BlogPost>({
 const { allPosts } = storeToRefs(store);
 const areFieldsEmpty = ref(false);
 const isLoading = ref(false);
-const isFormVisible = ref(true);
 const progressRing = ref<HTMLElement | null>(null);
 const isMessageVisible = ref(false);
 const animatedTick = ref<HTMLElement | null>(null);
@@ -618,7 +627,6 @@ const handleAddPost = async () => {
     setTimeout(() => {
       isLoading.value = false;
       animation.destroy();
-      isFormVisible.value = false;
       isMessageVisible.value = true;
 
       nextTick(() => {
@@ -635,7 +643,7 @@ const handleAddPost = async () => {
     }, 2800);
   });
 };
-const closeThanksMessage = () => {
+const closeAddThanksMessage = () => {
   isAddPostVisible.value = false;
   isMessageVisible.value = false;
   animationOfTick.value!.destroy();
@@ -691,6 +699,35 @@ const handleEditPost = async () => {
     try {
       await store.editPost(newPost.value);
       resetEditPostForm();
+      uploadImgs.value = [];
+      isLoading.value = true;
+      nextTick(() => {
+        const animation = lottie.loadAnimation({
+          container: progressRing.value!,
+          renderer: "svg",
+          loop: true,
+          autoplay: true,
+          path: "/animations/progress-ring.json",
+        });
+
+        setTimeout(() => {
+          isLoading.value = false;
+          animation.destroy();
+          isMessageVisible.value = true;
+
+          nextTick(() => {
+            if (animatedTick.value) {
+              animationOfTick.value = lottie.loadAnimation({
+                container: animatedTick.value!,
+                renderer: "svg",
+                loop: false,
+                autoplay: true,
+                path: "/animations/tick.json",
+              });
+            }
+          });
+        }, 2800);
+      });
     } catch (error) {
       console.error("Error updating post:", error);
     }
@@ -710,8 +747,12 @@ const handleEditPostVisible = (post: BlogPost) => {
 };
 const resetEditPostForm = () => {
   resetForm();
-  isEditPostVisible.value = false;
   areFieldsEmpty.value = false;
+};
+const closeEditThanksMessage = () => {
+  isEditPostVisible.value = false;
+  isMessageVisible.value = false;
+  animationOfTick.value!.destroy();
   isAddPostBtnVisible.value = true;
 };
 
@@ -937,9 +978,6 @@ onMounted(() => {
     font-size: 1rem;
     color: #4d4d4d;
   }
-}
-.edit-post-btn {
-  margin-top: 1.25rem;
 }
 .edit-post {
   &__title-body {
@@ -1168,13 +1206,10 @@ onMounted(() => {
   .title {
     margin-bottom: 0;
   }
-  .add-post {
-    &__close-btn svg {
-      width: 15px;
-      height: 15px;
-    }
-  }
+  .add-post,
   .edit-post {
+    margin-top: 1.875rem;
+
     &__close-btn svg {
       width: 15px;
       height: 15px;
@@ -1198,17 +1233,7 @@ onMounted(() => {
   .add-post-btn {
     margin-top: 2.5rem;
   }
-  .add-post {
-    &__body {
-      flex-direction: row;
-    }
-    &__content {
-      width: 100%;
-    }
-  }
-  .edit-post-btn {
-    margin-top: 2.5rem;
-  }
+  .add-post,
   .edit-post {
     &__body {
       flex-direction: row;

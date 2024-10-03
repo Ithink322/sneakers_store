@@ -26,7 +26,7 @@
   ></UIButton>
   <div v-if="isAddProductVisible" class="add-product">
     <div
-      v-if="!isLoading || !isAddMessageVisible"
+      v-if="!isLoading && !isAddMessageVisible"
       class="add-product__title-body"
     >
       <h2 class="add-product__subtitle">Добавить новый продукт</h2>
@@ -294,10 +294,7 @@
         ></UIButton>
       </div>
       <div v-if="isLoading" class="loading-container">
-        <div
-          ref="addProgressRing"
-          class="loading-container__progress-ring"
-        ></div>
+        <div ref="progressRing" class="loading-container__progress-ring"></div>
         <span class="loading-container__text">
           Подождите, сохраняется<br />
           новый товар
@@ -322,7 +319,7 @@
             />
           </svg>
         </button>
-        <div ref="addAnimatedTick" class="thanks-message__tick"></div>
+        <div ref="animatedTick" class="thanks-message__tick"></div>
         <span class="thanks-message__title">Товар добавлен</span>
         <span class="thanks-message__text"
           >Вы успешно добавили новый товар.</span
@@ -332,7 +329,7 @@
   </div>
   <div v-if="isEditProductVisible" class="edit-product">
     <div
-      v-if="!isLoading || !isEditMessageVisible"
+      v-if="!isLoading && !isEditMessageVisible"
       class="edit-product__title-body"
     >
       <h2 class="edit-product__subtitle">Изменить товар</h2>
@@ -600,10 +597,7 @@
         ></UIButton>
       </div>
       <div v-if="isLoading" class="loading-container">
-        <div
-          ref="editProgressRing"
-          class="loading-container__progress-ring"
-        ></div>
+        <div ref="progressRing" class="loading-container__progress-ring"></div>
         <span class="loading-container__text">
           Подождите, изменения<br />
           сохраняются
@@ -628,7 +622,7 @@
             />
           </svg>
         </button>
-        <div ref="editAnimatedTick" class="thanks-message__tick"></div>
+        <div ref="animatedTick" class="thanks-message__tick"></div>
         <span class="thanks-message__title">Товар изменён</span>
         <span class="thanks-message__text">Вы успешно изменили товар.</span>
       </div>
@@ -1100,16 +1094,21 @@ onMounted(() => {
 const isAddProductBtnVisible = ref(true);
 const isAddProductVisible = ref(false);
 const showAddProductForm = () => {
+  uploadImgs.value = [];
   isAddProductVisible.value = true;
 };
 
 const closeAddProductForm = () => {
+  resetForm();
   isAddProductVisible.value = false;
   isAddProductBtnVisible.value = true;
   areFieldsEmpty.value = false;
 };
 const closeEditProductForm = () => {
   resetEditProductForm();
+  isEditProductVisible.value = false;
+  isAddProductBtnVisible.value = true;
+  areFieldsEmpty.value = false;
 };
 
 const fileInput = ref<HTMLInputElement | null>(null);
@@ -1195,16 +1194,12 @@ const store = useProductsStore();
 const { allProducts } = storeToRefs(store);
 const areFieldsEmpty = ref(false);
 const isLoading = ref(false);
-const addProgressRing = ref<HTMLElement | null>(null);
-const editProgressRing = ref<HTMLElement | null>(null);
+const progressRing = ref<HTMLElement | null>(null);
 const isAddMessageVisible = ref(false);
 const isEditMessageVisible = ref(false);
-const addAnimatedTick = ref<HTMLElement | null>(null);
-const addAnimationOfTick = ref<any>(null);
-const editAnimatedTick = ref<HTMLElement | null>(null);
-const editAnimationOfTick = ref<any>(null);
+const animatedTick = ref<HTMLElement | null>(null);
+const animationOfTick = ref<any>(null);
 const handleAddProduct = async () => {
-  uploadImgs.value = [];
   const requiredFields: (keyof Product)[] = [
     "heroes",
     "gender",
@@ -1281,7 +1276,7 @@ const handleAddProduct = async () => {
   isLoading.value = true;
   nextTick(() => {
     const animation = lottie.loadAnimation({
-      container: addProgressRing.value!,
+      container: progressRing.value!,
       renderer: "svg",
       loop: true,
       autoplay: true,
@@ -1290,13 +1285,12 @@ const handleAddProduct = async () => {
     setTimeout(() => {
       isLoading.value = false;
       animation.destroy();
-      isAddProductVisible.value = false;
       isAddMessageVisible.value = true;
 
       nextTick(() => {
-        if (addAnimatedTick.value) {
-          addAnimationOfTick.value = lottie.loadAnimation({
-            container: addAnimatedTick.value!,
+        if (animatedTick.value) {
+          animationOfTick.value = lottie.loadAnimation({
+            container: animatedTick.value!,
             renderer: "svg",
             loop: false,
             autoplay: true,
@@ -1310,7 +1304,7 @@ const handleAddProduct = async () => {
 const closeAddThanksMessage = () => {
   isAddProductVisible.value = false;
   isAddMessageVisible.value = false;
-  addAnimationOfTick.value!.destroy();
+  animationOfTick.value!.destroy();
 };
 const resetForm = () => {
   newProduct.value = {
@@ -1393,44 +1387,38 @@ const handleEditProduct = async () => {
   }
 
   if (newProduct.value.category && newProduct.value.title) {
+    await store.editProduct(newProduct.value);
+    await store.filterProducts();
+    resetEditProductForm();
+    uploadImgs.value = [];
     isLoading.value = true;
-    try {
-      await store.editProduct(newProduct.value);
-      await store.filterProducts();
-      resetEditProductForm();
-
-      nextTick(() => {
-        const animation = lottie.loadAnimation({
-          container: editProgressRing.value!,
-          renderer: "svg",
-          loop: true,
-          autoplay: true,
-          path: "/animations/progress-ring.json",
-        });
-
-        setTimeout(() => {
-          animation.destroy();
-          isLoading.value = false;
-          isEditProductVisible.value = false;
-          isEditMessageVisible.value = true;
-
-          nextTick(() => {
-            if (editAnimatedTick.value) {
-              editAnimationOfTick.value = lottie.loadAnimation({
-                container: editAnimatedTick.value!,
-                renderer: "svg",
-                loop: false,
-                autoplay: true,
-                path: "/animations/tick.json",
-              });
-            }
-          });
-        }, 2800);
+    nextTick(() => {
+      const animation = lottie.loadAnimation({
+        container: progressRing.value!,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/animations/progress-ring.json",
       });
-    } catch (error) {
-      console.error("Error updating product:", error);
-      isLoading.value = false;
-    }
+
+      setTimeout(() => {
+        isLoading.value = false;
+        animation.destroy();
+        isEditMessageVisible.value = true;
+
+        nextTick(() => {
+          if (animatedTick.value) {
+            animationOfTick.value = lottie.loadAnimation({
+              container: animatedTick.value!,
+              renderer: "svg",
+              loop: false,
+              autoplay: true,
+              path: "/animations/tick.json",
+            });
+          }
+        });
+      }, 2800);
+    });
   } else {
     areFieldsEmpty.value = true;
   }
@@ -1438,11 +1426,13 @@ const handleEditProduct = async () => {
 const closeEditThanksMessage = () => {
   isEditProductVisible.value = false;
   isEditMessageVisible.value = false;
-  editAnimationOfTick.value!.destroy();
+  animationOfTick.value!.destroy();
+  isAddProductBtnVisible.value = true;
 };
 const handleEditProductVisible = (product: Product) => {
   window.scrollTo(0, 0);
   isEditProductVisible.value = true;
+  isAddProductVisible.value = false;
   isAddProductBtnVisible.value = false;
   newProduct.value = { ...product };
   uploadImgs.value = [...product.heroes];
@@ -1455,9 +1445,7 @@ const handleEditProductVisible = (product: Product) => {
 };
 const resetEditProductForm = () => {
   resetForm();
-  isEditProductVisible.value = false;
   areFieldsEmpty.value = false;
-  isAddProductBtnVisible.value = true;
 };
 
 const windowWidth = ref(0);
@@ -2156,9 +2144,6 @@ watch(
     color: #4d4d4d;
   }
 }
-.edit-product-btn {
-  margin-top: 1.25rem;
-}
 .edit-product {
   margin-bottom: 1.25rem;
 
@@ -2655,12 +2640,7 @@ input[type="number"] {
 }
 /* 768px = 48em */
 @media (min-width: 48em) {
-  .add-product {
-    &__close-btn svg {
-      width: 15px;
-      height: 15px;
-    }
-  }
+  .add-product,
   .edit-product {
     &__close-btn svg {
       width: 15px;
@@ -2714,19 +2694,7 @@ input[type="number"] {
   .add-product-btn {
     margin-bottom: 2.5rem;
   }
-  .add-product {
-    margin-bottom: 2.5rem;
-
-    &__body {
-      flex-direction: row;
-    }
-    &__content {
-      width: 100%;
-    }
-  }
-  .edit-product-btn {
-    margin-top: 2.5rem;
-  }
+  .add-product,
   .edit-product {
     margin-bottom: 2.5rem;
 
