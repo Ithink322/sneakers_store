@@ -7,7 +7,7 @@
       <form
         @submit.prevent="
           {
-            searchCatalog(), search(searchQuery);
+            searchCatalog(), search();
           }
         "
         ref="searchForm"
@@ -283,16 +283,44 @@
           </div>
         </div>
         <button class="burger-menu__catalog-btn">
-          <NuxtLink @click="closeBurgerMenu" to="">МУЖСКИЕ</NuxtLink>
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :to="{
+              path: '/catalog',
+              query: { page: 1, paginate: 'Мужские' },
+            }"
+            >МУЖСКИЕ</NuxtLink
+          >
         </button>
         <button class="burger-menu__catalog-btn">
-          <NuxtLink @click="closeBurgerMenu" to="">ЖЕНСКИЕ</NuxtLink>
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :to="{
+              path: '/catalog',
+              query: { page: 1, paginate: 'Женские' },
+            }"
+            >ЖЕНСКИЕ</NuxtLink
+          >
         </button>
         <button class="burger-menu__catalog-btn">
-          <NuxtLink @click="closeBurgerMenu" to="">ДЕТСКИЕ</NuxtLink>
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :to="{
+              path: '/catalog',
+              query: { page: 1, paginate: 'Детские' },
+            }"
+            >ДЕТСКИЕ</NuxtLink
+          >
         </button>
         <button class="burger-menu__catalog-btn">
-          <NuxtLink @click="closeBurgerMenu" to="">РАСПРОДАЖА</NuxtLink>
+          <NuxtLink
+            @click="closeBurgerMenu"
+            :to="{
+              path: '/catalog',
+              query: { page: 1, paginate: 'Распродажа' },
+            }"
+            >РАСПРОДАЖА</NuxtLink
+          >
         </button>
         <button class="burger-menu__section-btn">
           <NuxtLink
@@ -347,36 +375,28 @@ import { usePostsStore } from "@/store/Posts";
 import { useProductsStore } from "@/store/Products";
 import { useFavoritesStore } from "@/store/Favorites";
 import type { Product } from "@/types/Product";
-import axios from "axios";
 import Highlighter from "vue-highlight-words";
 
 const searchQuery = ref("");
 const searchResults = ref<Product[]>([]);
-const router = useRouter();
 const handleSearchInput = async (query: string) => {
   if (searchQuery.value.trim()) {
-    searchResults.value = await search(searchQuery.value);
+    searchResults.value = await search();
   } else {
     searchResults.value = [];
   }
 };
-const search = async (query: string): Promise<Product[]> => {
-  try {
-    const response = await axios.post("/api/catalog/search", {
-      query,
-    });
-    return response.data.results;
-  } catch (error) {
-    console.error("Error fetching search results:", error);
-    return [];
-  }
+const catalogStore = useProductsStore();
+const search = async (): Promise<Product[]> => {
+  return catalogStore.searchProducts(searchQuery.value);
 };
+const router = useRouter();
 const searchCatalog = () => {
+  closeBurgerMenu();
   router.push({
     path: "/catalog",
     query: { page: 1, search: searchQuery.value },
   });
-  closeBurgerMenu();
 };
 
 const store = usePostsStore();
@@ -390,7 +410,6 @@ const isActive = (path: string) => {
   return route.path === path;
 };
 
-const catalogStore = useProductsStore();
 const currentCatalogPage = computed(() => catalogStore.currentPage);
 
 const props = defineProps(["isOpen"]);

@@ -21,4 +21,5 @@ export interface Product {
   categoryBackgroundColor?: string;
   category?: string;
   averageRating?: number;
+  sortingCategory?: string;
 }

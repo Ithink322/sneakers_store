@@ -145,10 +145,42 @@
             </div>
           </div>
           <ul class="header-mid__titles-list">
-            <li><NuxtLink to="">Мужские</NuxtLink></li>
-            <li><NuxtLink to="">Женские</NuxtLink></li>
-            <li><NuxtLink to="">Детские</NuxtLink></li>
-            <li><NuxtLink to="">Распродажа</NuxtLink></li>
+            <li>
+              <NuxtLink
+                :to="{
+                  path: '/catalog',
+                  query: { page: 1, paginate: 'Мужские' },
+                }"
+                >Мужские</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink
+                :to="{
+                  path: '/catalog',
+                  query: { page: 1, paginate: 'Женские' },
+                }"
+                >Женские</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink
+                :to="{
+                  path: '/catalog',
+                  query: { page: 1, paginate: 'Детские' },
+                }"
+                >Детские</NuxtLink
+              >
+            </li>
+            <li>
+              <NuxtLink
+                :to="{
+                  path: '/catalog',
+                  query: { page: 1, paginate: 'Распродажа' },
+                }"
+                >Распродажа</NuxtLink
+              >
+            </li>
           </ul>
         </div>
         <form

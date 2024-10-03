@@ -24,6 +24,7 @@ const ProductSchema: Schema = new Schema({
   categoryBackgroundColor: { type: String },
   category: { type: String },
   averageRating: { type: Number },
+  sortingCategory: { type: String },
 });
 
 const CatalogProduct = mongoose.model<Document & Product>(

@@ -333,14 +333,16 @@
       :hitProducts="hitProducts"
     ></UIProductsSlider>
   </div>
-  <div v-else-if="loading">
-    <p>Loading product...</p>
+  <div v-else-if="loading" class="loading">
+    <div ref="progressRing" class="loading__progress-ring"></div>
+    <span class="loading__text"> Загрузка товара... </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useProductsStore } from "@/store/Products";
 import type { Product } from "@/types/Product";
+import lottie from "lottie-web";
 import { latestProducts } from "@/data/ProductsInSlider";
 import { hitProducts } from "@/data/ProductsInSlider";
 import { useReviewsStore } from "@/store/Reviews";
@@ -352,12 +354,26 @@ const allProductsLength = computed(() => store.allProducts.length);
 const product = ref<Product | null>(null);
 const route = useRoute();
 const loading = ref(true);
+const progressRing = ref<HTMLElement | null>(null);
 onMounted(async () => {
   const productId = Number(route.params.id);
+  loading.value = true;
   await store.fetchProductById(productId);
   product.value = store.product;
   if (!product.value) {
     console.error("Product not found");
+  }
+  await nextTick();
+  if (progressRing.value) {
+    const animation = lottie.loadAnimation({
+      container: progressRing.value!,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/animations/progress-ring.json",
+    });
+  } else {
+    console.error("Progress ring element is null");
   }
   loading.value = false;
 });
@@ -1035,6 +1051,27 @@ td {
   }
   &::after {
     margin-top: 2.5rem;
+  }
+}
+.loading {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex-centered;
+  flex-direction: column;
+  gap: 1.563rem;
+
+  &__progress-ring {
+    width: 200px;
+    height: 200px;
+  }
+  &__text {
+    text-align: center;
+    font-family: "Pragmatica Medium";
+    font-size: 1rem;
+    color: #4d4d4d;
   }
 }
 /* 768px = 48em */

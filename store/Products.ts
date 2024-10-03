@@ -39,11 +39,18 @@ export const useProductsStore = defineStore("productsStore", {
       const filtersStore = useFiltersStore();
       const route = useRoute();
       const searchQuery = route.query.search?.toString() || "";
+      const paginatedCategory = route.query.paginate?.toString() || "";
 
       let productsToFilter = [...this.allProducts];
       if (searchQuery) {
         productsToFilter = productsToFilter.filter((product) =>
           product.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+
+      if (paginatedCategory) {
+        productsToFilter = productsToFilter.filter(
+          (product) => product.sortingCategory === paginatedCategory
         );
       }
 
@@ -106,7 +113,7 @@ export const useProductsStore = defineStore("productsStore", {
       if (!this.product) {
         console.error("Product not found");
       }
-      return product;
+      return this.product;
     },
     setPage(page: number) {
       this.currentPage = page;

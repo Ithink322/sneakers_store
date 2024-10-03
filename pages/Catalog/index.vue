@@ -5,14 +5,22 @@
       {{
         route.query.search
           ? `Результаты поиска “${route.query.search}”`
+          : route.query.paginate
+          ? `Модели в категории “${route.query.paginate}”`
           : "Все модели"
       }}
     </h1>
     <span class="titles-container__text">
-      {{ route.query.search ? store.filteredProducts.length : totalProducts }}
+      {{
+        route.query.search || route.query.paginate
+          ? store.filteredProducts.length
+          : totalProducts
+      }}
       {{
         conjugateTovar(
-          route.query.search ? store.filteredProducts.length : totalProducts
+          route.query.search || route.query.paginate
+            ? store.filteredProducts.length
+            : totalProducts
         )
       }}
     </span>
@@ -285,6 +293,18 @@
               class="add-product__field"
             />
           </div>
+        </div>
+        <div class="edit-product__content">
+          <span class="edit-product__title">
+            Категория сортировки
+            <span class="edit-product__title--red">*</span></span
+          >
+          <input
+            v-model="newProduct.sortingCategory"
+            placeholder="Введите категорию сортировки"
+            type="text"
+            class="edit-product__field"
+          />
         </div>
         <UIButton
           type="submit"
@@ -588,6 +608,18 @@
               class="edit-product__field"
             />
           </div>
+        </div>
+        <div class="edit-product__content">
+          <span class="edit-product__title">
+            Категория сортировки
+            <span class="edit-product__title--red">*</span></span
+          >
+          <input
+            v-model="newProduct.sortingCategory"
+            placeholder="Введите категорию сортировки"
+            type="text"
+            class="edit-product__field"
+          />
         </div>
         <UIButton
           type="submit"
@@ -1189,8 +1221,20 @@ const newProduct = ref<Product>({
   previousPrice: "",
   categoryBackgroundColor: "",
   category: "",
+  sortingCategory: "",
 });
+const route = useRoute();
 const store = useProductsStore();
+watchEffect(() => {
+  const newPaginate = route.query.paginate;
+
+  if (newPaginate) {
+    if (store.allProducts.length > 0) {
+      store.filterProducts();
+      window.scrollTo(0, 0);
+    }
+  }
+});
 const { allProducts } = storeToRefs(store);
 const areFieldsEmpty = ref(false);
 const isLoading = ref(false);
@@ -1211,6 +1255,7 @@ const handleAddProduct = async () => {
     "previousPrice",
     "categoryBackgroundColor",
     "category",
+    "sortingCategory",
   ];
   const requiredSpecsFields: (keyof Product["specs"])[] = [
     "gender",
@@ -1263,7 +1308,6 @@ const handleAddProduct = async () => {
 
   if (!newProduct.value.heroes || newProduct.value.heroes.length === 0) {
     const existingProduct = await store.getProductById(newProduct.value.id);
-    console.log("existingProduct:", existingProduct);
     if (existingProduct) {
       newProduct.value.heroes = existingProduct.heroes;
     }
@@ -1327,6 +1371,7 @@ const resetForm = () => {
     previousPrice: "",
     categoryBackgroundColor: "",
     category: "",
+    sortingCategory: "",
   };
 };
 
@@ -1343,6 +1388,7 @@ const handleEditProduct = async () => {
     "previousPrice",
     "categoryBackgroundColor",
     "category",
+    "sortingCategory",
   ];
   const requiredSpecsFields: (keyof Product["specs"])[] = [
     "gender",
@@ -1473,7 +1519,6 @@ const sizes = ref(sizesArr);
 const colors = ref(colorsObj);
 const materials = ref(materialsArr);
 
-const route = useRoute();
 watch(
   () => route.query.page,
   (newPage) => store.setPage(Number(newPage) || 1),

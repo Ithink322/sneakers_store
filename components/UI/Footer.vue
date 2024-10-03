@@ -136,16 +136,40 @@
                 >
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Детские кроссовки</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Детские' },
+                  }"
+                  >Детские кроссовки</NuxtLink
+                >
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Женские кроссовки</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Женские' },
+                  }"
+                  >Женские кроссовки</NuxtLink
+                >
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Мужские кроссовки</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Мужские' },
+                  }"
+                  >Мужские кроссовки</NuxtLink
+                >
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Распродажа</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Распродажа' },
+                  }"
+                  >Распродажа</NuxtLink
+                >
               </li>
             </ul>
             <button @click="toggleShopDropdown" class="dropdown__btn">
@@ -164,13 +188,13 @@
               :class="{ active: isDropdownActive('shop') }"
             >
               <li class="dropdown-list__link">
-                <NuxtLink to="">Личный кабинет</NuxtLink>
+                <NuxtLink to="/PrivateCabinet">Личный кабинет</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Избранное</NuxtLink>
+                <NuxtLink to="/Favorites">Избранное</NuxtLink>
               </li>
               <li class="dropdown-list__link">
-                <NuxtLink to="">Корзина товаров</NuxtLink>
+                <NuxtLink to="/Cart">Корзина товаров</NuxtLink>
               </li>
               <li class="dropdown-list__link">
                 <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>
@@ -211,28 +235,52 @@
                 >
               </li>
               <li class="list__link">
-                <NuxtLink to="">Детские кроссовки</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Детские' },
+                  }"
+                  >Детские кроссовки</NuxtLink
+                >
               </li>
               <li class="list__link">
-                <NuxtLink to="">Женские кроссовки</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Женские' },
+                  }"
+                  >Женские кроссовки</NuxtLink
+                >
               </li>
               <li class="list__link">
-                <NuxtLink to="">Мужские кроссовки</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Мужские' },
+                  }"
+                  >Мужские кроссовки</NuxtLink
+                >
               </li>
               <li class="list__link">
-                <NuxtLink to="">Распродажа</NuxtLink>
+                <NuxtLink
+                  :to="{
+                    path: '/catalog',
+                    query: { page: 1, paginate: 'Распродажа' },
+                  }"
+                  >Распродажа</NuxtLink
+                >
               </li>
             </ul>
             <ul class="footer__list list">
               <span class="list__title">МАГАЗИН</span>
               <li class="list__link">
-                <NuxtLink to="">Личный кабинет</NuxtLink>
+                <NuxtLink to="/PrivateCabinet">Личный кабинет</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink to="">Избранное</NuxtLink>
+                <NuxtLink to="/Favorites">Избранное</NuxtLink>
               </li>
               <li class="list__link">
-                <NuxtLink to="">Корзина товаров</NuxtLink>
+                <NuxtLink to="/Cart">Корзина товаров</NuxtLink>
               </li>
               <li class="list__link">
                 <NuxtLink to="/IndividualOrder">Индивидуальный заказ</NuxtLink>

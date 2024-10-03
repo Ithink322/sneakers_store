@@ -47,7 +47,7 @@
             @click="changeSlide(index)"
           ></div>
         </div>
-        <div v-if="isAdmin" class="card__btns">
+        <div v-if="isAdmin && isCatalogPage" class="card__btns">
           <button @click.prevent="editProduct()" class="card__btn">
             <svg
               width="19"
@@ -163,6 +163,8 @@ const props = defineProps<{
 }>();
 
 const isAdmin = ref(localStorage.getItem("isAdmin") === "true");
+const route = useRoute();
+const isCatalogPage = route.path === "/catalog";
 
 const emit = defineEmits(["editProduct"]);
 const editProduct = async () => {
@@ -170,17 +172,6 @@ const editProduct = async () => {
 };
 const productsStore = useProductsStore();
 const router = useRouter();
-/* const removeProduct = async (id: number) => {
-  await productsStore.removeProduct(id);
-  const currentTotalPages = productsStore.totalPages;
-
-  if (productsStore.currentPage > currentTotalPages && currentTotalPages > 0) {
-    productsStore.setPage(currentTotalPages);
-    router.push(`/catalog?page=${currentTotalPages}`);
-  } else {
-    router.push(`/catalog?page=${productsStore.currentPage}`);
-  }
-}; */
 const removeProduct = async (product: Product | Favorite | CartProduct) => {
   if ("id" in product) {
     const id = product.id;
