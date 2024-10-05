@@ -192,6 +192,7 @@ export const useCartStore = defineStore("cartProductsStore", {
       this.promoCode = "";
       this.discountSubTotal = 0;
       localStorage.removeItem("cart-store");
+      this.cart = [...this.cart];
       const userId = localStorage.getItem("userId") as string;
       axios.post("/api/cart/reset", { userId });
     },

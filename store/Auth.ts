@@ -25,11 +25,13 @@ export const useAuthStore = defineStore("auth", {
       this.token = token;
       this.isAdmin = isAdmin;
       this.isLoggedIn = true;
+      this.rememberMe = rememberMe;
 
       localStorage.setItem("userId", userId);
       localStorage.setItem("fio", fio);
       localStorage.setItem("number", number);
       localStorage.setItem("isAdmin", isAdmin ? "true" : "false");
+      localStorage.setItem("rememberMe", rememberMe ? "true" : "false");
 
       if (rememberMe) {
         localStorage.setItem("authToken", token);
@@ -49,25 +51,47 @@ export const useAuthStore = defineStore("auth", {
       localStorage.removeItem("fio");
       localStorage.removeItem("number");
       localStorage.removeItem("isAdmin");
-      localStorage.removeItem("authToken");
-      sessionStorage.removeItem("authToken");
+      if (this.rememberMe) {
+        localStorage.removeItem("authToken");
+      } else {
+        sessionStorage.removeItem("authToken");
+      }
     },
     initializeAuth() {
-      const storedUserId = localStorage.getItem("userId");
-      const storedFio = localStorage.getItem("fio");
-      const storedNumber = localStorage.getItem("number");
-      const storedToken =
-        localStorage.getItem("authToken") ||
-        sessionStorage.getItem("authToken");
-      const storedIsAdmin = localStorage.getItem("isAdmin") === "true";
+      const storedRememberMe = localStorage.getItem("rememberMe") === "true";
 
-      if (storedUserId && storedFio && storedNumber) {
-        this.userId = storedUserId;
-        this.fio = storedFio;
-        this.number = storedNumber;
-        this.token = storedToken!;
-        this.isAdmin = storedIsAdmin;
-        this.isLoggedIn = true;
+      if (storedRememberMe) {
+        const storedToken = localStorage.getItem("authToken");
+        const storedUserId = localStorage.getItem("userId");
+        const storedFio = localStorage.getItem("fio");
+        const storedNumber = localStorage.getItem("number");
+        const storedIsAdmin = localStorage.getItem("isAdmin") === "true";
+
+        if (storedUserId && storedFio && storedNumber && storedToken) {
+          this.userId = storedUserId;
+          this.fio = storedFio;
+          this.number = storedNumber;
+          this.token = storedToken;
+          this.isAdmin = storedIsAdmin;
+          this.isLoggedIn = true;
+        }
+      } else {
+        const storedToken = sessionStorage.getItem("authToken");
+        if (storedToken) {
+          const storedUserId = localStorage.getItem("userId");
+          const storedFio = localStorage.getItem("fio");
+          const storedNumber = localStorage.getItem("number");
+          const storedIsAdmin = localStorage.getItem("isAdmin") === "true";
+
+          if (storedUserId && storedFio && storedNumber && storedToken) {
+            this.userId = storedUserId;
+            this.fio = storedFio;
+            this.number = storedNumber;
+            this.token = storedToken;
+            this.isAdmin = storedIsAdmin;
+            this.isLoggedIn = true;
+          }
+        }
       }
     },
   },

@@ -1033,7 +1033,24 @@
       </div>
     </div>
     <div v-if="isEditAddressVisible" class="body">
-      <h2 class="subtitle">Редактирование адреса</h2>
+      <div class="title-body">
+        <h2 class="title-body__subtitle">Редактировать адрес</h2>
+        <button @click="closeEditAddressForm" class="title-body__close-btn">
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 10 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.7"
+              d="M9.66937 0.226864C9.52925 0.0864247 9.33901 0.0075 9.14062 0.0075C8.94224 0.0075 8.752 0.0864247 8.61188 0.226864L4.94438 3.88686L1.27688 0.219364C1.13675 0.0789247 0.946513 0 0.748125 0C0.549737 0 0.359499 0.0789247 0.219375 0.219364C-0.073125 0.511864 -0.073125 0.984364 0.219375 1.27686L3.88687 4.94436L0.219375 8.61186C-0.073125 8.90436 -0.073125 9.37686 0.219375 9.66936C0.511875 9.96186 0.984375 9.96186 1.27688 9.66936L4.94438 6.00186L8.61188 9.66936C8.90438 9.96186 9.37687 9.96186 9.66937 9.66936C9.96187 9.37686 9.96187 8.90436 9.66937 8.61186L6.00187 4.94436L9.66937 1.27686C9.95437 0.991864 9.95437 0.511864 9.66937 0.226864Z"
+              fill="black"
+            />
+          </svg>
+        </button>
+      </div>
       <form @submit.prevent="addressSubmit" class="edit-address-form">
         <div class="edit-address-form__body">
           <span class="edit-address-form__title"
@@ -1372,6 +1389,8 @@ const privateCabinetStore = usePrivateCabinetStore();
 const setActiveSection = (section: number) => {
   activeSection.value = section;
   privateCabinetStore.setActiveBtn(section);
+  isProfileMessageVisible.value = false;
+  isPassMessageVisible.value = false;
   if (activeSection.value !== 4) {
     isAddressVisible.value = false;
     isEditAddressVisible.value = false;
@@ -1483,6 +1502,28 @@ const editProfile = async () => {
   const profileData = { userId, ...updatedData };
   if (Object.keys(updatedData).length > 0) {
     privateCabinetStore.editProfile(profileData);
+    authStore.initializeAuth();
+    if (fioProfile.value) {
+      authStore.fio = fioProfile.value;
+      localStorage.setItem("fio", fioProfile.value);
+    }
+    if (phoneNumber.value) {
+      authStore.number = phoneNumber.value;
+      privateCabinetStore.addressData!.number = phoneNumber.value;
+      localStorage.setItem("number", phoneNumber.value);
+      const userId = localStorage.getItem("userId") as string;
+      await privateCabinetStore.editAddress({
+        userId: userId,
+        fio: fio.value,
+        companyName: companyName.value,
+        region: region.value,
+        city: city.value,
+        street: street.value,
+        index: index.value,
+        houseNum: houseNum.value,
+        number: privateCabinetStore.addressData!.number,
+      });
+    }
 
     isLoading.value = true;
     nextTick(() => {
@@ -1548,6 +1589,11 @@ const isEditAddressVisible = ref(false);
 const openEditAddress = () => {
   isAddressVisible.value = false;
   isEditAddressVisible.value = true;
+};
+
+const closeEditAddressForm = () => {
+  isEditAddressVisible.value = false;
+  isAddressVisible.value = true;
 };
 
 onMounted(() => {
@@ -2433,6 +2479,22 @@ const logOut = () => {
     }
   }
 }
+.title-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__subtitle {
+    font-family: "Pragmatica Medium";
+    font-size: 1.313rem;
+    line-height: 32px;
+    color: #1d1d27;
+    margin: 0.938rem 0;
+  }
+  &__close-btn {
+    @include btn;
+  }
+}
 .edit-address-form {
   display: flex;
   flex-direction: column;
@@ -2637,6 +2699,15 @@ const logOut = () => {
       color: #fff;
     }
   }
+  .title-body {
+    &__subtitle {
+      margin: 1.125rem 0;
+    }
+    &__close-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
   .subtitle {
     margin: 1.125rem 0;
   }
@@ -2806,9 +2877,15 @@ const logOut = () => {
       margin-left: auto;
     }
   }
+  .title-body {
+    margin: 0 0 1.563rem 0;
+    &__subtitle {
+      font-size: 1.75rem;
+      margin: 0;
+    }
+  }
   .subtitle {
     font-size: 1.75rem;
-    color: #1d1d27;
     margin: 0 0 1.563rem 0;
   }
   .my-acc {

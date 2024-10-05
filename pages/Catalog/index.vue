@@ -1299,13 +1299,6 @@ const handleAddProduct = async () => {
     return;
   }
 
-  const latestProduct = allProducts.value[allProducts.value.length - 1];
-  if (latestProduct) {
-    newProduct.value.id = latestProduct.id + 1;
-  } else {
-    newProduct.value.id = 1;
-  }
-
   if (!newProduct.value.heroes || newProduct.value.heroes.length === 0) {
     const existingProduct = await store.getProductById(newProduct.value.id);
     if (existingProduct) {
@@ -1314,6 +1307,7 @@ const handleAddProduct = async () => {
   }
 
   await store.addProduct(newProduct.value);
+  console.log("Newly added product with ID:", newProduct.value.id);
   await store.filterProducts();
   resetForm();
   uploadImgs.value = [];

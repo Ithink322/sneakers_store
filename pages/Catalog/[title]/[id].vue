@@ -358,22 +358,26 @@ const progressRing = ref<HTMLElement | null>(null);
 onMounted(async () => {
   const productId = Number(route.params.id);
   loading.value = true;
+  nextTick(() => {
+    if (progressRing.value) {
+      const animation = lottie.loadAnimation({
+        container: progressRing.value!,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "/animations/progress-ring.json",
+      });
+    } else {
+      console.error("Progress ring element is null");
+    }
+  });
   await store.fetchProductById(productId);
   product.value = store.product;
   if (!product.value) {
     console.error("Product not found");
   }
-  await nextTick();
-  if (progressRing.value) {
-    const animation = lottie.loadAnimation({
-      container: progressRing.value!,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/progress-ring.json",
-    });
-  } else {
-    console.error("Progress ring element is null");
+  if (product.value && product.value.colors) {
+    setActiveColor(0, product.value.colors[0]);
   }
   loading.value = false;
 });
@@ -544,11 +548,6 @@ const setActiveColor = (index: number, color: string) => {
   activeColor.value = colorNames[color as keyof typeof colorNames];
   activeHexColor.value = color;
 };
-onMounted(() => {
-  if (product.value && product.value.colors) {
-    setActiveColor(0, product.value.colors[0]);
-  }
-});
 
 const activeSizeIndex = ref(0);
 const activeSize = ref(product.value?.sizes[0]);
@@ -1062,6 +1061,7 @@ td {
   @include flex-centered;
   flex-direction: column;
   gap: 1.563rem;
+  height: 500px;
 
   &__progress-ring {
     width: 200px;
