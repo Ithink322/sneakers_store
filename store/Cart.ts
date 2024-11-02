@@ -8,6 +8,7 @@ interface ProductsState {
   productCounts: ProductCount;
   promoCode: string;
   discountSubTotal: number;
+  isUpdatingCart: boolean;
 }
 interface ProductCount {
   [key: string]: number;
@@ -29,6 +30,7 @@ export const useCartStore = defineStore("cartProductsStore", {
     productCounts: {},
     promoCode: "",
     discountSubTotal: 0,
+    isUpdatingCart: false,
   }),
   getters: {
     getCount:
@@ -73,6 +75,9 @@ export const useCartStore = defineStore("cartProductsStore", {
       chosenSize: number,
       qty: number = 1
     ) {
+      if (this.isUpdatingCart) return;
+      this.isUpdatingCart = true;
+
       const userId = localStorage.getItem("userId") as string;
 
       const router = useRouter();
@@ -121,6 +126,7 @@ export const useCartStore = defineStore("cartProductsStore", {
       }
 
       this.calculateDiscount();
+      this.isUpdatingCart = false;
     },
     async removeCartProduct(
       productId: number,
