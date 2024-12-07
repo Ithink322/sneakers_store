@@ -570,6 +570,12 @@ const addCartProduct = () => {
       width: 440px;
       height: 445px;
     }
+    &__wishlist-btn svg path {
+      transition: stroke 0.3s ease;
+    }
+    &__wishlist-btn:hover svg path {
+      stroke: $Dark-Orange;
+    }
   }
   .slide--from320px {
     display: none;
