@@ -151,7 +151,8 @@ const KurskInfo = ref<Contacts[]>([
     phone: "+7 (918) 547-20-83",
     email: "orderskursk@store.ru",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2419295.1426344425!2d34.26138521858544!3d53.68988041953008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x412f03c89ce986d3%3A0xa106adaa8e5d19f4!2sNew%20Balance!5e0!3m2!1sru!2sru!4v1718014806912!5m2!1sru!2sru",
+      "https://yandex.ru/map-widget/v1/?um=constructor%3A93148b1261df131b0bcbd28ab798ba631d192baa5c06e51dd319bf1244694489&amp;source=constructor",
+    /* "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2419295.1426344425!2d34.26138521858544!3d53.68988041953008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x412f03c89ce986d3%3A0xa106adaa8e5d19f4!2sNew%20Balance!5e0!3m2!1sru!2sru!4v1718014806912!5m2!1sru!2sru", */
   },
 ]);
 
@@ -161,7 +162,8 @@ const MoscowInfo = ref<Contacts[]>([
     phone: "+7 (495) 647-88-20",
     email: "ordersmoscow@store.ru",
     mapSrc:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71827.59625176922!2d37.6217508!3d55.765235399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54ae60c3268e9%3A0x5c1b643ffcfa3395!2z0JzQsNCz0LDQt9C40L0gU25lYWtlcmhlYWQ!5e0!3m2!1sru!2sru!4v1718014750408!5m2!1sru!2sru",
+      "https://yandex.ru/map-widget/v1/?um=constructor%3A7f7b75b0fd2d9806b57c6c3d9efa7f3f344efd9a67262db2ba26156f3ab28ba7&amp;source=constructor",
+    /* "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d71827.59625176922!2d37.6217508!3d55.765235399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54ae60c3268e9%3A0x5c1b643ffcfa3395!2z0JzQsNCz0LDQt9C40L0gU25lYWtlcmhlYWQ!5e0!3m2!1sru!2sru!4v1718014750408!5m2!1sru!2sru", */
   },
 ]);
 
