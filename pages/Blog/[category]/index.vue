@@ -573,7 +573,6 @@ const newPost = ref<BlogPost>({
     },
   ],
 });
-const { allPosts } = storeToRefs(store);
 const areFieldsEmpty = ref(false);
 const isLoading = ref(false);
 const progressRing = ref<HTMLElement | null>(null);
@@ -606,7 +605,7 @@ const handleAddPost = async () => {
 
   newPost.value.date = format(new Date(), "d MMMM yyyy", { locale: ru });
 
-  const latestPost = allPosts.value[allPosts.value.length - 1];
+  const latestPost = store.allPosts[store.allPosts.length - 1];
   if (latestPost) {
     newPost.value.id = latestPost.id + 1;
   } else {

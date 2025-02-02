@@ -1235,7 +1235,6 @@ watchEffect(() => {
     }
   }
 });
-/* const { allProducts } = storeToRefs(store); */
 const areFieldsEmpty = ref(false);
 const isLoading = ref(false);
 const progressRing = ref<HTMLElement | null>(null);
