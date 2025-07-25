@@ -51,14 +51,14 @@
               <li>
                 <nuxt-link
                   @click="closeCatalogMenu"
-                  to="/catalog/nike-air-force-1/1?page=1"
+                  to="/catalog/nike-air-force-1/10?page=1"
                   >Nike Air Force 1</nuxt-link
                 >
               </li>
               <li>
                 <nuxt-link
                   @click="closeCatalogMenu"
-                  to="/catalog/nike-air-max-90/2?page=1"
+                  to="/catalog/nike-air-max-90/11?page=1"
                   >Nike Air Max 90</nuxt-link
                 >
               </li>
@@ -100,7 +100,7 @@
               <li>
                 <nuxt-link
                   @click="closeCatalogMenu"
-                  to="/catalog/nike-air-max-1-animal-pack/8?page=1"
+                  to="/catalog/nike-air-max-1-animal-pack/17?page=1"
                   >Nike Air Max 1 "Animal Pack"</nuxt-link
                 >
               </li>
