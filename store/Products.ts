@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import type { Product } from "@/types/Product";
+import type { ApiResponse } from "@/types/api";
 import { useFiltersStore } from "@/store/Filters";
+import { getApiErrorMessage, getApiResponseMessage } from "@/utils/apiClient";
 import axios from "axios";
 
 interface ProductsState {
@@ -93,7 +95,12 @@ export const useProductsStore = defineStore("productsStore", {
         this.setAllProducts(data);
         this.filterProducts();
       } catch (error) {
-        console.error("Error fetching catalog products:", error);
+        console.error(
+          getApiErrorMessage(
+            error,
+            "Не удалось загрузить каталог."
+          )
+        );
       }
     },
     async fetchProductById(id: number) {
@@ -102,7 +109,7 @@ export const useProductsStore = defineStore("productsStore", {
       }
       this.product = this.allProducts.find((p) => p.id === id) || null;
       if (!this.product) {
-        console.error("Product not found");
+        console.error("Товар не найден.");
       }
     },
     async getProductById(id: number) {
@@ -111,7 +118,7 @@ export const useProductsStore = defineStore("productsStore", {
       }
       this.product = this.allProducts.find((p) => p.id === id) || null;
       if (!this.product) {
-        console.error("Product not found");
+        console.error("Товар не найден.");
       }
       return this.product;
     },
@@ -134,7 +141,7 @@ export const useProductsStore = defineStore("productsStore", {
         searchRegex.test(product.title)
       );
     },
-    async addProduct(productData: Product) {
+    async addProduct(productData: Product): Promise<ApiResponse<{ product?: Product }>> {
       try {
         const response = await axios.post(
           "/api/catalog/addProduct",
@@ -144,12 +151,20 @@ export const useProductsStore = defineStore("productsStore", {
         if (response.data.success) {
           const createdProduct = response.data.product;
           this.allProducts.push(createdProduct);
-          console.log("Product added successfully:", createdProduct);
-        } else {
-          console.error("Failed to create product:", response.data.message);
+          return response.data;
         }
+
+        const message = getApiResponseMessage(
+          response.data,
+          "Не удалось добавить товар."
+        );
+        return { success: false, message };
       } catch (error) {
-        console.error("Error creating product:", error);
+        const message = getApiErrorMessage(
+          error,
+          "Не удалось добавить товар."
+        );
+        return { success: false, message };
       }
     },
     async editProduct(updatedProduct: Product) {
@@ -168,14 +183,14 @@ export const useProductsStore = defineStore("productsStore", {
         if (index !== -1) {
           this.allProducts[index] = { ...response.data };
         } else {
-          console.error("Product not found in store.");
+          console.error("Товар не найден в каталоге.");
         }
       } catch (error) {
-        console.error("Error updating product:", error);
+        console.error(getApiErrorMessage(error, "Не удалось обновить товар."));
         throw error;
       }
     },
-    async removeProduct(id: number) {
+    async removeProduct(id: number): Promise<ApiResponse> {
       try {
         const response = await axios.post("/api/catalog/removeProduct", {
           id: Number(id),
@@ -190,11 +205,20 @@ export const useProductsStore = defineStore("productsStore", {
           if (this.currentPage > currentTotalPages && currentTotalPages > 0) {
             this.currentPage = currentTotalPages;
           }
-        } else {
-          console.error(response.data.message);
+          return response.data;
         }
+
+        const message = getApiResponseMessage(
+          response.data,
+          "Не удалось удалить товар."
+        );
+        return { success: false, message };
       } catch (error) {
-        console.error("Error deleting product:", error);
+        const message = getApiErrorMessage(
+          error,
+          "Не удалось удалить товар."
+        );
+        return { success: false, message };
       }
     },
   },

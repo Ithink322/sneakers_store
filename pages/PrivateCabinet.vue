@@ -1818,7 +1818,7 @@ const pass2OnInput = () => {
     activePass1Notice.value = "";
   }
 };
-const validatePasses = async () => {
+const validatePasses = () => {
   const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
   if (currentPass.value === "") {
     isCurrentPassEmpty.value = true;
@@ -1844,16 +1844,9 @@ const validatePasses = async () => {
   activeCurrentPassNotice.value = null;
   activePass1Notice.value = null;
   activePass2Notice.value = null;
-  const userId = localStorage.getItem("userId") as string;
-  const response = await privateCabinetStore.editPass(
-    userId,
-    currentPass.value,
-    pass1.value
-  );
+
   if (isCurrentPassEmpty.value) {
     activeCurrentPassNotice.value = "Важно заполнить это поле.";
-  } else if (response.message === "Current password is incorrect") {
-    activeCurrentPassNotice.value = "Текущий пароль не совпадает.";
   }
   if (isPass1Empty.value) {
     activePass1Notice.value = "Важно заполнить это поле.";
@@ -1895,11 +1888,11 @@ const editPass = async () => {
       pass1.value
     );
 
-    if (response.message === "Current password is incorrect") {
+    if (!response.success) {
+      activeCurrentPassNotice.value = response.message;
       isCurrentPassValid.value = false;
       return;
     } else {
-      console.log("Password updated successfully");
 
       isLoading.value = true;
       nextTick(() => {

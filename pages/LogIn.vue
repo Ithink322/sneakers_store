@@ -4,9 +4,9 @@
   <div class="container">
     <form @submit.prevent="logIn" class="container__form">
       <span
-        v-if="!isDataCorrect"
+        v-if="apiErrorMessage"
         class="container__notice container__empty-notice"
-        >Неверный логин или пароль.</span
+        >{{ apiErrorMessage }}</span
       >
       <div class="container__input-body">
         <span class="container__input-title"
@@ -138,6 +138,7 @@ import { useAuthStore } from "@/store/Auth";
 import { useFavoritesStore } from "@/store/Favorites";
 import { useCartStore } from "@/store/Cart";
 import axios from "axios";
+import { getApiErrorMessage, getApiResponseMessage } from "@/utils/apiClient";
 
 useHead({
   title: "Вход в Sneakers Store - Найдите идеальные кроссовки",
@@ -183,16 +184,16 @@ const isLoginValid = ref(true);
 const isPassValid = ref(true);
 const isPassLengthValid = ref(true);
 const activePassNotice = ref<string | null>(null);
-const isDataCorrect = ref(true);
+const apiErrorMessage = ref("");
 const loginOnInput = () => {
   isLoginEmpty.value = login.value === "";
   isLoginValid.value = true;
-  isDataCorrect.value = true;
+  apiErrorMessage.value = "";
 };
 const passOnInput = () => {
   isPassEmpty.value = pass.value === "";
   isPassValid.value = true;
-  isDataCorrect.value = true;
+  apiErrorMessage.value = "";
 
   if (pass.value.length >= 8 && pass.value.length <= 20) {
     activePassNotice.value = "";
@@ -246,6 +247,8 @@ const logIn = async () => {
     login.value !== "" &&
     pass.value !== ""
   ) {
+    apiErrorMessage.value = "";
+
     try {
       const response = await axios.post("/api/auth/logIn", {
         login: login.value,
@@ -265,11 +268,16 @@ const logIn = async () => {
         await cartStore.fetchCart(response.data.userId);
         router.push("/catalog?page=1");
       } else {
-        console.error("Login failed:", response.data.message);
-        isDataCorrect.value = false;
+        apiErrorMessage.value = getApiResponseMessage(
+          response.data,
+          "Неверный логин или пароль."
+        );
       }
     } catch (error) {
-      console.error("An error occurred during login:", error);
+      apiErrorMessage.value = getApiErrorMessage(
+        error,
+        "Не удалось войти. Попробуйте позже."
+      );
     }
   }
 };

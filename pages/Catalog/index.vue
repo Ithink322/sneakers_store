@@ -61,6 +61,11 @@
           class="add-product__notice add-product__empty-notice"
           >Важно заполнить все поля.</span
         >
+        <span
+          v-if="productApiError"
+          class="add-product__notice add-product__empty-notice"
+          >{{ productApiError }}</span
+        >
         <div class="add-product__content">
           <span class="add-product__title">
             Изображения <span class="add-product__title--red">*</span></span
@@ -1236,6 +1241,7 @@ watchEffect(() => {
   }
 });
 const areFieldsEmpty = ref(false);
+const productApiError = ref("");
 const isLoading = ref(false);
 const progressRing = ref<HTMLElement | null>(null);
 const isAddMessageVisible = ref(false);
@@ -1295,8 +1301,12 @@ const handleAddProduct = async () => {
   });
   if (invalidFields.length > 0 || invalidSpecsFields.length > 0) {
     areFieldsEmpty.value = true;
+    productApiError.value = "";
     return;
   }
+
+  areFieldsEmpty.value = false;
+  productApiError.value = "";
 
   if (!newProduct.value.heroes || newProduct.value.heroes.length === 0) {
     const existingProduct = await store.getProductById(newProduct.value.id);
@@ -1305,8 +1315,12 @@ const handleAddProduct = async () => {
     }
   }
 
-  await store.addProduct(newProduct.value);
-  console.log("Newly added product with ID:", newProduct.value.id);
+  const result = await store.addProduct(newProduct.value);
+  if (!result.success) {
+    productApiError.value = result.message;
+    return;
+  }
+
   await store.filterProducts();
   resetForm();
   uploadImgs.value = [];

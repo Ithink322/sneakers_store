@@ -20,9 +20,9 @@
           >Введите корректный email или login.</span
         >
         <span
-          v-if="!isLoginUnique"
+          v-if="apiErrorMessage"
           class="container__notice container__valid-notice"
-          >Email или login уже существует.</span
+          >{{ apiErrorMessage }}</span
         >
         <input
           v-model="login"
@@ -206,6 +206,7 @@
 <script setup lang="ts">
 import Inputmask from "inputmask";
 import axios from "axios";
+import { getApiErrorMessage, getApiResponseMessage } from "@/utils/apiClient";
 
 useHead({
   title: "Присоединяйтесь к Sneakers Store - Откройте для себя мир кроссовок",
@@ -271,11 +272,11 @@ const isPass2Valid = ref(true);
 const isPass1LengthValid = ref(true);
 const isPass2LengthValid = ref(true);
 const arePassesEqual = ref(true);
-const isLoginUnique = ref(true);
+const apiErrorMessage = ref("");
 const loginOnInput = () => {
   isLoginEmpty.value = login.value === "";
   isLoginValid.value = true;
-  isLoginUnique.value = true;
+  apiErrorMessage.value = "";
 };
 const fioOnInput = () => {
   isFioEmpty.value = fio.value === "";
@@ -415,6 +416,8 @@ const signUp = async () => {
     pass2.value !== "" &&
     isPolicyAccepted.value
   ) {
+    apiErrorMessage.value = "";
+
     try {
       const response = await axios.post("/api/auth/signUp", {
         login: login.value,
@@ -427,10 +430,16 @@ const signUp = async () => {
       if (response.data.success) {
         router.push("/logIn");
       } else {
-        console.error("Sign-up failed:", response.data.message);
+        apiErrorMessage.value = getApiResponseMessage(
+          response.data,
+          "Не удалось зарегистрироваться. Попробуйте позже."
+        );
       }
     } catch (error) {
-      isLoginUnique.value = false;
+      apiErrorMessage.value = getApiErrorMessage(
+        error,
+        "Не удалось зарегистрироваться. Попробуйте позже."
+      );
     }
   }
 };

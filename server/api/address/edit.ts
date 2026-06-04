@@ -1,5 +1,6 @@
 import { defineEventHandler, readBody } from "h3";
 import AddressModel from "@/server/models/Address";
+import { apiFail, apiSuccess } from "@/server/utils/apiResponse";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -8,17 +9,24 @@ export default defineEventHandler(async (event) => {
 
     const address = await AddressModel.findOne({ userId });
 
+    if (!address) {
+      return apiFail("Адрес не найден.");
+    }
+
     Object.keys(updatedFields).forEach((key) => {
       if (updatedFields[key] !== undefined && updatedFields[key] !== "") {
-        (address as any)[key] = updatedFields[key];
+        (address as Record<string, unknown>)[key] = updatedFields[key];
       }
     });
 
-    await address!.save();
+    await address.save();
 
-    return { message: "Address edited successfully", updatedAddress: address };
+    return apiSuccess(
+      { updatedAddress: address },
+      "Адрес успешно обновлён."
+    );
   } catch (error) {
     console.error("Failed to edit address:", error);
-    return { statusCode: 500, message: "Internal Server Error" };
+    return apiFail("Не удалось обновить адрес. Попробуйте позже.");
   }
 });

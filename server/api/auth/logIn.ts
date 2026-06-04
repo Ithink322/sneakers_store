@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserModel from "@/server/models/User";
 import connectToDB from "@/utils/connectToDB";
+import { apiFail, apiSuccess } from "@/server/utils/apiResponse";
 
 const secret = process.env.SECRET_KEY;
 
@@ -26,36 +27,28 @@ export default defineEventHandler(async (event) => {
 
     const user = await UserModel.findOne({ login });
     if (!user) {
-      return {
-        success: false,
-        message: "User not found.",
-      };
+      return apiFail("Неверный логин или пароль.");
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return {
-        success: false,
-        message: "Invalid password.",
-      };
+      return apiFail("Неверный логин или пароль.");
     }
 
     const token = generateAccessToken(user._id.toString());
 
-    return {
-      success: true,
-      message: "Login successful!",
-      userId: user._id,
-      token,
-      fio: user.fio,
-      number: user.number,
-      isAdmin: user.isAdmin || false,
-    };
+    return apiSuccess(
+      {
+        userId: user._id,
+        token,
+        fio: user.fio,
+        number: user.number,
+        isAdmin: user.isAdmin || false,
+      },
+      "Вход выполнен успешно."
+    );
   } catch (error) {
     console.error("Error during login:", error);
-    return {
-      success: false,
-      message: "An error occurred during login.",
-    };
+    return apiFail("Не удалось войти. Попробуйте позже.");
   }
 });

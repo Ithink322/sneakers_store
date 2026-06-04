@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import type { Address } from "@/types/Address";
+import type { ApiResponse } from "@/types/api";
+import { getApiErrorMessage, getApiResponseMessage } from "@/utils/apiClient";
 import axios from "axios";
 
 export const usePrivateCabinetStore = defineStore("privateCabinet", {
@@ -24,13 +26,13 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
       try {
         const userId = localStorage.getItem("userId") as string;
         const number = localStorage.getItem("number") as string;
-        const response = await axios.post("/api/address/add", {
+        await axios.post("/api/address/add", {
           ...address,
           userId: userId,
           number: number,
         });
       } catch (error) {
-        console.error("Failed to add an address:", error);
+        console.error(getApiErrorMessage(error, "Не удалось добавить адрес."));
       }
     },
     async fetchAddress() {
@@ -40,10 +42,12 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
         if (response.data.success) {
           this.addressData = response.data.address;
         } else {
-          console.error("Failed to fetch address:", response.data.message);
+          console.error(
+            getApiResponseMessage(response.data, "Не удалось загрузить адрес.")
+          );
         }
       } catch (error) {
-        console.error("An error occurred while fetching the address:", error);
+        console.error(getApiErrorMessage(error, "Не удалось загрузить адрес."));
       }
     },
     async editAddress(address: {
@@ -56,16 +60,25 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
       index?: string;
       houseNum?: string;
       number?: string;
-    }) {
+    }): Promise<ApiResponse<{ updatedAddress?: Address }>> {
       try {
         const response = await axios.put(`/api/address/edit`, address);
-        if (response.data.message === "Address edited successfully") {
+        if (response.data.success) {
           this.addressData = response.data.updatedAddress;
-        } else {
-          console.error("Failed to edit address:", response.data.message);
+          return response.data;
         }
+
+        const message = getApiResponseMessage(
+          response.data,
+          "Не удалось обновить адрес."
+        );
+        return { success: false, message };
       } catch (error) {
-        console.error("Failed to edit address:", error);
+        const message = getApiErrorMessage(
+          error,
+          "Не удалось обновить адрес."
+        );
+        return { success: false, message };
       }
     },
     async removeAddress() {
@@ -78,30 +91,54 @@ export const usePrivateCabinetStore = defineStore("privateCabinet", {
       email?: string;
       fio?: string;
       number?: string;
-    }) {
+    }): Promise<ApiResponse> {
       try {
         const response = await axios.put("/api/profile/edit", profile);
-        if (response.data.message === "Profile edited successfully") {
+        if (response.data.success) {
           this.profileData = response.data.updatedProfile;
-          console.log("Password updated successfully");
-        } else {
-          console.error("Failed to edit profile:", response.data.message);
+          return response.data;
         }
+
+        const message = getApiResponseMessage(
+          response.data,
+          "Не удалось обновить профиль."
+        );
+        return { success: false, message };
       } catch (error) {
-        console.error("Failed to edit profile:", error);
+        const message = getApiErrorMessage(
+          error,
+          "Не удалось обновить профиль."
+        );
+        return { success: false, message };
       }
     },
-    async editPass(userId: string, currentPass: string, newPass: string) {
+    async editPass(
+      userId: string,
+      currentPass: string,
+      newPass: string
+    ): Promise<ApiResponse> {
       try {
         const response = await axios.put("/api/pass/edit", {
           userId,
           currentPass,
           newPass,
         });
+        if (!response.data.success) {
+          return {
+            success: false,
+            message: getApiResponseMessage(
+              response.data,
+              "Не удалось изменить пароль."
+            ),
+          };
+        }
         return response.data;
       } catch (error) {
-        console.error("Error updating password:", error);
-        return { success: false, message: "Internal Server Error" };
+        const message = getApiErrorMessage(
+          error,
+          "Не удалось изменить пароль."
+        );
+        return { success: false, message };
       }
     },
   },

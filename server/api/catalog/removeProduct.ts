@@ -1,6 +1,7 @@
-import { H3Event } from "h3";
+import { defineEventHandler, H3Event, readBody } from "h3";
 import connectToDB from "@/utils/connectToDB";
 import CatalogProduct from "@/server/models/CatalogProduct";
+import { apiFail, apiSuccess } from "@/server/utils/apiResponse";
 
 export default defineEventHandler(async (event: H3Event) => {
   await connectToDB();
@@ -11,12 +12,12 @@ export default defineEventHandler(async (event: H3Event) => {
     const result = await CatalogProduct.findOneAndDelete({ id: Number(id) });
 
     if (result) {
-      return { success: true };
-    } else {
-      return { success: false, message: "Product not found" };
+      return apiSuccess(undefined, "Товар успешно удалён.");
     }
+
+    return apiFail("Товар не найден.");
   } catch (error) {
     console.error("Error deleting product:", error);
-    return { success: false, message: "Failed to delete product" };
+    return apiFail("Не удалось удалить товар. Попробуйте позже.");
   }
 });

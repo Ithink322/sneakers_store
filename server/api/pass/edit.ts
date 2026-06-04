@@ -2,6 +2,7 @@ import { defineEventHandler, readBody } from "h3";
 import bcrypt from "bcryptjs";
 import UserModel from "@/server/models/User";
 import mongoose from "mongoose";
+import { apiFail, apiSuccess } from "@/server/utils/apiResponse";
 
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -11,24 +12,28 @@ export default defineEventHandler(async (event) => {
     const { userId, currentPass, newPass } = body;
 
     if (!ObjectId.isValid(userId)) {
-      return { statusCode: 400, message: "Invalid User ID" };
+      return apiFail("Некорректный идентификатор пользователя.");
     }
 
     const user = await UserModel.findOne({ _id: new ObjectId(String(userId)) });
 
-    const isMatch = await bcrypt.compare(currentPass, user!.password);
+    if (!user) {
+      return apiFail("Пользователь не найден.");
+    }
+
+    const isMatch = await bcrypt.compare(currentPass, user.password);
     if (!isMatch) {
-      return { statusCode: 401, message: "Current password is incorrect" };
+      return apiFail("Текущий пароль неверен.");
     }
 
     const hashedPass = await bcrypt.hash(newPass, 7);
-    user!.password = hashedPass;
+    user.password = hashedPass;
 
-    await user!.save();
+    await user.save();
 
-    return { success: true, message: "Password updated successfully" };
+    return apiSuccess(undefined, "Пароль успешно изменён.");
   } catch (error) {
     console.error("Error updating password:", error);
-    return { statusCode: 500, message: "Internal Server Error" };
+    return apiFail("Не удалось изменить пароль. Попробуйте позже.");
   }
 });

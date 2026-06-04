@@ -1,6 +1,7 @@
 import { defineEventHandler, getQuery } from "h3";
 import AddressModel from "@/server/models/Address";
 import connectToDB from "@/utils/connectToDB";
+import { apiFail, apiSuccess } from "@/server/utils/apiResponse";
 
 export default defineEventHandler(async (event) => {
   await connectToDB();
@@ -12,14 +13,12 @@ export default defineEventHandler(async (event) => {
     const address = await AddressModel.findOne({ userId });
 
     if (address) {
-      return { success: true, address };
-    } else {
-      return {
-        success: false,
-        message: "No address found for the given user.",
-      };
+      return apiSuccess({ address });
     }
+
+    return apiFail("Адрес для пользователя не найден.");
   } catch (error) {
-    return { success: false, message: "Failed to fetch the address.", error };
+    console.error("Failed to fetch address:", error);
+    return apiFail("Не удалось загрузить адрес. Попробуйте позже.");
   }
 });
