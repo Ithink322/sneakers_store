@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { login, fio, number, password, isAdmin } = body;
 
-  const hashedPassword = bcrypt.hashSync(password, 7);
+  const hashedPassword = await bcrypt.hash(password, 7);
 
   const newUser = new UserModel({
     login,

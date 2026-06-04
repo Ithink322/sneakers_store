@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
       };
     }
 
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return {
         success: false,
