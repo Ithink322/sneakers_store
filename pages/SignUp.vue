@@ -10,14 +10,9 @@
           ></span
         >
         <span
-          v-if="isLoginEmpty"
+          v-if="loginError"
           class="container__notice container__empty-notice"
-          >Важно заполнить это поле.</span
-        >
-        <span
-          v-if="!isLoginValid"
-          class="container__notice container__valid-notice"
-          >Введите корректный email или login.</span
+          >{{ loginError }}</span
         >
         <span
           v-if="apiErrorMessage"
@@ -31,8 +26,7 @@
           type="text"
           placeholder="Введите email адрес или логин"
           :class="{
-            'login--empty': isLoginEmpty,
-            'invalid-login': !isLoginValid,
+            'invalid-login': loginError,
           }"
         />
       </div>
@@ -41,14 +35,9 @@
           >ФИО <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="isFioEmpty"
+          v-if="fioError"
           class="container__notice container__empty-notice"
-          >Важно заполнить это поле.</span
-        >
-        <span
-          v-if="!isFioValid"
-          class="container__notice container__valid-notice"
-          >Введите корректное ФИО.</span
+          >{{ fioError }}</span
         >
         <input
           v-model="fio"
@@ -57,8 +46,7 @@
           type="text"
           placeholder="Ваше полное имя"
           :class="{
-            'fio--empty': isFioEmpty,
-            'invalid-fio': !isFioValid,
+            'invalid-fio': fioError,
           }"
         />
       </div>
@@ -68,9 +56,9 @@
           <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="isNumberEmpty"
+          v-if="numberError"
           class="container__notice container__empty-notice"
-          >Важно заполнить это поле.</span
+          >{{ numberError }}</span
         >
         <input
           v-model="number"
@@ -80,7 +68,7 @@
           type="text"
           placeholder="+7 (___) ___ - ___ - ___"
           :class="{
-            'number--empty': isNumberEmpty,
+            'number--empty': numberError,
           }"
         />
       </div>
@@ -89,9 +77,9 @@
           >Пароль <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="activePass1Notice"
+          v-if="passwordError"
           class="container__notice container__valid-notice"
-          >{{ activePass1Notice }}</span
+          >{{ passwordError }}</span
         >
         <div class="container__input-container">
           <input
@@ -101,10 +89,7 @@
             :type="isPasswordVisible1 ? 'text' : 'password'"
             placeholder="Придумайте пароль"
             :class="{
-              'pass-1--empty': isPass1Empty,
-              'invalid-pass-1': !isPass1Valid,
-              'equal-passes': !arePassesEqual,
-              'pass-1-length': !isPass1LengthValid,
+              'invalid-pass-1': passwordError,
             }"
           />
           <button
@@ -123,9 +108,9 @@
           <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="activePass2Notice"
+          v-if="passwordConfirmError"
           class="container__notice container__valid-notice"
-          >{{ activePass2Notice }}</span
+          >{{ passwordConfirmError }}</span
         >
         <div class="container__input-container">
           <input
@@ -135,10 +120,7 @@
             :type="isPasswordVisible2 ? 'text' : 'password'"
             placeholder="Повторите пароль"
             :class="{
-              'pass-2--empty': isPass2Empty,
-              'invalid-pass-2': !isPass2Valid,
-              'equal-passes': !arePassesEqual,
-              'pass-2-length': !isPass2LengthValid,
+              'invalid-pass-2': passwordConfirmError,
             }"
           />
           <button
@@ -152,9 +134,9 @@
         </div>
       </div>
       <span
-        v-if="!isPolicyAccepted"
+        v-if="policyError"
         class="container__notice container__valid-notice"
-        >Пожалуйста подтвердите обработку персональных данных.</span
+        >{{ policyError }}</span
       >
       <div class="container__checkbox-content">
         <input
@@ -207,6 +189,16 @@
 import Inputmask from "inputmask";
 import axios from "axios";
 import { getApiErrorMessage, getApiResponseMessage } from "@/utils/apiClient";
+import type { SignUpFormValues } from "@/utils/validation/auth";
+import {
+  validateFio,
+  validateLogin,
+  validatePassword,
+  validatePasswordConfirm,
+  validatePhone,
+  validatePolicy,
+} from "@/utils/validation/auth";
+import { useField, useForm } from "vee-validate";
 
 useHead({
   title: "Присоединяйтесь к Sneakers Store - Откройте для себя мир кроссовок",
@@ -253,196 +245,85 @@ onMounted(() => {
   Inputmask("+7 (999) 999-99-99").mask(numberInput);
 });
 
-const login = ref("");
-const fio = ref("");
-const number = ref("");
-const pass1 = ref("");
-const pass2 = ref("");
-const isLoginEmpty = ref(false);
-const isFioEmpty = ref(false);
-const isNumberEmpty = ref(false);
-const activePass1Notice = ref<string | null>(null);
-const activePass2Notice = ref<string | null>(null);
-const isPass1Empty = ref(false);
-const isPass2Empty = ref(false);
-const isLoginValid = ref(true);
-const isFioValid = ref(true);
-const isPass1Valid = ref(true);
-const isPass2Valid = ref(true);
-const isPass1LengthValid = ref(true);
-const isPass2LengthValid = ref(true);
-const arePassesEqual = ref(true);
 const apiErrorMessage = ref("");
-const loginOnInput = () => {
-  isLoginEmpty.value = login.value === "";
-  isLoginValid.value = true;
+const { handleSubmit, validateField } = useForm<SignUpFormValues>({
+  initialValues: {
+    login: "",
+    fio: "",
+    number: "",
+    password: "",
+    passwordConfirm: "",
+    policy: true,
+  },
+});
+const { value: login, errorMessage: loginError } = useField<string>(
+  "login",
+  validateLogin
+);
+const { value: fio, errorMessage: fioError } = useField<string>(
+  "fio",
+  validateFio
+);
+const { value: number, errorMessage: numberError } = useField<string>(
+  "number",
+  validatePhone
+);
+const { value: pass1, errorMessage: passwordError } = useField<string>(
+  "password",
+  validatePassword
+);
+const { value: pass2, errorMessage: passwordConfirmError } = useField<string>(
+  "passwordConfirm",
+  (value) => validatePasswordConfirm(value, pass1.value)
+);
+const { value: isPolicyAccepted, errorMessage: policyError } =
+  useField<boolean>("policy", validatePolicy);
+const clearApiError = () => {
   apiErrorMessage.value = "";
 };
-const fioOnInput = () => {
-  isFioEmpty.value = fio.value === "";
-  isFioValid.value = true;
-};
-const numberOnInput = () => {
-  isNumberEmpty.value = number.value === "";
-};
+const loginOnInput = clearApiError;
+const fioOnInput = clearApiError;
+const numberOnInput = clearApiError;
 const pass1OnInput = () => {
-  isPass1Empty.value = pass1.value === "";
-  isPass1Valid.value = true;
-
-  if (pass1.value.length >= 8 && pass1.value.length <= 20) {
-    activePass1Notice.value = "";
-    isPass1LengthValid.value = true;
-  }
-  if (pass1.value === pass2.value) {
-    arePassesEqual.value = true;
-    activePass1Notice.value = "";
+  clearApiError();
+  if (pass2.value) {
+    validateField("passwordConfirm");
   }
 };
 const pass2OnInput = () => {
-  isPass2Empty.value = pass2.value === "";
-  isPass2Valid.value = true;
-
-  if (pass2.value.length >= 8 && pass2.value.length <= 20) {
-    activePass2Notice.value = "";
-    isPass2LengthValid.value = true;
-  }
-  if (pass1.value === pass2.value) {
-    arePassesEqual.value = true;
-    activePass1Notice.value = "";
-  }
-};
-
-const validateLogin = () => {
-  if (login.value === "") {
-    isLoginEmpty.value = true;
-    isLoginValid.value = true;
-  } else {
-    isLoginEmpty.value = false;
-    const loginRegex =
-      /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-    isLoginValid.value = loginRegex.test(login.value);
-  }
-};
-const validateFio = () => {
-  if (fio.value === "") {
-    isFioEmpty.value = true;
-    isFioValid.value = true;
-  } else {
-    isFioEmpty.value = false;
-    const fioRegex =
-      /^(?:[А-ЯЁа-яёA-Za-z]+\s[А-ЯЁа-яёA-Za-z]+)(?:\s[А-ЯЁа-яёA-Za-z]+)?$/;
-    isFioValid.value = fioRegex.test(fio.value.trim());
-  }
-};
-const validateNumber = () => {
-  const numberDigits = number.value.replace(/\D/g, "");
-  if (number.value === "") {
-    isNumberEmpty.value = true;
-  } else {
-    isNumberEmpty.value = false;
-  }
-
-  if (
-    numberDigits.length === 11 &&
-    numberDigits.match(/^7\d{3}\d{3}\d{2}\d{2}$/)
-  ) {
-    isNumberEmpty.value = false;
-  } else {
-    isNumberEmpty.value = true;
-  }
-};
-const validatePasses = () => {
-  const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
-  if (pass1.value === "") {
-    isPass1Empty.value = true;
-    isPass1Valid.value = true;
-  } else {
-    isPass1Empty.value = false;
-    isPass1Valid.value = passRegex.test(pass1.value);
-  }
-  if (pass2.value === "") {
-    isPass2Empty.value = true;
-    isPass2Valid.value = true;
-  } else {
-    isPass2Empty.value = false;
-    isPass2Valid.value = passRegex.test(pass2.value);
-  }
-  arePassesEqual.value = pass1.value === pass2.value;
-
-  activePass1Notice.value = null;
-  activePass2Notice.value = null;
-  if (isPass1Empty.value) {
-    activePass1Notice.value = "Важно заполнить это поле.";
-  } else if (!(pass1.value.length >= 8 && pass1.value.length <= 20)) {
-    activePass1Notice.value = "Пароль должен содержать от 8 до 20 символов.";
-  } else if (!passRegex.test(pass1.value)) {
-    activePass1Notice.value =
-      "Пароль не должен содержать специальных символов.";
-  } else if (pass1.value !== pass2.value) {
-    activePass1Notice.value = "Пароли не совпадают.";
-  }
-  if (isPass2Empty.value) {
-    activePass2Notice.value = "Важно заполнить это поле.";
-  } else if (!(pass2.value.length >= 8 && pass2.value.length <= 20)) {
-    activePass2Notice.value = "Пароль должен содержать от 8 до 20 символов.";
-  } else if (!passRegex.test(pass2.value)) {
-    activePass2Notice.value =
-      "Пароль не должен содержать специальных символов.";
-  }
+  clearApiError();
+  validateField("passwordConfirm");
 };
 
 const router = useRouter();
-const isPolicyAccepted = ref(true);
 const isAdmin = ref(false);
-const signUp = async () => {
-  validateLogin();
-  validateFio();
-  validateNumber();
-  validatePasses();
+const signUp = handleSubmit(async (values) => {
+  apiErrorMessage.value = "";
 
-  const numberDigits = number.value.replace(/\D/g, "");
-  if (
-    isLoginValid.value &&
-    isFioValid.value &&
-    numberDigits.length === 11 &&
-    numberDigits.match(/^7\d{3}\d{3}\d{2}\d{2}$/) &&
-    isPass1Valid.value &&
-    isPass2Valid.value &&
-    arePassesEqual.value &&
-    login.value !== "" &&
-    fio.value !== "" &&
-    number.value !== "" &&
-    pass1.value !== "" &&
-    pass2.value !== "" &&
-    isPolicyAccepted.value
-  ) {
-    apiErrorMessage.value = "";
+  try {
+    const response = await axios.post("/api/auth/signUp", {
+      login: values.login,
+      fio: values.fio,
+      number: values.number,
+      password: values.password,
+      isAdmin: isAdmin.value,
+    });
 
-    try {
-      const response = await axios.post("/api/auth/signUp", {
-        login: login.value,
-        fio: fio.value,
-        number: number.value,
-        password: pass1.value,
-        isAdmin: isAdmin.value,
-      });
-
-      if (response.data.success) {
-        router.push("/logIn");
-      } else {
-        apiErrorMessage.value = getApiResponseMessage(
-          response.data,
-          "Не удалось зарегистрироваться. Попробуйте позже."
-        );
-      }
-    } catch (error) {
-      apiErrorMessage.value = getApiErrorMessage(
-        error,
+    if (response.data.success) {
+      router.push("/logIn");
+    } else {
+      apiErrorMessage.value = getApiResponseMessage(
+        response.data,
         "Не удалось зарегистрироваться. Попробуйте позже."
       );
     }
+  } catch (error) {
+    apiErrorMessage.value = getApiErrorMessage(
+      error,
+      "Не удалось зарегистрироваться. Попробуйте позже."
+    );
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

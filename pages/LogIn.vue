@@ -14,24 +14,18 @@
           <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="isLoginEmpty"
+          v-if="loginError"
           class="container__notice container__empty-notice"
-          >Важно заполнить это поле.</span
-        >
-        <span
-          v-if="!isLoginValid"
-          class="container__notice container__valid-notice"
-          >Введите корректный email или login.</span
+          >{{ loginError }}</span
         >
         <input
           v-model="login"
-          @input="loginOnInput"
+          @input="clearApiError"
           class="container__input"
           type="text"
           placeholder="Введите email адрес или логин"
           :class="{
-            'login--empty': isLoginEmpty,
-            'invalid-login': !isLoginValid,
+            'invalid-login': loginError,
           }"
         />
       </div>
@@ -40,21 +34,19 @@
           >Пароль <span class="container__input-title--red">*</span></span
         >
         <span
-          v-if="activePassNotice"
+          v-if="passwordError"
           class="container__notice container__valid-notice"
-          >{{ activePassNotice }}</span
+          >{{ passwordError }}</span
         >
         <div class="container__input-container">
           <input
-            v-model="pass"
-            @input="passOnInput"
+            v-model="password"
+            @input="clearApiError"
             class="container__input"
             :type="isPasswordVisible ? 'text' : 'password'"
             placeholder="Введите пароль от аккаунта"
             :class="{
-              'pass--empty': isPassEmpty,
-              'invalid-pass': !isPassValid,
-              'pass-1-length': !isPassLengthValid,
+              'invalid-pass': passwordError,
             }"
           />
           <button
@@ -139,6 +131,9 @@ import { useFavoritesStore } from "@/store/Favorites";
 import { useCartStore } from "@/store/Cart";
 import axios from "axios";
 import { getApiErrorMessage, getApiResponseMessage } from "@/utils/apiClient";
+import type { LogInFormValues } from "@/utils/validation/auth";
+import { validateLogin, validatePassword } from "@/utils/validation/auth";
+import { useField, useForm } from "vee-validate";
 
 useHead({
   title: "Вход в Sneakers Store - Найдите идеальные кроссовки",
@@ -176,111 +171,64 @@ const togglePassword = () => {
   isPasswordVisible.value = !isPasswordVisible.value;
 };
 
-const login = ref("");
-const pass = ref("");
-const isLoginEmpty = ref(false);
-const isPassEmpty = ref(false);
-const isLoginValid = ref(true);
-const isPassValid = ref(true);
-const isPassLengthValid = ref(true);
-const activePassNotice = ref<string | null>(null);
 const apiErrorMessage = ref("");
-const loginOnInput = () => {
-  isLoginEmpty.value = login.value === "";
-  isLoginValid.value = true;
+const clearApiError = () => {
   apiErrorMessage.value = "";
 };
-const passOnInput = () => {
-  isPassEmpty.value = pass.value === "";
-  isPassValid.value = true;
-  apiErrorMessage.value = "";
-
-  if (pass.value.length >= 8 && pass.value.length <= 20) {
-    activePassNotice.value = "";
-    isPassLengthValid.value = true;
-  }
-};
-
-const validateLogin = () => {
-  if (login.value === "") {
-    isLoginEmpty.value = true;
-    isLoginValid.value = true;
-  } else {
-    isLoginEmpty.value = false;
-    const loginRegex =
-      /^(?:[a-zA-Z0-9._%+-]{3,20}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-    isLoginValid.value = loginRegex.test(login.value);
-  }
-};
-const validatePass = () => {
-  const passRegex = /^[A-Za-zА-Яа-яёЁ\d_-]{8,20}$/;
-  if (pass.value === "") {
-    isPassEmpty.value = true;
-    isPassValid.value = true;
-  } else {
-    isPassEmpty.value = false;
-    isPassValid.value = passRegex.test(pass.value);
-  }
-
-  activePassNotice.value = null;
-  if (isPassEmpty.value) {
-    activePassNotice.value = "Важно заполнить это поле.";
-  } else if (!(pass.value.length >= 8 && pass.value.length <= 20)) {
-    activePassNotice.value = "Пароль должен содержать от 8 до 20 символов.";
-  } else if (!passRegex.test(pass.value)) {
-    activePassNotice.value = "Пароль не должен содержать специальных символов.";
-  }
-};
+const { handleSubmit } = useForm<LogInFormValues>({
+  initialValues: {
+    login: "",
+    password: "",
+  },
+});
+const { value: login, errorMessage: loginError } = useField<string>(
+  "login",
+  validateLogin
+);
+const { value: password, errorMessage: passwordError } = useField<string>(
+  "password",
+  validatePassword
+);
 
 const authStore = useAuthStore();
 const router = useRouter();
 const favoritesStore = useFavoritesStore();
 const cartStore = useCartStore();
 const rememberMe = ref(false);
-const logIn = async () => {
-  validateLogin();
-  validatePass();
+const logIn = handleSubmit(async (values) => {
+  apiErrorMessage.value = "";
 
-  if (
-    isLoginValid.value &&
-    isPassValid.value &&
-    login.value !== "" &&
-    pass.value !== ""
-  ) {
-    apiErrorMessage.value = "";
+  try {
+    const response = await axios.post("/api/auth/logIn", {
+      login: values.login,
+      password: values.password,
+    });
 
-    try {
-      const response = await axios.post("/api/auth/logIn", {
-        login: login.value,
-        password: pass.value,
-      });
-
-      if (response.data.success) {
-        authStore.getAuthData(
-          response.data.userId,
-          response.data.fio,
-          response.data.number,
-          response.data.token,
-          response.data.isAdmin,
-          rememberMe.value
-        );
-        await favoritesStore.fetchFavorites(response.data.userId);
-        await cartStore.fetchCart(response.data.userId);
-        router.push("/catalog?page=1");
-      } else {
-        apiErrorMessage.value = getApiResponseMessage(
-          response.data,
-          "Неверный логин или пароль."
-        );
-      }
-    } catch (error) {
-      apiErrorMessage.value = getApiErrorMessage(
-        error,
-        "Не удалось войти. Попробуйте позже."
+    if (response.data.success) {
+      authStore.getAuthData(
+        response.data.userId,
+        response.data.fio,
+        response.data.number,
+        response.data.token,
+        response.data.isAdmin,
+        rememberMe.value
+      );
+      await favoritesStore.fetchFavorites(response.data.userId);
+      await cartStore.fetchCart(response.data.userId);
+      router.push("/catalog?page=1");
+    } else {
+      apiErrorMessage.value = getApiResponseMessage(
+        response.data,
+        "Неверный логин или пароль."
       );
     }
+  } catch (error) {
+    apiErrorMessage.value = getApiErrorMessage(
+      error,
+      "Не удалось войти. Попробуйте позже."
+    );
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

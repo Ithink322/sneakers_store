@@ -13,6 +13,7 @@
     "@nuxt/kit": "^3.11.2",
     "@nuxt/types": "^2.18.1",
     "@pinia/nuxt": "^0.5.0",
+    "@vee-validate/nuxt": "^4.15.1",
     "axios": "^1.7.4",
     "bcryptjs": "^2.4.3",
     "date-fns": "^3.6.0",
@@ -24,6 +25,7 @@
     "nuxt": "^3.11.0",
     "nuxt-rating": "^0.1.5",
     "pinia": "^2.1.7",
+    "vee-validate": "^4.15.1",
     "vue": "^3.4.21",
     "vue-highlight-words": "^3.0.1",
     "vue-router": "^4.3.0"
