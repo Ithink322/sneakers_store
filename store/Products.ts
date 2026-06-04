@@ -104,12 +104,14 @@ export const useProductsStore = defineStore("productsStore", {
       }
     },
     async fetchProductById(id: number) {
-      if (!this.allProducts.length) {
-        await this.fetchProducts();
-      }
-      this.product = this.allProducts.find((p) => p.id === id) || null;
-      if (!this.product) {
-        console.error("Товар не найден.");
+      try {
+        const { data } = await axios.get("/api/catalog/getProduct", {
+          params: { id },
+        });
+        this.product = data;
+      } catch (error) {
+        this.product = null;
+        console.error(getApiErrorMessage(error, "Товар не найден."));
       }
     },
     async getProductById(id: number) {

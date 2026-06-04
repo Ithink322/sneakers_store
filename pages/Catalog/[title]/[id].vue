@@ -350,11 +350,29 @@ import { useFavoritesStore } from "@/store/Favorites";
 import { useCartStore } from "@/store/Cart";
 
 const store = useProductsStore();
-const allProductsLength = computed(() => store.allProducts.length);
 const product = ref<Product | null>(null);
 const route = useRoute();
+const router = useRouter();
 const loading = ref(true);
 const progressRing = ref<HTMLElement | null>(null);
+
+const syncProductRouteTitle = () => {
+  if (!product.value) {
+    return;
+  }
+
+  const productTitle = slugify(product.value.title);
+  if (productTitle !== String(route.params.title)) {
+    router.replace({
+      params: {
+        ...route.params,
+        title: productTitle,
+      },
+      query: { page: 1 },
+    });
+  }
+};
+
 onMounted(async () => {
   const productId = Number(route.params.id);
   loading.value = true;
@@ -379,35 +397,13 @@ onMounted(async () => {
   if (product.value && product.value.colors) {
     setActiveColor(0, product.value.colors[0]);
   }
+  syncProductRouteTitle();
   loading.value = false;
 });
 
-const checkTitleValidity = () => {
-  if (allProductsLength.value > 0) {
-    const title = store.allProducts.find(
-      (product) => slugify(product.title) === (route.params.title as string)
-    );
-    if (!title) {
-      throw createError({ statusCode: 404, statusMessage: "Page Not Found" });
-    }
-    return title;
-  }
-};
-
 const reviewsStore = useReviewsStore();
-const router = useRouter();
 onMounted(() => {
-  const validProduct = checkTitleValidity();
   reviewsStore.currentPage = 1;
-  if (validProduct) {
-    router.replace({
-      params: {
-        ...route.params,
-        title: slugify(validProduct.title),
-      },
-      query: { page: 1 },
-    });
-  }
 });
 
 watchEffect(() => {

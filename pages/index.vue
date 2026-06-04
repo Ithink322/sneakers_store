@@ -252,6 +252,12 @@ const allProductsLength = computed(() => catalogStore.allProducts.length);
 const postsStore = usePostsStore();
 const allPostsLength = computed(() => postsStore.allPosts.length);
 
+onMounted(async () => {
+  if (!catalogStore.allProducts.length) {
+    await catalogStore.fetchProducts();
+  }
+});
+
 onMounted(() => {
   /* autoplay carousel .overflow__container from 1440px starts */
   let slides = document.querySelectorAll(".overflow__slide");

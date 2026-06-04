@@ -1987,6 +1987,10 @@ const parsePrice = (price: string) => {
 
 const reviewsStore = useReviewsStore();
 onMounted(async () => {
+  if (!store.allProducts.length) {
+    await store.fetchProducts();
+  }
+  store.filterProducts();
   await nextTick();
   await reviewsStore.updateProductRatings(store.filteredProducts);
 });
@@ -2023,9 +2027,6 @@ const sortProducts = async (option: string) => {
   store.filteredProducts = productsToSort;
 };
 
-onMounted(() => {
-  store.filterProducts();
-});
 watch(
   () => route.query.search,
   () => {
